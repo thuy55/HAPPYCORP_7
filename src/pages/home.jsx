@@ -13,7 +13,9 @@ import {
   List,
   ListItem,
   Button,
-  Card
+  Card,
+  Icon,
+  Badge
 } from 'framework7-react';
 import moment from 'moment';
 import { number } from 'prop-types';
@@ -87,11 +89,11 @@ const HomePage = () => {
         <NavLeft>
           <Link iconIos="f7:menu" iconMd="material:menu" panelOpen="left" />
         </NavLeft>
-        <NavTitle className='text-dark' sliding>HAPPYCORP_7</NavTitle>
+        <NavTitle className='text-dark' sliding>Happy Corp</NavTitle>
         <NavRight>
           <Link iconIos="f7:menu" iconMd="material:menu" panelOpen="right" />
         </NavRight>
-        <NavTitleLarge className='text'>HAPPYCORP_7</NavTitleLarge>
+        <NavTitleLarge className='text'>Xin chào Thúy Nguyễn</NavTitleLarge>
       </Navbar>
 
       {/* Page content */}
@@ -116,7 +118,7 @@ const HomePage = () => {
       <swiper-container pagination
         loop
         autoplay='{"delay":5000, "disableOnInteraction": false}'
-        class=" mt-5 demo-swiper-multiple demo-swiper-multiple-auto ps-2"
+        class=" mt-3 demo-swiper-multiple demo-swiper-multiple-auto ps-3"
         space-between="10"
         slides-per-view="1.15">
         <swiper-slide><img src='https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?cs=srgb&dl=pexels-souvenirpixels-414612.jpg&fm=jpg' className='w-100 border-image' ></img></swiper-slide>
@@ -128,72 +130,106 @@ const HomePage = () => {
       </swiper-container>
 
       {/* Calender */}
-      <div className="calendar p-2 py-0 rounded-4 shadow-sm " style={{ backdropFilter: "blur(50px)" }}>
-        <div className="d-flex justify-content-between text-center mb-2">
-          {week.map((day, idx) => (
-            <div key={idx} className="flex-fill fw-bold bg-pink mx-1 py-2 rounded-3 p-1" style={{ fontSize: "13px" }}>{day}</div>
-          ))}
-        </div>
-        <div className="d-flex flex-wrap text-center">
-          {calendarDays.map((date, idx) => {
-            const isCurrentMonth = date.month() === searchMonth && date.year() === searchYear;
-            return (
-              <div
-                key={idx}
-                className={`row  rounded-3 m-1 p-1 ${isCurrentMonth ? 'border' : ''} `}
-                style={{
-                  width: "12%",
-                  color: isCurrentMonth ? undefined : 'transparent',
-                  fontSize: "10px",
-                  minHeight: "45px"
-                }}
-              >
-                <div className='col-6 p-0 pe-1'>
-                  {date.format("DD")}
+      <div className='p-3  mt-3'>
+        <div className="calendar  p-1  rounded-4 shadow-sm bg-secondary bg-opacity-10" style={{ backdropFilter: "blur(50px)" }}>
+          <div className="d-flex justify-content-between text-center mb-2 py-1">
+            {week.map((day, idx) => (
+              <div key={idx} className="flex-fill fw-bold bg-pink mx-1 py-2 rounded-3 p-1" style={{ fontSize: "13px" }}>{day}</div>
+            ))}
+          </div>
+          <div className="d-flex flex-wrap text-center">
+            {calendarDays.map((date, idx) => {
+              const isCurrentMonth = date.month() === searchMonth && date.year() === searchYear;
+              return (
+                <div
+                  key={idx}
+                  className={`row rounded-3 m-1 p-1 ${isCurrentMonth ? 'border bg-white' : ''} `}
+                  style={{
+                    width: "12%",
+                    color: isCurrentMonth ? undefined : 'transparent',
+                    fontSize: "10px",
+                    minHeight: "45px"
+                  }}
+                >
+                  <div className='col-6 p-0 pe-1'>
+                    {date.format("DD")}
+                  </div>
+                  {datamonth && datamonth.map((book, key) => {
+                    if (book.time === date.format("DD/MM/YYYY")) {
+                      return (
+                        <>
+                          <div className='col-6 p-0 ps-1' key={key}>
+                            <div className='bg-danger text-white rounded-2'>
+                              {book.booking[0]}
+                            </div>
+                          </div>
+                          <div className='col-6 p-0 mt-1 pe-1'>
+                            <div className='bg-success text-white rounded-2'>
+                              {book.booking[1]}
+                            </div>
+                          </div>
+                          <div className='col-6 p-0 mt-1 ps-1'>
+                            <div className='bg-warning text-white rounded-2'>
+                              {book.booking[2]}
+                            </div>
+                          </div>
+                        </>
+                      )
+                    }
+                  })}
                 </div>
-                {datamonth && datamonth.map((book, key) => {
-                  if (book.time === date.format("DD/MM/YYYY")) {
-                    return (
-                      <>
-                        <div className='col-6 p-0 ps-1' key={key}>
-                          <div className='bg-danger text-white rounded-2'>
-                            {book.booking[0]}
-                          </div>
-                        </div>
-                        <div className='col-6 p-0 mt-1 pe-1'>
-                          <div className='bg-success text-white rounded-2'>
-                            {book.booking[1]}
-                          </div>
-                        </div>
-                        <div className='col-6 p-0 mt-1 ps-1'>
-                          <div className='bg-warning text-white rounded-2'>
-                            {book.booking[2]}
-                          </div>
-                        </div>
-                      </>
-                    )
-                  }
-                })}
-              </div>
-            );
-          })}
-        </div>
-        <div className="d-flex justify-content-between align-items-center gap-3 mt-3 flex-wrap">
-          <div className="d-flex align-items-center gap-1">
-            <span className="badge bg-pink mb-1" style={{ fontSize: "10px" }}> </span>
-            <span className='fs-13'> Tổng booking</span>
+              );
+            })}
           </div>
-          <div className="d-flex align-items-center gap-1">
-            <span className={`badge bg-success mb-1`} style={{ fontSize: "10px" }}> </span>
-            <span className='fs-13'> Đã thanh toán</span>
+
+          <div className="d-flex justify-content-between align-items-center gap-3  p-2 ">
+            <div className="d-flex align-items-center gap-1">
+              <Badge className='bg-pink'> </Badge>
+              <span className='fs-13'> Tổng booking</span>
+            </div>
+            <div className="d-flex align-items-center gap-1">
+              <Badge className='bg-success'> </Badge>
+              <span className='fs-13'> Đã thanh toán</span>
+            </div>
+            <div className="d-flex align-items-center gap-1">
+              <Badge className='bg-warning'> </Badge>
+              <span className='fs-13'> Còn chờ</span>
+            </div>
           </div>
-          <div className="d-flex align-items-center gap-1">
-            <span className={`badge bg-warning mb-1`} style={{ fontSize: "10px" }}> </span>
-            <span className='fs-13'> Còn chờ</span>
-          </div>
+
         </div>
       </div>
 
+      <div className=' d-flex justify-content-between align-items-center px-4 mt-2'>
+        <div className='fs-13 fw-bold'>
+          Lịch sử đặt lịch
+        </div>
+        <div>
+          <span class="material-icons fs-5">
+            arrow_forward
+          </span>
+        </div>
+      </div>
+      <List className='px-3 mb-3 mt-0'>
+        <ListItem link="#" className='row mt-2 list-no-chevron'>
+          <div className='col-2'>
+            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className='w-100 border border-2 rounded-3 border-danger'></img>
+          </div>
+          <div className='col-10 fs-13 ms-2 border-bottom border-light'>
+            <div className='fw-bold d-flex justify-content-between'> Phòng: V.I.P 4 <span>25.500.000</span></div>
+            <div className='text-muted mt-1 mb-2'>18/07/2025 14:22:52</div>
+          </div>
+        </ListItem>
+        <ListItem link="#" className='row mt-2 list-no-chevron'>
+          <div className='col-2'>
+            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className='w-100 border border-2 rounded-3 border-danger'></img>
+          </div>
+          <div className='col-10 fs-13 ms-2 border-bottom border-light'>
+            <div className='fw-bold d-flex justify-content-between'> Phòng: V.I.P 4 <span>25.500.000</span></div>
+            <div className='text-muted mt-1 mb-2'>18/07/2025 14:22:52</div>
+          </div>
+        </ListItem>
+      </List>
 
       <List strong inset dividersIos>
         <ListItem link="/about/" title="About" />
