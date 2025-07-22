@@ -15,7 +15,9 @@ import {
   Button,
   Card,
   Icon,
-  Badge
+  Badge,
+  Popup,
+  View
 } from 'framework7-react';
 import moment from 'moment';
 import { number } from 'prop-types';
@@ -262,7 +264,23 @@ const HomePage = () => {
           link="/request-and-load/user/123456/"
         />
       </List>
+
+      <Popup id="my-popup">
+        <View>
+          <Page>
+            <Navbar title="Popup">
+              <NavRight>
+                <Link popupClose>Close</Link>
+              </NavRight>
+            </Navbar>
+            <Block>
+              <p>Popup content goes here. jdbhfsjn</p>
+            </Block>
+          </Page>
+        </View>
+      </Popup>
     </Page>
+
   );
 }
 export default HomePage;

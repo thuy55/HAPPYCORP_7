@@ -9,6 +9,7 @@ import SettingsPage from '../pages/settings.jsx';
 import DynamicRoutePage from '../pages/dynamic-route.jsx';
 import RequestAndLoad from '../pages/request-and-load.jsx';
 import NotFoundPage from '../pages/404.jsx';
+import SocialPage from '../pages/social.jsx';
 
 var routes = [
   {
@@ -34,6 +35,11 @@ var routes = [
   {
     path: '/settings/',
     component: SettingsPage,
+  },
+
+  {
+    path: '/social/',
+    component: SocialPage,
   },
 
   {
