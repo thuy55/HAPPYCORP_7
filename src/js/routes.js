@@ -11,6 +11,10 @@ import RequestAndLoad from '../pages/request-and-load.jsx';
 import NotFoundPage from '../pages/404.jsx';
 import SocialPage from '../pages/social.jsx';
 import LoginPage from '../pages/Login.jsx';
+import EventPage from '../pages/Event.jsx';
+import EndowPage from '../pages/Endow.jsx';
+import EventDetailPage from '../pages/EventDetail.jsx';
+import EndowDetailPage from '../pages/EndowDetail.jsx';
 
 var routes = [
   {
@@ -46,6 +50,23 @@ var routes = [
     path: '/login/',
     component: LoginPage,
   },
+  {
+    path: '/event/',
+    component: EventPage,
+  },
+  {
+    path: '/endow/',
+    component: EndowPage,
+  },
+  {
+    path: '/event-detail/',
+    component: EventDetailPage,
+  },
+  {
+    path: '/endow-detal/',
+    component: EndowDetailPage,
+  },
+
 
   {
     path: '/dynamic-route/blog/:blogId/post/:postId/',

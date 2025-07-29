@@ -835,24 +835,15 @@ const SocialPage = () => {
     return (
         <Page name="social" >
 
-            <Navbar className='py-2'  >
-                <div class="navbar-bg"></div>
-                <div className=' d-flex justify-content-between w-100'>
-                    <div className='d-flex align-items-center'>
-                        <NavLeft>
-                            <Link iconIos="f7:menu" iconMd="material:menu" panelOpen="left" />
-                        </NavLeft>
-                    </div>
-                    <div className='d-flex align-items-center'>
-
-                        <Button fill sheetOpen=".my-popup-menu" className=' rounded-circle border border-0 shadow border border-0 text-center p-2 me-2' style={{ width: "40px", height: "40px", backgroundColor: "white", color: "black" }}><Icon f7="rectangle_grid_2x2" size="20px"></Icon></Button>
-                        <Button fill popupOpen=".my-popup-notification" className=' rounded-circle border border-0 shadow border border-0 text-center p-2 me-2' style={{ width: "40px", height: "40px", backgroundColor: "white", color: "black" }}><Icon f7="bell" size="20px"></Icon></Button>
-                        <Button fill panelOpen="right" className='p-0 m-0 bg-none rounded-circle' style={{ width: "40px", height: "40px" }}>
-                            <img src={`${avatar}`} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
-                        </Button>
-
-                    </div>
-                </div>
+            <Navbar sliding={false}>
+                <NavLeft>
+                    <Link panelOpen="left" ><img src='../image/13.gif' className='size-icon'></img></Link>
+                </NavLeft>
+                <NavTitle className='text-dark' sliding>
+                    <img src='../image/happy-corp-logo.png' style={{ height: "35px" }}></img>
+                </NavTitle>
+                <NavRight>
+                </NavRight>
             </Navbar>
 
             {/* Page content */}
@@ -911,21 +902,96 @@ const SocialPage = () => {
                 </List>
             </Popover>
 
-            <Card className=' p-3  border border-0 shadow rounded-4'>
+            <Card className=' p-3  border border-light shadow-sm rounded-4'>
                 <div className='row d-flex align-items-center'>
                     <div className='col-8'>
                         <div className='d-flex align-items-center'>
                             <Link fill popoverOpen=".popover-menu-social">
-                                <img src={`${avatar}`} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
+                                <img src="https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png" className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
                             </Link>
                             <span className='fst-italic  ms-3'>{name} {t("how_are_you_today?")}</span>
                         </div>
                     </div>
                     <div className='col-4 text-end'>
-                        <Link className='d-flex align-items-center justify-content-end text-white' fill sheetOpen=".add-social-sheet">
+                        <Link className='d-flex align-items-center justify-content-end align-items-center' fill sheetOpen=".add-social-sheet">
                             <Icon f7="plus" size="20px" className='me-1'></Icon>
-                            <div className='mt-1'>{t("post1")}</div>
+                            <div className='mt-1'>Post</div>
                         </Link>
+                    </div>
+                </div>
+            </Card>
+
+            <Card className=' p-0  border border-light shadow-sm rounded-4'>
+                <div className='d-flex align-items-center justify-content-between p-3'>
+                    <div className='d-flex align-items-center'>
+                        <img src="https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png" onClick={() => { profile_social(socials.account.uid) }} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
+                        <span className=' ms-2'>Thanh Thúy
+                            <div className='fs-12 text-secondary d-flex align-items-center'>31/07/2025
+
+                            </div>
+                        </span>
+                    </div>
+                    <div className=''>
+                        <Button fill popoverOpen=".popover-menu" className='rounded-circle  p-2 text-center' style={{ width: "30px", height: "30px" }}> <Icon f7="ellipsis" size="20px" color='white'></Icon></Button>
+                    </div>
+                </div>
+                <div className='row px-4'>
+                    <div className='col-6 p-1'>
+                        <img src='https://media.macphun.com/img/uploads/customer/how-to/608/15542038745ca344e267fb80.28757312.jpg?q=85&w=1340' className='w-100'></img>
+                    </div>
+                    <div className='col-6 p-1'>
+                        <img src='https://images.pexels.com/photos/1194775/pexels-photo-1194775.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'  className='w-100'></img>
+                    </div>
+
+                </div>
+                <div className='mt-3' style={{ borderBottom: "0.5px solid #a8a7a7ff" }}></div>
+                <div className='row my-3 d-flex align-items-center'>
+                    <div className='col-4 text-center'>
+                        <img src='../image/12.gif' className='size-icon'></img>
+                        1 {t("like")}
+                    </div>
+
+                    <Link className='col-4 text-center px-0 ' fill sheetOpen=".comment-social-sheet">
+                        <img src='../image/4.gif' className='size-icon'></img>
+                        2 {t("comment")}
+                    </Link>
+                    <div className='col-4 text-center'>
+                        <img src='../image/icon-share.gif' className='size-icon'></img>
+                        {t("share")}
+                    </div>
+                </div>
+            </Card>
+            <Card className=' p-0  border border-light shadow-sm rounded-4'>
+                <div className='d-flex align-items-center justify-content-between p-3'>
+                    <div className='d-flex align-items-center'>
+                        <img src="https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png" onClick={() => { profile_social(socials.account.uid) }} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
+                        <span className=' ms-2'>Thanh Thúy
+                            <div className='fs-12 text-secondary d-flex align-items-center'>31/07/2025
+
+                            </div>
+                        </span>
+                    </div>
+                    <div className=''>
+                        <Button fill popoverOpen=".popover-menu" className='rounded-circle  p-2 text-center' style={{ width: "30px", height: "30px" }}> <Icon f7="ellipsis" size="20px" color='white'></Icon></Button>
+                    </div>
+                </div>
+                <div className='row px-4'>
+                    <img src='https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png'></img>
+                </div>
+                <div className='mt-3' style={{ borderBottom: "0.5px solid #a8a7a7ff" }}></div>
+                <div className='row my-3 d-flex align-items-center'>
+                    <div className='col-4 text-center'>
+                        <img src='../image/3.gif' className='size-icon'></img>
+                        1 {t("like")}
+                    </div>
+
+                    <Link className='col-4 text-center px-0 ' fill sheetOpen=".comment-social-sheet">
+                        <img src='../image/4.gif' className='size-icon'></img>
+                        2 {t("comment")}
+                    </Link>
+                    <div className='col-4 text-center'>
+                        <img src='../image/icon-share.gif' className='size-icon'></img>
+                        {t("share")}
                     </div>
                 </div>
             </Card>

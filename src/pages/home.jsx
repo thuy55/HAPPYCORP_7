@@ -120,7 +120,7 @@ const HomePage = () => {
           <div className='text-dark fw-bold fs-13'>Room</div>
         </div>
       </div>
-      <div className='fs-6 fw-bold mx-3 mt-4 d-flex align-items-center'><img src='../image/6.gif' className='size-icon'></img>  Ưu đãi</div>
+      <Link href="/endow/"  className='fs-6 fw-bold mx-3 mt-4 justify-content-start d-flex align-items-center'><img src='../image/6.gif' className='size-icon'></img>  Ưu đãi</Link>
       <div className='row d-flex flex-nowrap mx-2 mt-2 pb-2' style={{ overflowX: "auto", whiteSpace: "nowrap" }}>
         <div className='col-4 px-1'>
           <Card className='m-0 border-light p-1 fs-13'>
@@ -172,7 +172,7 @@ const HomePage = () => {
         </div>
 
       </div>
-      <div className='fs-6 fw-bold mx-3 mt-4'> <img src='../image/6.gif' className='size-icon'></img>Sự kiện</div>
+      <Link href="/event/" className='fs-6 fw-bold mx-3 mt-4'> <img src='../image/6.gif' className='size-icon'></img>Sự kiện</Link>
       <swiper-container pagination
         loop
         autoplay='{"delay":5000, "disableOnInteraction": false}'
