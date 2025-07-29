@@ -98,9 +98,10 @@ const MyApp = () => {
           {/* Tabbar for switching views-tabs */}
           <Toolbar tabbar icons bottom>
             <Link tabLink="#view-home" tabLinkActive iconIos="f7:house_fill" iconMd="material:home" text="Home" />
-            <Link tabLink="#view-catalog" iconIos="f7:square_list_fill" iconMd="material:view_list" text="Catalog" />
-            <Link tabLink="#view-settings" iconIos="f7:gear" iconMd="material:settings" text="Settings" />
-            <Link tabLink="#social" iconIos="f7:gear" iconMd="material:social" text="Social" />
+            <Link tabLink="#view-catalog" iconIos="f7:square_list_fill" iconMd="material:view_list" text="Chat" />
+            <Link tabLink="#view-settings" iconIos="f7:gear" iconMd="material:settings" text="Lịch sử" />
+            <Link tabLink="#social" iconIos="f7:circle_grid_hex" iconMd="material:circle_grid_hex" text="Social" />
+            <Link tabLink="#social" iconIos="f7:person_alt_circle" iconMd="material:social" text="Account" />
           </Toolbar>
 
           {/* Your main view/tab, should have "view-main" class. It also has "tabActive" prop */}

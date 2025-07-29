@@ -10,6 +10,7 @@ import DynamicRoutePage from '../pages/dynamic-route.jsx';
 import RequestAndLoad from '../pages/request-and-load.jsx';
 import NotFoundPage from '../pages/404.jsx';
 import SocialPage from '../pages/social.jsx';
+import LoginPage from '../pages/Login.jsx';
 
 var routes = [
   {
@@ -40,6 +41,10 @@ var routes = [
   {
     path: '/social/',
     component: SocialPage,
+  },
+  {
+    path: '/login/',
+    component: LoginPage,
   },
 
   {

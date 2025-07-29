@@ -839,37 +839,21 @@ const SocialPage = () => {
                 <div class="navbar-bg"></div>
                 <div className=' d-flex justify-content-between w-100'>
                     <div className='d-flex align-items-center'>
-                        <NavLeft >
-                            <Link href="/" data-view=".view-main">
-                                <img src='../img/logo-small.svg' style={{ width: "30px", height: "30px", }}></img>
-                            </Link>
+                        <NavLeft>
+                            <Link iconIos="f7:menu" iconMd="material:menu" panelOpen="left" />
                         </NavLeft>
-                        <Button href="/search/" data-view=".view-main" className='  text-light border border-0 text-center  me-2' style={{ width: "40px", height: "40px", }}><Icon f7="search" size="25px"></Icon></Button>
                     </div>
                     <div className='d-flex align-items-center'>
 
-                        <Button fill sheetOpen=".my-popup-menu" className=' rounded-circle text-light border border-0 text-center p-2 me-2' style={{ width: "40px", height: "40px", backgroundColor: "rgba(52, 58, 64)" }}><Icon f7="rectangle_grid_2x2" size="20px"></Icon></Button>
-                        <Button fill popupOpen=".my-popup-notification" className=' rounded-circle text-light border border-0 text-center p-2 me-2' style={{ width: "40px", height: "40px", backgroundColor: "rgba(52, 58, 64)" }}><Icon f7="bell" size="20px"></Icon></Button>
+                        <Button fill sheetOpen=".my-popup-menu" className=' rounded-circle border border-0 shadow border border-0 text-center p-2 me-2' style={{ width: "40px", height: "40px", backgroundColor: "white", color: "black" }}><Icon f7="rectangle_grid_2x2" size="20px"></Icon></Button>
+                        <Button fill popupOpen=".my-popup-notification" className=' rounded-circle border border-0 shadow border border-0 text-center p-2 me-2' style={{ width: "40px", height: "40px", backgroundColor: "white", color: "black" }}><Icon f7="bell" size="20px"></Icon></Button>
                         <Button fill panelOpen="right" className='p-0 m-0 bg-none rounded-circle' style={{ width: "40px", height: "40px" }}>
                             <img src={`${avatar}`} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
                         </Button>
 
                     </div>
                 </div>
-
             </Navbar>
-
-
-            {/* Thanh Toolbar ở dưới */}
-            {/* <Toolbar tabbar icons bottom>
-                <Link tabLink="#view-app" href="/account/" iconIos="f7:circle_grid_hex" iconMd="material:settings" text={t("application")} />
-                <Link tabLink="#view-chat" href="/chatnew/" iconIos="f7:bubble_left_bubble_right" iconMd="material:view_list" text={t("chat")} />
-                <Link href="/" tabLink="#view-home" link="/home/" iconIos="f7:house" iconMd="material:home" text={t("home")} />
-                <Link tabLink="#view-account" href="/social/" tabLinkActive iconIos="f7:globe" iconMd="material:settings" text={t("community")} />
-                <Link tabLink="#view-account" href="/account/" iconIos="f7:person" iconMd="material:settings" text={t("account")} />
-            </Toolbar> */}
-
-
 
             {/* Page content */}
             <Popover className="popover-menu text-white" style={{ backgroundColor: "#1e1e1e", width: "200px" }}>
@@ -927,14 +911,14 @@ const SocialPage = () => {
                 </List>
             </Popover>
 
-            <Card className=' p-3 bg-dark bg-opacity-75 text-light rounded-4'>
+            <Card className=' p-3  border border-0 shadow rounded-4'>
                 <div className='row d-flex align-items-center'>
                     <div className='col-8'>
                         <div className='d-flex align-items-center'>
                             <Link fill popoverOpen=".popover-menu-social">
                                 <img src={`${avatar}`} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
                             </Link>
-                            <span className='fst-italic text-light ms-3'>{name} {t("how_are_you_today?")}</span>
+                            <span className='fst-italic  ms-3'>{name} {t("how_are_you_today?")}</span>
                         </div>
                     </div>
                     <div className='col-4 text-end'>
@@ -944,18 +928,16 @@ const SocialPage = () => {
                         </Link>
                     </div>
                 </div>
-
-
             </Card>
 
             {socials && socials.map((socials) => {
                 return (
                     <React.Fragment key={socials.id}>
-                        <Card className=' p-0 bg-dark bg-opacity-75 text-light rounded-4'>
+                        <Card className=' p-0  border border-0 shadow rounded-4'>
                             <div className='d-flex align-items-center justify-content-between p-3'>
                                 <div className='d-flex align-items-center'>
                                     <img src={`https://beta.ellm.io/${socials.account.avatar}`} onClick={() => { profile_social(socials.account.uid) }} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
-                                    <span className='text-light ms-2'>{socials.account.name}
+                                    <span className=' ms-2'>{socials.account.name}
                                         <div className='fs-12 text-secondary d-flex align-items-center'>{socials.date}
                                             {socials.access == 0 &&
                                                 <Icon f7="globe" size="14px" className='ms-1'></Icon>
@@ -969,7 +951,7 @@ const SocialPage = () => {
                                 <div className='d-flex align-items-center'>
                                     {socials.lang !== language && <Button className='bg-none p-1 text-white rounded-3 me-3 fs-12'>{t("translate")} </Button>}
 
-                                    <Button onClick={() => { getActive(socials.active, socials.account.uid, socials.accountsave) }} fill popoverOpen=".popover-menu" className='rounded-circle bg-dark bg-opacity-75 p-2 text-center' style={{ width: "30px", height: "30px" }}> <Icon f7="ellipsis" size="20px" color='white'></Icon></Button>
+                                    <Button onClick={() => { getActive(socials.active, socials.account.uid, socials.accountsave) }} fill popoverOpen=".popover-menu" className='rounded-circle  p-2 text-center' style={{ width: "30px", height: "30px" }}> <Icon f7="ellipsis" size="20px" color='white'></Icon></Button>
                                 </div>
                             </div>
                             <div className='mx-3'> {socials.content} </div>
@@ -1340,7 +1322,7 @@ const SocialPage = () => {
 
                                                 </div>
                                                 <div className='mt-1'>
-                                                    <div className='w-100 rounded-3 border border-1 bg-dark bg-opacity-75 fs-15 p-2'>
+                                                    <div className='w-100 rounded-3 border border-1  fs-15 p-2'>
                                                         {cmt.content}
                                                     </div>
                                                 </div>
@@ -1621,11 +1603,11 @@ const SocialPage = () => {
                 <PageContent className='overflowY-auto'>
                     <List className='mt-3 mb-4 px-2'>
 
-                        <Card className=' p-0 mx-1 bg-dark bg-opacity-75 text-light rounded-4'>
+                        <Card className=' p-0 mx-1  border border-0 shadow rounded-4'>
                             <div className='d-flex align-items-center justify-content-between p-3'>
                                 <div className='d-flex align-items-center'>
                                     <img src={`https://beta.ellm.io/${acc_social_view.avatar}`} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
-                                    <span className='text-light ms-2'>{acc_social_view.name}
+                                    <span className='border border-0 shadow ms-2'>{acc_social_view.name}
                                         <div className='fs-12 text-secondary d-flex align-items-center'>{social_view.date}
                                             {social_view.access == 0 &&
                                                 <Icon f7="globe" size="14px" className='ms-1'></Icon>
@@ -1758,7 +1740,7 @@ const SocialPage = () => {
 
                                                 </div>
                                                 <div className='mt-1'>
-                                                    <div className='w-100 rounded-3 border border-1 bg-dark bg-opacity-75 fs-15 p-2'>
+                                                    <div className='w-100 rounded-3 border border-1  fs-15 p-2'>
                                                         {cmt.content}
                                                     </div>
                                                 </div>
@@ -1830,7 +1812,7 @@ const SocialPage = () => {
                     <img src='../img/deleted.svg'></img>
                     <div className='fs-14 text-white my-2'>{t("title_delete")}</div>
                     <div className='d-flex align-items-center justify-content-center '>
-                        <Button className='bg-dark bg-opacity-75 text-white fs-15 rounded-pill me-3' style={{ padding: "22px" }} sheetClose>{t("cancel")}</Button>
+                        <Button className=' text-white fs-15 rounded-pill me-3' style={{ padding: "22px" }} sheetClose>{t("cancel")}</Button>
                         <Button className='bg-danger  text-white fs-15  rounded-pill' style={{ padding: "22px" }} onClick={DeleteSocial}>{t("delete")}</Button>
                     </div>
                 </PageContent>

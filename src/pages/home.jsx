@@ -89,11 +89,14 @@ const HomePage = () => {
       {/* Top Navbar */}
       <Navbar large sliding={false}>
         <NavLeft>
-          <Link iconIos="f7:menu" iconMd="material:menu" panelOpen="left" />
+          {/* <Link iconIos="f7:menu" iconMd="material:menu" panelOpen="left" /> */}
+          <Link panelOpen="left" ><img src='../image/13.gif' className='size-icon'></img></Link>
         </NavLeft>
-        <NavTitle className='text-dark' sliding>Happy Corp</NavTitle>
+        <NavTitle className='text-dark' sliding>
+          <img src='../image/happy-corp-logo.png' style={{ height: "35px" }}></img>
+        </NavTitle>
         <NavRight>
-          <Link iconIos="f7:menu" iconMd="material:menu" panelOpen="right" />
+          {/* <Link iconIos="f7:menu" iconMd="material:menu" panelOpen="right" /> */}
         </NavRight>
         <NavTitleLarge className='text'>Xin chào Thúy Nguyễn</NavTitleLarge>
       </Navbar>
@@ -101,39 +104,94 @@ const HomePage = () => {
       {/* Page content */}
       <div className="grid grid-cols-4 px-2 mt-3">
         <div className='text-center  bg-light rounded-4 mx-2 p-3'>
-          <img src='../image/food.png' className='w-75'></img>
+          <img src='../image/14.gif' className='w-75'></img>
           <div className='text-dark fw-bold fs-13 '>Menu</div>
         </div>
         <div className='text-center  bg-light rounded-4 mx-2 p-3'>
-          <img src='../image/booking1.png' className='w-75'></img>
+          <img src='../image/8.gif' className='w-75'></img>
           <div className='text-dark fw-bold fs-13'>Booking</div>
         </div>
         <div className='text-center  bg-light rounded-4 mx-2 p-3'>
-          <img src='../image/event.png' className='w-75'></img>
+          <img src='../image/1.gif' className='w-75'></img>
           <div className='text-dark fw-bold fs-13'>Event</div>
         </div>
         <div className='text-center  bg-light rounded-4 mx-2 p-3'>
-          <img src='../image/bar.png' className='w-75'></img>
+          <img src='../image/icon-lease.gif' className='w-75'></img>
           <div className='text-dark fw-bold fs-13'>Room</div>
         </div>
       </div>
+      <div className='fs-6 fw-bold mx-3 mt-4 d-flex align-items-center'><img src='../image/6.gif' className='size-icon'></img>  Ưu đãi</div>
+      <div className='row d-flex flex-nowrap mx-2 mt-2 pb-2' style={{ overflowX: "auto", whiteSpace: "nowrap" }}>
+        <div className='col-4 px-1'>
+          <Card className='m-0 border-light p-1 fs-13'>
+            <div>
+              <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
+              <div className='d-flex'>
+                <div className='mt-2 fst-italic text-white tag-khuyenmai'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
+              </div>
+              <div className='fw-bold text-pink my-1'>Giảm 10%</div>
+              <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+            </div>
+          </Card>
+        </div>
+        <div className='col-4 px-1'>
+          <Card className='m-0 border-light p-1 fs-13'>
+            <div>
+              <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
+              <div className='d-flex'>
+                <div className='mt-2 fst-italic text-white tag-khuyenmai'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
+              </div>
+              <div className='fw-bold text-pink my-1'>Giảm 10%</div>
+              <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+            </div>
+          </Card>
+        </div>
+        <div className='col-4 px-1'>
+          <Card className='m-0 border-light p-1 fs-13'>
+            <div>
+              <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
+              <div className='d-flex'>
+                <div className='mt-2 fst-italic text-white tag-khuyenmai'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
+              </div>
+              <div className='fw-bold text-pink my-1'>Giảm 10%</div>
+              <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+            </div>
+          </Card>
+        </div>
+        <div className='col-4 px-1'>
+          <Card className='m-0 border-light p-1 fs-13'>
+            <div>
+              <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
+              <div className='d-flex'>
+                <div className='mt-2 fst-italic text-white tag-khuyenmai'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
+              </div>
+              <div className='fw-bold text-pink my-1'>Giảm 10%</div>
+              <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+            </div>
+          </Card>
+        </div>
+
+      </div>
+      <div className='fs-6 fw-bold mx-3 mt-4'> <img src='../image/6.gif' className='size-icon'></img>Sự kiện</div>
       <swiper-container pagination
         loop
         autoplay='{"delay":5000, "disableOnInteraction": false}'
         class=" mt-3 demo-swiper-multiple demo-swiper-multiple-auto ps-3"
         space-between="10"
         slides-per-view="1.15">
-        <swiper-slide><img src='https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?cs=srgb&dl=pexels-souvenirpixels-414612.jpg&fm=jpg' className='w-100 border-image' ></img></swiper-slide>
-        <swiper-slide><img src='https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D' className='w-100 border-image'></img></swiper-slide>
-        <swiper-slide><img src='https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?cs=srgb&dl=pexels-souvenirpixels-414612.jpg&fm=jpg' className='w-100 border-image' ></img></swiper-slide>
-        <swiper-slide><img src='https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D' className='w-100 border-image'></img></swiper-slide>
-        <swiper-slide><img src='https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?cs=srgb&dl=pexels-souvenirpixels-414612.jpg&fm=jpg' className='w-100 border-image' ></img></swiper-slide>
-        <swiper-slide><img src='https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D' className='w-100 border-image'></img></swiper-slide>
+        <swiper-slide><img src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image' ></img></swiper-slide>
+        <swiper-slide><audio src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image'></audio></swiper-slide>
+        <swiper-slide><img src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image'></img></swiper-slide>
+        <swiper-slide><img src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image' ></img></swiper-slide>
+        <swiper-slide><img src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image'></img></swiper-slide>
+        <swiper-slide><img src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image' ></img></swiper-slide>
+        <swiper-slide><img src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image'></img></swiper-slide>
       </swiper-container>
 
       {/* Calender */}
-      <div className='p-3  mt-3'>
-        <div className="calendar  p-1  rounded-4 shadow-sm bg-secondary bg-opacity-10" style={{ backdropFilter: "blur(50px)" }}>
+      <div className='fs-15 fw-bold mx-3 mt-3'>Lịch Booking tháng 07/2025</div>
+      <div className='p-3  mt1'>
+        <div className="calendar  p-1  rounded-4 shadow-sm bg-light" style={{ backdropFilter: "blur(50px)" }}>
           <div className="d-flex justify-content-between text-center mb-2 py-1">
             {week.map((day, idx) => (
               <div key={idx} className="flex-fill fw-bold bg-pink mx-1 py-2 rounded-3 p-1" style={{ fontSize: "13px" }}>{day}</div>
@@ -145,7 +203,7 @@ const HomePage = () => {
               return (
                 <div
                   key={idx}
-                  className={`row rounded-3 m-1 p-1 ${isCurrentMonth ? 'border bg-white' : ''} `}
+                  className={`row rounded-3 m-1 p-1 ${isCurrentMonth ? 'border-light bg-white' : ''} `}
                   style={{
                     width: "12%",
                     color: isCurrentMonth ? undefined : 'transparent',
@@ -218,7 +276,7 @@ const HomePage = () => {
             <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className='w-100 border border-2 rounded-3 border-danger'></img>
           </div>
           <div className='col-10 fs-13 ms-2 border-bottom border-light'>
-            <div className='fw-bold d-flex justify-content-between'> Phòng: V.I.P 4 <span>25.500.000</span></div>
+            <div className='fw-bold d-flex justify-content-between'> Phòng: V.I.P 4 <span className='text-success'>Đã hoàn tất</span></div>
             <div className='text-muted mt-1 mb-2'>18/07/2025 14:22:52</div>
           </div>
         </ListItem>
@@ -227,14 +285,14 @@ const HomePage = () => {
             <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className='w-100 border border-2 rounded-3 border-danger'></img>
           </div>
           <div className='col-10 fs-13 ms-2 border-bottom border-light'>
-            <div className='fw-bold d-flex justify-content-between'> Phòng: V.I.P 4 <span>25.500.000</span></div>
+            <div className='fw-bold d-flex justify-content-between'> Phòng: V.I.P 4 <span className='text-success'>Đã hoàn tất</span></div>
             <div className='text-muted mt-1 mb-2'>18/07/2025 14:22:52</div>
           </div>
         </ListItem>
       </List>
 
       <List strong inset dividersIos>
-        <ListItem link="/about/" title="About" />
+        <ListItem link="/login/" title="Login" />
         <ListItem link="/form/" title="Form" />
       </List>
 

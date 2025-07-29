@@ -51,3 +51,60 @@
     display: none !important;
     content: none !important;
 }
+
+input {
+    border: 0.5px solid #f07;
+    font-size: 14px;
+    padding: 12px;
+}
+
+.fs-14 {
+    font-size: 14px;
+}
+
+.form-check-input {
+    padding: 5px;
+    border-color: #f07;
+}
+
+.form-check-input:checked {
+    padding: 5px;
+    background-color: #f07;
+    border-color: #f07;
+}
+
+.form-check-input:focus {
+    border-color: #f07;
+    outline: 0;
+    box-shadow: 0 0 0 .1rem rgb(241, 178, 207);
+}
+
+.limited-lines1 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    /* Giới hạn 1 dòng */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    /* Đảm bảo không bị ảnh hưởng */
+    word-break: break-word;
+    /* Ngắt từ nếu quá dài */
+    max-width: 100%;
+    /* Đảm bảo không bị tràn */
+}
+.tag-khuyenmai{
+    border-radius: 45px 0 45px 0;
+    padding: 3px 10px 3px 10px;
+
+    font-size: 11px;
+    background: linear-gradient(#f07, #f0606c, #f86f56);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    letter-spacing: 0.5px;
+    animation: pulseGlow 1.5s infinite
+}
+
+.size-icon{
+    width: 35px;
+    height: 35px;
+}
