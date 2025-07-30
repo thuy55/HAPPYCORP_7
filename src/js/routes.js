@@ -17,6 +17,7 @@ import EventDetailPage from '../pages/EventDetail.jsx';
 import EndowDetailPage from '../pages/EndowDetail.jsx';
 import RoomPage from '../pages/room.jsx';
 import AccountPage from '../pages/Account.jsx';
+import RevenuePage from '../pages/Revenue.jsx';
 
 var routes = [
   {
@@ -76,6 +77,11 @@ var routes = [
     path: '/account/',
     component: AccountPage,
   },
+  {
+    path: '/revenue/',
+    component: RevenuePage,
+  },
+
 
 
   {

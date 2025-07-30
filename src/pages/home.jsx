@@ -118,10 +118,12 @@ const HomePage = () => {
           <img src='../image/8.gif' className='w-50'></img>
           <div className=' fs-13'>Đặt bàn</div>
         </div>
+        <Link href="/revenue/">
         <div className='text-center rounded-4 mx-2 p-1'>
           <img src='../image/1.gif' className='w-50'></img>
           <div className=' fs-13'>Sự kiện</div>
         </div>
+        </Link>
         <Link href="/room/">
           <div className='text-center rounded-4 mx-2 p-1'>
             <img src='../image/icon-lease.gif' className='w-50'></img>
