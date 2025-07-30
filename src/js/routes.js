@@ -15,6 +15,8 @@ import EventPage from '../pages/Event.jsx';
 import EndowPage from '../pages/Endow.jsx';
 import EventDetailPage from '../pages/EventDetail.jsx';
 import EndowDetailPage from '../pages/EndowDetail.jsx';
+import RoomPage from '../pages/room.jsx';
+import AccountPage from '../pages/Account.jsx';
 
 var routes = [
   {
@@ -65,6 +67,14 @@ var routes = [
   {
     path: '/endow-detal/',
     component: EndowDetailPage,
+  },
+  {
+    path: '/room/',
+    component: RoomPage,
+  },
+   {
+    path: '/account/',
+    component: AccountPage,
   },
 
 

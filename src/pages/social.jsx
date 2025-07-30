@@ -26,6 +26,7 @@ import {
 } from 'framework7-react';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
+import CommonNavbar from '../components/CommonNavbar';
 
 const SocialPage = () => {
     const { t } = useTranslation();
@@ -35,38 +36,70 @@ const SocialPage = () => {
     const [sheetOpenedDeleteSocial, setSheetOpenedDeleteSocial] = useState(false);
     const [sheetOpenedAdd, setSheetOpenedAdd] = useState(false);
 
-    const [images, setImages] = useState([]);
+    // const [images, setImages] = useState([]);
 
-    // Hàm chọn file ảnh
-    const [addimage, setaddimage] = useState([]);
+    // const [addimage, setaddimage] = useState([]);
+    // const handleImageChange = (event) => {
+    //     const files = Array.from(event.target.files); // Lấy danh sách file
+    //     setaddimage((prevImages) => [...prevImages, ...files]);
+    //     console.log(files);
+    //     const newImages = [];
+    //     files.forEach((file) => {
+    //         const reader = new FileReader();
+    //         reader.onload = (e) => {
+    //             newImages.push(e.target.result);
+    //             if (newImages.length === files.length) {
+    //                 setImages((prev) => [...prev, ...newImages]); // Cập nhật state
+
+    //             }
+    //         };
+    //         reader.readAsDataURL(file);
+    //     });
+    // };
+
+    // const triggerFileInput = () => {
+    //     document.getElementById("fileInput").click();
+    // };
+
+    // const handleDeleteImage = (index) => {
+    //     setImages(images.filter((_, i) => i !== index));
+
+    //     setaddimage(addimage.filter((_, i) => i !== index));
+
+    // };
+
+    // test
+
+    const [media, setMedia] = useState([]); // [{ preview, file, type }]
+
     const handleImageChange = (event) => {
-        const files = Array.from(event.target.files); // Lấy danh sách file
-        setaddimage((prevImages) => [...prevImages, ...files]);
-        console.log(files);
-        const newImages = [];
+        const files = Array.from(event.target.files);
+        const newMedia = [];
+
         files.forEach((file) => {
             const reader = new FileReader();
             reader.onload = (e) => {
-                newImages.push(e.target.result);
-                if (newImages.length === files.length) {
-                    setImages((prev) => [...prev, ...newImages]); // Cập nhật state
+                const type = file.type.startsWith("video") ? "video" : "image";
+                newMedia.push({
+                    preview: e.target.result,
+                    file,
+                    type,
+                });
 
+                if (newMedia.length === files.length) {
+                    setMedia((prev) => [...prev, ...newMedia]);
                 }
             };
             reader.readAsDataURL(file);
         });
     };
 
-    // Hàm kích hoạt input file khi bấm vào icon
     const triggerFileInput = () => {
         document.getElementById("fileInput").click();
     };
 
-    const handleDeleteImage = (index) => {
-        setImages(images.filter((_, i) => i !== index));
-
-        setaddimage(addimage.filter((_, i) => i !== index));
-
+    const handleDeleteMedia = (index) => {
+        setMedia((prev) => prev.filter((_, i) => i !== index));
     };
 
     //upload audio
@@ -834,17 +867,7 @@ const SocialPage = () => {
 
     return (
         <Page name="social" >
-
-            <Navbar sliding={false}>
-                <NavLeft>
-                    <Link panelOpen="left" ><img src='../image/13.gif' className='size-icon'></img></Link>
-                </NavLeft>
-                <NavTitle className='text-dark' sliding>
-                    <img src='../image/happy-corp-logo.png' style={{ height: "35px" }}></img>
-                </NavTitle>
-                <NavRight>
-                </NavRight>
-            </Navbar>
+            <CommonNavbar />
 
             {/* Page content */}
             <Popover className="popover-menu text-white" style={{ backgroundColor: "#1e1e1e", width: "200px" }}>
@@ -870,7 +893,6 @@ const SocialPage = () => {
                                     {t("save_the_post")}
                                 </>
                             }
-
                         </Link>
                     </ListItem>
                     <ListItem popoverClose >
@@ -913,7 +935,7 @@ const SocialPage = () => {
                         </div>
                     </div>
                     <div className='col-4 text-end'>
-                        <Link className='d-flex align-items-center justify-content-end align-items-center' fill sheetOpen=".add-social-sheet">
+                        <Link className='d-flex align-items-center justify-content-end align-items-center' fill popupOpen="#add-social">
                             <Icon f7="plus" size="20px" className='me-1'></Icon>
                             <div className='mt-1'>Post</div>
                         </Link>
@@ -940,7 +962,7 @@ const SocialPage = () => {
                         <img src='https://media.macphun.com/img/uploads/customer/how-to/608/15542038745ca344e267fb80.28757312.jpg?q=85&w=1340' className='w-100'></img>
                     </div>
                     <div className='col-6 p-1'>
-                        <img src='https://images.pexels.com/photos/1194775/pexels-photo-1194775.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'  className='w-100'></img>
+                        <img src='https://images.pexels.com/photos/1194775/pexels-photo-1194775.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' className='w-100'></img>
                     </div>
 
                 </div>
@@ -1487,159 +1509,71 @@ const SocialPage = () => {
             </Popover>
 
             {/* add social */}
-            <Sheet push
-                className="add-social-sheet rounded-4 modal-center"
-                opened={sheetOpenedAdd}
-                onSheetClosed={() => {
-                    setSheetOpenedAdd(false);
-                }}
-                style={{ height: "90%", width: "90%", backgroundColor: "rgba(52, 58, 64)", color: "white" }}
-                swipeToClose
-                swipeToStep
-                backdrop
-            >
-                <div className="custom-backdrop"></div>
 
-                <Toolbar className="custom-toolbar ">
-                    <div className="left text-white d-flex align-items-center">
-                        <Icon f7='wand_stars'></Icon>
+            <Popup id="add-social">
+                <View>
+                    <Page>
+                        <Navbar title="Thêm bài viết">
+                            <NavRight>
+                                <Link popupClose>Close</Link>
+                            </NavRight>
+                        </Navbar>
+                        <List className='mt-3 mb-4 px-2'>
+                            <div className='px-3'>
 
-                        <Block className='text-white fs-5'>{t("create_post")}</Block>
-                    </div>
-                    <div className="right">
-                        <Link sheetClose> <Icon f7="xmark" size='20px' color='white' className='me-2'></Icon></Link>
-                    </div>
-                </Toolbar>
-                {/*  Scrollable sheet content */}
-                <PageContent className='overflowY-auto'>
-                    <List className='mt-3 mb-4 px-2'>
-                        <div className='px-3'>
-                            <textarea rows={5} className=' rounded-3 border border-1 px-2 text-white mb-3' placeholder="Xin chào 123" onChange={(e) => setContentAdd(e.target.value)}></textarea>
-                        </div>
-                        {selectTypePost == "1" &&
-                            <>
-                                <Card className='m-0 mx-2 p-3 rounded-4 border-border-secondary bg-dark' style={{ minHeight: "300px" }}>
+                                <textarea rows={5} className=' rounded-3 border border-1 px-2  mb-3' placeholder="Hãy nêu cảm nghĩ của bạn" onChange={(e) => setContentAdd(e.target.value)}></textarea>
+                            </div>
 
-                                    <div className="image-upload-container">
-                                        {/* Input file ẩn */}
-                                        <input
-                                            id="fileInput"
-                                            type="file"
-                                            multiple
-                                            accept="image/*"
-                                            style={{ display: "none" }}
-                                            onChange={handleImageChange}
-                                        />
+                            <div className="m-0 mx-3 p-3 rounded-4 border border-1" style={{ minHeight: "300px" }}>
+                                <div className="image-upload-container">
+                                    <input
+                                        id="fileInput"
+                                        type="file"
+                                        multiple
+                                        accept="image/*,video/*"
+                                        style={{ display: "none" }}
+                                        onChange={handleImageChange}
+                                    />
 
-                                        {/* Grid hiển thị ảnh */}
-                                        <div className="image-grid">
-                                            {/* Ô tải ảnh lên */}
-                                            <div className="upload-box text-center" onClick={triggerFileInput}>
-                                                <Icon f7="cloud_upload" size="30px" color="white" />
-                                                <div>{t("add_image")}</div>
-                                            </div>
+                                    <div className="image-grid">
+                                        <div className="upload-box text-center mt-4" onClick={triggerFileInput} style={{ cursor: 'pointer' }}>
+                                            <Icon f7="cloud_upload" size="30px" />
+                                            <div>Thêm hình ảnh / video</div>
+                                        </div>
 
-                                            <div className='row'>
-                                                {images.map((img, index) => (
-                                                    <div key={index} className="image-item position-relative col-4">
-                                                        <Button className="btn bg-danger btn-sm position-absolute top-0 end-0 m-1 rounded-circle p-1"
-                                                            onClick={() => handleDeleteImage(index)}
-                                                            style={{ width: "30px", height: "30px" }}>
-                                                            <Icon f7="trash" size="15px" color="white" />
-                                                        </Button>
-                                                        <img src={img} alt={`Ảnh ${index + 1}`} className="preview-img w-100" />
-                                                    </div>
-                                                ))}
-                                            </div>
+                                        <div className="row mt-3">
+                                            {media.map((item, index) => (
+                                                <div key={index} className="image-item position-relative col-4 mb-3">
+                                                    <Button
+                                                        className="btn bg-danger btn-sm position-absolute top-0 end-0 m-1 rounded-circle p-1"
+                                                        onClick={() => handleDeleteMedia(index)}
+                                                        style={{ width: "30px", height: "30px" }}
+                                                    >
+                                                        <Icon f7="trash" size="15px" color="white" />
+                                                    </Button>
+
+                                                    {item.type === 'image' ? (
+                                                        <img src={item.preview} alt={`Ảnh ${index + 1}`} className="preview-img w-100 rounded-3" />
+                                                    ) : (
+                                                        <video
+                                                            src={item.preview}
+                                                            controls
+                                                            className="preview-img w-100 rounded-3"
+                                                            style={{ maxHeight: "150px", objectFit: "cover" }}
+                                                        />
+                                                    )}
+                                                </div>
+                                            ))}
                                         </div>
                                     </div>
-                                </Card>
-                            </>
-                        }
-                        {selectTypePost == "2" &&
-                            <>
-                                <Card className='m-0 mx-2 p-3 rounded-4 border-border-secondary bg-dark' style={{ minHeight: "300px" }}>
-
-                                    <div className="audio-upload-container">
-                                        {/* Input file (ẩn) */}
-                                        <input
-                                            id="audioInput"
-                                            type="file"
-                                            accept="audio/*"
-                                            style={{ display: "none" }}
-                                            onChange={handleAudioChange}
-                                        />
-
-                                        {/* Nút tải lên */}
-                                        {!audioFile && (
-                                            <div className="upload-box text-center" onClick={triggerFileInputAudio}>
-                                                <Icon f7="cloud_upload" size="30px" color="white" />
-                                                <div>{t("add_audio")}</div>
-                                            </div>
-                                        )}
-
-                                        {/* Nếu đã chọn file */}
-                                        {audioFile && (
-                                            <div className="audio-preview text-center">
-                                                <audio controls src={audioFile} className="w-100"></audio>
-                                                <Button
-                                                    className="btn bg-danger btn-sm mt-2"
-                                                    onClick={handleDeleteAudio}
-                                                >
-                                                    <Icon f7="trash" size="15px" color="white" /> {t("delete")}
-                                                </Button>
-                                            </div>
-                                        )}
-                                    </div>
-                                </Card>
-                            </>
-                        }
-
-                        <div className=' rounded-3 p-2 border mx-2 mt-3'>
-                            <div className='d-flex justify-content-between align-items-center'>
-                                <div>{t("add_to_post")} </div>
-                                <div className='d-flex align-items-center'>
-                                    <Button onClick={() => { setSelectTypePost("1"), console.log(1); setType("images") }}>
-                                        <Icon f7='photo_on_rectangle' size="25px" color='white'></Icon>
-                                    </Button>
-                                    <Button onClick={() => { setSelectTypePost("2"), console.log(2); setType("audio") }}>
-                                        <Icon f7='music_note_2' size="25px" color='white'></Icon>
-                                    </Button>
-                                    {/* <Button></Button> */}
                                 </div>
                             </div>
-                        </div>
 
-                        <div className='text-white fw-bold fs-14 mx-2 mt-3'>{t("who_can_see_your_post?")}</div>
-                        <div className='fst-italic text-muted fs-12 mx-2'>{t("title_edit_social")}</div>
-
-                        <Card className='rounded-4 p-3 bg-dark bg-opacity-50 text-white fs-14'>
-                            <div className="form-check d-flex align-items-center">
-                                <input className="form-check-input" style={{ fontSize: "1.2em" }} type="radio" name="flexRadioDefault" id="flexRadioDefault1" onChange={(e) => setAccess("0")}></input>
-                                <label className="form-check-label fs-15 ms-4 d-flex align-items-center" htmlFor="flexRadioDefault1">
-                                    <Icon f7='globe' size="20px" className='me-2'></Icon>
-                                    {t("public")}
-                                </label>
-                            </div>
-                            <div className="form-check d-flex align-items-center my-3">
-                                <input className="form-check-input" style={{ fontSize: "1.2em" }} type="radio" name="flexRadioDefault" id="flexRadioDefault1" onChange={(e) => setAccess("1")}></input>
-                                <label className="form-check-label fs-15 ms-4 d-flex align-items-center" htmlFor="flexRadioDefault1">
-                                    <Icon f7='person_3' size="20px" className='me-2'></Icon>
-                                    {t("followers")}
-                                </label>
-                            </div>
-                            <div className="form-check d-flex align-items-center">
-                                <input className="form-check-input" style={{ fontSize: "1.2em" }} type="radio" name="flexRadioDefault" id="flexRadioDefault1" onChange={(e) => setAccess("2")}></input>
-                                <label className="form-check-label fs-15 ms-4 d-flex align-items-center" htmlFor="flexRadioDefault1">
-                                    <Icon f7='lock' size="20px" className='me-2'></Icon>
-                                    {t("only_me")}
-                                </label>
-                            </div>
-                        </Card>
-                        <Button className=' rounded-pill p-4 bg-primary text-white mt-3 mx-3 fs-6' onClick={handleAddPost}>{t("post1")}</Button>
-                    </List>
-                </PageContent>
-            </Sheet>
+                            <Button className=' rounded-pill p-4 bg-pink text-white mt-5 mx-3 fs-6' onClick={handleAddPost}>Đăng</Button>
+                        </List>
+                    </Page>
+                </View>
+            </Popup>
 
             {/* Modal comment */}
             <Sheet push

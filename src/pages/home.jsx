@@ -17,10 +17,12 @@ import {
   Icon,
   Badge,
   Popup,
-  View
+  View,
+  f7
 } from 'framework7-react';
 import moment from 'moment';
 import { number } from 'prop-types';
+import CommonNavbar from '../components/CommonNavbar';
 
 
 const HomePage = () => {
@@ -80,6 +82,11 @@ const HomePage = () => {
     }, 2000);
   }
 
+  function bookingDetail(e) {
+    f7.popup.open('#booking-detail');
+    console.log(345565);
+  }
+
 
 
   return (
@@ -87,47 +94,49 @@ const HomePage = () => {
 
     <Page name="home">
       {/* Top Navbar */}
-      <Navbar large sliding={false}>
-        <NavLeft>
-          {/* <Link iconIos="f7:menu" iconMd="material:menu" panelOpen="left" /> */}
-          <Link panelOpen="left" ><img src='../image/13.gif' className='size-icon'></img></Link>
-        </NavLeft>
-        <NavTitle className='text-dark' sliding>
-          <img src='../image/happy-corp-logo.png' style={{ height: "35px" }}></img>
-        </NavTitle>
-        <NavRight>
-          {/* <Link iconIos="f7:menu" iconMd="material:menu" panelOpen="right" /> */}
-        </NavRight>
-        <NavTitleLarge className='text'>Xin chào Thúy Nguyễn</NavTitleLarge>
-      </Navbar>
-
+      <CommonNavbar />
       {/* Page content */}
-      <div className="grid grid-cols-4 px-2 mt-3">
-        <div className='text-center  bg-light rounded-4 mx-2 p-3'>
-          <img src='../image/14.gif' className='w-75'></img>
-          <div className='text-dark fw-bold fs-13 '>Menu</div>
+      <List className='m-0 mt-2'>
+        <div className="video-container rounded-3 px-2">
+          <video
+            className="video-bg w-100 "
+            autoPlay
+            muted
+            loop
+            playsInline
+          >
+            <source src="https://happycorp.com.vn/wp-content/uploads/2025/07/homevideo.mp4" type="video/mp4" />
+          </video>
         </div>
-        <div className='text-center  bg-light rounded-4 mx-2 p-3'>
-          <img src='../image/8.gif' className='w-75'></img>
-          <div className='text-dark fw-bold fs-13'>Booking</div>
+      </List>
+      <div className="grid grid-cols-4 px-2 mt-2">
+        <div className='text-center rounded-4 mx-2 p-1'>
+          <img src='../image/14.gif' className='w-50'></img>
+          <div className=' fs-13 '>Thực đơn</div>
         </div>
-        <div className='text-center  bg-light rounded-4 mx-2 p-3'>
-          <img src='../image/1.gif' className='w-75'></img>
-          <div className='text-dark fw-bold fs-13'>Event</div>
+        <div className='text-center rounded-4 mx-2 p-1'>
+          <img src='../image/8.gif' className='w-50'></img>
+          <div className=' fs-13'>Đặt bàn</div>
         </div>
-        <div className='text-center  bg-light rounded-4 mx-2 p-3'>
-          <img src='../image/icon-lease.gif' className='w-75'></img>
-          <div className='text-dark fw-bold fs-13'>Room</div>
+        <div className='text-center rounded-4 mx-2 p-1'>
+          <img src='../image/1.gif' className='w-50'></img>
+          <div className=' fs-13'>Sự kiện</div>
         </div>
+        <Link href="/room/">
+          <div className='text-center rounded-4 mx-2 p-1'>
+            <img src='../image/icon-lease.gif' className='w-50'></img>
+            <div className=' fs-13'>Sơ đồ phòng</div>
+          </div>
+        </Link>
       </div>
-      <Link href="/endow/"  className='fs-6 fw-bold mx-3 mt-4 justify-content-start d-flex align-items-center'><img src='../image/6.gif' className='size-icon'></img>  Ưu đãi</Link>
+      <Link href="/endow/" className='fs-6 fw-bold mx-3 mt-3 justify-content-start d-flex align-items-center'><img src='../image/6.gif' className='size-icon'></img>  Ưu đãi</Link>
       <div className='row d-flex flex-nowrap mx-2 mt-2 pb-2' style={{ overflowX: "auto", whiteSpace: "nowrap" }}>
         <div className='col-4 px-1'>
           <Card className='m-0 border-light p-1 fs-13'>
             <div>
               <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
               <div className='d-flex'>
-                <div className='mt-2 fst-italic text-white tag-khuyenmai'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
+                <div className='mt-2 fst-italic'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
               </div>
               <div className='fw-bold text-pink my-1'>Giảm 10%</div>
               <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
@@ -139,7 +148,7 @@ const HomePage = () => {
             <div>
               <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
               <div className='d-flex'>
-                <div className='mt-2 fst-italic text-white tag-khuyenmai'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
+                <div className='mt-2 fst-italic'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
               </div>
               <div className='fw-bold text-pink my-1'>Giảm 10%</div>
               <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
@@ -151,7 +160,7 @@ const HomePage = () => {
             <div>
               <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
               <div className='d-flex'>
-                <div className='mt-2 fst-italic text-white tag-khuyenmai'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
+                <div className='mt-2 fst-italic'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
               </div>
               <div className='fw-bold text-pink my-1'>Giảm 10%</div>
               <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
@@ -163,16 +172,15 @@ const HomePage = () => {
             <div>
               <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
               <div className='d-flex'>
-                <div className='mt-2 fst-italic text-white tag-khuyenmai'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
+                <div className='mt-2 fst-italic'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
               </div>
               <div className='fw-bold text-pink my-1'>Giảm 10%</div>
               <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
             </div>
           </Card>
         </div>
-
       </div>
-      <Link href="/event/" className='fs-6 fw-bold mx-3 mt-4'> <img src='../image/6.gif' className='size-icon'></img>Sự kiện</Link>
+      <Link href="/event/" className='fs-6 fw-bold mx-3 mt-3'> <img src='../image/6.gif' className='size-icon'></img>Sự kiện</Link>
       <swiper-container pagination
         loop
         autoplay='{"delay":5000, "disableOnInteraction": false}'
@@ -180,7 +188,7 @@ const HomePage = () => {
         space-between="10"
         slides-per-view="1.15">
         <swiper-slide><img src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image' ></img></swiper-slide>
-        <swiper-slide><audio src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image'></audio></swiper-slide>
+        <swiper-slide><img src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image'></img></swiper-slide>
         <swiper-slide><img src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image'></img></swiper-slide>
         <swiper-slide><img src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image' ></img></swiper-slide>
         <swiper-slide><img src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image'></img></swiper-slide>
@@ -201,43 +209,47 @@ const HomePage = () => {
             {calendarDays.map((date, idx) => {
               const isCurrentMonth = date.month() === searchMonth && date.year() === searchYear;
               return (
-                <div
-                  key={idx}
-                  className={`row rounded-3 m-1 p-1 ${isCurrentMonth ? 'border-light bg-white' : ''} `}
-                  style={{
-                    width: "12%",
-                    color: isCurrentMonth ? undefined : 'transparent',
-                    fontSize: "10px",
-                    minHeight: "45px"
-                  }}
-                >
-                  <div className='col-6 p-0 pe-1'>
-                    {date.format("DD")}
-                  </div>
-                  {datamonth && datamonth.map((book, key) => {
-                    if (book.time === date.format("DD/MM/YYYY")) {
-                      return (
-                        <>
-                          <div className='col-6 p-0 ps-1' key={key}>
-                            <div className='bg-danger text-white rounded-2'>
-                              {book.booking[0]}
-                            </div>
-                          </div>
-                          <div className='col-6 p-0 mt-1 pe-1'>
-                            <div className='bg-success text-white rounded-2'>
-                              {book.booking[1]}
-                            </div>
-                          </div>
-                          <div className='col-6 p-0 mt-1 ps-1'>
-                            <div className='bg-warning text-white rounded-2'>
-                              {book.booking[2]}
-                            </div>
-                          </div>
-                        </>
-                      )
-                    }
-                  })}
-                </div>
+                <Link className='m-0 p-0' fill popupOpen="#popup-view-booking">
+                  <Card
+                    key={idx}
+                    className={`card-animated-bg rounded-3 m-1 p-1 ${isCurrentMonth ? 'border-light bg-white' : 'border border-0 bg-light'} `}
+                    style={{
+                      width: "12%",
+                      color: isCurrentMonth ? undefined : 'transparent',
+                      fontSize: "10px",
+                      minHeight: "45px"
+                    }}
+                  >
+                    <div className='row m-0'>
+                      <div className='col-6 p-0 pe-1'>
+                        {date.format("DD")}
+                      </div>
+                      {datamonth && datamonth.map((book, key) => {
+                        if (book.time === date.format("DD/MM/YYYY")) {
+                          return (
+                            <>
+                              <div className='col-6 p-0 ps-1' key={key}>
+                                <div className='bg-danger text-white rounded-2'>
+                                  {book.booking[0]}
+                                </div>
+                              </div>
+                              <div className='col-6 p-0 mt-1 pe-1'>
+                                <div className='bg-success text-white rounded-2'>
+                                  {book.booking[1]}
+                                </div>
+                              </div>
+                              <div className='col-6 p-0 mt-1 ps-1'>
+                                <div className='bg-warning text-white rounded-2'>
+                                  {book.booking[2]}
+                                </div>
+                              </div>
+                            </>
+                          )
+                        }
+                      })}
+                    </div>
+                  </Card>
+                </Link>
               );
             })}
           </div>
@@ -291,49 +303,187 @@ const HomePage = () => {
         </ListItem>
       </List>
 
-      <List strong inset dividersIos>
-        <ListItem link="/login/" title="Login" />
-        <ListItem link="/form/" title="Form" />
-      </List>
-
-      <BlockTitle>Modals</BlockTitle>
-      <Block className="grid grid-cols-2 grid-gap">
-        <Button fill popupOpen="#my-popup">Popup</Button>
-        <Button fill loginScreenOpen="#my-login-screen">Login Screen</Button>
-      </Block>
-
-      <BlockTitle>Panels</BlockTitle>
-      <Block className="grid grid-cols-2 grid-gap">
-        <Button fill panelOpen="left">Left Panel</Button>
-        <Button fill panelOpen="right">Right Panel</Button>
-      </Block>
-
-      <List strong inset dividersIos>
-        <ListItem
-          title="Dynamic (Component) Route"
-          link="/dynamic-route/blog/45/post/125/?foo=bar#about"
-        />
-        <ListItem
-          title="Default Route (404)"
-          link="/load-something-that-doesnt-exist/"
-        />
-        <ListItem
-          title="Request Data & Load"
-          link="/request-and-load/user/123456/"
-        />
-      </List>
-
-      <Popup id="my-popup">
+      <Popup id="popup-view-booking">
         <View>
           <Page>
-            <Navbar title="Popup">
+            <Navbar title="Ngày 31/07/2025">
               <NavRight>
                 <Link popupClose>Close</Link>
               </NavRight>
             </Navbar>
-            <Block>
-              <p>Popup content goes here. jdbhfsjn</p>
+            <Block className='my-3'>
+              <div className='fw-bold'>Chi tiết khách hàng</div>
+              <List className='my-2'>
+                <Card className='m-0 p-2 border border-0 rounded-0'>
+                  <div className=' text-center'>
+                    Chưa biết là gì
+                  </div>
+                </Card>
+              </List>
+
+              <div className='fw-bold fs-6 text-pink'>Tổng booking 5</div>
+
+              <div class="grid grid-cols-3 fs-13 mt-2">
+                <div className='d-flex align-items-center mt-2'>
+                  <div className='hinh-vuong bg-primary rounded-2 me-1'></div>
+                  4 Nhận khách
+                </div>
+                <div className='d-flex align-items-center mt-2'>
+                  <div className='hinh-vuong bg-success rounded-2 me-1'></div>
+                  4 Thanh toán
+                </div>
+                <div className='d-flex align-items-center mt-2'>
+                  <div className='hinh-vuong bg-warning rounded-2 me-1'></div>
+                  4 Đợi duyệt
+                </div>
+                <div className='d-flex align-items-center mt-2'>
+                  <div className='hinh-vuong bg-info rounded-2 me-1'></div>
+                  0 Chờ duyệt
+                </div>
+                <div className='d-flex align-items-center mt-2'>
+                  <div className='hinh-vuong bg-danger rounded-2 me-1'></div>
+                  0 Không duyệt
+                </div>
+                <div className='d-flex align-items-center mt-2'>
+                  <div className='hinh-vuong bg-secondary rounded-2 me-1'></div>
+                  0 Đã hủy
+                </div>
+              </div>
+              <List className='my-3'>
+                <div onClick={() => { bookingDetail(1) }} className=' hieuung p-2 rounded-2 d-flex align-items-center fs-13'>
+                  <div className='bg-primary rounded-2' style={{ width: "35px", height: "35px" }}></div>
+                  <div className='ms-2'>
+                    <div className='fw-bold mb-1'>MR TRUNG & HUY NGUYỄN (K.BI)</div>
+                    <div>31/07/2025 12:00:00</div>
+                  </div>
+                </div>
+                <div className=' border-bottom mb-2  '></div>
+                <div className=' hieuung p-2 rounded-2 d-flex align-items-center fs-13'>
+                  <div className='bg-primary rounded-2' style={{ width: "35px", height: "35px" }}></div>
+                  <div className='ms-2'>
+                    <div className='fw-bold mb-1'>MR TRUNG & HUY NGUYỄN (K.BI)</div>
+                    <div>31/07/2025 12:00:00</div>
+                  </div>
+                </div>
+                <div className=' border-bottom mb-2  '></div>
+
+              </List>
+              <div className='fw-bold fs-6 text-pink'>Phòng trống</div>
+              <List className='mt-0'>
+                <div className='row'>
+                  <div className='col-6 p-2'>
+                    <Card className='m-0 p-1 rounded-3 border border-0 fs-13'>
+                      <img className='w-100 rounded-3' src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp'></img>
+                      <div className='fs-6 fw-bold text-center mt-2'>Happy corp 2</div>
+                      <div className='mt-1'>Khung giờ trống:</div>
+                      <ul className='mt-1' style={{ listStyle: 'disc', paddingLeft: '1.1rem' }}>
+                        <li>9h30 - 15h00</li>
+                        <li>9h30 - 15h00</li>
+                      </ul>
+                    </Card>
+                  </div>
+                  <div className='col-6 p-2'>
+                    <Card className='m-0 p-1 rounded-3 border border-0 fs-13'>
+                      <img className='w-100 rounded-3' src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp'></img>
+                      <div className='fs-6 fw-bold text-center mt-2'>Happy corp 2</div>
+                      <div className='mt-1'>Khung giờ trống:</div>
+                      <ul className='mt-1' style={{ listStyle: 'disc', paddingLeft: '1.1rem' }}>
+                        <li>9h30 - 15h00</li>
+                        <li>9h30 - 15h00</li>
+                      </ul>
+                    </Card>
+                  </div>
+                  <div className='col-6 p-2'>
+                    <Card className='m-0 p-1 rounded-3 border border-0 fs-13'>
+                      <img className='w-100 rounded-3' src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp'></img>
+                      <div className='fs-6 fw-bold text-center mt-2'>Happy corp 2</div>
+                      <div className='mt-1'>Khung giờ trống:</div>
+                      <ul className='mt-1' style={{ listStyle: 'disc', paddingLeft: '1.1rem' }}>
+                        <li>9h30 - 15h00</li>
+                        <li>9h30 - 15h00</li>
+                      </ul>
+                    </Card>
+                  </div>
+                  <div className='col-6 p-2'>
+                    <Card className='m-0 p-1 rounded-3 border border-0 fs-13'>
+                      <img className='w-100 rounded-3' src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp'></img>
+                      <div className='fs-6 fw-bold text-center mt-2'>Happy corp 2</div>
+                      <div className='mt-1'>Khung giờ trống:</div>
+                      <ul className='mt-1' style={{ listStyle: 'disc', paddingLeft: '1.1rem' }}>
+                        <li>9h30 - 15h00</li>
+                        <li>9h30 - 15h00</li>
+                      </ul>
+                    </Card>
+                  </div>
+                </div>
+              </List>
             </Block>
+          </Page>
+        </View>
+      </Popup>
+
+
+      <Popup id="booking-detail">
+        <View>
+          <Page>
+            <Navbar title="Chi tiết đặt lịch">
+              <NavRight>
+                <Link popupClose>Close</Link>
+              </NavRight>
+            </Navbar>
+            <Block className='mt-0 '>
+              <div className='fw-bold fs-6 mt-4'>Thông tin khách hàng</div>
+              <List className='my-2 fs-13'>
+                <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                  Khách hàng<div className='fw-bold'>MR TRUNG & HUY NGUYỄN (K.BI)</div>
+                </div>
+                <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                  Ghi chú<div className='fw-bold'>Không có</div>
+                </div>
+              </List>
+              <div className='fw-bold fs-6 mt-4'>Thông tin đặt bàn</div>
+              <List className='my-2 fs-13'>
+                <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                  Nhà hàng<div className='fw-bold'>90s House</div>
+                </div>
+                <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                  Mã booking<div className='fw-bold'>#8732465</div>
+                </div>
+                <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                  Ngày<div className='fw-bold'>31/07/2025 12:00:00</div>
+                </div>
+                <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                  Số người<div className='fw-bold'>3</div>
+                </div>
+
+                <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                  Khu vực/ Phòng<div className='fw-bold'>V4</div>
+                </div>
+                <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                  Trạng thái<span className='px-2 pb-1 bg-primary rounded-pill text-white'>Đã nhận phòng</span>
+                </div>
+                <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                  Người đặt<div className='fw-bold'>Jatbirat</div>
+                </div>
+                <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                  Ghi chú<div className='fw-bold'>Không có</div>
+                </div>
+              </List>
+              <div className='fw-bold fs-6 mt-4'>Thanh toán</div>
+              <List className='my-2 fs-13'>
+                <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                  Tổng tiền<div className='fw-bold'>0</div>
+                </div>
+              </List>
+            </Block>
+            <div className='fixed-bottom grid grid-cols-2 grid-gap px-2 mb-4'>
+              <div>
+                <button className='border border-0 rounded-pill p-3 bg-warning fs-13 fw-đơnd'>Tải hóa đơn</button>
+              </div>
+              <div>
+                <button className='border border-0 rounded-pill p-3 bg-warning fs-13 fw-đơnd'>Chia sẻ</button>
+              </div>
+            </div>
           </Page>
         </View>
       </Popup>

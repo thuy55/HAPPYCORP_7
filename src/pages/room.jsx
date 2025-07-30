@@ -25,7 +25,7 @@ import { number } from 'prop-types';
 import CommonNavbar from '../components/CommonNavbar';
 
 
-const EventPage = () => {
+const RoomPage = () => {
 
     const handleClick = (e) => {
         f7.views.main.router.navigate('/event-detail/');
@@ -39,21 +39,159 @@ const EventPage = () => {
         }, 2000);
     }
 
+    //search
+    const [selectedMonth, setSelectedMonth] = useState(moment().month()); // 0 - 11
+    const [selectedYear, setSelectedYear] = useState(moment().year());
+    const [selectedDate, setSelectedDate] = useState(moment().date());
+
+    const listDate = ["CN", "T2", "T3", "T4", "T5", "T6", "T7"];
+
+    const [searchDate, setSearchDate] = useState(moment().date());
+    const [searchMonth, setSearchMonth] = useState(moment().month()); // 0 - 11
+    const [searchYear, setSearchYear] = useState(moment().year());
+    const [date, setdate] = useState("");
+    useEffect(() => {
+        const selectedMoment = moment({
+            year: searchYear,
+            month: searchMonth,
+            day: searchDate
+        });
+
+        const weekdayNumber = selectedMoment.day();
+        const weekday = listDate[weekdayNumber];
+        setdate(weekday)
+    }, [])
+
+    function handleSearchMonth() {
+        setSearchMonth(selectedMonth);
+        setSearchYear(selectedYear)
+        setSearchDate(selectedDate);
+        const selectedMoment = moment({
+            year: selectedYear,
+            month: selectedMonth,
+            day: selectedDate
+        });
+        console.log(selectedDate + "-" + selectedMonth + "-" + selectedYear);
+
+        const weekdayNumber = selectedMoment.day();
+        const weekday = listDate[weekdayNumber];
+        setdate(weekday)
+    }
+
     return (
 
 
         <Page name="home">
             {/* Top Navbar */}
             <CommonNavbar />
+
             {/* Page content */}
             <List className='m-2' simpleList>
                 <div className='d-flex align-items-center fs-6 fw-bold'>
                     <Link back>
                         <img src='../image/icon-backward.gif' className='size-icon me-1'></img>
                     </Link>
-                    Sự kiện
+                    Sơ đồ phòng
                 </div>
             </List>
+
+            <div className='d-flex align-items-center row px-2'>
+                <div className='col-3'>
+                    <img src='../image/icon-backward.gif' className='size-icon '></img>
+                </div>
+
+                <div className='col-6'>
+                    <div data-bs-toggle="collapse" data-bs-target="#collapseSearch" aria-expanded="true" aria-controls="collapseSearch" className="d-flex align-items-center p-2 bg-light rounded-pill  w-100 fs-13" style={{ height: '45px' }}>
+                        <input
+                            type="text"
+                            className="form-control bg-light border-0 shadow-none fs-13 fw-bold"
+                            placeholder="Tìm kiếm"
+                            style={{
+                                flex: 1,
+                                borderRadius: '50px',
+                            }}
+                        value={`${date} - ${searchDate}/${searchMonth + 1}/${searchYear}`}
+                        />
+                        <div id="open-modal-search-date-home"
+                            className=" d-flex justify-content-center align-items-center me-0"
+                            style={{
+                                backgroundColor: 'white',
+                                borderRadius: '50%',
+                                width: '35px',
+                                height: '35px',
+                            }}
+                        >
+                            <img src='../image/icon-backward.gif' className='size-icon'></img>
+                        </div>
+                    </div>
+                </div>
+                <div className='text-end col-3'>
+                    <img src='../image/icon-backward.gif' className='size-icon '></img>
+
+                </div>
+            </div>
+            <div className="collapse show" id="collapseSearch">
+                <div className='mt-3 row px-3'>
+                    <div className='col-4'>
+
+                        <select className='p-2 rounded-4 fs-13 border border-1 w-100 bg-light' value={selectedDate} onChange={(e) => setSelectedDate(parseInt(e.target.value))}>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                        </select>
+
+                    </div>
+                    <div className='col-4'>
+                        <select className='p-2 rounded-4 fs-13 border border-1 w-100 bg-light' value={selectedMonth}
+                            onChange={(e) => setSelectedMonth(parseInt(e.target.value))}>
+                            {moment.months().map((month, idx) => (
+                                <option key={idx} value={idx}>{month}</option>
+                            ))}
+                        </select>
+
+                    </div>
+                    <div className='col-4'>
+                        <select className='p-2 rounded-4 fs-13 border border-1 w-100' value={selectedYear}
+                            onChange={(e) => setSelectedYear(parseInt(e.target.value))}>
+                            {Array.from({ length: 10 }, (_, i) => {
+                                const year = moment().year() - 5 + i;
+                                return <option key={year} value={year}>{year}</option>;
+                            })}
+                        </select>
+                    </div>
+                </div>
+                <div className='d-flex justify-content-center mt-2 px-3 mb-3'>
+                    <button className='bg-pink text-white fs-13 fw-bold p-3 rounded-pill w-100' onClick={() => { handleSearchMonth() }}>Xem</button>
+                </div>
+            </div>
             <List className='my-2'>
                 <div className='bg-warning bg-opacity-10 row'>
                     <div className='col-7 p-2 ps-4 pe-0 fs-5 fw-bold'>
@@ -159,4 +297,4 @@ const EventPage = () => {
 
     );
 }
-export default EventPage;
+export default RoomPage;

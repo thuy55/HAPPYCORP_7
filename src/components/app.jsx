@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getDevice }  from 'framework7/lite-bundle';
+import { getDevice } from 'framework7/lite-bundle';
 import {
   f7,
   f7ready,
@@ -21,7 +21,11 @@ import {
   ListItem,
   ListInput,
   ListButton,
-  BlockFooter
+  BlockFooter,
+  Icon,
+  Card,
+  NavLeft,
+  NavTitle
 } from 'framework7-react';
 
 import capacitorApp from '../js/capacitor-app';
@@ -36,23 +40,23 @@ const MyApp = () => {
   // Framework7 Parameters
   const f7params = {
     name: 'HAPPYCORP_7', // App name
-      theme: 'auto', // Automatic theme detection
-      // App store
-      store: store,
-      // App routes
-      routes: routes,
+    theme: 'auto', // Automatic theme detection
+    // App store
+    store: store,
+    // App routes
+    routes: routes,
 
 
-      // Input settings
-      input: {
-        scrollIntoViewOnFocus: device.capacitor,
-        scrollIntoViewCentered: device.capacitor,
-      },
-      // Capacitor Statusbar settings
-      statusbar: {
-        iosOverlaysWebView: true,
-        androidOverlaysWebView: false,
-      },
+    // Input settings
+    input: {
+      scrollIntoViewOnFocus: device.capacitor,
+      scrollIntoViewCentered: device.capacitor,
+    },
+    // Capacitor Statusbar settings
+    statusbar: {
+      iosOverlaysWebView: true,
+      androidOverlaysWebView: false,
+    },
   };
   const alertLoginData = () => {
     f7.dialog.alert('Username: ' + username + '<br>Password: ' + password, () => {
@@ -67,54 +71,121 @@ const MyApp = () => {
     }
     // Call F7 APIs here
   });
+  const [selected, setSelected] = useState('home');
 
   return (
-    <App { ...f7params }>
-
-        {/* Left panel with cover effect*/}
-        <Panel left cover dark>
-          <View>
-            <Page>
-              <Navbar title="Left Panel"/>
-              <Block>Left panel content goes here</Block>
-            </Page>
-          </View>
-        </Panel>
+    <App {...f7params}>
 
 
-        {/* Right panel with reveal effect*/}
-        <Panel right reveal dark>
-          <View>
-            <Page>
-              <Navbar title="Right Panel"/>
-              <Block>Right panel content goes here</Block>
-            </Page>
-          </View>
-        </Panel>
+
+      {/* Views/Tabs container */}
+      <Views tabs className="safe-areas">
+        {/* Tabbar for switching views-tabs */}
+        <Toolbar tabbar icons bottom>
+          <Link tabLink="#view-home" tabLinkActive iconIos="f7:house_fill" iconMd="material:home" text="Home" />
+          <Link tabLink="#view-catalog" iconIos="f7:square_list_fill" iconMd="material:view_list" text="Chat" />
+          <Link tabLink="#view-settings" iconIos="f7:gear" iconMd="material:settings" text="Lịch sử" />
+          <Link tabLink="#social" iconIos="f7:circle_grid_hex" iconMd="material:circle_grid_hex" text="Social" />
+          <Link tabLink="#account" iconIos="f7:person_alt_circle" iconMd="material:account" text="Account" />
+        </Toolbar>
+
+        {/* Your main view/tab, should have "view-main" class. It also has "tabActive" prop */}
+        <View id="view-home" main tab tabActive url="/" />
+
+        {/* Catalog View */}
+        <View id="view-catalog" name="catalog" tab url="/catalog/" />
+
+        {/* Settings View */}
+        <View id="social" name="social" tab url="/social/" />
+        <View id="account" name="account" tab url="/account/" />
+
+      </Views>
+      {/* Left panel with cover effect*/}
+      <Panel left cover>
+        <View>
+          <Page>
+            <Navbar>
+              {/* <div className=' py-2'> */}
+              <img src='../image/happy-corp-logo.png' className='w-25'></img>
+              {/* </div> */}
+            </Navbar>
 
 
-        {/* Views/Tabs container */}
-        <Views tabs className="safe-areas">
-          {/* Tabbar for switching views-tabs */}
-          <Toolbar tabbar icons bottom>
-            <Link tabLink="#view-home" tabLinkActive iconIos="f7:house_fill" iconMd="material:home" text="Home" />
-            <Link tabLink="#view-catalog" iconIos="f7:square_list_fill" iconMd="material:view_list" text="Chat" />
-            <Link tabLink="#view-settings" iconIos="f7:gear" iconMd="material:settings" text="Lịch sử" />
-            <Link tabLink="#social" iconIos="f7:circle_grid_hex" iconMd="material:circle_grid_hex" text="Social" />
-            <Link tabLink="#social" iconIos="f7:person_alt_circle" iconMd="material:social" text="Account" />
-          </Toolbar>
+            <BlockTitle className='mb-1  mt-4 fs-13 '>Quản lý</BlockTitle>
+            <List dividersIos={false} simpleList inset className='fs-13 list-custom mb-3'>
+              <Link href="/account/" data-view=".view-main" panelClose selected={selected === 'account'}
+                onClick={() => { setSelected('account'), console.log(123) }}>
+                <div>
+                  <Icon f7="command" size="16px" className='me-2'></Icon> Tài khoản
+                </div>
+              </Link>
+              <ListItem >
+                <div>
+                  <Icon f7="square_stack_3d_up" size="16px" className='me-2'></Icon>Thông báo
+                </div>
+              </ListItem>
+              <ListItem >
+                <div>
+                  <Icon f7="square_stack_3d_up" size="16px" className='me-2'></Icon>Nhật ký
+                </div>
+              </ListItem>
+            </List>
 
-          {/* Your main view/tab, should have "view-main" class. It also has "tabActive" prop */}
-          <View id="view-home" main tab tabActive url="/" />
+            <BlockTitle className='mb-1  mt-3 fs-13 '>Giao diện</BlockTitle>
+            <List dividersIos={false} simpleList inset className='fs-13 list-custom mb-3'>
+              <ListItem>
+                <div>
+                  <Icon f7="pencil_outline" size="16px" className='me-2'></Icon>Sáng
+                </div>
+              </ListItem>
+              <ListItem >
+                <div>
+                  <Icon f7="chat_bubble_text" size="16px" className='me-2'></Icon> Tối
+                </div>
+              </ListItem>
+            </List>
 
-          {/* Catalog View */}
-          <View id="view-catalog" name="catalog" tab url="/catalog/" />
+            <BlockTitle className='mb-1  mt-3 fs-13 '>Ngôn ngữ</BlockTitle>
+            <List dividersIos={false} simpleList inset className='fs-13 list-custom mb-3'>
+              <ListItem>
+                <div>
+                  <Icon f7="pencil_outline" size="16px" className='me-2'></Icon>Tiếng Việt
+                </div>
+              </ListItem>
+              <ListItem >
+                <div>
+                  <Icon f7="chat_bubble_text" size="16px" className='me-2'></Icon> Tiếng Anh
+                </div>
+              </ListItem>
+            </List>
+            <div className='px-3'>
+              <button className='p-2 rounded-pill bg-pink fs-13 border border-0 text-white fw-bold'>Đăng xuất</button>
+            </div>
+            <div className='fixed-bottom mb-4'>
+              <Card className="bg-pink-nhat border border-0 bg-danger m-0 rounded-0 fs-13 p-3 py-4">
+                <div>
+                  <img src='../image/happy-corp-logo.png' className='w-25' />
+                </div>
+                <div className='mt-1'>Tòa nhà International Plaza, 343 Phạm Ngũ Lão, Phường Bến Thành, Quận 1, Hồ Chí Minh</div>
+                <div className='mt-1'>1900638008</div>
+                <div className='mt-2'>Happy Corp 2025. All Rights Reserved | Privacy Policy | Sitemap | Website Terms of Use</div>
+              </Card>
+            </div>
+          </Page>
+        </View>
+      </Panel>
 
-          {/* Settings View */}
-          <View id="view-settings" name="settings" tab url="/settings/" />
-          <View id="social" name="social" tab url="/social/" />
 
-        </Views>
+      {/* Right panel with reveal effect*/}
+      <Panel right reveal dark>
+        <View>
+          <Page>
+            <Navbar title="Right Panel" />
+            <Block>Right panel content goes here</Block>
+          </Page>
+        </View>
+      </Panel>
+
 
       {/* Popup */}
       {/* <Popup id="my-popup">

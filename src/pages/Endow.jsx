@@ -22,6 +22,7 @@ import {
 } from 'framework7-react';
 import moment from 'moment';
 import { number } from 'prop-types';
+import CommonNavbar from '../components/CommonNavbar';
 
 
 const EndowPage = () => {
@@ -42,17 +43,7 @@ const EndowPage = () => {
     return (
 
         <Page name="home">
-            {/* Top Navbar */}
-            <Navbar sliding={false}>
-                <NavLeft>
-                    <Link panelOpen="left" ><img src='../image/13.gif' className='size-icon'></img></Link>
-                </NavLeft>
-                <NavTitle className='text-dark' sliding>
-                    <img src='../image/happy-corp-logo.png' style={{ height: "35px" }}></img>
-                </NavTitle>
-                <NavRight>
-                </NavRight>
-            </Navbar>
+     <CommonNavbar />
 
             {/* Page content */}
             <List className='m-2' simpleList>
@@ -118,7 +109,7 @@ const EndowPage = () => {
                         <div>
                             <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
                             <div className='d-flex'>
-                                <div className='mt-2 fst-italic text-white tag-khuyenmai'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
+                                <div className='mt-2 fst-italic '> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
                             </div>
                             <div className='fw-bold text-pink my-1'>Giảm 10%</div>
                             <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
@@ -130,7 +121,7 @@ const EndowPage = () => {
                         <div>
                             <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
                             <div className='d-flex'>
-                                <div className='mt-2 fst-italic text-white tag-khuyenmai'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
+                                <div className='mt-2 fst-italic '> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
                             </div>
                             <div className='fw-bold text-pink my-1'>Giảm 10%</div>
                             <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
@@ -142,7 +133,7 @@ const EndowPage = () => {
                         <div>
                             <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
                             <div className='d-flex'>
-                                <div className='mt-2 fst-italic text-white tag-khuyenmai'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
+                                <div className='mt-2 fst-italic '> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
                             </div>
                             <div className='fw-bold text-pink my-1'>Giảm 10%</div>
                             <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
@@ -154,7 +145,7 @@ const EndowPage = () => {
                         <div>
                             <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
                             <div className='d-flex'>
-                                <div className='mt-2 fst-italic text-white tag-khuyenmai'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
+                                <div className='mt-2 fst-italic '> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
                             </div>
                             <div className='fw-bold text-pink my-1'>Giảm 10%</div>
                             <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
