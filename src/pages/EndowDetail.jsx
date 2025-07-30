@@ -59,7 +59,7 @@ const EndowDetailPage = () => {
                     <Link back>
                         <img src='../image/icon-backward.gif' className='size-icon me-1'></img>
                     </Link>
-                    Chi tiết sự kiện
+                    Chi tiết sự kiện jkdfhsj
                 </div>
             </List>
             <List className='my-2 position-relative'>
