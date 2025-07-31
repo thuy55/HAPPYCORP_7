@@ -121,7 +121,7 @@ const HomePage = () => {
           <img src='../image/8.gif' className='w-50'></img>
           <div className=' fs-13'>Đặt bàn</div>
         </div>
-        <PageTransition href="/revenue/">
+        <PageTransition href="/social-save/">
           <div className='text-center rounded-4 mx-2 p-1'>
             <img src='../img/home.gif' className='w-50'></img>
             <div className=' fs-13'>Sự kiện</div>

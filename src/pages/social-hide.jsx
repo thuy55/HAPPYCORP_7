@@ -25,11 +25,11 @@ import {
     f7
 } from 'framework7-react';
 import axios from 'axios';
-import { data, index } from 'dom7';
 import { useTranslation } from 'react-i18next';
+import CommonNavbar from '../components/CommonNavbar';
+import PageTransition from '../components/PageTransition';
 
-
-const SocialHidePage = () => {
+const SocialSavePage = () => {
     const { t } = useTranslation();
     const [sheetOpenedSuccess, setSheetOpenedSuccess] = useState(false);
     const [sheetOpenedEdit, setSheetOpenedEdit] = useState(false);
@@ -37,38 +37,70 @@ const SocialHidePage = () => {
     const [sheetOpenedDeleteSocial, setSheetOpenedDeleteSocial] = useState(false);
     const [sheetOpenedAdd, setSheetOpenedAdd] = useState(false);
 
-    const [images, setImages] = useState([]);
+    // const [images, setImages] = useState([]);
 
-    // Hàm chọn file ảnh
-    const [addimage, setaddimage] = useState([]);
+    // const [addimage, setaddimage] = useState([]);
+    // const handleImageChange = (event) => {
+    //     const files = Array.from(event.target.files); // Lấy danh sách file
+    //     setaddimage((prevImages) => [...prevImages, ...files]);
+    //     console.log(files);
+    //     const newImages = [];
+    //     files.forEach((file) => {
+    //         const reader = new FileReader();
+    //         reader.onload = (e) => {
+    //             newImages.push(e.target.result);
+    //             if (newImages.length === files.length) {
+    //                 setImages((prev) => [...prev, ...newImages]); // Cập nhật state
+
+    //             }
+    //         };
+    //         reader.readAsDataURL(file);
+    //     });
+    // };
+
+    // const triggerFileInput = () => {
+    //     document.getElementById("fileInput").click();
+    // };
+
+    // const handleDeleteImage = (index) => {
+    //     setImages(images.filter((_, i) => i !== index));
+
+    //     setaddimage(addimage.filter((_, i) => i !== index));
+
+    // };
+
+    // test
+
+    const [media, setMedia] = useState([]); // [{ preview, file, type }]
+
     const handleImageChange = (event) => {
-        const files = Array.from(event.target.files); // Lấy danh sách file
-        setaddimage((prevImages) => [...prevImages, ...files]);
-        console.log(files);
-        const newImages = [];
+        const files = Array.from(event.target.files);
+        const newMedia = [];
+
         files.forEach((file) => {
             const reader = new FileReader();
             reader.onload = (e) => {
-                newImages.push(e.target.result);
-                if (newImages.length === files.length) {
-                    setImages((prev) => [...prev, ...newImages]); // Cập nhật state
+                const type = file.type.startsWith("video") ? "video" : "image";
+                newMedia.push({
+                    preview: e.target.result,
+                    file,
+                    type,
+                });
 
+                if (newMedia.length === files.length) {
+                    setMedia((prev) => [...prev, ...newMedia]);
                 }
             };
             reader.readAsDataURL(file);
         });
     };
 
-    // Hàm kích hoạt input file khi bấm vào icon
     const triggerFileInput = () => {
         document.getElementById("fileInput").click();
     };
 
-    const handleDeleteImage = (index) => {
-        setImages(images.filter((_, i) => i !== index));
-
-        setaddimage(addimage.filter((_, i) => i !== index));
-
+    const handleDeleteMedia = (index) => {
+        setMedia((prev) => prev.filter((_, i) => i !== index));
     };
 
     //upload audio
@@ -122,7 +154,7 @@ const SocialHidePage = () => {
         const api = axios.create({
             baseURL: "https://beta.ellm.io/api",
         });
-        api.post("/list_social_hide", data, {
+        api.post("/socials", data, {
             headers: {
                 "Content-Type": "application/json",
                 'Authorization': 'Bearer 123123ellm',
@@ -148,11 +180,12 @@ const SocialHidePage = () => {
     const [sheetOpenedDetailImage, setSheetOpenedDetailImage] = useState(false);
 
     const [selectImage, setSelectImage] = useState("");
+
     const handleClick = (content, index) => {
         setSelectedContent(content, index);
         setSelectImage(index)
-        social_id(content.active);
         console.log("Nội dung đã chọn:", index);
+        social_id(content.active);
         setSheetOpenedDetailImage(true);
     };
 
@@ -588,8 +621,8 @@ const SocialHidePage = () => {
     }
 
     const [selectActive, setSelectActive] = useState("");
-    const [selectSaveSocial, setSelectSaveSocial] = useState(0);
     const [selectuidSocial, setSelectuidSocial] = useState("");
+    const [selectSaveSocial, setSelectSaveSocial] = useState(0);
     const getActive = (active, uid, save) => {
         setSelectActive(active);
         console.log("active", active);
@@ -833,257 +866,243 @@ const SocialHidePage = () => {
             });
     }
 
+
+    // xem video
+    const videoRef = useRef(null);
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    const togglePlay = () => {
+        if (!videoRef.current) return;
+
+        if (isPlaying) {
+            videoRef.current.pause();
+            setIsPlaying(false);
+        } else {
+            videoRef.current.play();
+            setIsPlaying(true);
+        }
+    };
+
+    const viewSocial = {
+        "avatar": "https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png",
+        "access": "1",
+        "name": "Thanh Thúy",
+        "date": "31/07/2025",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "images": ["https://media.macphun.com/img/uploads/customer/how-to/608/15542038745ca344e267fb80.28757312.jpg?q=85&w=1340", "https://images.pexels.com/photos/1194775/pexels-photo-1194775.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"],
+        "video": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "like": 1,
+        "comment": 2,
+        "share": 0,
+        "comments": [
+            {
+                "avatar": "https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png",
+                "name": "Nguyễn Văn A",
+                "date": "31/07/2025",
+                "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            }
+        ]
+    }
+
+    const textComment = [
+        {
+            "avatar": "https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png",
+            "account": "Nguyễn Văn A",
+            "date": "31/07/2025",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "active": "1234567890",
+        },
+        {
+            "avatar": "https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png",
+            "account": "Nguyễn Văn A",
+            "date": "31/07/2025",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "active": "1234567890",
+        },
+        {
+            "avatar": "https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png",
+            "account": "Nguyễn Văn A",
+            "date": "31/07/2025",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "active": "1234567890",
+        },
+        {
+            "avatar": "https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png",
+            "account": "Nguyễn Văn A",
+            "date": "31/07/2025",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "active": "1234567890",
+        },
+        {
+            "avatar": "https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png",
+            "account": "Nguyễn Văn A",
+            "date": "31/07/2025",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "active": "1234567890",
+        },
+        {
+            "avatar": "https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png",
+            "account": "Nguyễn Văn A",
+            "date": "31/07/2025",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "active": "1234567890",
+        },
+        {
+            "avatar": "https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png",
+            "account": "Nguyễn Văn A",
+            "date": "31/07/2025",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "active": "1234567890",
+        },
+        {
+            "avatar": "https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png",
+            "account": "Nguyễn Văn A",
+            "date": "31/07/2025",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "active": "1234567890",
+        }
+    ]
     return (
         <Page name="social" >
-
-            <Navbar className='py-2'  >
-                <div class="navbar-bg"></div>
-                <div className=' d-flex justify-content-between w-100'>
-                    <div className='d-flex align-items-center'>
-                        <NavLeft >
-                            <Link href="/" data-view=".view-main">
-                                <img src='../img/logo-small.svg' style={{ width: "30px", height: "30px", }}></img>
-                            </Link>
-                        </NavLeft>
-                        <Button href="/search/" data-view=".view-main" className='  text-light border border-0 text-center  me-2' style={{ width: "40px", height: "40px", }}><Icon f7="search" size="25px"></Icon></Button>
-                    </div>
-                    <div className='d-flex align-items-center'>
-
-                        <Button fill sheetOpen=".my-popup-menu" className=' rounded-circle text-light border border-0 text-center p-2 me-2' style={{ width: "40px", height: "40px", backgroundColor: "rgba(52, 58, 64)" }}><Icon f7="rectangle_grid_2x2" size="20px"></Icon></Button>
-                        <Button fill popupOpen=".my-popup-notification" className=' rounded-circle text-light border border-0 text-center p-2 me-2' style={{ width: "40px", height: "40px", backgroundColor: "rgba(52, 58, 64)" }}><Icon f7="bell" size="20px"></Icon></Button>
-                        <Button fill panelOpen="right" className='p-0 m-0 bg-none rounded-circle' style={{ width: "40px", height: "40px" }}>
-                            <img src={`${avatar}`} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
-                        </Button>
-
-                    </div>
-                </div>
-
-            </Navbar>
-
-
-            {/* Thanh Toolbar ở dưới */}
-            <Toolbar tabbar icons bottom>
-                <Link tabLink="#view-app" href="/account/" iconIos="f7:circle_grid_hex" iconMd="material:settings" text={t("application")} />
-                <Link tabLink="#view-chat" href="/chatnew/" iconIos="f7:bubble_left_bubble_right" iconMd="material:view_list" text={t("chat")} />
-                <Link href="/" tabLink="#view-home" link="/home/" iconIos="f7:house" iconMd="material:home" text={t("home")} />
-                <Link tabLink="#view-account" href="/social/" tabLinkActive iconIos="f7:globe" iconMd="material:settings" text={t("community")} />
-                <Link tabLink="#view-account" href="/account/" iconIos="f7:person" iconMd="material:settings" text={t("account")} />
-            </Toolbar>
-
-
+            <CommonNavbar />
 
             {/* Page content */}
-            <Popover className="popover-menu-social-hide text-white" style={{ backgroundColor: "#1e1e1e", width: "200px" }}>
-                <List>
-                    {uid_account == selectuidSocial &&
-                        <ListItem >
-                            <Link className='d-flex align-items-center fs-14 text-white' onClick={() => { social_id(selectActive) }} fill sheetOpen=".edit-social-hide-sheet" popoverClose >
-                                <Icon f7="pencil_circle" size="20px" className='me-2'></Icon>
-                                {t("edit")}
-                            </Link>
-                        </ListItem>
-                    }
 
-                    <ListItem >
-                        <Link className='d-flex align-items-center fs-14 text-white' onClick={() => { socialSave() }} popoverClose >
-                            <Icon f7="bookmark" size="20px" className='me-2'></Icon>
-                            {selectSaveSocial == 1 ?
-                                <>
-                                    Xóa lưu
-                                </>
-                                :
-                                <>
-                                    {t("save_the_post")}
-                                </>
-                            }
-                        </Link>
-                    </ListItem>
-                    <ListItem popoverClose >
-                        <Link className='d-flex align-items-center fs-14 text-white' onClick={() => { socialHide() }} popoverClose >
-                            <Icon f7="eye_slash" size="20px" className='me-2'></Icon>
-                            Hiện bài viết
-                        </Link>
-                    </ListItem>
-                    <ListItem >
-                        <div className='d-flex align-items-center fs-14'>
-                            <Icon f7="link_circle" size="20px" className='me-2'></Icon>
-                            {t("copy_link")}
+            <List className='m-2' simpleList>
+                <div className='d-flex align-items-center fs-6 fw-bold'>
+                    <PageTransition href="/" >
+                        <img src='../image/icon-backward.gif' className='size-icon me-1'></img>
+                    </PageTransition>
+                    Danh sách bài viết ẩn
+                </div>
+            </List>
+
+            <div className='m-3'>
+                <div className=' p-3  border border-light shadow-sm rounded-4'>
+                    {/* <div className='row d-flex align-items-center'>
+                        <div className='col-8'>
+                            <div className='d-flex align-items-center'>
+                                <Link fill popoverOpen=".popover-menu-social">
+                                    <img src="https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png" className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
+                                </Link>
+                                <span className='fst-italic  ms-3'>{name} {t("how_are_you_today?")}</span>
+                            </div>
                         </div>
-                    </ListItem>
-                    <ListItem popoverClose >
-                        <div className='d-flex align-items-center fs-14'>
-                            <Icon f7="ant" size="20px" className='me-2'></Icon>
-                            {t("report")}
-                        </div>
-                    </ListItem>
-                    {uid_account == selectuidSocial &&
-                        <ListItem popoverClose >
-                            <Link className='d-flex align-items-center fs-14 text-white' fill sheetOpen=".delete-social-hide-sheet" popoverClose >
-                                <Icon f7="trash" size="20px" className='me-2'></Icon>
-                                {t("delete")}
+                        <div className='col-4 text-end'>
+                            <Link className='d-flex align-items-center justify-content-end align-items-center' fill popupOpen="#add-social">
+                                <Icon f7="plus" size="20px" className='me-1'></Icon>
+                                <div className='mt-1'>Post</div>
                             </Link>
-                        </ListItem>
-                    }
-                </List>
-            </Popover>
+                        </div>
+                    </div> */}
+                </div>
 
-            <div className='d-flex align-items-center fs-4 mx-3'>
-
-                <Button back className='bg-dark bg-opacity-75 rounded-circle me-2 fs-6' backLink="Back" style={{ width: "35px", height: "35px" }}><Icon f7="chevron_left" size="20px" color='white'></Icon></Button>
-                Bài viết đã ẩn
-            </div>
-            <Card className=' p-3 bg-dark bg-opacity-75 text-light rounded-4'>
-                <div className='row d-flex align-items-center'>
-                    <div className='col-8'>
+                <div className=' p-0  border border-light shadow-sm rounded-4'>
+                    <div className='d-flex align-items-center justify-content-between p-3'>
                         <div className='d-flex align-items-center'>
-                            <Link fill popoverOpen=".popover-menu-social-hide-account">
-                                <img src={`${avatar}`} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
-                            </Link>
-                            <span className='fst-italic text-light ms-3'>{name} {t("how_are_you_today?")}</span>
+                            <img src="https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png" onClick={() => { profile_social(socials.account.uid) }} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
+                            <span className=' ms-2'>Thanh Thúy
+                                <div className='fs-12 text-secondary d-flex align-items-center'>31/07/2025
+
+                                </div>
+                            </span>
+                        </div>
+                        <div className=''>
+                            <Button fill popoverOpen=".popover-menu" className='rounded-circle  p-2 text-center' style={{ width: "30px", height: "30px" }}> <Icon f7="ellipsis" size="20px" color='white'></Icon></Button>
                         </div>
                     </div>
-                    <div className='col-4 text-end'>
-                        <Link className='d-flex align-items-center justify-content-end text-white' fill sheetOpen=".add-social-hide-sheet">
-                            <Icon f7="plus" size="20px" className='me-1'></Icon>
-                            <div className='mt-1'>{t("post1")}</div>
+                    <div className='row px-4'>
+                        <div className='col-6 p-1'>
+                            <img src='https://media.macphun.com/img/uploads/customer/how-to/608/15542038745ca344e267fb80.28757312.jpg?q=85&w=1340' className='w-100'></img>
+                        </div>
+                        <div className='col-6 p-1'>
+                            <img src='https://images.pexels.com/photos/1194775/pexels-photo-1194775.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' className='w-100'></img>
+                        </div>
+
+                    </div>
+                    <div className='mt-3' style={{ borderBottom: "0.5px solid #a8a7a7ff" }}></div>
+                    <div className='row my-3 d-flex align-items-center'>
+                        <div className='col-4 text-center'>
+                            <img src='../image/12.gif' className='size-icon'></img>
+                            1 {t("like")}
+                        </div>
+
+                        <Link className='col-4 text-center px-0 ' fill popupOpen="#comment-social">
+                            <img src='../image/4.gif' className='size-icon'></img>
+                            2 {t("comment")}
                         </Link>
+                        <div className='col-4 text-center'>
+                            <img src='../image/icon-share.gif' className='size-icon'></img>
+                            {t("share")}
+                        </div>
+                    </div>
+                </div>
+
+                <div className=' p-0  border border-light shadow-sm rounded-4'>
+                    <div className='d-flex align-items-center justify-content-between p-3'>
+                        <div className='d-flex align-items-center'>
+                            <img src="https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png" onClick={() => { profile_social(socials.account.uid) }} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
+                            <span className=' ms-2'>Thanh Thúy
+                                <div className='fs-12 text-secondary d-flex align-items-center'>31/07/2025
+
+                                </div>
+                            </span>
+                        </div>
+                        <div className=''>
+                            <Button fill popoverOpen=".popover-menu" className='rounded-circle  p-2 text-center' style={{ width: "30px", height: "30px" }}> <Icon f7="ellipsis" size="20px" color='white'></Icon></Button>
+                        </div>
+                    </div>
+                    <div className='row px-4'>
+                        <div
+                            className="position-relative"
+                            style={{ cursor: 'pointer' }}
+                            onClick={togglePlay}
+                        >
+                            <video
+                                ref={videoRef}
+                                className="video-bg w-100"
+                                muted
+                                loop
+                                playsInline
+                            >
+                                <source
+                                    src="https://happycorp.com.vn/wp-content/uploads/2025/07/homevideo.mp4"
+                                    type="video/mp4"
+                                />
+                            </video>
+
+                            {!isPlaying && (
+                                <div className="video-play-button">
+                                    ▶
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    <div className='mt-3' style={{ borderBottom: "0.5px solid #a8a7a7ff" }}></div>
+                    <div className='row my-3 d-flex align-items-center'>
+                        <div className='col-4 text-center'>
+                            <img src='../image/12.gif' className='size-icon'></img>
+                            1 {t("like")}
+                        </div>
+
+                        <Link className='col-4 text-center px-0 ' fill sheetOpen=".comment-social-sheet">
+                            <img src='../image/4.gif' className='size-icon'></img>
+                            2 {t("comment")}
+                        </Link>
+                        <div className='col-4 text-center'>
+                            <img src='../image/icon-share.gif' className='size-icon'></img>
+                            {t("share")}
+                        </div>
                     </div>
                 </div>
 
 
-            </Card>
 
-            {socials && socials.map((socials, index) => {
-                return (
-                    <React.Fragment key={index}>
-                        <Card className=' p-0 bg-dark bg-opacity-75 text-light rounded-4'>
-                            <div className='d-flex align-items-center justify-content-between p-3'>
-                                <div className='d-flex align-items-center'>
-                                    <img src={`https://beta.ellm.io/${socials.account.avatar}`} onClick={() => { profile_social(socials.account.uid) }} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
-                                    <span className='text-light ms-2'>{socials.account.name}
-                                        <div className='fs-12 text-secondary d-flex align-items-center'>{socials.date}
-                                            {socials.access == 0 &&
-                                                <Icon f7="globe" size="14px" className='ms-1'></Icon>
-                                            }
-                                            {socials.access == 1 &&
-                                                <Icon f7="person_2" size="14px" className='ms-1'></Icon>
-                                            }
-                                        </div>
-                                    </span>
-                                </div>
-                                <div className='d-flex align-items-center'>
-                                    {socials.lang !== language && <Button className='bg-none p-1 text-white rounded-3 me-3 fs-12'>{t("translate")} </Button>}
-
-                                    <Button onClick={() => { getActive(socials.active, socials.account.uid, socials.accountsave) }} fill popoverOpen=".popover-menu-social-hide" className='rounded-circle bg-dark bg-opacity-75 p-2 text-center' style={{ width: "30px", height: "30px" }}> <Icon f7="ellipsis" size="20px" color='white'></Icon></Button>
-                                </div>
-                            </div>
-                            <div className='mx-3'> {socials.content} </div>
-                            {socials.type == 'images' && (
-                                <>
-                                    <div className="row px-4" >
-                                        {/* Xử lý khi chỉ có 1 hoặc 2 ảnh */}
-                                        {socials.data.length <= 2 && socials.data.map((data, index) => (
-                                            <div key={index} className={`px-1 p-1 ${socials.data.length === 1 ? 'col-12' : 'col-6'}`}>
-                                                <img style={{ minHeight: "240px", objectFit: "cover" }}
-                                                    src={`https://beta.ellm.io/${data.data}`}
-                                                    className="w-100 rounded-2"
-                                                    onClick={() => handleClick(socials, index)}
-                                                />
-                                            </div>
-                                        ))}
-
-                                        {/* Hiển thị 3 ảnh đầu nếu có nhiều hơn 2 ảnh */}
-                                        {socials.data.length > 2 && socials.data.slice(0, 3).map((data, index) => (
-                                            <div key={index} className="col-4 px-1 p-1">
-                                                <img
-                                                    src={`https://beta.ellm.io/${data.data}`}
-                                                    className="w-100 rounded-2"
-                                                    onClick={() => handleClick(socials, index)}
-                                                />
-                                            </div>
-                                        ))}
-                                    </div>
-
-                                    {/* Hàng dưới chứa 2 ảnh (nếu có ít nhất 4 ảnh) */}
-                                    {socials.data.length > 3 && (
-                                        <div className="row px-4">
-                                            {/* Ảnh đầu tiên của hàng dưới */}
-                                            <div className="col-6 px-1 p-1">
-                                                <img
-                                                    src={`https://beta.ellm.io/${socials.data[3].data}`}
-                                                    className="w-100 rounded-2"
-                                                    onClick={() => handleClick(socials, 3)}
-                                                />
-                                            </div>
-
-                                            {/* Ảnh thứ hai của hàng dưới có overlay nếu có hơn 5 ảnh */}
-                                            {socials.data.length > 4 &&
-                                                <div className="col-6 px-1 p-1 position-relative">
-                                                    <img
-                                                        src={`https://beta.ellm.io/${socials.data[4].data}`}
-                                                        className="w-100 rounded-2"
-                                                    // onClick={() => handleClick(socials)}
-                                                    />
-                                                    {socials.data.length > 5 && (
-                                                        <div onClick={() => handleClick(socials, 4)} className="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-flex justify-content-center align-items-center rounded-2">
-                                                            <span className="text-white fs-4 fw-bold">
-                                                                {`${socials.data.length - 5}+`}
-                                                            </span>
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            }
-                                        </div>
-                                    )}
-                                </>
-                            )}
-
-                            {socials.type == "audio" && (
-                                <>
-                                    <div className="px-3 mt-1" >
-                                        {socials.data.map((voice, index) => (
-                                            <div key={index} className="my-2  rounded-4 border-secondary " style={{ backgroundColor: "unset" }}>
-                                                <audio controls className="w-100">
-                                                    <source src={`https://beta.ellm.io/${voice.data}`} type="audio/mpeg" />
-                                                    Trình duyệt của bạn không hỗ trợ audio.
-                                                </audio>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </>
-                            )}
-
-                            <div className='mt-3' style={{ borderBottom: "0.5px solid #353535" }}></div>
-                            <div className='row my-3'>
-                                <div className='col-4 text-center' onClick={() => { LikeSocial(socials.active, socials.like) }}>
-                                    {socials.accountlike == 1 ?
-                                        <Icon f7="heart_fill" size="20px" className='me-1' color='red'></Icon>
-                                        :
-                                        <Icon f7="heart" size="20px" className='me-1'></Icon>
-                                    }
-
-                                    {socials.like} {t("like")}
-                                </div>
-
-                                <Link className='col-4 text-center px-0 text-white' fill sheetOpen=".comment-social-hide-sheet" onClick={() => { social_id(socials.active, socials.comment) }}>
-                                    <Icon f7="chat_bubble" size="20px" className='me-1'></Icon>
-                                    {socials.comment} {t("comment")}
-                                </Link>
-                                <div className='col-4 text-center'>
-                                    <Icon f7="arrowshape_turn_up_right" size="20px" className='me-1'></Icon>
-                                    {t("share")}
-                                </div>
-                            </div>
-                        </Card>
-                    </React.Fragment>
-                )
-            })}
-
-
+            </div>
             {/* success  */}
             <Sheet
                 push
-                className="success-social-hide-sheet rounded-5 modal-success"
+                className="success-social-sheet rounded-5 modal-success"
                 opened={sheetOpenedSuccess}
                 onSheetClosed={() => {
                     setSheetOpenedSuccess(false);
@@ -1093,171 +1112,19 @@ const SocialHidePage = () => {
                 swipeToStep
                 backdrop>
 
-                <PageContent className='py-4 text-center text-white'>
-                    <img src='../img/icons8-success.gif' className='bg-dark'></img>
+                <PageContent className='py-4 text-center '>
+                    <img src='../img/icons8-success.gif' className=''></img>
                     <div className='fs-2' style={{ fontWeight: "300" }}>Success</div>
-                    <div className='fs-14 text-white my-2'>Đã lưu thành công</div>
+                    <div className='fs-14  my-2'>Đã lưu thành công</div>
                     <div className='d-flex justify-content-center'>
-                        <Button className='bg-success  text-white fs-15  rounded-pill w-50' style={{ padding: "22px" }} sheetClose>OK</Button>
+                        <Button className='bg-success   fs-15  rounded-pill w-50' style={{ padding: "22px" }} sheetClose>OK</Button>
                     </div>
-                </PageContent>
-            </Sheet>
-
-            {/* //Chỉnh Sửa  */}
-            <Sheet push
-                className="edit-social-hide-sheet rounded-4 modal-center"
-                opened={sheetOpenedEdit}
-                onSheetClosed={() => {
-                    setSheetOpenedEdit(false);
-                }}
-                style={{ height: "90%", width: "90%", backgroundColor: "rgba(52, 58, 64)", color: "white" }}
-                swipeToClose
-                swipeToStep
-                backdrop
-            >
-                <div className="custom-backdrop"></div>
-
-                <Toolbar className="custom-toolbar ">
-                    <div className="left text-white d-flex align-items-center">
-                        <Icon f7='wand_stars'></Icon>
-
-                        <Block className='text-white fs-5'>{t("edit")} {t("post1")}</Block>
-                    </div>
-                    <div className="right">
-                        <Link sheetClose> <Icon f7="xmark" size='20px' color='white' className='me-2'></Icon></Link>
-                    </div>
-                </Toolbar>
-                {/*  Scrollable sheet content */}
-                <PageContent className='overflowY-auto'>
-                    <List className='mt-3 mb-4 px-2'>
-                        <div className='px-3'>
-                            <textarea rows={5} className=' rounded-4 border border-1 px-2 text-white mb-3' value={contentUpdate} onChange={(e) => { setContentUpdate(e.target.value) }} ></textarea>
-                        </div>
-
-                        {typeUpdate == "images" &&
-                            <>
-                                <Card className='m-0 mx-2 p-3 rounded-4 border-border-secondary bg-dark' style={{ minHeight: "300px" }}>
-
-                                    <div className="image-upload-container">
-                                        <input
-                                            id="fileInputUpdate"
-                                            type="file"
-                                            multiple
-                                            accept="image/*"
-                                            style={{ display: "none" }}
-                                            onChange={handleImageChangeUpdate}
-                                        />
-
-                                        <div className="image-grid">
-                                            <div className="upload-box text-center" onClick={triggerFileInputUpdate}>
-                                                <Icon f7="cloud_upload" size="30px" color="white" />
-                                                <div>{t("add_image")}</div>
-                                            </div>
-
-                                            <div className='row'>
-                                                {imageUpdate && imageUpdate.map((image, index) => {
-                                                    return (
-                                                        <>
-                                                            <div key={index} className="image-item position-relative col-4">
-                                                                <Button className="btn bg-danger btn-sm position-absolute top-0 end-0 m-1 rounded-circle p-1"
-                                                                    onClick={() => handleDeleteImageUpdate(index)}
-                                                                    style={{ width: "30px", height: "30px" }}>
-                                                                    <Icon f7="trash" size="15px" color="white" />
-                                                                </Button>
-                                                                <img
-                                                                    src={image.preview ? image.preview : `https://beta.ellm.io/${image.data}`}
-                                                                    className="preview-img w-100"
-                                                                />
-
-                                                            </div>
-                                                        </>
-                                                    )
-                                                })}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Card>
-                            </>
-                        }
-                        {typeUpdate == "audio" &&
-                            <>
-                                <Card className='m-0 mx-2 p-3 rounded-4 border-border-secondary bg-dark' style={{ minHeight: "300px" }}>
-
-                                    <div className="audio-upload-container">
-                                        {/* Input file (ẩn) */}
-                                        <input
-                                            id="audioInput"
-                                            type="file"
-                                            accept="audio/*"
-                                            style={{ display: "none" }}
-                                            onChange={handleAudioChangeUpdate}
-                                        />
-                                        {audioUpdate ? (
-                                            <div className="audio-preview text-center">
-                                                <audio controls className="w-100">
-                                                    <source src={audioFileUpdate ? audioUpdate.preview : `https://beta.ellm.io/${audioUpdate.data}`} type="audio/mpeg" />
-                                                    Trình duyệt của bạn không hỗ trợ audio.
-                                                </audio>
-                                                <div className='d-flex justify-content-center'>
-                                                    <Button
-                                                        className="btn bg-danger btn-sm mt-2 w-25 text-white rounded-4"
-                                                        onClick={handleDeleteAudioUpdate}
-                                                    >
-                                                        <Icon f7="trash" size="15px" color="white" /> {t("delete")}
-                                                    </Button>
-                                                </div>
-
-                                            </div>
-
-                                        ) : (
-                                            <div className="upload-box text-center" onClick={triggerFileInputAudioUpdate}>
-                                                <Icon f7="cloud_upload" size="30px" color="white" />
-                                                <div>{t("add_audio")}</div>
-                                            </div>
-                                        )}
-
-                                    </div>
-                                </Card>
-                            </>
-                        }
-
-                        <div className='text-white fw-bold fs-14 mx-2 mt-3'>{t("who_can_see_your_post?")}</div>
-                        <div className='fst-italic text-muted fs-12 mx-2'>{t("title_edit_social")}</div>
-
-                        <Card className='rounded-4 p-3 bg-dark bg-opacity-50 text-white fs-14'>
-                            <div className="form-check d-flex align-items-center">
-                                <input className="form-check-input" style={{ fontSize: "1.2em" }} type="radio" name="flexRadioDefault" id="0" value={accessUpdate}
-                                    checked={accessUpdate === 0} onChange={(e) => setAccessUpdate(0)}></input>
-                                <label className="form-check-label fs-15 ms-4 d-flex align-items-center" htmlFor="0">
-                                    <Icon f7='globe' size="20px" className='me-2'></Icon>
-                                    {t("public")}
-                                </label>
-                            </div>
-                            <div className="form-check d-flex align-items-center my-3">
-                                <input className="form-check-input" style={{ fontSize: "1.2em" }} type="radio" name="flexRadioDefault" id="1" value={accessUpdate}
-                                    checked={accessUpdate === 1} onChange={(e) => setAccessUpdate(1)}></input>
-                                <label className="form-check-label fs-15 ms-4 d-flex align-items-center" htmlFor="1">
-                                    <Icon f7='person_3' size="20px" className='me-2'></Icon>
-                                    {t("followers")}
-                                </label>
-                            </div>
-                            <div className="form-check d-flex align-items-center">
-                                <input className="form-check-input" style={{ fontSize: "1.2em" }} type="radio" name="flexRadioDefault" id="2" value={accessUpdate}
-                                    checked={accessUpdate === 2} onChange={(e) => setAccessUpdate(2)}></input>
-                                <label className="form-check-label fs-15 ms-4 d-flex align-items-center" htmlFor="2">
-                                    <Icon f7='lock' size="20px" className='me-2'></Icon>
-                                    {t("only_me")}
-                                </label>
-                            </div>
-                        </Card>
-                        <Button className=' rounded-pill p-4 bg-primary text-white mt-3 mx-3 fs-6' onClick={updateSocial}>{t("edit")}</Button>
-                    </List>
                 </PageContent>
             </Sheet>
 
             {/* Detail Image  */}
             <Sheet push
-                className="detail-image-social-hide-sheet rounded-4 modal-center"
+                className="detail-image-sheet rounded-4 modal-center"
                 opened={sheetOpenedDetailImage}
                 onSheetClosed={() => {
                     setSheetOpenedDetailImage(false);
@@ -1270,10 +1137,10 @@ const SocialHidePage = () => {
                 <div className="custom-backdrop"></div>
 
                 <Toolbar className="custom-toolbar ">
-                    <div className="left text-white d-flex align-items-center">
+                    <div className="left  d-flex align-items-center">
 
 
-                        <Block className='text-white fs-6'>{t("detail")} </Block>
+                        <Block className=' fs-6'>{t("detail")} </Block>
                     </div>
                     <div className="right">
                         <Link sheetClose> <Icon f7="xmark" size='20px' color='white' className='me-2'></Icon></Link>
@@ -1286,7 +1153,7 @@ const SocialHidePage = () => {
                             {selectedContent.content}
                         </div>
 
-                        <div id="carouselExampleControls2" className="carousel slide my-5" data-bs-ride="carousel">
+                        <div id="carouselExampleControls0" className="carousel slide my-5" data-bs-ride="carousel">
                             <div className="carousel-inner">
                                 {selectedContent && selectedContent.data.map((image, index) => (
                                     <div key={index} className={`carousel-item ${index === selectImage ? "active" : ""}`}>
@@ -1295,15 +1162,16 @@ const SocialHidePage = () => {
                                 ))}
                             </div>
 
-                            <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls2" data-bs-slide="prev">
+                            <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls0" data-bs-slide="prev">
                                 <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span className="visually-hidden">Previous</span>
                             </button>
-                            <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls2" data-bs-slide="next">
+                            <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls0" data-bs-slide="next">
                                 <span className="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span className="visually-hidden">Next</span>
                             </button>
                         </div>
+
                         <div className='row mx-0 py-2 border-top border-bottom fs-14 mb-3'>
                             <div className='col-4 text-center' onClick={() => { LikeSocial(social_view.active, social_view.like) }}>
                                 {acc_like_social == 1 ?
@@ -1315,7 +1183,7 @@ const SocialHidePage = () => {
                                 {t("like")}
                             </div>
 
-                            <div className='col-4 text-center px-0 text-white' >
+                            <div className='col-4 text-center px-0 ' >
                                 <Icon f7="chat_bubble" size="20px" className='me-1'></Icon>
                                 {social_view.comment} {t("comment")}
                             </div>
@@ -1344,7 +1212,7 @@ const SocialHidePage = () => {
 
                                                 </div>
                                                 <div className='mt-1'>
-                                                    <div className='w-100 rounded-3 border border-1 bg-dark bg-opacity-75 fs-15 p-2'>
+                                                    <div className='w-100 rounded-3 border border-1  fs-15 p-2'>
                                                         {cmt.content}
                                                     </div>
                                                 </div>
@@ -1364,10 +1232,10 @@ const SocialHidePage = () => {
                             borderTopLeftRadius: "1rem",
                             borderTopRightRadius: "1rem"
                         }}>
-                            <div className="input-group m-0 mb-1  rounded-3 p-0 form-control rounded-pill-chat border border-0 bg-dark" style={{ position: "relative" }}>
+                            <div className="input-group m-0 mb-1  rounded-3 p-0 form-control rounded-pill-chat border border-0 " style={{ position: "relative" }}>
                                 <input
                                     rows={1}
-                                    className="border border-0 ps-2 rounded-3 fs-15 text-white bg-dark"
+                                    className="border border-0 ps-2 rounded-3 fs-15  "
                                     placeholder="Comment"
                                     style={{
                                         width: "90%",
@@ -1386,438 +1254,430 @@ const SocialHidePage = () => {
                                         transform: "translateY(-50%)"
                                     }}
                                 >
-                                    <Button onClick={CommentSocial} className='p-2 mt-2 rounded-3 bg-danger text-white' style={{ width: "35px", height: "35px" }}>
+                                    <Button onClick={CommentSocial} className='p-2 mt-2 rounded-3 bg-danger ' style={{ width: "35px", height: "35px" }}>
                                         <Icon f7="paperplane" size="20px" ></Icon>
                                     </Button>
                                 </span>
 
                             </div>
                         </Card>
+
+
+
                     </List>
                 </PageContent>
             </Sheet>
 
             {/* menu-social */}
-            <Popover className="popover-menu-social-hide-account text-white" style={{ backgroundColor: "#1e1e1e", width: "250px" }}>
-                <List>
+            <Popover className="popover-menu-social " style={{ width: "250px" }}>
+                <List className='px-3'>
                     <ListItem >
-                        <Link className='d-flex align-items-center fs-14 text-white fw-bold' href="/profile/" data-view=".view-main" popoverClose >
-                            <img src={`${avatar}`} className='rounded-circle me-2' style={{ width: "40px", height: "40px" }}></img>
-                            {name}
+                        <Link className='d-flex align-items-center fs-14  fw-bold' href="/profile/" data-view=".view-main" popoverClose >
+                            <img src="https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png" className='rounded-circle me-2' style={{ width: "40px", height: "40px" }}></img>
+                            Thanh Thúy
                         </Link>
                     </ListItem>
                     <ListItem >
-                        <Link className='d-flex align-items-center fs-14 text-white' href="/social/" data-view=".view-main" popoverClose >
+                        <Link className='d-flex align-items-center fs-14 ' href="/social/" data-view=".view-main" popoverClose >
                             <Icon f7="doc_richtext" size="20px" className='me-2'></Icon>
                             {t("feed")}
                         </Link>
                     </ListItem>
                     <ListItem >
-                        <Link className='d-flex align-items-center fs-14 text-white' href="/chat-explore/" data-view=".view-main" popoverClose >
+                        <Link className='d-flex align-items-center fs-14 ' href="/chat-explore/" data-view=".view-main" popoverClose >
                             <Icon f7="cursor_rays" size="20px" className='me-2'></Icon>
                             {t("explore")}
                         </Link>
                     </ListItem>
                     <ListItem  >
-                        <Link className='d-flex align-items-center fs-14 text-white' href="/social-follower/" data-view=".view-main" popoverClose >
+                        <Link className='d-flex align-items-center fs-14 ' href="/social-follower/" data-view=".view-main" popoverClose >
                             <Icon f7="person_3" size="20px" className='me-2'></Icon>
                             {t("friends")}
                         </Link>
                     </ListItem>
                     <ListItem >
-                        <Link className='d-flex align-items-center fs-14 text-white' href="/social-save/" data-view=".view-main" popoverClose>
+                        <PageTransition className='d-flex align-items-center fs-14 ' href="/social-save/" data-view=".view-main" popoverClose>
                             <Icon f7="bookmark" size="20px" className='me-2'></Icon>
                             {t("saved")}
-                        </Link>
+                        </PageTransition>
                     </ListItem>
                     <ListItem  >
-                        <Link className='d-flex align-items-center fs-14 text-white' href="/social-hide/" data-view=".view-main" popoverClose>
+                        <PageTransition className='d-flex align-items-center fs-14 ' href="/social-hide/" data-view=".view-main" popoverClose>
                             <Icon f7="eye_slash" size="20px" className='me-2'></Icon>
                             {t("hidden")}
-                        </Link>
+                        </PageTransition>
                     </ListItem>
                 </List>
             </Popover>
 
+            {/* menu từng social */}
+            <Popover className="popover-menu " style={{ width: "200px" }}>
+                <List className='px-3'>
+                    {/* {uid_account == selectuidSocial && */}
+                    <ListItem >
+                        <Link className='d-flex align-items-center fs-14 ' onClick={() => { social_id(selectActive) }} fill sheetOpen=".edit-social-sheet" popoverClose >
+                            <Icon f7="pencil_circle" size="20px" className='me-2'></Icon>
+                            Chỉnh sửa
+                        </Link>
+                    </ListItem>
+                    {/* } */}
+
+                    <ListItem >
+                        <Link className='d-flex align-items-center fs-14 ' onClick={() => { socialSave() }} popoverClose >
+                            <Icon f7="bookmark" size="20px" className='me-2'></Icon>
+
+                            Lưu bài viết
+
+                        </Link>
+                    </ListItem>
+                    <ListItem popoverClose >
+                        <Link className='d-flex align-items-center fs-14 ' onClick={() => { socialHide() }} popoverClose >
+                            <Icon f7="eye_slash" size="20px" className='me-2'></Icon>
+                            Xóa ẩn bài viết
+                        </Link>
+                    </ListItem>
+                    <ListItem >
+                        <div className='d-flex align-items-center fs-14'>
+                            <Icon f7="link_circle" size="20px" className='me-2'></Icon>
+                            Copy bài viết
+                        </div>
+                    </ListItem>
+                    <ListItem popoverClose >
+                        <div className='d-flex align-items-center fs-14'>
+                            <Icon f7="ant" size="20px" className='me-2'></Icon>
+                            Báo cáo
+                        </div>
+                    </ListItem>
+                    {/* {uid_account == selectuidSocial && */}
+                    <ListItem popoverClose >
+                        <Link className='d-flex align-items-center fs-14 ' fill sheetOpen=".delete-social-sheet" popoverClose >
+                            <Icon f7="trash" size="20px" className='me-2'></Icon>
+                            Xóa bài viết
+                        </Link>
+                    </ListItem>
+                    {/* } */}
+                </List>
+            </Popover>
+
             {/* add social */}
-            <Sheet push
-                className="add-social-hide-sheet rounded-4 modal-center"
-                opened={sheetOpenedAdd}
-                onSheetClosed={() => {
-                    setSheetOpenedAdd(false);
-                }}
-                style={{ height: "90%", width: "90%", backgroundColor: "rgba(52, 58, 64)", color: "white" }}
-                swipeToClose
-                swipeToStep
-                backdrop
-            >
-                <div className="custom-backdrop"></div>
+            <Popup id="add-social">
+                <View>
+                    <Page>
+                        <Navbar title="Thêm bài viết">
+                            <NavRight>
+                                <Link popupClose>Close</Link>
+                            </NavRight>
+                        </Navbar>
+                        <List className='mt-3 mb-4 px-2'>
+                            <div className='px-3'>
 
-                <Toolbar className="custom-toolbar ">
-                    <div className="left text-white d-flex align-items-center">
-                        <Icon f7='wand_stars'></Icon>
+                                <textarea rows={5} className=' rounded-3 border border-1 px-2  mb-3' placeholder="Hãy nêu cảm nghĩ của bạn" onChange={(e) => setContentAdd(e.target.value)}></textarea>
+                            </div>
 
-                        <Block className='text-white fs-5'>{t("create_post")}</Block>
-                    </div>
-                    <div className="right">
-                        <Link sheetClose> <Icon f7="xmark" size='20px' color='white' className='me-2'></Icon></Link>
-                    </div>
-                </Toolbar>
-                {/*  Scrollable sheet content */}
-                <PageContent className='overflowY-auto'>
-                    <List className='mt-3 mb-4 px-2'>
-                        <div className='px-3'>
-                            <textarea rows={5} className=' rounded-3 border border-1 px-2 text-white mb-3' placeholder="Xin chào 123" onChange={(e) => setContentAdd(e.target.value)}></textarea>
-                        </div>
-                        {selectTypePost == "1" &&
-                            <>
-                                <Card className='m-0 mx-2 p-3 rounded-4 border-border-secondary bg-dark' style={{ minHeight: "300px" }}>
+                            <div className="m-0 mx-3 p-3 rounded-4 border border-1" style={{ minHeight: "300px" }}>
+                                <div className="image-upload-container">
+                                    <input
+                                        id="fileInput"
+                                        type="file"
+                                        multiple
+                                        accept="image/*,video/*"
+                                        style={{ display: "none" }}
+                                        onChange={handleImageChange}
+                                    />
 
-                                    <div className="image-upload-container">
-                                        {/* Input file ẩn */}
-                                        <input
-                                            id="fileInput"
-                                            type="file"
-                                            multiple
-                                            accept="image/*"
-                                            style={{ display: "none" }}
-                                            onChange={handleImageChange}
-                                        />
-
-                                        {/* Grid hiển thị ảnh */}
-                                        <div className="image-grid">
-                                            {/* Ô tải ảnh lên */}
-                                            <div className="upload-box text-center" onClick={triggerFileInput}>
-                                                <Icon f7="cloud_upload" size="30px" color="white" />
-                                                <div>{t("add_image")}</div>
-                                            </div>
-
-                                            <div className='row'>
-                                                {images.map((img, index) => (
-                                                    <div key={index} className="image-item position-relative col-4">
-                                                        <Button className="btn bg-danger btn-sm position-absolute top-0 end-0 m-1 rounded-circle p-1"
-                                                            onClick={() => handleDeleteImage(index)}
-                                                            style={{ width: "30px", height: "30px" }}>
-                                                            <Icon f7="trash" size="15px" color="white" />
-                                                        </Button>
-                                                        <img src={img} alt={`Ảnh ${index + 1}`} className="preview-img w-100" />
-                                                    </div>
-                                                ))}
-                                            </div>
+                                    <div className="image-grid">
+                                        <div className="upload-box text-center mt-4" onClick={triggerFileInput} style={{ cursor: 'pointer' }}>
+                                            <Icon f7="cloud_upload" size="30px" />
+                                            <div>Thêm hình ảnh / video</div>
                                         </div>
-                                    </div>
-                                </Card>
-                            </>
-                        }
-                        {selectTypePost == "2" &&
-                            <>
-                                <Card className='m-0 mx-2 p-3 rounded-4 border-border-secondary bg-dark' style={{ minHeight: "300px" }}>
 
-                                    <div className="audio-upload-container">
-                                        {/* Input file (ẩn) */}
-                                        <input
-                                            id="audioInput"
-                                            type="file"
-                                            accept="audio/*"
-                                            style={{ display: "none" }}
-                                            onChange={handleAudioChange}
-                                        />
+                                        <div className="row mt-3">
+                                            {media.map((item, index) => (
+                                                <div key={index} className="image-item position-relative col-4 mb-3">
+                                                    <Button
+                                                        className="btn bg-danger btn-sm position-absolute top-0 end-0 m-1 rounded-circle p-1"
+                                                        onClick={() => handleDeleteMedia(index)}
+                                                        style={{ width: "30px", height: "30px" }}
+                                                    >
+                                                        <Icon f7="trash" size="15px" color="white" />
+                                                    </Button>
 
-                                        {/* Nút tải lên */}
-                                        {!audioFile && (
-                                            <div className="upload-box text-center" onClick={triggerFileInputAudio}>
-                                                <Icon f7="cloud_upload" size="30px" color="white" />
-                                                <div>{t("add_audio")}</div>
-                                            </div>
-                                        )}
-
-                                        {/* Nếu đã chọn file */}
-                                        {audioFile && (
-                                            <div className="audio-preview text-center">
-                                                <audio controls src={audioFile} className="w-100"></audio>
-                                                <Button
-                                                    className="btn bg-danger btn-sm mt-2"
-                                                    onClick={handleDeleteAudio}
-                                                >
-                                                    <Icon f7="trash" size="15px" color="white" /> {t("delete")}
-                                                </Button>
-                                            </div>
-                                        )}
-                                    </div>
-                                </Card>
-                            </>
-                        }
-
-                        <div className=' rounded-3 p-2 border mx-2 mt-3'>
-                            <div className='d-flex justify-content-between align-items-center'>
-                                <div>{t("add_to_post")} </div>
-                                <div className='d-flex align-items-center'>
-                                    <Button onClick={() => { setSelectTypePost("1"), console.log(1); setType("images") }}>
-                                        <Icon f7='photo_on_rectangle' size="25px" color='white'></Icon>
-                                    </Button>
-                                    <Button onClick={() => { setSelectTypePost("2"), console.log(2); setType("audio") }}>
-                                        <Icon f7='music_note_2' size="25px" color='white'></Icon>
-                                    </Button>
-                                    {/* <Button></Button> */}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className='text-white fw-bold fs-14 mx-2 mt-3'>{t("who_can_see_your_post?")}</div>
-                        <div className='fst-italic text-muted fs-12 mx-2'>{t("title_edit_social")}</div>
-
-                        <Card className='rounded-4 p-3 bg-dark bg-opacity-50 text-white fs-14'>
-                            <div className="form-check d-flex align-items-center">
-                                <input className="form-check-input" style={{ fontSize: "1.2em" }} type="radio" name="flexRadioDefault" id="flexRadioDefault1" onChange={(e) => setAccess("0")}></input>
-                                <label className="form-check-label fs-15 ms-4 d-flex align-items-center" htmlFor="flexRadioDefault1">
-                                    <Icon f7='globe' size="20px" className='me-2'></Icon>
-                                    {t("public")}
-                                </label>
-                            </div>
-                            <div className="form-check d-flex align-items-center my-3">
-                                <input className="form-check-input" style={{ fontSize: "1.2em" }} type="radio" name="flexRadioDefault" id="flexRadioDefault1" onChange={(e) => setAccess("1")}></input>
-                                <label className="form-check-label fs-15 ms-4 d-flex align-items-center" htmlFor="flexRadioDefault1">
-                                    <Icon f7='person_3' size="20px" className='me-2'></Icon>
-                                    {t("followers")}
-                                </label>
-                            </div>
-                            <div className="form-check d-flex align-items-center">
-                                <input className="form-check-input" style={{ fontSize: "1.2em" }} type="radio" name="flexRadioDefault" id="flexRadioDefault1" onChange={(e) => setAccess("2")}></input>
-                                <label className="form-check-label fs-15 ms-4 d-flex align-items-center" htmlFor="flexRadioDefault1">
-                                    <Icon f7='lock' size="20px" className='me-2'></Icon>
-                                    {t("only_me")}
-                                </label>
-                            </div>
-                        </Card>
-                        <Button className=' rounded-pill p-4 bg-primary text-white mt-3 mx-3 fs-6' onClick={handleAddPost}>{t("post1")}</Button>
-                    </List>
-                </PageContent>
-            </Sheet>
-
-            {/* Modal comment */}
-            <Sheet push
-                className="comment-social-hide-sheet rounded-4 modal-center"
-                opened={sheetOpenComment}
-                onSheetClosed={() => {
-                    setSheetOpenComment(false);
-                }}
-                style={{ height: "90%", width: "90%", backgroundColor: "rgba(52, 58, 64)", color: "white" }}
-                swipeToClose
-                swipeToStep
-                backdrop
-            >
-                <div className="custom-backdrop"></div>
-
-                <Toolbar className="custom-toolbar ">
-                    <div className="left text-white d-flex align-items-center">
-                        <Icon f7='wand_stars'></Icon>
-
-                        <Block className='text-white fs-5'>Bình luận bài viết</Block>
-                    </div>
-                    <div className="right">
-                        <Link sheetClose> <Icon f7="xmark" size='20px' color='white' className='me-2'></Icon></Link>
-                    </div>
-                </Toolbar>
-                {/*  Scrollable sheet content */}
-                <PageContent className='overflowY-auto'>
-                    <List className='mt-3 mb-4 px-2'>
-
-                        <Card className=' p-0 mx-1 bg-dark bg-opacity-75 text-light rounded-4'>
-                            <div className='d-flex align-items-center justify-content-between p-3'>
-                                <div className='d-flex align-items-center'>
-                                    <img src={`https://beta.ellm.io/${acc_social_view.avatar}`} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
-                                    <span className='text-light ms-2'>{acc_social_view.name}
-                                        <div className='fs-12 text-secondary d-flex align-items-center'>{social_view.date}
-                                            {social_view.access == 0 &&
-                                                <Icon f7="globe" size="14px" className='ms-1'></Icon>
-                                            }
-                                            {social_view.access == 1 &&
-                                                <Icon f7="person_2" size="14px" className='ms-1'></Icon>
-                                            }
-                                        </div>
-                                    </span>
-                                </div>
-                                <div className='d-flex align-items-center'>
-                                    {social_view.lang !== language && <Button className='bg-none p-1 text-white rounded-3 me-3 fs-12'>{t("translate")} </Button>}
-                                </div>
-                            </div>
-                            <div className='mx-3'> {social_view.content} </div>
-                            {social_view.type == 'images' && (
-                                <>
-                                    <div className="row px-4" >
-                                        {/* Xử lý khi chỉ có 1 hoặc 2 ảnh */}
-                                        {data_social_view.length <= 2 && data_social_view.map((data, index) => (
-                                            <div key={index} className={`px-1 p-1 ${data_social_view.length === 1 ? 'col-12' : 'col-6'}`}>
-                                                <img style={{ minHeight: "240px", objectFit: "cover" }}
-                                                    src={`https://beta.ellm.io/${data.data}`}
-                                                    className="w-100 rounded-2"
-                                                    onClick={() => handleClick(social_view, index)}
-                                                />
-                                            </div>
-                                        ))}
-
-                                        {/* Hiển thị 3 ảnh đầu nếu có nhiều hơn 2 ảnh */}
-                                        {data_social_view.length > 2 && data_social_view.slice(0, 3).map((data, index) => (
-                                            <div key={index} className="col-4 px-1 p-1">
-                                                <img
-                                                    src={`https://beta.ellm.io/${data.data}`}
-                                                    className="w-100 rounded-2"
-                                                    onClick={() => handleClick(social_view, index)}
-                                                />
-                                            </div>
-                                        ))}
-                                    </div>
-
-                                    {/* Hàng dưới chứa 2 ảnh (nếu có ít nhất 4 ảnh) */}
-                                    {data_social_view.length > 3 && (
-                                        <div className="row px-4">
-                                            {/* Ảnh đầu tiên của hàng dưới */}
-                                            <div className="col-6 px-1 p-1">
-                                                <img
-                                                    src={`https://beta.ellm.io/${data_social_view[3].data}`}
-                                                    className="w-100 rounded-2"
-                                                    onClick={() => handleClick(social_view, 3)}
-                                                />
-                                            </div>
-
-                                            {/* Ảnh thứ hai của hàng dưới có overlay nếu có hơn 5 ảnh */}
-                                            {data_social_view.length > 4 && (
-                                                <div className="col-6 px-1 p-1 position-relative">
-                                                    <img
-                                                        src={`https://beta.ellm.io/${data_social_view[4].data}`}
-                                                        className="w-100 rounded-2"
-                                                    // onClick={() => handleClick(social_view)}
-                                                    />
-                                                    {data_social_view.length > 5 && (
-                                                        <div onClick={() => handleClick(social_view, 4)} className="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-flex justify-content-center align-items-center rounded-2">
-                                                            <span className="text-white fs-4 fw-bold">
-                                                                {`${data_social_view.length - 5}+`}
-                                                            </span>
-                                                        </div>
+                                                    {item.type === 'image' ? (
+                                                        <img src={item.preview} alt={`Ảnh ${index + 1}`} className="preview-img w-100 rounded-3" />
+                                                    ) : (
+                                                        <video
+                                                            src={item.preview}
+                                                            controls
+                                                            className="preview-img w-100 rounded-3"
+                                                            style={{ maxHeight: "150px", objectFit: "cover" }}
+                                                        />
                                                     )}
                                                 </div>
-                                            )}
+                                            ))}
                                         </div>
-                                    )}
-                                </>
-                            )}
-
-
-                            {social_view.type == "audio" && (
-                                <>
-                                    <div className="px-3 mt-1" >
-                                        {data_social_view.map((voice, index) => (
-                                            <div key={index} className="my-2  rounded-4 border-secondary " style={{ backgroundColor: "unset" }}>
-                                                <audio controls className="w-100">
-                                                    <source src={`https://beta.ellm.io/${voice.data}`} type="audio/mpeg" />
-                                                    Trình duyệt của bạn không hỗ trợ audio.
-                                                </audio>
-                                            </div>
-                                        ))}
                                     </div>
-                                </>
-                            )}
-
-                            <div className='mt-3' style={{ borderBottom: "0.5px solid #353535" }}></div>
-                            <div className='row my-3'>
-                                <div className='col-4 text-center' onClick={() => { LikeSocial(social_view.active, social_view.like) }}>
-                                    {acc_like_social == 1 ?
-                                        <Icon f7="heart_fill" size="20px" className='me-1' color='red'></Icon>
-                                        :
-                                        <Icon f7="heart" size="20px" className='me-1'></Icon>
-                                    }
-
-                                    {t("like")}
-                                </div>
-
-                                <div className='col-4 text-center px-0 text-white' >
-                                    <Icon f7="chat_bubble" size="20px" className='me-1'></Icon>
-                                    {social_view.comment} {t("comment")}
-                                </div>
-                                <div className='col-4 text-center'>
-                                    <Icon f7="arrowshape_turn_up_right" size="20px" className='me-1'></Icon>
-                                    {t("share")}
                                 </div>
                             </div>
-                        </Card>
-                        <div className='px-2' style={{ marginBottom: "70px" }}>
-                            {listComment && listComment.map((cmt) => {
-                                return (
-                                    <>
-                                        <div className='row mt-3'>
-                                            <div className='col-2'>
-                                                <img src={`https://beta.ellm.io/${cmt.avatar}`} className='w-100 rounded-circle'></img>
-                                            </div>
-                                            <div className='col-10 ps-0'>
-                                                <div className='d-flex align-items-center justify-content-between'>
-                                                    <div className='fs-15'>{cmt.account} <span className='fs-12 text-muted ms-2'> {cmt.date}</span></div>
-                                                    {cmt.id_account == acc_social_view.id ?
-                                                        <div className='fs-12 d-flex align-items-center' onClick={() => { deleteComment(cmt.active) }}><Icon f7='trash' color='red' size="16px" className='me-1'></Icon>Xóa</div>
-                                                        :
-                                                        <div></div>
-                                                    }
 
+                            <Button className=' rounded-pill p-4 bg-pink  mt-5 mx-3 fs-6' onClick={handleAddPost}>Đăng</Button>
+                        </List>
+                    </Page>
+                </View>
+            </Popup>
+
+            {/* Edit Social */}
+            <Popup id="edit-social">
+                <View>
+                    <Page>
+                        <Navbar title="Sửa bài viết">
+                            <NavRight>
+                                <Link popupClose>Close</Link>
+                            </NavRight>
+                        </Navbar>
+                        <List className='mt-3 mb-4 px-2'>
+                            <div className='px-3'>
+
+                                <textarea rows={5} className=' rounded-3 border border-1 px-2  mb-3' placeholder="Hãy nêu cảm nghĩ của bạn" onChange={(e) => setContentAdd(e.target.value)}></textarea>
+                            </div>
+
+                            <div className="m-0 mx-3 p-3 rounded-4 border border-1" style={{ minHeight: "300px" }}>
+                                <div className="image-upload-container">
+                                    <input
+                                        id="fileInput"
+                                        type="file"
+                                        multiple
+                                        accept="image/*,video/*"
+                                        style={{ display: "none" }}
+                                        onChange={handleImageChange}
+                                    />
+
+                                    <div className="image-grid">
+                                        <div className="upload-box text-center mt-4" onClick={triggerFileInput} style={{ cursor: 'pointer' }}>
+                                            <Icon f7="cloud_upload" size="30px" />
+                                            <div>Thêm hình ảnh / video</div>
+                                        </div>
+
+                                        <div className="row mt-3">
+                                            {media.map((item, index) => (
+                                                <div key={index} className="image-item position-relative col-4 mb-3">
+                                                    <Button
+                                                        className="btn bg-danger btn-sm position-absolute top-0 end-0 m-1 rounded-circle p-1"
+                                                        onClick={() => handleDeleteMedia(index)}
+                                                        style={{ width: "30px", height: "30px" }}
+                                                    >
+                                                        <Icon f7="trash" size="15px" color="white" />
+                                                    </Button>
+
+                                                    {item.type === 'image' ? (
+                                                        <img src={item.preview} alt={`Ảnh ${index + 1}`} className="preview-img w-100 rounded-3" />
+                                                    ) : (
+                                                        <video
+                                                            src={item.preview}
+                                                            controls
+                                                            className="preview-img w-100 rounded-3"
+                                                            style={{ maxHeight: "150px", objectFit: "cover" }}
+                                                        />
+                                                    )}
                                                 </div>
-                                                <div className='mt-1'>
-                                                    <div className='w-100 rounded-3 border border-1 bg-dark bg-opacity-75 fs-15 p-2'>
-                                                        {cmt.content}
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <Button className=' rounded-pill p-4 bg-pink  mt-5 mx-3 fs-6' onClick={handleAddPost}>Đăng</Button>
+                        </List>
+                    </Page>
+                </View>
+            </Popup>
+            {/* Modal comment */}
+            <Popup id="comment-social" className="auto-height-popup">
+                <View>
+                    <Page>
+                        <Navbar title="Bình luận bài viết">
+                            <NavRight>
+                                <Link popupClose>Close</Link>
+                            </NavRight>
+                        </Navbar>
+                        <List className='mt-3 mb-4 px-2'>
+
+                            <Card className=' p-0 mx-1  border border-0 shadow-sm fs-13 rounded-4'>
+                                <div className='d-flex align-items-center justify-content-between p-3'>
+                                    <div className='d-flex align-items-center'>
+                                        <img src={`${viewSocial.avatar}`} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
+                                        <span className='border border-0  ms-2'>
+                                            {viewSocial.name}
+                                            <div className='fs-12 text-secondary d-flex align-items-center'>{viewSocial.date}
+                                                {viewSocial.access == 0 &&
+                                                    <Icon f7="globe" size="14px" className='ms-1'></Icon>
+                                                }
+                                                {viewSocial.access == 1 &&
+                                                    <Icon f7="person_2" size="14px" className='ms-1'></Icon>
+                                                }
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className='mx-3'> {viewSocial.content} </div>
+
+                                {/* <div className="row px-4" >
+                                    {viewSocial.images.length <= 2 && viewSocial.images.map((data, index) => (
+                                        <div key={index} className={`px-1 p-1 ${viewSocial.images.length === 1 ? 'col-12' : 'col-6'}`}>
+                                            <img style={{ minHeight: "240px", objectFit: "cover" }}
+                                                src={`${data[index]}`}
+                                                className="w-100 rounded-2"
+                                                onClick={() => handleClick(viewSocial, index)}
+                                            />
+                                        </div>
+                                    ))}
+
+                                    {viewSocial.images.length > 2 && viewSocial.images.slice(0, 3).map((data, index) => (
+                                        <div key={index} className="col-4 px-1 p-1">
+                                            <img
+                                                src={`${data.data}`}
+                                                className="w-100 rounded-2"
+                                                onClick={() => handleClick(viewSocial, index)}
+                                            />
+                                        </div>
+                                    ))}
+                                </div> */}
+                                <div className='row px-4 mt-2'>
+                                    <div className='col-6 p-1'>
+                                        <img src='https://media.macphun.com/img/uploads/customer/how-to/608/15542038745ca344e267fb80.28757312.jpg?q=85&w=1340' className='w-100'></img>
+                                    </div>
+                                    <div className='col-6 p-1'>
+                                        <img src='https://images.pexels.com/photos/1194775/pexels-photo-1194775.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' className='w-100'></img>
+                                    </div>
+                                </div>
+
+                                {viewSocial.images.length > 3 && (
+                                    <div className="row px-4">
+                                        <div className="col-6 px-1 p-1">
+                                            <img
+                                                src={`${viewSocial.images[3].data}`}
+                                                className="w-100 rounded-2"
+                                                onClick={() => handleClick(viewSocial, 3)}
+                                            />
+                                        </div>
+
+                                        {viewSocial.images.length > 4 && (
+                                            <div className="col-6 px-1 p-1 position-relative">
+                                                <img
+                                                    src={`${viewSocial.images[4].data}`}
+                                                    className="w-100 rounded-2"
+                                                />
+                                                {viewSocial.images.length > 5 && (
+                                                    <div onClick={() => handleClick(viewSocial, 4)} className="position-absolute top-0 start-0 w-100 h-100  bg-opacity-50 d-flex justify-content-center align-items-center rounded-2">
+                                                        <span className=" fs-4 fw-bold">
+                                                            {`${viewSocial.images.length - 5}+`}
+                                                        </span>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+
+
+
+                                <div className='mt-3' style={{ borderBottom: "0.5px solid #353535" }}></div>
+                                <div className='row my-3'>
+                                    <div className='col-4 text-center' onClick={() => { LikeSocial(social_view.active, social_view.like) }}>
+                                        {acc_like_social == 1 ?
+                                            <Icon f7="heart_fill" size="20px" className='me-1' color='red'></Icon>
+                                            :
+                                            <Icon f7="heart" size="20px" className='me-1'></Icon>
+                                        }
+
+                                        {t("like")}
+                                    </div>
+
+                                    <div className='col-4 text-center px-0 ' >
+                                        <Icon f7="chat_bubble" size="20px" className='me-1'></Icon>
+                                        {social_view.comment} {t("comment")}
+                                    </div>
+                                    <div className='col-4 text-center'>
+                                        <Icon f7="arrowshape_turn_up_right" size="20px" className='me-1'></Icon>
+                                        {t("share")}
+                                    </div>
+                                </div>
+                            </Card>
+                            <div className='px-3 fs-13' style={{ marginBottom: "70px" }}>
+                                {textComment && textComment.map((cmt) => {
+                                    return (
+                                        <>
+                                            <div className='row mt-3 border-bottom'>
+                                                <div className='col-2'>
+                                                    <img src={`${cmt.avatar}`} className='w-100 rounded-circle'></img>
+                                                </div>
+                                                <div className='col-10 ps-0'>
+                                                    <div className='d-flex align-items-center justify-content-between'>
+                                                        <div className='fs-15 fw-bold'>{cmt.account} <span className='fs-12 text-muted ms-2'> {cmt.date}</span></div>
+                                                        {/* {cmt.id_account == acc_social_view.id ? */}
+                                                        <div className='fs-12 d-flex align-items-center' onClick={() => { deleteComment(cmt.active) }}><Icon f7='trash' color='red' size="16px" className='me-1'></Icon>Xóa</div>
+                                                        {/* :
+                                                        <div></div>
+                                                         } */}
+
+                                                    </div>
+                                                    <div className='mt-1'>
+                                                        <div className='w-100  fs-15 p-2'>
+                                                            {cmt.content}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </>
-                                )
-                            })}
-                        </div>
-                        <Card className='p-0 m-0 mt-4 mx-1 ' style={{
-                            backgroundColor: "rgba(52, 58, 64)",
-                            position: "fixed",
-                            bottom: 0,
-                            left: 0,
-                            right: 0,
-                            zIndex: 1000, // đảm bảo nổi lên trên
-                            borderTopLeftRadius: "1rem",
-                            borderTopRightRadius: "1rem"
-                        }}>
-                            <div className="input-group m-0 mb-1  rounded-3 p-0 form-control rounded-pill-chat border border-0 bg-dark" style={{ position: "relative" }}>
-                                <input
-                                    rows={1}
-                                    className="border border-0 ps-2 rounded-3 fs-15 text-white bg-dark"
-                                    placeholder="Comment"
-                                    style={{
-                                        width: "90%",
-                                        height: "45px"
-                                    }}
-                                    value={content}
-                                    onChange={(e) => setContent(e.target.value)}
-                                    aria-describedby="basic-addon1"
-                                ></input>
-                                <span
-                                    className="clear-button position-absolute d-flex text-end justify-content-end"
-                                    id="basic-addon2"
-                                    style={{
-                                        right: "5px",
-                                        top: "17px",
-                                        transform: "translateY(-50%)"
-                                    }}
-                                >
-                                    <Button onClick={CommentSocial} className='p-2 mt-2 rounded-3 bg-danger text-white' style={{ width: "35px", height: "35px" }}>
-                                        <Icon f7="paperplane" size="20px" ></Icon>
-                                    </Button>
-                                </span>
-
+                                        </>
+                                    )
+                                })}
                             </div>
-                        </Card>
+                            <Card className='p-0 m-0 mt-4  mx-2 mb-2 border border-2 rounded-4 ' style={{
+                                // backgroundColor: "rgba(52, 58, 64)",
+                                position: "fixed",
+                                bottom: 0,
+                                left: 0,
+                                right: 0,
+                                zIndex: 1000, // đảm bảo nổi lên trên
+                            }}>
+                                <div className="input-group m-0 mb-1  rounded-3 p-0 form-control rounded-pill-chat border border-0 " style={{ position: "relative" }}>
+                                    <input
+                                        rows={1}
+                                        className="border border-0 rounded-4c ps-2 rounded-3 fs-15  "
+                                        placeholder="Comment"
+                                        style={{
+                                            width: "90%",
+                                            height: "45px"
+                                        }}
+                                        value={content}
+                                        onChange={(e) => setContent(e.target.value)}
+                                        aria-describedby="basic-addon1"
+                                    ></input>
+                                    <span
+                                        className="clear-button position-absolute d-flex text-end justify-content-end rounded-4"
+                                        id="basic-addon2"
+                                        style={{
+                                            right: "5px",
+                                            top: "20px",
+                                            transform: "translateY(-50%)"
+                                        }}
+                                    >
+                                        <Button onClick={CommentSocial} className='p-2 mt-2 rounded-3 bg-pink ' style={{ width: "35px", height: "35px" }}>
+                                            <Icon f7="paperplane" size="20px" ></Icon>
+                                        </Button>
+                                    </span>
+
+                                </div>
+                            </Card>
 
 
-                    </List>
-                </PageContent>
-            </Sheet>
-
+                        </List>
+                    </Page>
+                </View>
+            </Popup>
             {/* //delete social */}
             <Sheet
                 push
-                className="delete-social-hide-sheet rounded-5 modal-delete"
+                className="delete-social-sheet rounded-5 modal-delete"
                 opened={sheetOpenedDeleteSocial}
                 onSheetClosed={() => {
                     setSheetOpenedDeleteSocial(false);
@@ -1829,10 +1689,10 @@ const SocialHidePage = () => {
 
                 <PageContent className='p-4 text-center'>
                     <img src='../img/deleted.svg'></img>
-                    <div className='fs-14 text-white my-2'>{t("title_delete")}</div>
+                    <div className='fs-14  my-2'>{t("title_delete")}</div>
                     <div className='d-flex align-items-center justify-content-center '>
-                        <Button className='bg-dark bg-opacity-75 text-white fs-15 rounded-pill me-3' style={{ padding: "22px" }} sheetClose>{t("cancel")}</Button>
-                        <Button className='bg-danger  text-white fs-15  rounded-pill' style={{ padding: "22px" }} onClick={DeleteSocial}>{t("delete")}</Button>
+                        <Button className='  fs-15 rounded-pill me-3' style={{ padding: "22px" }} sheetClose>{t("cancel")}</Button>
+                        <Button className='bg-danger   fs-15  rounded-pill' style={{ padding: "22px" }} onClick={DeleteSocial}>{t("delete")}</Button>
                     </div>
                 </PageContent>
             </Sheet>
@@ -1841,4 +1701,4 @@ const SocialHidePage = () => {
         </Page>
     );
 };
-export default SocialHidePage;
+export default SocialSavePage;

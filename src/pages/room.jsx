@@ -78,6 +78,8 @@ const RoomPage = () => {
         setdate(weekday)
     }
 
+    const [step, setStep] = useState(0);
+
     return (
 
 
@@ -86,7 +88,7 @@ const RoomPage = () => {
             <CommonNavbar />
 
             {/* Page content */}
-            <List className='m-2' simpleList>
+            <List className='mx-2 mt-2' simpleList>
                 <div className='d-flex align-items-center fs-6 fw-bold'>
                     <Link back>
                         <img src='../image/icon-backward.gif' className='size-icon me-1'></img>
@@ -110,7 +112,7 @@ const RoomPage = () => {
                                 flex: 1,
                                 borderRadius: '50px',
                             }}
-                        value={`${date} - ${searchDate}/${searchMonth + 1}/${searchYear}`}
+                            value={`${date} - ${searchDate}/${searchMonth + 1}/${searchYear}`}
                         />
                         <div id="open-modal-search-date-home"
                             className=" d-flex justify-content-center align-items-center me-0"
@@ -188,110 +190,322 @@ const RoomPage = () => {
                         </select>
                     </div>
                 </div>
-                <div className='d-flex justify-content-center mt-2 px-3 mb-3'>
-                    <button className='bg-pink text-white fs-13 fw-bold p-3 rounded-pill w-100' onClick={() => { handleSearchMonth() }}>Xem</button>
+                <div className='d-flex justify-content-center mt-2 px-4 mb-3'>
+                    <button className='border-btn fs-13 fw-bold p-2 rounded-pill w-100' onClick={() => { handleSearchMonth() }}>Xem</button>
                 </div>
             </div>
-            <List className='my-2'>
-                <div className='bg-warning bg-opacity-10 row'>
-                    <div className='col-7 p-2 ps-4 pe-0 fs-5 fw-bold'>
-                        <div className=''>Hãy đến với HappyCorp để nào</div>
-                        <div className='mt-1'> <span className='bg-pink rounded-1 text-white px-2'>đến 50%</span></div>
-                    </div>
-                    <div className='col-5 ps-0'>
-                        <img src='../image/10.gif' className='w-100'></img>
-                    </div>
-                </div>
-            </List>
-            <List className=' mb-3 mt-0'>
-                <Card className='border-1 border-light my-3 shadow-sm p-1 rounded-3'>
-                    <div className="row " onClick={() => { handleClick(1) }}>
-                        <div className='col-4'>
-                            <img src='https://play-lh.googleusercontent.com/IeNJWoKYx1waOhfWF6TiuSiWBLfqLb18lmZYXSgsH1fvb8v1IYiZr5aYWe0Gxu-pVZX3' className='rounded-3 w-100'></img>
-                        </div>
-                        <div className='col-8 ps-0 fs-13'>
-                            <div className='d-flex align-items-center fst-italic'>
-                                <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc
-                            </div>
-                            <div className='fw-bold '>Giảm 10%</div>
-                            <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
-                            <div className='d-flex justify-content-end mt-1'>
-                                <button className='bg-pink p-1 px-3 rounded-3 border-0 text-white'>Xem ngay</button>
-                            </div>
-                        </div>
-                    </div>
-                </Card>
-                <Card className='border-1 border-light my-3 shadow-sm p-1 rounded-3'>
-                    <div className="row ">
-                        <div className='col-4'>
-                            <img src='https://play-lh.googleusercontent.com/IeNJWoKYx1waOhfWF6TiuSiWBLfqLb18lmZYXSgsH1fvb8v1IYiZr5aYWe0Gxu-pVZX3' className='rounded-3 w-100'></img>
-                        </div>
-                        <div className='col-8 ps-0 fs-13'>
-                            <div className='d-flex align-items-center fst-italic fw-bold'>
-                                <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc
-                            </div>
-                            <div className='fw-bold text-pink'>Giảm 10%</div>
-                            <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
-                            <div className='d-flex justify-content-end mt-1'>
-                                <button className='bg-pink p-1 px-3 rounded-3 border-0 text-white'>Xem ngay</button>
-                            </div>
-                        </div>
-                    </div>
-                </Card>
-            </List>
 
+            <div className='px-4'>
+                {step === 0 && (
+                    <>
+                        <div className='fs-13 fw-bold mt-3'>Sơ đồ phòng</div>
+                        <div className="d-flex justify-content-between align-items-center gap-3  p-2 ">
+                            <div className="d-flex align-items-center gap-1">
+                                <Badge className='bg-primary'> </Badge>
+                                <span className='fs-13'> Tổng booking</span>
+                            </div>
+                            <div className="d-flex align-items-center gap-1">
+                                <Badge className='bg-warning'> </Badge>
+                                <span className='fs-13'> Đã thanh toán</span>
+                            </div>
+                            <div className="d-flex align-items-center gap-1">
+                                <Badge className='bg-white'> </Badge>
+                                <span className='fs-13'> Còn chờ</span>
+                            </div>  
+                        </div>
+                        <div className='row' style={{ display: 'flex', alignItems: 'stretch' }}>
+                            <div className='col-6 px-2' style={{ display: 'flex' }}>
+                                <Card className='fs-13 border border-0 bg-primary text-white m-0 mt-3 rounded-3 p-1 pb-2'>
+                                    <img src='https://baochauelec.com/cdn/images/cong%20trinh/1-Cong-trinh-t4-2019/Ha-Noi/4-son-la/karaoke-kinh-doanh-o-son-la-h3.jpg' className='w-100 rounded-3'></img>
+                                    <div className='fw-bold mt-1'>Phòng VIP 4 dành cho 10 người</div>
 
-            <div className='fs-6 fw-bold mx-3 mt-4 d-flex align-items-center'><img src='../image/6.gif' className='size-icon'></img>  Ưu đãi</div>
-            <div className='row d-flex flex-nowrap mx-2 mt-2 pb-2' style={{ overflowX: "auto", whiteSpace: "nowrap" }}>
-                <div className='col-4 px-1'>
-                    <Card className='m-0 border-light p-1 fs-13'>
-                        <div>
-                            <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
-                            <div className='d-flex'>
-                                <div className='mt-2 fst-italic'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
+                                    <div className='d-flex align-items-center mt-1'>
+                                        <i class="f7-icons fs-13 me-1">house</i>Nguyễn Thị A
+                                    </div>
+                                    <div className='d-flex align-items-center mt-1'>
+                                        <i class="f7-icons fs-13 me-1">house</i> 9:00-12:00
+                                    </div>
+                                </Card>
                             </div>
-                            <div className='fw-bold text-pink my-1'>Giảm 10%</div>
-                            <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
-                        </div>
-                    </Card>
-                </div>
-                <div className='col-4 px-1'>
-                    <Card className='m-0 border-light p-1 fs-13'>
-                        <div>
-                            <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
-                            <div className='d-flex'>
-                                <div className='mt-2 fst-italic'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
-                            </div>
-                            <div className='fw-bold text-pink my-1'>Giảm 10%</div>
-                            <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
-                        </div>
-                    </Card>
-                </div>
-                <div className='col-4 px-1'>
-                    <Card className='m-0 border-light p-1 fs-13'>
-                        <div>
-                            <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
-                            <div className='d-flex'>
-                                <div className='mt-2 fst-italic'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
-                            </div>
-                            <div className='fw-bold text-pink my-1'>Giảm 10%</div>
-                            <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
-                        </div>
-                    </Card>
-                </div>
-                <div className='col-4 px-1'>
-                    <Card className='m-0 border-light p-1 fs-13'>
-                        <div>
-                            <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
-                            <div className='d-flex'>
-                                <div className='mt-2 fst-italic'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
-                            </div>
-                            <div className='fw-bold text-pink my-1'>Giảm 10%</div>
-                            <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
-                        </div>
-                    </Card>
-                </div>
+                            <div className='col-6 px-2' style={{ display: 'flex' }}>
+                                <Card className='fs-13 border border-0 bg-warning bg-opacity-75 text-white m-0 mt-3 rounded-3 p-1 pb-2'>
+                                    <img src='https://baochauelec.com/cdn/images/cong%20trinh/1-Cong-trinh-t4-2019/Ha-Noi/4-son-la/karaoke-kinh-doanh-o-son-la-h3.jpg' className='w-100 rounded-3'></img>
+                                    <div className='fw-bold mt-1'>Phòng VIP 4 dành cho 10 người</div>
 
+                                    <div className='d-flex align-items-center mt-1'>
+                                        <i class="f7-icons fs-13 me-1">house</i>Nguyễn Thị A
+                                    </div>
+                                    <div className='d-flex align-items-center mt-1'>
+                                        <i class="f7-icons fs-13 me-1">house</i> 9:00-12:00
+                                    </div>
+                                </Card>
+                            </div>
+                            <div className='col-6 px-2' style={{ display: 'flex' }}>
+                                <Card className='fs-13 border border-0 bg-white shadow-sm m-0 mt-3 rounded-3 p-1 pb-2'>
+                                    <img src='https://baochauelec.com/cdn/images/cong%20trinh/1-Cong-trinh-t4-2019/Ha-Noi/4-son-la/karaoke-kinh-doanh-o-son-la-h3.jpg' className='w-100 rounded-3'></img>
+                                    <div className='fw-bold mt-1'>Phòng VIP 4 dành cho 10 người</div>
+                                </Card>
+                            </div>
+                            <div className='col-6 px-2' style={{ display: 'flex' }}>
+                                <Card className='fs-13 border border-0 bg-warning bg-opacity-75 text-white m-0 mt-3 rounded-3 p-1 pb-2'>
+                                    <img src='https://baochauelec.com/cdn/images/cong%20trinh/1-Cong-trinh-t4-2019/Ha-Noi/4-son-la/karaoke-kinh-doanh-o-son-la-h3.jpg' className='w-100 rounded-3'></img>
+                                    <div className='fw-bold mt-1'>Phòng VIP 4 dành cho 10 người</div>
+
+                                    <div className='d-flex align-items-center mt-1'>
+                                        <i class="f7-icons fs-13 me-1">house</i>Nguyễn Thị A
+                                    </div>
+                                    <div className='d-flex align-items-center mt-1'>
+                                        <i class="f7-icons fs-13 me-1">house</i> 9:00-12:00
+                                    </div>
+                                </Card>
+                            </div>
+                            <div className='col-6 px-2' style={{ display: 'flex' }}>
+                                <Card className='fs-13 border border-0 bg-white shadow-sm m-0 mt-3 rounded-3 p-1 pb-2'>
+                                    <img src='https://baochauelec.com/cdn/images/cong%20trinh/1-Cong-trinh-t4-2019/Ha-Noi/4-son-la/karaoke-kinh-doanh-o-son-la-h3.jpg' className='w-100 rounded-3'></img>
+                                    <div className='fw-bold mt-1'>Phòng VIP 4 dành cho 10 người</div>
+                                </Card>
+                            </div>
+
+                        </div>
+                        <div className='p-2 mt-3'>
+                            <button className='rounded-pill border-btn fs-13 fw-bold p-2 fs-13 w-100' onClick={() => setStep(2)}>Tiếp tục</button>
+                        </div>
+                    </>
+                )}
+                {step === 1 && (
+                    <>
+                        <Card className='m-0  p-3 py-4 rounded-4 mt-3 fs-13 shadow-sm '>
+                            <div className='fw-bold'>Thông tin phòng</div>
+                            <div className='my-2'>Tên: <span className='fw-bold ms-2'>Happy 1</span></div>
+                            <div> Ngày đặt: <span className='fw-bold ms-2'>{moment().format("DD/MM/YYYY")}</span></div>
+
+                        </Card>
+                        <Card className='m-0  p-3 py-4 rounded-4 mt-3 fs-13 shadow-sm '>
+                            <div className='d-flex justify-content-between align-items-center'>
+                                <div className='fw-bold'>Thông tin khách hàng</div>
+                            </div>
+                            <div className=' fs-13 fw-bold mt-3'>Tên <span className='text-danger ms-1'>(*)</span></div>
+                            <div className='mt-2'>
+                                <input type='text' className='p-3 rounded-4 fs-13 border border-0 shadow-sm bg-secondary bg-opacity-25  w-100' placeholder="Tên"></input>
+                            </div>
+                            <div className=' fs-13 fw-bold mt-3'>Điện thoại <span className='text-danger ms-1'>(*)</span></div>
+                            <div className='mt-2'>
+                                <input type='tel' className='p-3 rounded-4 fs-13 border border-0 shadow-sm bg-secondary bg-opacity-25  w-100' placeholder="Điện thoại"></input>
+                            </div>
+                            <div className=' fs-13 fw-bold mt-3'>Giờ <span className='text-danger ms-1'>(*)</span></div>
+                            <div className='mt-2'>
+                                <input type='time' className='p-3 rounded-4 fs-13 border border-0 shadow-sm bg-secondary bg-opacity-25  w-100' ></input>
+                            </div>
+                            <div className=' fs-13 fw-bold mt-3'>Số người <span className='text-danger ms-1'>(*)</span></div>
+                            <div className='mt-2'>
+                                <input type='number' className='p-3 rounded-4 fs-13 border border-0 shadow-sm bg-secondary bg-opacity-25  w-100' placeholder="0"></input>
+                            </div>
+                            <div className=' fs-13 fw-bold mt-3'>Yêu cầu</div>
+                            <div className='mt-2'>
+                                <textarea rows={5} className='p-3 rounded-4 fs-13 border border-0 shadow-sm bg-secondary bg-opacity-25  w-100' placeholder="Yêu cầu"></textarea>
+                            </div>
+                        </Card>
+                        <div className='p-2 mt-3'>
+                            <button className='rounded-pill bg-pink text-white fs-13 p-3 w-100' onClick={() => setStep(2)}>Tiếp tục</button>
+                        </div>
+                    </>
+                )}
+                {step === 2 && (
+                    <>
+                        <Card className='m-0 p-3 py-4  rounded-4 mt-3 fs-13 shadow-sm '>
+                            <div className='fw-bold'>Thông tin đặt phòng</div>
+                            <div className=' fs-13 fw-bold mt-3'>Ngày <span className='text-danger ms-1'>(*)</span></div>
+                            <div className='mt-2'>
+                                <input type='date' className='p-3 rounded-4 fs-13 border border-0 shadow-sm bg-secondary bg-opacity-25  w-100' placeholder='dd/mm/yyyy'></input>
+                            </div>
+                            <div className=' fs-13 fw-bold mt-3'>Giờ <span className='text-danger ms-1'>(*)</span></div>
+                            <div className='mt-2'>
+                                <input type='time' className='p-3 rounded-4 fs-13 border border-0 shadow-sm bg-secondary bg-opacity-25  w-100' placeholder='Điện thoại'></input>
+                            </div>
+                            <div className=' fs-13 fw-bold mt-3'>Số người <span className='text-danger ms-1'>(*)</span></div>
+                            <div className='mt-2'>
+                                <input type='number' className='p-3 rounded-4 fs-13 border border-0 shadow-sm bg-secondary bg-opacity-25  w-100' placeholder='0'></input>
+                            </div>
+                            <div className=' fs-13 fw-bold mt-3'>Yêu cầu <span className='text-danger ms-1'>(*)</span></div>
+                            <div className='mt-2'>
+                                <textarea rows={5} className='p-3 rounded-4 fs-13 border border-0 shadow-sm bg-secondary bg-opacity-25  w-100' placeholder="Yêu cầu"></textarea>
+                            </div>
+                        </Card>
+                        <div className='p-2 mt-3 d-flex align-items-center '>
+                            <div className='col-6'>
+                                <button className='rounded-pill bg-secondary text-white fs-13 p-3 w-100' onClick={() => setStep(1)}>Quay lại</button>
+                            </div>
+                            <div className='col-6'>
+                                <button className='rounded-pill bg-pink text-white fs-13 p-3 w-100' onClick={() => setStep(3)}>Tiếp tục</button>
+                            </div>
+                        </div>
+                    </>
+                )}
+
+                {step === 4 && (
+                    <>
+                        <IonCard className='m-0 p-3  py-4 rounded-4 mt-3 fs-13 shadow'>
+                            <div className='fw-bold'>Món ăn / Dịch vụ</div>
+                            <IonAccordionGroup multiple >
+                                <IonAccordion value='1' className='rounded-4 bg-transparent mt-3 shadow-sm'>
+                                    <IonItem lines="none" className='fs-13 rounded-4 bg-white ' slot="header">
+                                        <IonLabel className='fw-bold py-2'>
+                                            Combo
+                                        </IonLabel>
+                                    </IonItem>
+                                    <div className="p-2 bg-transparent fs-13" slot="content" style={{ backgroundColor: "transparent !important" }}>
+                                        <IonRow className='d-flex align-items-center'>
+                                            <IonCol size='6'>
+                                                <IonCard className='shadow-sm rounded-4 m-0 p-2' onClick={() => { setIsModalOpenDetail(true) }}>
+                                                    <img src='https://happy-booking.eclo.io/datas/img/1.jpg' className='w-100 rounded-4 p-1'></img>
+                                                    <div className='mt-1 fw-bold ms-1'>Combo 1</div>
+                                                    <div className='ms-1'>4.500.000đ</div>
+                                                </IonCard>
+                                            </IonCol>
+                                            <IonCol size='6'>
+                                                <IonCard className='shadow-sm rounded-4 m-0 p-2'>
+                                                    <img src='https://happy-booking.eclo.io/datas/img/1.jpg' className='w-100 rounded-4 p-1'></img>
+                                                    <div className='mt-1 fw-bold ms-1'>Combo 1</div>
+                                                    <div className='ms-1'>4.500.000đ</div>
+                                                </IonCard>
+                                            </IonCol>
+                                            <IonCol size='6'>
+                                                <IonCard className='shadow-sm rounded-4 m-0 p-2'>
+                                                    <img src='https://happy-booking.eclo.io/datas/img/1.jpg' className='w-100 rounded-4 p-1'></img>
+                                                    <div className='mt-1 fw-bold ms-1'>Combo 1</div>
+                                                    <div className='ms-1'>4.500.000đ</div>
+                                                </IonCard>
+                                            </IonCol>
+                                            <IonCol size='6'>
+                                                <IonCard className='shadow-sm rounded-4 m-0 p-2'>
+                                                    <img src='https://happy-booking.eclo.io/datas/img/1.jpg' className='w-100 rounded-4 p-1'></img>
+                                                    <div className='mt-1 fw-bold ms-1'>Combo 1</div>
+                                                    <div className='ms-1'>4.500.000đ</div>
+                                                </IonCard>
+                                            </IonCol>
+                                        </IonRow>
+                                    </div>
+                                </IonAccordion>
+                                <IonAccordion value='2' className='rounded-4 bg-transparent mt-4 shadow-sm'>
+                                    <IonItem lines="none" className='fs-13 rounded-4 bg-white' slot="header">
+                                        <IonLabel className='fw-bold py-2'>
+                                            Món chính
+                                        </IonLabel>
+                                    </IonItem>
+                                    <div className="p-2 bg-transparent fs-13" slot="content" style={{ backgroundColor: "transparent !important" }}>
+                                        <IonRow className='d-flex align-items-center'>
+                                            <IonCol size='6'>
+                                                <IonCard className='shadow-sm rounded-4 m-0 p-2 text-dark'>
+                                                    <img src='https://happy-booking.eclo.io/datas/img/1.jpg' className='w-100 rounded-4 p-1'></img>
+                                                    <div className='mt-1 fw-bold ms-1'>Combo 1</div>
+                                                    <div className='ms-1'>4.500.000đ</div>
+                                                </IonCard>
+                                            </IonCol>
+                                            <IonCol size='6'>
+                                                <IonCard className='shadow-sm rounded-4 m-0 p-2 text-dark'>
+                                                    <img src='https://happy-booking.eclo.io/datas/img/1.jpg' className='w-100 rounded-4 p-1'></img>
+                                                    <div className='mt-1 fw-bold ms-1'>Combo 1</div>
+                                                    <div className='ms-1'>4.500.000đ</div>
+                                                </IonCard>
+                                            </IonCol>
+                                            <IonCol size='6'>
+                                                <IonCard className='shadow-sm rounded-4 m-0 p-2 text-dark'>
+                                                    <img src='https://happy-booking.eclo.io/datas/img/1.jpg' className='w-100 rounded-4 p-1'></img>
+                                                    <div className='mt-1 fw-bold ms-1'>Combo 1</div>
+                                                    <div className='ms-1'>4.500.000đ</div>
+                                                </IonCard>
+                                            </IonCol>
+                                            <IonCol size='6'>
+                                                <IonCard className='shadow-sm rounded-4 m-0 p-2 text-dark'>
+                                                    <img src='https://happy-booking.eclo.io/datas/img/1.jpg' className='w-100 rounded-4 p-1'></img>
+                                                    <div className='mt-1 fw-bold ms-1'>Combo 1</div>
+                                                    <div className='ms-1'>4.500.000đ</div>
+                                                </IonCard>
+                                            </IonCol>
+                                        </IonRow>
+                                    </div>
+                                </IonAccordion>
+                                <IonAccordion value='3' className='rounded-4 bg-transparent mt-4 shadow-sm'>
+                                    <IonItem lines="none" className='fs-13 rounded-4 bg-white' slot="header">
+                                        <IonLabel className='fw-bold py-2'>
+                                            Đồ uống
+                                        </IonLabel>
+                                    </IonItem>
+                                    <div className="p-2 bg-transparent fs-13" slot="content" style={{ backgroundColor: "transparent !important" }}>
+                                        <IonRow className='d-flex align-items-center'>
+                                            <IonCol size='6'>
+                                                <IonCard className='shadow-sm rounded-4 m-0 p-2 text-dark'>
+                                                    <img src='https://happy-booking.eclo.io/datas/img/1.jpg' className='w-100 rounded-4 p-1'></img>
+                                                    <div className='mt-1 fw-bold ms-1'>Combo 1</div>
+                                                    <div className='ms-1'>4.500.000đ</div>
+                                                </IonCard>
+                                            </IonCol>
+                                            <IonCol size='6'>
+                                                <IonCard className='shadow-sm rounded-4 m-0 p-2 text-dark'>
+                                                    <img src='https://happy-booking.eclo.io/datas/img/1.jpg' className='w-100 rounded-4 p-1'></img>
+                                                    <div className='mt-1 fw-bold ms-1'>Combo 1</div>
+                                                    <div className='ms-1'>4.500.000đ</div>
+                                                </IonCard>
+                                            </IonCol>
+                                            <IonCol size='6'>
+                                                <IonCard className='shadow-sm rounded-4 m-0 p-2 text-dark'>
+                                                    <img src='https://happy-booking.eclo.io/datas/img/1.jpg' className='w-100 rounded-4 p-1'></img>
+                                                    <div className='mt-1 fw-bold ms-1'>Combo 1</div>
+                                                    <div className='ms-1'>4.500.000đ</div>
+                                                </IonCard>
+                                            </IonCol>
+                                            <IonCol size='6'>
+                                                <IonCard className='shadow-sm rounded-4 m-0 p-2 text-dark'>
+                                                    <img src='https://happy-booking.eclo.io/datas/img/1.jpg' className='w-100 rounded-4 p-1'></img>
+                                                    <div className='mt-1 fw-bold ms-1'>Combo 1</div>
+                                                    <div className='ms-1'>4.500.000đ</div>
+                                                </IonCard>
+                                            </IonCol>
+                                        </IonRow>
+                                    </div>
+                                </IonAccordion>
+                            </IonAccordionGroup>
+                        </IonCard>
+                        <IonRow className='p-2 mt-3 d-flex align-items-center '>
+                            <IonCol size='6'>
+                                <button className='rounded-pill bg-secondary text-white fs-13 p-3 w-100' onClick={() => setStep(3)}>Quay lại</button>
+                            </IonCol>
+                            <IonCol size='6'>
+                                <button className='rounded-pill bg-pink text-white fs-13 p-3 w-100' onClick={() => setStep(5)}>Tiếp tục</button>
+                            </IonCol>
+                        </IonRow>
+                    </>
+                )}
+                {step === 5 && (
+                    <>
+                        <IonCard className='m-0 p-3  py-4 rounded-4 mt-3 fs-13 shadow'>
+                            <div className='fw-bold'>Thông tin thanh toán</div>
+                            <IonRow className=' fs-13 fw-bold mt-3'>Cọc trước</IonRow>
+                            <IonRow className='mt-2'>
+                                <input type='text' className='p-3 rounded-4 fs-13 border border-0 shadow-sm bg-secondary bg-opacity-25  w-100' placeholder='Cọc trước'></input>
+                            </IonRow>
+
+                            <IonRow className=' fs-13 fw-bold mt-3'>Hình thức</IonRow>
+                            <IonSegment value="1">
+                                <IonSegmentButton value="1">
+                                    <IonLabel>Chuyển khoản</IonLabel>
+                                </IonSegmentButton>
+                                <IonSegmentButton value="2">
+                                    <IonLabel>Tiền mặt</IonLabel>
+                                </IonSegmentButton>
+                            </IonSegment>
+
+                        </IonCard>
+                        <IonRow className='p-2 mt-3 d-flex align-items-center '>
+                            <IonCol size='6'>
+                                <button className='rounded-pill bg-secondary text-white fs-13 p-3 w-100' onClick={() => setStep(4)}>Quay lại</button>
+                            </IonCol>
+                            <IonCol size='6'>
+                                <button className='rounded-pill bg-pink text-white fs-13 p-3 w-100' onClick={() => { success() }}>Hoàn tất</button>
+                            </IonCol>
+                        </IonRow>
+                    </>
+                )}
             </div>
         </Page>
 

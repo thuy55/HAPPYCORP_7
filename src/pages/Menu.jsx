@@ -191,9 +191,9 @@ const MenuPage = () => {
             {/* Header with back button */}
             <List className='m-2' simpleList>
                 <div className='d-flex align-items-center fs-6 fw-bold'>
-                    {/* <PageTransition back >
+                    <PageTransition href="/" >
                         <img src='../image/icon-backward.gif' className='size-icon me-1'></img>
-                    </PageTransition> */}
+                    </PageTransition>
                     Thực đơn
                 </div>
             </List>

@@ -184,10 +184,24 @@ const RevenuePage = () => {
             {/* Period Selector */}
             <List className='m-2' simpleList>
                 <div className='d-flex align-items-center fs-6 fw-bold'>
-                    <PageTransition href="/home/">
+                    {/* <PageTransition href="/home/">
                         <img src='../image/icon-backward.gif' className='size-icon me-1'></img>
+                    </PageTransition> */}
+                    <PageTransition
+                        href="/"
+                        className="me-1"
+                    >
+                        <img
+                            src='../image/icon-backward.gif'
+                            className='size-icon'
+                            alt="Back"
+                            style={{
+                                width: '24px',
+                                height: '24px',
+                                objectFit: 'contain'
+                            }}
+                        />
                     </PageTransition>
-                   
                     Báo cáo doanh thu
                 </div>
             </List>

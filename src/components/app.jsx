@@ -31,7 +31,9 @@ import {
 import capacitorApp from '../js/capacitor-app';
 import routes from '../js/routes';
 import store from '../js/store';
+import PageTransition from './PageTransition';
 
+import '../css/app.less';
 const MyApp = () => {
   // Login screen demo data
   const [username, setUsername] = useState('');
@@ -74,6 +76,22 @@ const MyApp = () => {
   });
   const [selected, setSelected] = useState('home');
 
+  const [activeTab, setActiveTab] = useState('home');
+
+  // Custom tab data
+  const tabs = [
+    { id: 'home', href: '/', icon: 'f7:house_fill', text: 'Home', active: true },
+    { id: 'catalog', href: '/catalog/', icon: 'f7:square_list_fill', text: 'Chat' },
+    { id: 'settings', href: '/history/', icon: 'f7:gear', text: 'Lịch sử' },
+    { id: 'social', href: '/social/', icon: 'f7:circle_grid_hex', text: 'Social' },
+    { id: 'account', href: '/account/', icon: 'f7:person_alt_circle', text: 'Account' }
+  ];
+
+  const handleTabClick = (tabId) => {
+    console.log('Tab clicked:', tabId);
+    setActiveTab(tabId);
+  };
+
   return (
     <App {...f7params}>
       {/* Views/Tabs container */}
@@ -86,12 +104,44 @@ const MyApp = () => {
           <Link tabLink="#account" iconIos="f7:person_alt_circle" iconMd="material:account" text="Account" />
         </Toolbar>
 
-        {/* Các views với pushState */}
         <View id="view-home" main tab tabActive url="/" pushState={true} />
         <View id="view-catalog" name="catalog" tab url="/catalog/" pushState={true} />
         <View id="social" name="social" tab url="/social/" pushState={true} />
         <View id="account" name="account" tab url="/account/" pushState={true} />
       </Views>
+      {/* <Views id="main-view" url="/" main className="safe-areas">
+        <View id="view-main" main url="/" pushState={true} />
+        <Toolbar className="tabbar custom-tabbar" bottom>
+          <div className="toolbar-inner d-flex justify-content-around align-items-center w-100">
+            {tabs.map((tab) => (
+              <PageTransition
+                key={tab.id}
+                href={tab.href}
+                showLoader={false} // Không hiển thị loading cho tab
+                onClick={() => handleTabClick(tab.id)}
+                className={`tab-link-custom ${activeTab === tab.id ? 'active' : ''}`}
+              >
+                <div className="tab-link-content text-center">
+                  <Icon
+                    f7={tab.icon}
+                    size="24px"
+                    className={`tab-icon ${activeTab === tab.id ? 'text-pink' : 'text-muted'}`}
+                  />
+                  <div
+                    className={`tab-text fs-10 mt-1 ${activeTab === tab.id ? 'text-pink fw-semibold' : 'text-muted'
+                      }`}
+                  >
+                    {tab.text}
+                  </div>
+                </div>
+              </PageTransition>
+            ))}
+          </div>
+        </Toolbar>
+      </Views> */}
+
+      {/* Custom Tabbar với PageTransition */}
+
       {/* Left panel with cover effect*/}
       <Panel left cover>
         <View>

@@ -20,6 +20,8 @@ import AccountPage from '../pages/Account.jsx';
 import RevenuePage from '../pages/Revenue.jsx';
 import HistoryPage from '../pages/History.jsx';
 import MenuPage from '../pages/Menu.jsx';
+import SocialHidePage from '../pages/social-hide.jsx';
+import SocialSavePage from '../pages/social_save.jsx';
 
 var routes = [
   {
@@ -94,6 +96,14 @@ var routes = [
   {
     path: '/menu/',
     component: MenuPage,
+  },
+  {
+    path: '/social-hidden/',
+    component: SocialHidePage,
+  },
+  {
+    path: '/social-save/',
+    component: SocialSavePage,
   },
 
 
