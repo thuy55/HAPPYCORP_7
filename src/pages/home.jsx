@@ -23,6 +23,7 @@ import {
 import moment from 'moment';
 import { number } from 'prop-types';
 import CommonNavbar from '../components/CommonNavbar';
+import PageTransition from '../components/PageTransition';
 
 
 const HomePage = () => {
@@ -110,20 +111,22 @@ const HomePage = () => {
         </div>
       </List>
       <div className="grid grid-cols-4 px-2 mt-2">
-        <div className='text-center rounded-4 mx-2 p-1'>
-          <img src='../image/14.gif' className='w-50'></img>
-          <div className=' fs-13 '>Thực đơn</div>
-        </div>
+        <PageTransition href="/menu/">
+          <div className='text-center rounded-4 mx-2 p-1'>
+            <img src='../image/14.gif' className='w-50'></img>
+            <div className=' fs-13 '>Thực đơn</div>
+          </div>
+        </PageTransition>
         <div className='text-center rounded-4 mx-2 p-1'>
           <img src='../image/8.gif' className='w-50'></img>
           <div className=' fs-13'>Đặt bàn</div>
         </div>
-        <Link href="/revenue/">
-        <div className='text-center rounded-4 mx-2 p-1'>
-          <img src='../image/1.gif' className='w-50'></img>
-          <div className=' fs-13'>Sự kiện</div>
-        </div>
-        </Link>
+        <PageTransition href="/revenue/">
+          <div className='text-center rounded-4 mx-2 p-1'>
+            <img src='../img/home.gif' className='w-50'></img>
+            <div className=' fs-13'>Sự kiện</div>
+          </div>
+        </PageTransition>
         <Link href="/room/">
           <div className='text-center rounded-4 mx-2 p-1'>
             <img src='../image/icon-lease.gif' className='w-50'></img>

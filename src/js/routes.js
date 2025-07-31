@@ -18,10 +18,16 @@ import EndowDetailPage from '../pages/EndowDetail.jsx';
 import RoomPage from '../pages/room.jsx';
 import AccountPage from '../pages/Account.jsx';
 import RevenuePage from '../pages/Revenue.jsx';
+import HistoryPage from '../pages/History.jsx';
+import MenuPage from '../pages/Menu.jsx';
 
 var routes = [
   {
     path: '/',
+    component: HomePage,
+  },
+  {
+    path: '/home/',
     component: HomePage,
   },
   {
@@ -73,13 +79,21 @@ var routes = [
     path: '/room/',
     component: RoomPage,
   },
-   {
+  {
     path: '/account/',
     component: AccountPage,
   },
   {
     path: '/revenue/',
     component: RevenuePage,
+  },
+  {
+    path: '/history/',
+    component: HistoryPage,
+  },
+  {
+    path: '/menu/',
+    component: MenuPage,
   },
 
 

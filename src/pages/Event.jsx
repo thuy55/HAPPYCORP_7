@@ -78,7 +78,7 @@ const EventPage = () => {
                             <div className='fw-bold '>Giảm 10%</div>
                             <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                             <div className='d-flex justify-content-end mt-1'>
-                                <button className='bg-pink p-1 px-3 rounded-3 border-0 text-white'>Xem ngay</button>
+                                <button className=' p-1 px-3 rounded-3 border-btn text-white'>Xem ngay</button>
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@ const EventPage = () => {
                             <div className='fw-bold text-pink'>Giảm 10%</div>
                             <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                             <div className='d-flex justify-content-end mt-1'>
-                                <button className='bg-pink p-1 px-3 rounded-3 border-0 text-white'>Xem ngay</button>
+                                <button className=' p-1 px-3 rounded-3 border-btn text-white'>Xem ngay</button>
                             </div>
                         </div>
                     </div>

@@ -45,6 +45,7 @@ const MyApp = () => {
     store: store,
     // App routes
     routes: routes,
+    pushState: true,
 
 
     // Input settings
@@ -75,12 +76,8 @@ const MyApp = () => {
 
   return (
     <App {...f7params}>
-
-
-
       {/* Views/Tabs container */}
-      <Views tabs className="safe-areas">
-        {/* Tabbar for switching views-tabs */}
+      <Views id="main-view" url="/" main tabs className="safe-areas">
         <Toolbar tabbar icons bottom>
           <Link tabLink="#view-home" tabLinkActive iconIos="f7:house_fill" iconMd="material:home" text="Home" />
           <Link tabLink="#view-catalog" iconIos="f7:square_list_fill" iconMd="material:view_list" text="Chat" />
@@ -89,16 +86,11 @@ const MyApp = () => {
           <Link tabLink="#account" iconIos="f7:person_alt_circle" iconMd="material:account" text="Account" />
         </Toolbar>
 
-        {/* Your main view/tab, should have "view-main" class. It also has "tabActive" prop */}
-        <View id="view-home" main tab tabActive url="/" />
-
-        {/* Catalog View */}
-        <View id="view-catalog" name="catalog" tab url="/catalog/" />
-
-        {/* Settings View */}
-        <View id="social" name="social" tab url="/social/" />
-        <View id="account" name="account" tab url="/account/" />
-
+        {/* Các views với pushState */}
+        <View id="view-home" main tab tabActive url="/" pushState={true} />
+        <View id="view-catalog" name="catalog" tab url="/catalog/" pushState={true} />
+        <View id="social" name="social" tab url="/social/" pushState={true} />
+        <View id="account" name="account" tab url="/account/" pushState={true} />
       </Views>
       {/* Left panel with cover effect*/}
       <Panel left cover>

@@ -19,7 +19,7 @@ import moment from 'moment';
 import CommonNavbar from '../components/CommonNavbar';
 import PageTransition from '../components/PageTransition';
 
-const RevenuePage = () => {
+const HistoryPage = () => {
     const [selectedPeriod, setSelectedPeriod] = useState('date');
     const [currentDate, setCurrentDate] = useState(moment());
     const [showDatePicker, setShowDatePicker] = useState(false);
@@ -184,11 +184,10 @@ const RevenuePage = () => {
             {/* Period Selector */}
             <List className='m-2' simpleList>
                 <div className='d-flex align-items-center fs-6 fw-bold'>
-                    <PageTransition href="/home/">
+                    <PageTransition href="/">
                         <img src='../image/icon-backward.gif' className='size-icon me-1'></img>
                     </PageTransition>
-                   
-                    Báo cáo doanh thu
+                    Lịch sử
                 </div>
             </List>
             <div className="px-3 py-3">
@@ -231,58 +230,6 @@ const RevenuePage = () => {
                     </div>
                 </div>
             </div>
-
-            {/* <div className="card-header mt-3 px-3">
-                <ul
-                    className="nav nav-pills row d-flex justify-content-around"
-                    id="pills-tab"
-                    role="tablist"
-                >
-                    <li className="nav-item col-4 px-0" role="presentation">
-                        <button
-                            className="nav-link active fs-13 d-flex align-items-center justify-content-center"
-                            id="pills-date-tab"
-                            data-bs-toggle="pill"
-                            data-bs-target="#nav-date"
-                            type="button"
-                            role="tab"
-                            aria-controls="pills-date"
-                            aria-selected="true"
-                        >
-                            Ngày
-                        </button>
-                    </li>
-                    <li className="nav-item col-4 px-0" role="presentation">
-                        <button
-                            className="nav-link fs-13  d-flex align-items-center justify-content-center"
-                            id="pills-week-tab"
-                            data-bs-toggle="pill"
-                            data-bs-target="#nav-week"
-                            type="button"
-                            role="tab"
-                            aria-controls="pills-week"
-                            aria-selected="false"
-                        >
-                            Tuần
-                        </button>
-                    </li>
-                    <li className="nav-item col-4 px-0" role="presentation">
-                        <button
-                            className="nav-link fs-13  d-flex align-items-center justify-content-center"
-                            id="pills-month-tab"
-                            data-bs-toggle="pill"
-                            data-bs-target="#nav-month"
-                            type="button"
-                            role="tab"
-                            aria-controls="pills-month"
-                            aria-selected="false"
-                        >
-                            Tháng
-                        </button>
-                    </li>
-                </ul>
-            </div>
- */}
 
             {/* Date Navigation */}
             <div className="d-flex justify-content-between align-items-center px-3 py-2">
@@ -479,4 +426,4 @@ const RevenuePage = () => {
     );
 };
 
-export default RevenuePage;
+export default HistoryPage;
