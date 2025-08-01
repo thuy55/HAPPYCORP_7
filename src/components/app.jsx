@@ -92,6 +92,10 @@ const MyApp = () => {
     setActiveTab(tabId);
   };
 
+  useEffect(() => {
+    import('https://cdn.lordicon.com/lordicon.js');
+  }, []);
+
   return (
     <App {...f7params}>
       {/* Views/Tabs container */}
@@ -155,49 +159,92 @@ const MyApp = () => {
 
             <BlockTitle className='mb-1  mt-4 fs-13 '>Quản lý</BlockTitle>
             <List dividersIos={false} simpleList inset className='fs-13 list-custom mb-3'>
-              <Link href="/account/" data-view=".view-main" panelClose selected={selected === 'account'}
+              <ListItem href="/account/" data-view=".view-main" panelClose selected={selected === 'account'}
                 onClick={() => { setSelected('account'), console.log(123) }}>
-                <div>
-                  <Icon f7="command" size="16px" className='me-2'></Icon> Tài khoản
-                </div>
-              </Link>
-              <ListItem >
-                <div>
-                  <Icon f7="square_stack_3d_up" size="16px" className='me-2'></Icon>Thông báo
-                </div>
+                <Link href="/account/" data-view=".view-main" panelClose selected={selected === 'account'}
+                  onClick={() => { setSelected('account'), console.log(123) }}>
+                  <lord-icon
+                    src="https://cdn.lordicon.com/shcfcebj.json"
+                    trigger="loop"
+                    colors="primary:#f30771,secondary:#f30771"
+                    className=' me-2'
+                    style={{ width: '25px', height: '25px' }}>
+                  </lord-icon> Tài khoản
+                </Link>
               </ListItem>
               <ListItem >
-                <div>
-                  <Icon f7="square_stack_3d_up" size="16px" className='me-2'></Icon>Nhật ký
-                </div>
+                <Link>
+                  <lord-icon
+                    src="https://cdn.lordicon.com/apmrcxtj.json"
+                    trigger="loop"
+                    colors="primary:#f30771,secondary:#f30771"
+                    className=' me-2'
+                    style={{ width: '25px', height: '25px' }}>
+                  </lord-icon>Thông báo
+                </Link>
+              </ListItem>
+              <ListItem >
+                <Link>
+                  <lord-icon
+                    src="https://cdn.lordicon.com/jectmwqf.json"
+                    trigger="loop"
+                    colors="primary:#f30771,secondary:#f30771"
+                    className=' me-2'
+                    style={{ width: '25px', height: '25px' }}>
+                  </lord-icon>Nhật ký
+                </Link>
               </ListItem>
             </List>
 
             <BlockTitle className='mb-1  mt-3 fs-13 '>Giao diện</BlockTitle>
             <List dividersIos={false} simpleList inset className='fs-13 list-custom mb-3'>
               <ListItem>
-                <div>
-                  <Icon f7="pencil_outline" size="16px" className='me-2'></Icon>Sáng
-                </div>
+                <Link>
+                  <lord-icon
+                    src="https://cdn.lordicon.com/bsdkzyjd.json"
+                    trigger="loop"
+                    colors="primary:#f30771,secondary:#f30771"
+                    className=' me-2'
+                    style={{ width: '25px', height: '25px' }}>
+                  </lord-icon>Sáng
+                </Link>
               </ListItem>
               <ListItem >
-                <div>
-                  <Icon f7="chat_bubble_text" size="16px" className='me-2'></Icon> Tối
-                </div>
+                <Link>
+                  <lord-icon
+                    src="https://cdn.lordicon.com/yodwgokk.json"
+                    trigger="loop"
+                    colors="primary:#f30771,secondary:#f30771"
+                    className=' me-2'
+                    style={{ width: '25px', height: '25px' }}>
+                  </lord-icon> Tối
+                </Link>
               </ListItem>
             </List>
 
             <BlockTitle className='mb-1  mt-3 fs-13 '>Ngôn ngữ</BlockTitle>
             <List dividersIos={false} simpleList inset className='fs-13 list-custom mb-3'>
               <ListItem>
-                <div>
-                  <Icon f7="pencil_outline" size="16px" className='me-2'></Icon>Tiếng Việt
-                </div>
+                <Link>
+                  <lord-icon
+                    src="https://cdn.lordicon.com/bsdkzyjd.json"
+                    trigger="loop"
+                    colors="primary:#f30771,secondary:#f30771"
+                    className=' me-2'
+                    style={{ width: '25px', height: '25px' }}>
+                  </lord-icon>Tiếng Việt
+                </Link>
               </ListItem>
               <ListItem >
-                <div>
-                  <Icon f7="chat_bubble_text" size="16px" className='me-2'></Icon> Tiếng Anh
-                </div>
+                <Link>
+                  <lord-icon
+                    src="https://cdn.lordicon.com/bsdkzyjd.json"
+                    trigger="loop"
+                    colors="primary:#f30771,secondary:#f30771"
+                    className=' me-2'
+                    style={{ width: '25px', height: '25px' }}>
+                  </lord-icon> Tiếng Anh
+                </Link>
               </ListItem>
             </List>
             <div className='px-3'>
@@ -208,9 +255,30 @@ const MyApp = () => {
                 <div>
                   <img src='../image/happy-corp-logo.png' className='w-25' />
                 </div>
-                <div className='mt-1'>Tòa nhà International Plaza, 343 Phạm Ngũ Lão, Phường Bến Thành, Quận 1, Hồ Chí Minh</div>
-                <div className='mt-1'>1900638008</div>
-                <div className='mt-2'>Happy Corp 2025. All Rights Reserved | Privacy Policy | Sitemap | Website Terms of Use</div>
+                <div className='mt-2'>
+                  <lord-icon
+                    src="https://cdn.lordicon.com/onmwuuox.json"
+                    trigger="loop"
+                    colors="primary:#f30771,secondary:#f30771"
+                    className=' me-1 mt-2'
+                    style={{ width: '20px', height: '20px' }}>
+                  </lord-icon>
+                  Tòa nhà International Plaza, 343 Phạm Ngũ Lão, Phường Bến Thành, Quận 1, Hồ Chí Minh
+                </div>
+                <div className='mt-1 d-flex align-items-center'>
+                  <lord-icon
+                    src="https://cdn.lordicon.com/pmivedvy.json"
+                    trigger="loop"
+                    colors="primary:#f30771,secondary:#f30771"
+                    className=' me-1'
+                    style={{ width: '20px', height: '20px' }}>
+                  </lord-icon>
+                  1900638008
+                </div>
+                <div className='mt-4'>
+                  
+                  Happy Corp 2025. All Rights Reserved | Privacy Policy | Sitemap | Website Terms of Use
+                </div>
               </Card>
             </div>
           </Page>

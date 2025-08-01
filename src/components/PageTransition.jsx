@@ -182,7 +182,7 @@ const PageTransition = ({
             </div>
 
             {/* Spinner */}
-            <div className="loading-spinner mb-3">
+            {/* <div className="loading-spinner mb-3">
               <div
                 className="spinner-border text-pink"
                 role="status"
@@ -193,10 +193,10 @@ const PageTransition = ({
               >
                 <span className="visually-hidden">Loading...</span>
               </div>
-            </div>
+            </div> */}
 
             {/* Loading message */}
-            <div
+            {/* <div
               className="loading-message"
               style={{
                 color: '#6c757d',
@@ -206,10 +206,10 @@ const PageTransition = ({
               }}
             >
               {loadingMessage}
-            </div>
+            </div> */}
 
             {/* Progress bar */}
-            <div
+            {/* <div
               className="progress"
               style={{
                 width: '250px',
@@ -226,7 +226,7 @@ const PageTransition = ({
                   borderRadius: '10px'
                 }}
               />
-            </div>
+            </div> */}
           </div>
         </div>
       )}

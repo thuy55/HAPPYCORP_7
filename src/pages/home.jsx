@@ -25,6 +25,7 @@ import { number } from 'prop-types';
 import CommonNavbar from '../components/CommonNavbar';
 import PageTransition from '../components/PageTransition';
 
+import { Player } from '@lordicon/react';
 
 const HomePage = () => {
   const week = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
@@ -89,13 +90,65 @@ const HomePage = () => {
   }
 
 
-
   return (
 
 
     <Page name="home">
       {/* Top Navbar */}
-      <CommonNavbar />
+      <Navbar large sliding={false}>
+        <NavLeft>
+          {/* <Link iconIos="f7:menu" iconMd="material:menu" panelOpen="left" /> */}
+          <Link panelOpen="left" >
+            <lord-icon
+              src="https://cdn.lordicon.com/bsdkzyjd.json"
+              trigger="loop"
+              state="loop-spin"
+              colors="primary:#00000,secondary:#f30771"
+              className='size-icon me-2'>
+            </lord-icon></Link>
+        </NavLeft>
+        <NavTitle className='text-dark' sliding>
+          <img src='../image/happy-corp-logo.png' style={{ height: "35px" }}></img>
+        </NavTitle>
+        <NavRight>
+          <Link >
+            <lord-icon
+              src="https://cdn.lordicon.com/wjyqkiew.json"
+              trigger="loop"
+              colors="primary:#f30771,secondary:#f30771"
+              className='size-icon me-2'>
+            </lord-icon></Link>
+        </NavRight>
+        <NavTitleLarge className='text'>
+          <div className='d-flex justify-content-between align-items-center'>
+            <div>
+              <div className='fs-13 mb-1 fw-normal'>
+                Xin chào
+              </div>
+              Thúy Nguyễn
+            </div>
+            <Button className='bg-pink rounded-pill p-3 fw-bold text-white'>Kích hoạt thẻ</Button>
+
+          </div>
+        </NavTitleLarge>
+      </Navbar>
+      <div className='px-4 my-2'>
+        <div className="d-flex align-items-center bg-light border border-secondary-10 rounded-pill row" style={{ cursor: 'pointer' }}>
+          {/* <span className="fw-semibold">{formatDate(currentDate, selectedPeriod)}</span> */}
+          <input className='border bg-light rounded-pill border-0 p-3 px-3 col-10' placeholder='Tìm kiếm'></input>
+          <Button fill={false} className=" col-2 d-flex justify-content-end">
+            <lord-icon
+              src="https://cdn.lordicon.com/wjyqkiew.json"
+              trigger="loop"
+              colors="primary:#000000,secondary:#f30771"
+              className=' me-2'
+              style={{ width: '30px', height: '30px' }}>
+            </lord-icon>
+          </Button>
+        </div>
+
+      </div>
+
       {/* Page content */}
       <List className='m-0 mt-2'>
         <div className="video-container rounded-3 px-2">
@@ -113,35 +166,53 @@ const HomePage = () => {
       <div className="grid grid-cols-4 px-2 mt-2">
         <PageTransition href="/menu/">
           <div className='text-center rounded-4 mx-2 p-1'>
-            <img src='../image/14.gif' className='w-50'></img>
+            <img src='../img/catering.gif' className='w-50'></img>
             <div className=' fs-13 '>Thực đơn</div>
           </div>
         </PageTransition>
         <div className='text-center rounded-4 mx-2 p-1'>
-          <img src='../image/8.gif' className='w-50'></img>
+          <img src='../img/online-order.gif' className='w-50'></img>
           <div className=' fs-13'>Đặt bàn</div>
         </div>
         <PageTransition href="/social-save/">
           <div className='text-center rounded-4 mx-2 p-1'>
-            <img src='../img/home.gif' className='w-50'></img>
+            <img src='../img/event.gif' className='w-50'></img>
             <div className=' fs-13'>Sự kiện</div>
           </div>
         </PageTransition>
-        <Link href="/room/">
+        <Link href="/revenue/">
           <div className='text-center rounded-4 mx-2 p-1'>
-            <img src='../image/icon-lease.gif' className='w-50'></img>
-            <div className=' fs-13'>Sơ đồ phòng</div>
+            <img src='../img/bill.gif' className='w-50'></img>
+            <div className=' fs-13'>Doanh thu</div>
           </div>
         </Link>
       </div>
-      <Link href="/endow/" className='fs-6 fw-bold mx-3 mt-3 justify-content-start d-flex align-items-center'><img src='../image/6.gif' className='size-icon'></img>  Ưu đãi</Link>
+      <Link href="/endow/" className='fs-6 fw-bold mx-3 mt-3 justify-content-start d-flex align-items-center'>
+        {/* <img src='../image/6.gif' className='size-icon'></img> */}
+        <lord-icon
+          src="https://cdn.lordicon.com/puebsmel.json"
+          trigger="loop"
+          colors="primary:#f30771,secondary:#f30771"
+          className=' me-1'
+          style={{ width: '30px', height: '30px' }}>
+        </lord-icon>
+
+        Ưu đãi
+      </Link>
       <div className='row d-flex flex-nowrap mx-2 mt-2 pb-2' style={{ overflowX: "auto", whiteSpace: "nowrap" }}>
         <div className='col-4 px-1'>
           <Card className='m-0 border-light p-1 fs-13'>
             <div>
               <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
               <div className='d-flex'>
-                <div className='mt-2 fst-italic'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
+                <div className='mt-2 fst-italic'> <lord-icon
+                  src="https://cdn.lordicon.com/puebsmel.json"
+                  trigger="loop"
+                  colors="primary:#f30771,secondary:#f30771"
+                  className=' me-1'
+                  style={{ width: '20px', height: '20px' }}>
+                </lord-icon>
+                  Giảm giá sốc</div>
               </div>
               <div className='fw-bold text-pink my-1'>Giảm 10%</div>
               <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
@@ -153,7 +224,15 @@ const HomePage = () => {
             <div>
               <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
               <div className='d-flex'>
-                <div className='mt-2 fst-italic'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
+                <div className='mt-2 fst-italic'>
+                  <lord-icon
+                    src="https://cdn.lordicon.com/puebsmel.json"
+                    trigger="loop"
+                    colors="primary:#f30771,secondary:#f30771"
+                    className=' me-1'
+                    style={{ width: '20px', height: '20px' }}>
+                  </lord-icon>
+                  Giảm giá sốc</div>
               </div>
               <div className='fw-bold text-pink my-1'>Giảm 10%</div>
               <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
@@ -165,7 +244,15 @@ const HomePage = () => {
             <div>
               <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
               <div className='d-flex'>
-                <div className='mt-2 fst-italic'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
+                <div className='mt-2 fst-italic'>
+                  <lord-icon
+                    src="https://cdn.lordicon.com/puebsmel.json"
+                    trigger="loop"
+                    colors="primary:#f30771,secondary:#f30771"
+                    className=' me-1'
+                    style={{ width: '20px', height: '20px' }}>
+                  </lord-icon>
+                  Giảm giá sốc</div>
               </div>
               <div className='fw-bold text-pink my-1'>Giảm 10%</div>
               <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
@@ -177,7 +264,15 @@ const HomePage = () => {
             <div>
               <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
               <div className='d-flex'>
-                <div className='mt-2 fst-italic'> <img src='../image/6.gif' style={{ width: "25px", height: "25px" }}></img>Giảm giá sốc</div>
+                <div className='mt-2 fst-italic'> 
+                  <lord-icon
+                  src="https://cdn.lordicon.com/puebsmel.json"
+                  trigger="loop"
+                  colors="primary:#f30771,secondary:#f30771"
+                  className=' me-1'
+                  style={{ width: '20px', height: '20px' }}>
+                </lord-icon>
+                  Giảm giá sốc</div>
               </div>
               <div className='fw-bold text-pink my-1'>Giảm 10%</div>
               <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
@@ -185,7 +280,15 @@ const HomePage = () => {
           </Card>
         </div>
       </div>
-      <Link href="/event/" className='fs-6 fw-bold mx-3 mt-3'> <img src='../image/6.gif' className='size-icon'></img>Sự kiện</Link>
+      <Link href="/event/" className='fs-6 fw-bold mx-3 mt-3'>
+        <lord-icon
+          src="https://cdn.lordicon.com/okgbpdra.json"
+          trigger="loop"
+          colors="primary:#f30771,secondary:#f30771"
+          className=' me-1'
+          style={{ width: '30px', height: '30px' }}>
+        </lord-icon>
+        Sự kiện</Link>
       <swiper-container pagination
         loop
         autoplay='{"delay":5000, "disableOnInteraction": false}'
@@ -202,7 +305,15 @@ const HomePage = () => {
       </swiper-container>
 
       {/* Calender */}
-      <div className='fs-15 fw-bold mx-3 mt-3'>Lịch Booking tháng 07/2025</div>
+      <div className='fs-15 fw-bold mx-3 mt-3 d-flex align-items-center'>
+        <lord-icon
+          src="https://cdn.lordicon.com/uphbloed.json"
+          trigger="loop"
+          colors="primary:#f30771,secondary:#f30771"
+          className=' me-1'
+          style={{ width: '30px', height: '30px' }}>
+        </lord-icon>
+        Lịch Booking tháng 07/2025</div>
       <div className='p-3  mt1'>
         <div className="calendar  p-1  rounded-4 shadow-sm bg-light" style={{ backdropFilter: "blur(50px)" }}>
           <div className="d-flex justify-content-between text-center mb-2 py-1">
@@ -277,8 +388,15 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div className=' d-flex justify-content-between align-items-center px-4 mt-2'>
-        <div className='fs-13 fw-bold'>
+      <div className=' d-flex justify-content-between align-items-center px-3 mt-2'>
+        <div className='fs-13 fw-bold d-flex align-items-center'>
+          <lord-icon
+            src="https://cdn.lordicon.com/psyssele.json"
+            trigger="loop"
+            colors="primary:#f30771,secondary:#f30771"
+            className=' me-1'
+            style={{ width: '30px', height: '30px' }}>
+          </lord-icon>
           Lịch sử đặt lịch
         </div>
         <div>
