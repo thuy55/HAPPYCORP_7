@@ -62,7 +62,17 @@ const AccountPage = () => {
             </div>
             <List className='my-2 fs-13 mx-4 '>
                 <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
-                    Mã của bạn :<div className='fw-bold'>#02</div>
+                    <div>
+                        <lord-icon
+                            src="https://cdn.lordicon.com/puebsmel.json"
+                            trigger="loop"
+                            colors="primary:#f30771,secondary:#f30771"
+                            className=' me-1'
+                            style={{ width: '20px', height: '20px' }}>
+                        </lord-icon>    
+                        Mã của bạn :
+                    </div>
+                    <div className='fw-bold'>#02</div>
                 </div>
                 <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
                     Họ và tên :<div className='fw-bold'>Thanh Thúy</div>

@@ -79,72 +79,104 @@ const MyApp = () => {
   const [activeTab, setActiveTab] = useState('home');
 
   // Custom tab data
-  const tabs = [
-    { id: 'home', href: '/', icon: 'f7:house_fill', text: 'Home', active: true },
-    { id: 'catalog', href: '/catalog/', icon: 'f7:square_list_fill', text: 'Chat' },
-    { id: 'settings', href: '/history/', icon: 'f7:gear', text: 'Lịch sử' },
-    { id: 'social', href: '/social/', icon: 'f7:circle_grid_hex', text: 'Social' },
-    { id: 'account', href: '/account/', icon: 'f7:person_alt_circle', text: 'Account' }
-  ];
-
-  const handleTabClick = (tabId) => {
-    console.log('Tab clicked:', tabId);
-    setActiveTab(tabId);
-  };
-
   useEffect(() => {
     import('https://cdn.lordicon.com/lordicon.js');
   }, []);
+
+  // const currentPath = f7?.views.main.router.currentRoute.path;
+  // console.log('Current path:', f7?.currentRoute?.path);
+
+  useEffect(() => {
+    f7ready(() => {
+      console.log('Current path:', f7.views.main.router.currentRoute.path);
+    });
+  }, []);
+  // f7.views.main.router.navigate('/endow-detal/');
+
+  const [currentPath, setCurrentPath] = useState("home");
+  // f7.views.main.router.navigate('/endow-detal/');
+  function handleActive(e) {
+    f7ready(() => {
+      setCurrentPath(e);
+      console.log('Current path:', e);
+    });
+  }
+
+  const getIconColor = (tabName) => {
+  return currentPath === tabName
+    ? 'primary:#f30771,secondary:#f30771'
+    : 'primary:#999999,secondary:#999999';
+};
+
 
   return (
     <App {...f7params}>
       {/* Views/Tabs container */}
       <Views id="main-view" url="/" main tabs className="safe-areas">
-        <Toolbar tabbar icons bottom>
-          <Link tabLink="#view-home" tabLinkActive iconIos="f7:house_fill" iconMd="material:home" text="Home" />
-          <Link tabLink="#view-catalog" iconIos="f7:square_list_fill" iconMd="material:view_list" text="Chat" />
-          <Link tabLink="#view-settings" iconIos="f7:gear" iconMd="material:settings" text="Lịch sử" />
-          <Link tabLink="#social" iconIos="f7:circle_grid_hex" iconMd="material:circle_grid_hex" text="Social" />
-          <Link tabLink="#account" iconIos="f7:person_alt_circle" iconMd="material:account" text="Account" />
-        </Toolbar>
-
-        <View id="view-home" main tab tabActive url="/" pushState={true} />
-        <View id="view-catalog" name="catalog" tab url="/catalog/" pushState={true} />
-        <View id="social" name="social" tab url="/social/" pushState={true} />
-        <View id="account" name="account" tab url="/account/" pushState={true} />
-      </Views>
-      {/* <Views id="main-view" url="/" main className="safe-areas">
-        <View id="view-main" main url="/" pushState={true} />
-        <Toolbar className="tabbar custom-tabbar" bottom>
-          <div className="toolbar-inner d-flex justify-content-around align-items-center w-100">
-            {tabs.map((tab) => (
-              <PageTransition
-                key={tab.id}
-                href={tab.href}
-                showLoader={false} // Không hiển thị loading cho tab
-                onClick={() => handleTabClick(tab.id)}
-                className={`tab-link-custom ${activeTab === tab.id ? 'active' : ''}`}
+        <Toolbar tabbar icons bottom className='custom-tabbar'>
+          <Link tabLink="#view-home" onClick={()=>{handleActive("home")}} tabLinkActive className={currentPath === '/' ? 'tab-selected' : 'ion-tab-button-custom'} >
+            <lord-icon
+              src="https://cdn.lordicon.com/jeuxydnh.json"
+              trigger={currentPath === 'home' ? 'loop' : 'none'}
+              colors={getIconColor('home')}
+              // colors="primary:#f30771,secondary:#f30771"
+              className=' me-1'
               >
-                <div className="tab-link-content text-center">
-                  <Icon
-                    f7={tab.icon}
-                    size="24px"
-                    className={`tab-icon ${activeTab === tab.id ? 'text-pink' : 'text-muted'}`}
-                  />
-                  <div
-                    className={`tab-text fs-10 mt-1 ${activeTab === tab.id ? 'text-pink fw-semibold' : 'text-muted'
-                      }`}
-                  >
-                    {tab.text}
-                  </div>
-                </div>
-              </PageTransition>
-            ))}
-          </div>
+            </lord-icon>
+            <div className={currentPath === 'home' ? 'd-none' : ''} style={{ fontSize: "12px" }}>Home</div>
+          </Link>
+          <Link tabLink="#view-chat" onClick={()=>{handleActive("chat")}} className={currentPath === '/chat/' ? 'tab-selected' : 'ion-tab-button-custom'}>
+            <lord-icon
+              src="https://cdn.lordicon.com/jdgfsfzr.json"
+              trigger={currentPath === 'chat' ? 'loop' : 'none'}
+              // colors="primary:#f30771,secondary:#f30771"
+              colors={getIconColor('chat')}
+              className=' me-1'
+              >
+            </lord-icon>
+            <div className={currentPath === 'chat' ? 'd-none' : ''} style={{ fontSize: "12px" }}>Chat</div>
+          </Link>
+          <Link tabLink="#view-history" onClick={()=>{handleActive("history")}} className={currentPath === '/history/' ? 'tab-selected' : 'ion-tab-button-custom'}>
+            <lord-icon
+              src="https://cdn.lordicon.com/rrbmabsx.json"
+              trigger={currentPath === 'history' ? 'loop' : 'none'}
+              // colors="primary:#f30771,secondary:#f30771"
+              colors={getIconColor('history')}
+              className=' me-1'
+              >
+            </lord-icon>
+            <div className={currentPath === 'history' ? 'd-none' : ''} style={{ fontSize: "12px" }}>History</div>
+          </Link>
+          <Link tabLink="#view-social" onClick={()=>{handleActive("social")}} className={currentPath === '/social/' ? 'tab-selected' : 'ion-tab-button-custom'}>
+            <lord-icon
+              src="https://cdn.lordicon.com/cfoaotmk.json"
+              trigger={currentPath === 'social' ? 'loop' : 'none'}
+              // colors="primary:#f30771,secondary:#f30771"
+              colors={getIconColor('social')}
+              className=' me-1'
+              >
+            </lord-icon>
+            <div className={currentPath === 'social' ? 'd-none' : ''} style={{ fontSize: "12px" }}>Social</div>
+          </Link>
+          <Link tabLink="#view-account" onClick={()=>{handleActive("account")}} className={currentPath === '/account/' ? 'tab-selected' : 'ion-tab-button-custom'}>
+            <lord-icon
+              src="https://cdn.lordicon.com/kdduutaw.json"
+              trigger={currentPath === 'account' ? 'loop' : 'none'}
+              // colors="primary:#f30771,secondary:#f30771"
+              colors={getIconColor('account')}
+              className=' me-1'
+              >
+            </lord-icon>
+            <div className={currentPath === 'account' ? 'd-none' : ''} style={{ fontSize: "12px" }}>Account</div>
+          </Link>
         </Toolbar>
-      </Views> */}
 
-      {/* Custom Tabbar với PageTransition */}
+        <View id="view-home" main tab tabActive url="/home/" pushState={true} />
+        <View id="view-chat"  tab url="/menu/" pushState={true} />
+        <View id="view-history"  tab url="/history/" pushState={true} />
+        <View id="view-social" tab url="/social/" pushState={true} />
+        <View id="view-account"  tab url="/account/" pushState={true} />
+      </Views>
 
       {/* Left panel with cover effect*/}
       <Panel left cover>
@@ -273,18 +305,18 @@ const MyApp = () => {
                     className=' me-1'
                     style={{ width: '20px', height: '20px' }}>
                   </lord-icon>
-                  1900638008
+                  638008
                 </div>
                 <div className='mt-4'>
-                  
-                  Happy Corp 2025. All Rights Reserved | Privacy Policy | Sitemap | Website Terms of Use
-                </div>
-              </Card>
-            </div>
-          </Page>
-        </View>
+              
+              ll Rights Reserved | Privacy Policy | Sitemap | Website Terms of Use
+                                                </div>
+            </Card>
+        </div>
+        </Page>
+        </View >
       </Panel>
-
+ 
 
       {/* Right panel with reveal effect*/}
       <Panel right reveal dark>
@@ -295,11 +327,11 @@ const MyApp = () => {
           </Page>
         </View>
       </Panel>
-
+ 
 
       {/* Popup */}
-      {/* <Popup id="my-popup">
-        <View>
+  {/* <Popup id=" my-popup">
+<View>
           <Page>
             <Navbar title="Popup">
               <NavRight>
@@ -340,9 +372,9 @@ const MyApp = () => {
               </BlockFooter>
             </List>
           </Page>
-        </View>
+         </View>
       </LoginScreen>
-    </App>
-  )
+    </App> 
+  ) 
 }
 export default MyApp;
