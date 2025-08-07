@@ -5,13 +5,29 @@ export default function CommonNavbar() {
     <Navbar sliding={false}>
       <NavLeft>
         <Link panelOpen="left">
-          <img src='../image/13.gif' className='size-icon' />
+
+          <lord-icon
+            slot="media"
+            src="https://cdn.lordicon.com/vmiwgvnx.json"
+            trigger="loop"
+            colors="primary:#f30771,secondary:#f30771"
+            className="size-icon"
+          ></lord-icon>
+          {/* <img src='../image/13.gif' className='size-icon' /> */}
         </Link>
       </NavLeft>
       <NavTitle className='text-dark' sliding>
         <img src='../image/happy-corp-logo.png' style={{ height: "35px" }} />
       </NavTitle>
-      <NavRight></NavRight>
+      <NavRight>
+        <Link >
+          <lord-icon
+            src="https://cdn.lordicon.com/wjyqkiew.json"
+            trigger="loop"
+            colors="primary:#f30771,secondary:#f30771"
+            className='size-icon me-2'>
+          </lord-icon></Link>
+      </NavRight>
     </Navbar>
   );
 }

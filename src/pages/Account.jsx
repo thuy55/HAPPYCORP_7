@@ -18,7 +18,9 @@ import {
     Badge,
     Popup,
     View,
-    f7
+    f7,
+    Sheet,
+    PageContent
 } from 'framework7-react';
 import moment from 'moment';
 import { number } from 'prop-types';
@@ -39,6 +41,40 @@ const AccountPage = () => {
         }, 2000);
     }
 
+    const [showPasswordold, setShowPasswordold] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showRePassword, setShowRePassword] = useState(false);
+
+    const [sheetOpenedChangePass, setSheetOpenedChangePass] = useState(false);
+    const [sheetOpenedChangeInfo, setSheetOpenedChangeInfo] = useState(false);
+
+    const [avatar, setAvatar] = useState < File | null > (null);
+    const [updateAvatar, setUpdateAvatar] = useState < string > ("");
+
+    const fileInputRef = useRef < HTMLInputElement > (null);
+
+    const triggerFileInputAvatar = () => {
+        fileInputRef.current?.click();
+    };
+
+    const handleImageAvatar = (event) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            setAvatar(file);
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                if (e.target?.result) {
+                    setUpdateAvatar(e.target.result); // base64 string
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleDeleteImageAddAvatar = () => {
+        setAvatar(null);
+        setUpdateAvatar("");
+    };
     return (
 
 
@@ -60,49 +96,162 @@ const AccountPage = () => {
                 <div className=''>thuy@gmail.com</div>
 
             </div>
-            <List className='my-2 fs-13 mx-4 '>
-                <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
-                    <div>
+            <List className='my-4 fs-13  list-no-chevron mx-3' dividersIos mediaList outlineIos strongIos>
+                <ListItem className='px-3'
+                    title={
+                        <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                            <span className="text-muted">Mã của bạn:</span>
+                            <span className="fw-bold">#00001</span>
+                        </div>
+                    }
+                >
+                    <lord-icon
+                        slot="media"
+                        src="https://cdn.lordicon.com/puebsmel.json"
+                        trigger="loop"
+                        colors="primary:#f30771,secondary:#f30771"
+                        style={{ width: '20px', height: '20px' }}
+                    ></lord-icon>
+                </ListItem>
+                <ListItem className='px-3'
+                    title={
+                        <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                            <span className="text-muted">Họ và tên:</span>
+                            <span className="fw-bold">Nguyễn Thị Thanh Thúy</span>
+                        </div>
+                    }
+                >
+                    <lord-icon
+                        slot="media"
+                        src="https://cdn.lordicon.com/puebsmel.json"
+                        trigger="loop"
+                        colors="primary:#f30771,secondary:#f30771"
+                        style={{ width: '20px', height: '20px' }}
+                    ></lord-icon>
+                </ListItem>
+
+                <ListItem className='px-3'
+                    title={
+                        <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                            <span className="text-muted">Số điện thoại:</span>
+                            <span className="fw-bold">0123456789</span>
+                        </div>
+                    }
+                >
+                    <lord-icon
+                        slot="media"
+                        src="https://cdn.lordicon.com/puebsmel.json"
+                        trigger="loop"
+                        colors="primary:#f30771,secondary:#f30771"
+                        style={{ width: '20px', height: '20px' }}
+                    ></lord-icon>
+                </ListItem>
+                <ListItem className='px-3'
+                    title={
+                        <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                            <span className="text-muted">Email:</span>
+                            <span className="fw-bold">thuy@gmail.com</span>
+                        </div>
+                    }
+                >
+                    <lord-icon
+                        slot="media"
+                        src="https://cdn.lordicon.com/puebsmel.json"
+                        trigger="loop"
+                        colors="primary:#f30771,secondary:#f30771"
+                        style={{ width: '20px', height: '20px' }}
+                    ></lord-icon>
+                </ListItem>
+                <ListItem className='px-3'
+                    title={
+                        <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                            <span className="text-muted">Tài khoản:</span>
+                            <span className="fw-bold">thanhthuy</span>
+                        </div>
+                    }
+                >
+                    <lord-icon
+                        slot="media"
+                        src="https://cdn.lordicon.com/puebsmel.json"
+                        trigger="loop"
+                        colors="primary:#f30771,secondary:#f30771"
+                        style={{ width: '20px', height: '20px' }}
+                    ></lord-icon>
+                </ListItem>
+                <ListItem className='px-3'
+                    title={
+                        <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                            <span className="text-muted">Ngày sinh:</span>
+                            <span className="fw-bold">05/05/2000</span>
+                        </div>
+                    }
+                >
+                    <lord-icon
+                        slot="media"
+                        src="https://cdn.lordicon.com/puebsmel.json"
+                        trigger="loop"
+                        colors="primary:#f30771,secondary:#f30771"
+                        style={{ width: '20px', height: '20px' }}
+                    ></lord-icon>
+                </ListItem>
+                <ListItem className='px-3'
+                    title={
+                        <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                            <span className="text-muted">Giới tính:</span>
+                            <span className="fw-bold">Nữ</span>
+                        </div>
+                    }
+                >
+                    <lord-icon
+                        slot="media"
+                        src="https://cdn.lordicon.com/puebsmel.json"
+                        trigger="loop"
+                        colors="primary:#f30771,secondary:#f30771"
+                        style={{ width: '20px', height: '20px' }}
+                    ></lord-icon>
+                </ListItem>
+                <ListItem className='px-3'
+                    title={
+                        <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                            <span className="text-muted">Ngày đăng ký:</span>
+                            <span className="fw-bold">21/07/2025</span>
+                        </div>
+                    }
+                >
+                    <lord-icon
+                        slot="media"
+                        src="https://cdn.lordicon.com/puebsmel.json"
+                        trigger="loop"
+                        colors="primary:#f30771,secondary:#f30771"
+                        style={{ width: '20px', height: '20px' }}
+                    ></lord-icon>
+                </ListItem>
+            </List>
+            <Card className='p-0 border border-secondary-10 rounded-4'>
+                <List className='fs-13 m-0 list-no-chevron' dividersIos mediaList outlineIos strongIos>
+                    <ListItem className='px-3 pt-2 ' fill sheetOpen=".sheet-changepassword" link
+                        title="Đổi mật khẩu"
+                    >
                         <lord-icon
-                            src="https://cdn.lordicon.com/puebsmel.json"
+                            slot="media"
+                            src="https://cdn.lordicon.com/exymduqj.json"
                             trigger="loop"
                             colors="primary:#f30771,secondary:#f30771"
-                            className=' me-1'
-                            style={{ width: '20px', height: '20px' }}>
-                        </lord-icon>    
-                        Mã của bạn :
-                    </div>
-                    <div className='fw-bold'>#02</div>
-                </div>
-                <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
-                    Họ và tên :<div className='fw-bold'>Thanh Thúy</div>
-                </div>
-                <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
-                    Email :<div className='fw-bold'>Thuy@gmail.com</div>
-                </div>
-                <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
-                    Tài khoản :<div className='fw-bold'>thuy</div>
-                </div>
-                <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
-                    Điện thoại :<div className='fw-bold'>0763462675</div>
-                </div>
-                <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
-                    Ngày sinh :<div className='fw-bold'>Không có</div>
-                </div>
-                <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
-                    Giới tính :<div className='fw-bold'>Nữ</div>
-                </div>
-                <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
-                    Ngày đăng kí :<div className='fw-bold'>Không có</div>
-                </div>
-            </List>
-            <Card className='p-3 border border-secondary-10 rounded-4'>
-                <div className='d-flex align-items-center pb-3  border-bottom'>
-                    Đổi mật khẩu
-                </div>
-                <div className='d-flex align-items-center  mt-3'>
-                    Cập nhật thông tin
-                </div>
+                            style={{ width: '20px', height: '20px' }}
+                        ></lord-icon>
+                    </ListItem>
+                    <ListItem className='px-3 pt-2 ' fill sheetOpen=".sheet-changeinfo" link
+                        title="Cập nhật thông tin"
+                    >
+                        <lord-icon
+                            slot="media"
+                            src="https://cdn.lordicon.com/fikcyfpp.json"
+                            trigger="loop"
+                            colors="primary:#f30771,secondary:#f30771"
+                            style={{ width: '20px', height: '20px' }}
+                        ></lord-icon>
+                    </ListItem>
+                </List>
             </Card>
 
             <Card className='p-3 border border-secondary-10 rounded-4'>
@@ -159,6 +308,199 @@ const AccountPage = () => {
                 </div>
 
             </Card>
+
+            <Sheet push
+                className="sheet-changepassword h-auto"
+                opened={sheetOpenedChangePass}
+                onSheetClosed={() => {
+                    setSheetOpenedChangePass(false);
+                }}
+            >
+                <Toolbar style={{ backgroundColor: "red !important" }}>
+                    <div className="left fs-14">Đổi mật khẩu</div>
+                    <div className="right">
+                        <Link sheetClose>Close</Link>
+                    </div>
+                </Toolbar>
+                <PageContent>
+                    <Block className='my-3'>
+                        <List className='my-2'>
+                            <div className='fs-14 mt-4'>Mật khẩu cũ</div>
+                            <div className="position-relative rounded-pill mt-2 w-100" style={{ border: "0.5px solid #f07" }}>
+                                <input
+                                    className="rounded-3  w-100 pe-5 px-3"
+                                    placeholder="Mật khẩu"
+                                    type={showPasswordold ? 'text' : 'password'}
+                                />
+                                <span
+                                    onClick={() => setShowPasswordold(!showPasswordold)}
+                                    style={{
+                                        position: 'absolute',
+                                        right: '10px',
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        cursor: 'pointer',
+                                        color: '#666'
+
+                                    }}
+                                >
+                                    {showPasswordold ? <span class="material-icons fs-6" >
+                                        visibility
+                                    </span> : <span class="material-icons fs-6">
+                                        visibility_off
+                                    </span>}
+                                </span>
+                            </div>
+                            <div className='fs-14 mt-4'>Mật khẩu mới</div>
+                            <div className="position-relative rounded-pill mt-2 w-100" style={{ border: "0.5px solid #f07" }}>
+                                <input
+                                    className="rounded-3  w-100 pe-5 px-3"
+                                    placeholder="Mật khẩu"
+                                    type={showPassword ? 'text' : 'password'}
+                                />
+                                <span
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    style={{
+                                        position: 'absolute',
+                                        right: '10px',
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        cursor: 'pointer',
+                                        color: '#666'
+
+                                    }}
+                                >
+                                    {showPassword ? <span class="material-icons fs-6" >
+                                        visibility
+                                    </span> : <span class="material-icons fs-6">
+                                        visibility_off
+                                    </span>}
+                                </span>
+                            </div>
+                            <div className='fs-14 mt-4'>Nhập lại mật khẩu</div>
+                            <div className="position-relative rounded-pill mt-2 w-100" style={{ border: "0.5px solid #f07" }}>
+                                <input
+                                    className="rounded-3  w-100 pe-5 px-3"
+                                    placeholder="Mật khẩu"
+                                    type={showRePassword ? 'text' : 'password'}
+                                />
+                                <span
+                                    onClick={() => setShowRePassword(!showRePassword)}
+                                    style={{
+                                        position: 'absolute',
+                                        right: '10px',
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        cursor: 'pointer',
+                                        color: '#666'
+
+                                    }}
+                                >
+                                    {showRePassword ? <span class="material-icons fs-6" >
+                                        visibility
+                                    </span> : <span class="material-icons fs-6">
+                                        visibility_off
+                                    </span>}
+                                </span>
+                            </div>
+                            <div className='mt-4 grid grid-cols-2 grid-gap'>
+                                <div>
+                                    <button className='p-2 rounded-pill border border-secondary bg-transparent fs-14'>Hủy</button>
+                                </div>
+                                <div>
+                                    <button type="button" className='p-2 rounded-pill border-btn fs-14'>Cập nhật</button>
+                                </div>
+                            </div>
+                        </List>
+
+
+                    </Block>
+                </PageContent>
+            </Sheet>
+
+            <Sheet push
+                className="sheet-changeinfo h-auto"
+                opened={sheetOpenedChangeInfo}
+                onSheetClosed={() => {
+                    setSheetOpenedChangeInfo(false);
+                }}
+            >
+                <Toolbar style={{ backgroundColor: "red !important" }}>
+                    <div className="left fs-14">Cập nhật thông tin</div>
+                    <div className="right">
+                        <Link sheetClose>Close</Link>
+                    </div>
+                </Toolbar>
+                <PageContent>
+                    <Block className='my-3'>
+                        <List className='my-2'>
+                            <div className='fs-14 mt-4'>Họ và tên</div>
+                            <input type='text' className='rounded-pill mt-2 w-100' placeholder='Họ và tên'></input>
+                            <div className='fs-14 mt-4'>Email</div>
+                            <input type='email' className='rounded-pill mt-2 w-100' placeholder='Email'></input>
+                            <div className='fs-14 mt-4'>Ngày sinh</div>
+                            <input type='date' className='rounded-pill mt-2 w-100' placeholder='Ngày sinh'></input>
+                            <div className='fs-14 mt-4'>Giới tính</div>
+                            <select className='rounded-pill mt-2 w-100'>
+                                <option value="1">Nam</option>
+                                <option value="2">Nữ</option>
+                            </select>
+                            <div className='fs-14 mt-4'>Ảnh đại diện</div>
+
+                            <Card>
+                                <div style={{ cursor: "pointer" }}>
+                                    {updateAvatar ? (
+                                        <div className="position-relative">
+                                            <button
+                                                className="btn bg-danger btn-sm position-absolute top-0 end-0 m-1 rounded-circle p-1"
+                                                onClick={handleDeleteImageAddAvatar}
+                                                style={{ width: "40px", height: "40px", zIndex: 2 }}
+                                            >
+                                                <Icon f7="trash" size="15px" color="white" />
+                                            </button>
+                                            <img
+                                                src={updateAvatar}
+                                                className="w-100 rounded-4 object-fit-cover"
+                                                alt="avatar preview"
+                                            />
+                                        </div>
+                                    ) : (
+                                        <div
+                                            className=""
+                                            style={{ height: "160px", borderRadius: "10px" }}
+                                            onClick={triggerFileInputAvatar}
+                                        >
+                                            <div className="d-flex justify-content-center">
+                                                <Icon f7="cloud_upload" size="30px" />
+                                            </div>
+                                            <div className="d-flex justify-content-center mt-3">Nhấn vào để tải hình ảnh của bạn lên</div>
+                                        </div>
+                                    )}
+
+                                    {/* Input file ẩn */}
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        ref={fileInputRef}
+                                        style={{ display: "none" }}
+                                        onChange={handleImageAvatar}
+                                    />
+                                </div>
+                            </Card>
+                            <div className='mt-4 grid grid-cols-2 grid-gap'>
+                                <div>
+                                    <button className='p-2 rounded-pill border border-secondary bg-transparent fs-14'>Hủy</button>
+                                </div>
+                                <div>
+                                    <button type="button" className='p-2 rounded-pill border-btn fs-14'>Cập nhật</button>
+                                </div>
+                            </div>
+                        </List>
+
+
+                    </Block>
+                </PageContent>
+            </Sheet>
         </Page>
 
     );

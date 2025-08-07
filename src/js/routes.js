@@ -22,6 +22,7 @@ import HistoryPage from '../pages/History.jsx';
 import MenuPage from '../pages/Menu.jsx';
 import SocialHidePage from '../pages/social-hide.jsx';
 import SocialSavePage from '../pages/social_save.jsx';
+import TestPage from '../pages/test.jsx';
 
 var routes = [
   {
@@ -105,6 +106,12 @@ var routes = [
     path: '/social-save/',
     component: SocialSavePage,
   },
+  
+  {
+    path: '/test/',
+    component: TestPage,
+  },
+
 
 
 

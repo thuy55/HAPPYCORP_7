@@ -114,63 +114,57 @@ const MyApp = () => {
       {/* Views/Tabs container */}
       <Views id="main-view" url="/" main tabs className="safe-areas">
         <Toolbar tabbar icons bottom className='custom-tabbar'>
-          <Link tabLink="#view-home" onClick={()=>{handleActive("home")}} tabLinkActive className={currentPath === '/' ? 'tab-selected' : 'ion-tab-button-custom'} >
+          <Link tabLink="#view-home" onClick={()=>{handleActive("home")}} tabLinkActive className={currentPath === 'home' ? 'tab-selected' : 'ion-tab-button-custom'} >
             <lord-icon
               src="https://cdn.lordicon.com/jeuxydnh.json"
               trigger={currentPath === 'home' ? 'loop' : 'none'}
               colors={getIconColor('home')}
-              // colors="primary:#f30771,secondary:#f30771"
               className=' me-1'
               >
             </lord-icon>
-            <div className={currentPath === 'home' ? 'd-none' : ''} style={{ fontSize: "12px" }}>Home</div>
+            <div  style={{ fontSize: "11px"}} >Home</div>
           </Link>
-          <Link tabLink="#view-chat" onClick={()=>{handleActive("chat")}} className={currentPath === '/chat/' ? 'tab-selected' : 'ion-tab-button-custom'}>
+          <Link tabLink="#view-chat" onClick={()=>{handleActive("chat")}} className={currentPath === 'chat' ? 'tab-selected' : 'ion-tab-button-custom'}>
             <lord-icon
               src="https://cdn.lordicon.com/jdgfsfzr.json"
               trigger={currentPath === 'chat' ? 'loop' : 'none'}
-              // colors="primary:#f30771,secondary:#f30771"
               colors={getIconColor('chat')}
               className=' me-1'
               >
             </lord-icon>
-            <div className={currentPath === 'chat' ? 'd-none' : ''} style={{ fontSize: "12px" }}>Chat</div>
+            <div  style={{ fontSize: "11px" }}>Chat</div>
           </Link>
-          <Link tabLink="#view-history" onClick={()=>{handleActive("history")}} className={currentPath === '/history/' ? 'tab-selected' : 'ion-tab-button-custom'}>
+          <Link tabLink="#view-history" onClick={()=>{handleActive("history")}} className={currentPath === 'history' ? 'tab-selected' : 'ion-tab-button-custom'}>
             <lord-icon
               src="https://cdn.lordicon.com/rrbmabsx.json"
               trigger={currentPath === 'history' ? 'loop' : 'none'}
-              // colors="primary:#f30771,secondary:#f30771"
               colors={getIconColor('history')}
               className=' me-1'
               >
             </lord-icon>
-            <div className={currentPath === 'history' ? 'd-none' : ''} style={{ fontSize: "12px" }}>History</div>
+            <div  style={{ fontSize: "11px" }}>History</div>
           </Link>
-          <Link tabLink="#view-social" onClick={()=>{handleActive("social")}} className={currentPath === '/social/' ? 'tab-selected' : 'ion-tab-button-custom'}>
+          <Link tabLink="#view-social" onClick={()=>{handleActive("social")}} className={currentPath === 'social' ? 'tab-selected' : 'ion-tab-button-custom'}>
             <lord-icon
               src="https://cdn.lordicon.com/cfoaotmk.json"
               trigger={currentPath === 'social' ? 'loop' : 'none'}
-              // colors="primary:#f30771,secondary:#f30771"
               colors={getIconColor('social')}
               className=' me-1'
               >
             </lord-icon>
-            <div className={currentPath === 'social' ? 'd-none' : ''} style={{ fontSize: "12px" }}>Social</div>
+            <div  style={{ fontSize: "11px" }}>Social</div>
           </Link>
-          <Link tabLink="#view-account" onClick={()=>{handleActive("account")}} className={currentPath === '/account/' ? 'tab-selected' : 'ion-tab-button-custom'}>
+          <Link tabLink="#view-account" onClick={()=>{handleActive("account")}} className={currentPath === 'account' ? 'tab-selected' : 'ion-tab-button-custom'}>
             <lord-icon
               src="https://cdn.lordicon.com/kdduutaw.json"
               trigger={currentPath === 'account' ? 'loop' : 'none'}
-              // colors="primary:#f30771,secondary:#f30771"
               colors={getIconColor('account')}
               className=' me-1'
               >
             </lord-icon>
-            <div className={currentPath === 'account' ? 'd-none' : ''} style={{ fontSize: "12px" }}>Account</div>
+            <div  style={{ fontSize: "11px" }}>Account</div>
           </Link>
         </Toolbar>
-
         <View id="view-home" main tab tabActive url="/home/" pushState={true} />
         <View id="view-chat"  tab url="/menu/" pushState={true} />
         <View id="view-history"  tab url="/history/" pushState={true} />
