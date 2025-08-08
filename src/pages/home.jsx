@@ -172,11 +172,13 @@ const HomePage = () => {
             <div className=' fs-13 '>Thực đơn</div>
           </div>
         </PageTransition>
-        <div className='text-center rounded-4 mx-2 p-1'>
-          <img src='../img/online-order.gif' className='w-50'></img>
-          <div className=' fs-13'>Đặt bàn</div>
-        </div>
-        <PageTransition href="/test/">
+        <PageTransition href="/booking/">
+          <div className='text-center rounded-4 mx-2 p-1'>
+            <img src='../img/online-order.gif' className='w-50'></img>
+            <div className=' fs-13'>Đặt bàn</div>
+          </div>
+        </PageTransition>
+        <PageTransition href="/event/">
           <div className='text-center rounded-4 mx-2 p-1'>
             <img src='../img/event.gif' className='w-50'></img>
             <div className=' fs-13'>Sự kiện</div>
@@ -566,7 +568,7 @@ const HomePage = () => {
                   </div>
                 </div>
                 <div className=' border-bottom mb-2  '></div>
-                
+
                 <Card expandable className='border  shadow-none  border-0 m-2 mx-0 p-1'>
                   <CardContent padding={false}>
                     <div className="" >

@@ -23,6 +23,7 @@ import MenuPage from '../pages/Menu.jsx';
 import SocialHidePage from '../pages/social-hide.jsx';
 import SocialSavePage from '../pages/social_save.jsx';
 import TestPage from '../pages/test.jsx';
+import BookingPage from '../pages/booking.jsx';
 
 var routes = [
   {
@@ -111,7 +112,10 @@ var routes = [
     path: '/test/',
     component: TestPage,
   },
-
+ {
+    path: '/booking/',
+    component: BookingPage,
+  },
 
 
 

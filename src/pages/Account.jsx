@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
     Page,
     Navbar,
@@ -48,19 +48,20 @@ const AccountPage = () => {
     const [sheetOpenedChangePass, setSheetOpenedChangePass] = useState(false);
     const [sheetOpenedChangeInfo, setSheetOpenedChangeInfo] = useState(false);
 
-    const [avatar, setAvatar] = useState < File | null > (null);
-    const [updateAvatar, setUpdateAvatar] = useState < string > ("");
+    // const [avatar, setAvatar] = useState < File | null > (null);
+    const [updateAvatar, setUpdateAvatar] = useState("");
 
-    const fileInputRef = useRef < HTMLInputElement > (null);
+    // const fileInputRef = useRef <HTMLInputElement> (null);
 
     const triggerFileInputAvatar = () => {
-        fileInputRef.current?.click();
+        // fileInputRef.current?.click();
+        document.getElementById("fileInput").click();
     };
 
     const handleImageAvatar = (event) => {
         const file = event.target.files?.[0];
         if (file) {
-            setAvatar(file);
+            // setAvatar(file);
             const reader = new FileReader();
             reader.onload = (e) => {
                 if (e.target?.result) {
@@ -72,7 +73,7 @@ const AccountPage = () => {
     };
 
     const handleDeleteImageAddAvatar = () => {
-        setAvatar(null);
+        // setAvatar(null);
         setUpdateAvatar("");
     };
     return (
@@ -293,11 +294,11 @@ const AccountPage = () => {
                         readOnly
                         className='col-11 text-truncate'
                         type="text"
-                        value={`https://beta.ellm.io/?ref=`}
+                        value={`https://beta.ellm.io/?`}
                     />
 
                     <div className='col-1 d-flex justify-content-end px-0' onClick={() => {
-                        navigator.clipboard.writeText(`https://beta.ellm.io/?ref=`);
+                        navigator.clipboard.writeText(`https://beta.ellm.io/?`);
                         alert("Coppy success");
                     }} >
 
@@ -481,7 +482,7 @@ const AccountPage = () => {
                                     <input
                                         type="file"
                                         accept="image/*"
-                                        ref={fileInputRef}
+                                        // ref={fileInputRef}
                                         style={{ display: "none" }}
                                         onChange={handleImageAvatar}
                                     />
