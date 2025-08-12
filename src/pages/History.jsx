@@ -345,8 +345,8 @@ const HistoryPage = () => {
             )}
 
             {/* Statistics Cards */}
-            <div className="row px-3 g-3 mb-4 mt-2">
-                <div className="col-4">
+            <div className="grid grid-cols-3 grid-gap px-3">
+                <div className="">
                     <Card className="text-center m-1 p-3 border-0 shadow-sm text-pink">
                         <div
                             className="display-4 fw-bold mb-1"
@@ -356,13 +356,13 @@ const HistoryPage = () => {
                         <div className='fs-13'>Total </div>
                     </Card>
                 </div>
-                <div className="col-4">
+                <div className="">
                     <Card className="text-center m-1 p-3 border-0 shadow-sm  text-success">
                         <div className="display-4 fw-bold mb-1">0</div>
                         <div className='fs-13'>Paid</div>
                     </Card>
                 </div>
-                <div className="col-4">
+                <div className="">
                     <Card className="text-center m-1 p-3 border-0 shadow-sm text-secondary">
                         <div className="display-4 fw-bold  mb-1">0</div>
                         <div className='fs-13'>Cancelled</div>

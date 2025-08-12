@@ -90,7 +90,7 @@ const RoomPage = () => {
 
             {/* Page content */}
             <PageContent>
-                <List className='mx-2 mt-2' simpleList>
+                <List className='mx-2 my-2' simpleList>
                     <div className='d-flex align-items-center fs-6 fw-bold'>
                         <Link back>
                             <img src='../image/icon-backward.gif' className='size-icon me-1'></img>
@@ -99,7 +99,121 @@ const RoomPage = () => {
                     </div>
                 </List>
 
-                <div className='d-flex align-items-center row px-2'>
+                <div className='px-4 my-2'>
+                    <div className="d-flex align-items-center bg-light border border-secondary-10 rounded-pill p-1 row" style={{ cursor: 'pointer' }}>
+                        <input className='border bg-light rounded-pill border-0 p-2 px-3 col-10' placeholder='Tìm kiếm'></input>
+                        <Button fill={false} className=" col-2 pe-0 d-flex justify-content-end">
+                            <lord-icon
+                                src="https://cdn.lordicon.com/wjyqkiew.json"
+                                trigger="loop"
+                                colors="primary:#000000,secondary:#f30771"
+                                className=' me-2'
+                                style={{ width: '30px', height: '30px' }}>
+                            </lord-icon>
+                        </Button>
+                    </div>
+                </div>
+
+                <div className='fw-bold px-3 d-flex align-items-center'>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/hqrhprrj.json"
+                        trigger="loop"
+                        colors="primary:#f30771,secondary:#f30771"
+                        className=' me-2 mb-2'
+                        style={{ width: '30px', height: '30px' }}>
+                    </lord-icon>
+                    Phòng siêu HOT
+                </div>
+                <div className='row d-flex flex-nowrap mx-2 mt-2 pb-2' style={{ overflowX: "auto", whiteSpace: "nowrap" }}>
+                    <div className='col-5 px-1'>
+                        <Card className='m-0 border-light p-0 fs-13 rounded-4 shadow-sm'>
+                            <div>
+                                <img src='https://img.freepik.com/premium-photo/elite-karaoke-suite-with-velvet-ropes-bartender_416256-24715.jpg' className='w-100 rounded-top-4'></img>
+
+                                <div className='p-1 w-100 bg-danger text-white text-center fw-bold'>HOT</div>
+                                <div className='p-2'>
+                                    <div className='fw-bold'>L1 - Phòng Private 1</div>
+                                    <div className="d-flex gap-1 my-1">
+                                        {[...Array(5)].map((_, i) => (
+                                            <lord-icon
+                                                key={i}
+                                                src="https://cdn.lordicon.com/cvwrvyjv.json"
+                                                trigger="loop"
+                                                colors="primary:#f30771,secondary:#f30771"
+                                                style={{ width: '15px', height: '15px' }}
+                                            />
+                                        ))}
+                                    </div>
+
+                                    <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                </div>
+                            </div>
+                        </Card>
+                    </div>
+                    <div className='col-5 px-1'>
+                        <Card className='m-0 border-light p-1 fs-13'>
+                            <div>
+                                <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
+                                <div className='d-flex'>
+                                    <div className='mt-2 fst-italic'>
+                                        <lord-icon
+                                            src="https://cdn.lordicon.com/puebsmel.json"
+                                            trigger="loop"
+                                            colors="primary:#f30771,secondary:#f30771"
+                                            className=' me-1'
+                                            style={{ width: '20px', height: '20px' }}>
+                                        </lord-icon>
+                                        Giảm giá sốc</div>
+                                </div>
+                                <div className='fw-bold text-pink my-1'>Giảm 10%</div>
+                                <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                            </div>
+                        </Card>
+                    </div>
+                    <div className='col-5 px-1'>
+                        <Card className='m-0 border-light p-1 fs-13'>
+                            <div>
+                                <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
+                                <div className='d-flex'>
+                                    <div className='mt-2 fst-italic'>
+                                        <lord-icon
+                                            src="https://cdn.lordicon.com/puebsmel.json"
+                                            trigger="loop"
+                                            colors="primary:#f30771,secondary:#f30771"
+                                            className=' me-1'
+                                            style={{ width: '20px', height: '20px' }}>
+                                        </lord-icon>
+                                        Giảm giá sốc</div>
+                                </div>
+                                <div className='fw-bold text-pink my-1'>Giảm 10%</div>
+                                <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                            </div>
+                        </Card>
+                    </div>
+                    <div className='col-5 px-1'>
+                        <Card className='m-0 border-light p-1 fs-13'>
+                            <div>
+                                <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
+                                <div className='d-flex'>
+                                    <div className='mt-2 fst-italic'>
+                                        <lord-icon
+                                            src="https://cdn.lordicon.com/puebsmel.json"
+                                            trigger="loop"
+                                            colors="primary:#f30771,secondary:#f30771"
+                                            className=' me-1'
+                                            style={{ width: '20px', height: '20px' }}>
+                                        </lord-icon>
+                                        Giảm giá sốc</div>
+                                </div>
+                                <div className='fw-bold text-pink my-1'>Giảm 10%</div>
+                                <div className='limited-lines1'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                            </div>
+                        </Card>
+                    </div>
+                </div>
+
+
+                {/* <div className='d-flex align-items-center row px-2'>
                     <div className='col-3'>
 
                         <img src='../image/left-arrow.gif' className='size-icon '></img>
@@ -515,7 +629,7 @@ const RoomPage = () => {
                             </IonRow>
                         </>
                     )}
-                </div>
+                </div> */}
             </PageContent>
         </Page>
 

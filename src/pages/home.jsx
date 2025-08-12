@@ -28,6 +28,7 @@ import CommonNavbar from '../components/CommonNavbar';
 import PageTransition from '../components/PageTransition';
 
 import { Player } from '@lordicon/react';
+import SheetBooking from "../components/SheetBooking";
 
 const HomePage = () => {
   const week = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
@@ -91,6 +92,8 @@ const HomePage = () => {
     console.log(345565);
   }
 
+  const [sheetOpened, setSheetOpened] = useState(false);
+
 
   return (
 
@@ -121,13 +124,14 @@ const HomePage = () => {
               className='size-icon me-2'>
             </lord-icon></Link>
         </NavRight>
-        <NavTitleLarge className='text'>
+        <NavTitleLarge className='text' >
           <div className='d-flex justify-content-between align-items-center'>
             <div>
-              <div className='fs-13 mb-1 fw-normal'>
+              <span className='fs-13  fw-normal me-1'>
                 Xin chào
-              </div>
-              Thúy Nguyễn
+              </span>
+              <span className='fw-bold'>Thanh Thúy</span>
+
             </div>
             <Button className='bg-pink rounded-pill p-3 fw-bold text-white'>Kích hoạt thẻ</Button>
 
@@ -135,10 +139,9 @@ const HomePage = () => {
         </NavTitleLarge>
       </Navbar>
       <div className='px-4 my-2'>
-        <div className="d-flex align-items-center bg-light border border-secondary-10 rounded-pill row" style={{ cursor: 'pointer' }}>
-          {/* <span className="fw-semibold">{formatDate(currentDate, selectedPeriod)}</span> */}
-          <input className='border bg-light rounded-pill border-0 p-3 px-3 col-10' placeholder='Tìm kiếm'></input>
-          <Button fill={false} className=" col-2 d-flex justify-content-end">
+        <div className="d-flex align-items-center bg-light border border-secondary-10 rounded-pill p-1 row" style={{ cursor: 'pointer' }}>
+          <input className='border bg-light rounded-pill border-0 p-2 px-3 col-10' placeholder='Tìm kiếm'></input>
+          <Button fill={false} className=" col-2 pe-0 d-flex justify-content-end">
             <lord-icon
               src="https://cdn.lordicon.com/wjyqkiew.json"
               trigger="loop"
@@ -165,6 +168,7 @@ const HomePage = () => {
           </video>
         </div>
       </List>
+
       <div className="grid grid-cols-4 px-2 mt-2">
         <PageTransition href="/menu/">
           <div className='text-center rounded-4 mx-2 p-1'>
@@ -172,7 +176,7 @@ const HomePage = () => {
             <div className=' fs-13 '>Thực đơn</div>
           </div>
         </PageTransition>
-        <PageTransition href="/booking/">
+        <PageTransition href="/room/">
           <div className='text-center rounded-4 mx-2 p-1'>
             <img src='../img/online-order.gif' className='w-50'></img>
             <div className=' fs-13'>Đặt bàn</div>
@@ -190,7 +194,19 @@ const HomePage = () => {
             <div className=' fs-13'>Doanh thu</div>
           </div>
         </Link>
+
+        <div onClick={() => setSheetOpened(true)}>
+          <div className='text-center rounded-4 mx-2 p-1'>
+            <img src='../img/bill.gif' className='w-50'></img>
+            <div className=' fs-13'>Doanh thu</div>
+          </div>
+        </div>
       </div>
+
+      <SheetBooking
+        opened={sheetOpened}
+        onClose={() => setSheetOpened(false)}
+      />
       <Link href="/endow/" className='fs-6 fw-bold mx-3 mt-3 justify-content-start d-flex align-items-center'>
         {/* <img src='../image/6.gif' className='size-icon'></img> */}
         <lord-icon
@@ -204,7 +220,7 @@ const HomePage = () => {
         Ưu đãi
       </Link>
       <div className='row d-flex flex-nowrap mx-2 mt-2 pb-2' style={{ overflowX: "auto", whiteSpace: "nowrap" }}>
-        <div className='col-4 px-1'>
+        <div className='col-5 px-1'>
           <Card className='m-0 border-light p-1 fs-13'>
             <div>
               <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
@@ -223,7 +239,7 @@ const HomePage = () => {
             </div>
           </Card>
         </div>
-        <div className='col-4 px-1'>
+        <div className='col-5 px-1'>
           <Card className='m-0 border-light p-1 fs-13'>
             <div>
               <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
@@ -243,7 +259,7 @@ const HomePage = () => {
             </div>
           </Card>
         </div>
-        <div className='col-4 px-1'>
+        <div className='col-5 px-1'>
           <Card className='m-0 border-light p-1 fs-13'>
             <div>
               <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
@@ -263,7 +279,7 @@ const HomePage = () => {
             </div>
           </Card>
         </div>
-        <div className='col-4 px-1'>
+        <div className='col-5 px-1'>
           <Card className='m-0 border-light p-1 fs-13'>
             <div>
               <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>

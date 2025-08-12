@@ -100,136 +100,95 @@ const AccountPage = () => {
             <List className='my-4 fs-13  list-no-chevron mx-3' dividersIos mediaList outlineIos strongIos>
                 <ListItem className='px-3'
                     title={
-                        <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                        <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
                             <span className="text-muted">Mã của bạn:</span>
                             <span className="fw-bold">#00001</span>
                         </div>
                     }
                 >
-                    <lord-icon
+                    {/* <lord-icon
                         slot="media"
                         src="https://cdn.lordicon.com/puebsmel.json"
                         trigger="loop"
                         colors="primary:#f30771,secondary:#f30771"
                         style={{ width: '20px', height: '20px' }}
-                    ></lord-icon>
+                    ></lord-icon> */}
+                    <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
                 </ListItem>
                 <ListItem className='px-3'
                     title={
-                        <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                        <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
                             <span className="text-muted">Họ và tên:</span>
                             <span className="fw-bold">Nguyễn Thị Thanh Thúy</span>
                         </div>
                     }
                 >
-                    <lord-icon
-                        slot="media"
-                        src="https://cdn.lordicon.com/puebsmel.json"
-                        trigger="loop"
-                        colors="primary:#f30771,secondary:#f30771"
-                        style={{ width: '20px', height: '20px' }}
-                    ></lord-icon>
+                    <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
                 </ListItem>
 
                 <ListItem className='px-3'
                     title={
-                        <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                        <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
                             <span className="text-muted">Số điện thoại:</span>
                             <span className="fw-bold">0123456789</span>
                         </div>
                     }
                 >
-                    <lord-icon
-                        slot="media"
-                        src="https://cdn.lordicon.com/puebsmel.json"
-                        trigger="loop"
-                        colors="primary:#f30771,secondary:#f30771"
-                        style={{ width: '20px', height: '20px' }}
-                    ></lord-icon>
+                    <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
                 </ListItem>
                 <ListItem className='px-3'
                     title={
-                        <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                        <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
                             <span className="text-muted">Email:</span>
                             <span className="fw-bold">thuy@gmail.com</span>
                         </div>
                     }
                 >
-                    <lord-icon
-                        slot="media"
-                        src="https://cdn.lordicon.com/puebsmel.json"
-                        trigger="loop"
-                        colors="primary:#f30771,secondary:#f30771"
-                        style={{ width: '20px', height: '20px' }}
-                    ></lord-icon>
+                    <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
                 </ListItem>
                 <ListItem className='px-3'
                     title={
-                        <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                        <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
                             <span className="text-muted">Tài khoản:</span>
                             <span className="fw-bold">thanhthuy</span>
                         </div>
                     }
                 >
-                    <lord-icon
-                        slot="media"
-                        src="https://cdn.lordicon.com/puebsmel.json"
-                        trigger="loop"
-                        colors="primary:#f30771,secondary:#f30771"
-                        style={{ width: '20px', height: '20px' }}
-                    ></lord-icon>
+                    <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
                 </ListItem>
                 <ListItem className='px-3'
                     title={
-                        <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                        <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
                             <span className="text-muted">Ngày sinh:</span>
                             <span className="fw-bold">05/05/2000</span>
                         </div>
                     }
                 >
-                    <lord-icon
-                        slot="media"
-                        src="https://cdn.lordicon.com/puebsmel.json"
-                        trigger="loop"
-                        colors="primary:#f30771,secondary:#f30771"
-                        style={{ width: '20px', height: '20px' }}
-                    ></lord-icon>
+                    <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
                 </ListItem>
                 <ListItem className='px-3'
                     title={
-                        <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                        <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
                             <span className="text-muted">Giới tính:</span>
                             <span className="fw-bold">Nữ</span>
                         </div>
                     }
                 >
-                    <lord-icon
-                        slot="media"
-                        src="https://cdn.lordicon.com/puebsmel.json"
-                        trigger="loop"
-                        colors="primary:#f30771,secondary:#f30771"
-                        style={{ width: '20px', height: '20px' }}
-                    ></lord-icon>
+                    <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
                 </ListItem>
                 <ListItem className='px-3'
                     title={
-                        <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                        <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
                             <span className="text-muted">Ngày đăng ký:</span>
                             <span className="fw-bold">21/07/2025</span>
                         </div>
                     }
                 >
-                    <lord-icon
-                        slot="media"
-                        src="https://cdn.lordicon.com/puebsmel.json"
-                        trigger="loop"
-                        colors="primary:#f30771,secondary:#f30771"
-                        style={{ width: '20px', height: '20px' }}
-                    ></lord-icon>
+                    <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
                 </ListItem>
             </List>
             <Card className='p-0 border border-secondary-10 rounded-4'>
-                <List className='fs-13 m-0 list-no-chevron' dividersIos mediaList outlineIos strongIos>
+                <List className='fs-13 m-0 ' dividersIos mediaList outlineIos strongIos>
                     <ListItem className='px-3 pt-2 ' fill sheetOpen=".sheet-changepassword" link
                         title="Đổi mật khẩu"
                     >
@@ -290,12 +249,7 @@ const AccountPage = () => {
                 </div>
                 <BlockTitle className='m-0 mt-3 fs-14 '>Liên kết của bạn</BlockTitle>
                 <div className="m-2 mx-1  row border border-1 rounded-pill p-2 d-flex align-items-center " >
-                    <input
-                        readOnly
-                        className='col-11 text-truncate'
-                        type="text"
-                        value={`https://beta.ellm.io/?`}
-                    />
+                    <div className='col-11 p-1 border border-0 text-truncate'>https://beta.ellm.io/?</div>
 
                     <div className='col-1 d-flex justify-content-end px-0' onClick={() => {
                         navigator.clipboard.writeText(`https://beta.ellm.io/?`);
@@ -329,7 +283,7 @@ const AccountPage = () => {
                             <div className='fs-14 mt-4'>Mật khẩu cũ</div>
                             <div className="position-relative rounded-pill mt-2 w-100" style={{ border: "0.5px solid #f07" }}>
                                 <input
-                                    className="rounded-3  w-100 pe-5 px-3"
+                                    className="rounded-pill  w-100 pe-5 px-3"
                                     placeholder="Mật khẩu"
                                     type={showPasswordold ? 'text' : 'password'}
                                 />
@@ -355,7 +309,7 @@ const AccountPage = () => {
                             <div className='fs-14 mt-4'>Mật khẩu mới</div>
                             <div className="position-relative rounded-pill mt-2 w-100" style={{ border: "0.5px solid #f07" }}>
                                 <input
-                                    className="rounded-3  w-100 pe-5 px-3"
+                                    className="rounded-pill  w-100 pe-5 px-3"
                                     placeholder="Mật khẩu"
                                     type={showPassword ? 'text' : 'password'}
                                 />
@@ -381,7 +335,7 @@ const AccountPage = () => {
                             <div className='fs-14 mt-4'>Nhập lại mật khẩu</div>
                             <div className="position-relative rounded-pill mt-2 w-100" style={{ border: "0.5px solid #f07" }}>
                                 <input
-                                    className="rounded-3  w-100 pe-5 px-3"
+                                    className="rounded-pill  w-100 pe-5 px-3"
                                     placeholder="Mật khẩu"
                                     type={showRePassword ? 'text' : 'password'}
                                 />
