@@ -1,9 +1,10 @@
 import { Sheet, Toolbar, PageContent, Block, Link, Button, Card } from "framework7-react";
 import SheetBooking1 from "./SheetBooking1";
 import { useState } from "react";
+import SheetBookingMenu from "./SheetBookingMenu";
 
 export default function SheetBooking({ opened, onClose }) {
-    const [sheetOpened1, setSheetOpened1] = useState(false);
+    const [sheetOpenebMenu, setSheetOpenebMenu] = useState(false);
     return (
         <Sheet
             className="demo-sheet-1 h-100"
@@ -518,11 +519,11 @@ export default function SheetBooking({ opened, onClose }) {
 
             </PageContent>
             <footer className="fixed-bottom p-3 py-2 bg-white">
-                <Button className="bg-pink p-3 rounded-pill text-white fs-15" onClick={() => setSheetOpened1(true)}>Tiếp tục</Button>
+                <Button className="bg-pink p-3 rounded-pill text-white fs-15" onClick={() => setSheetOpenebMenu(true)}>Tiếp tục</Button>
             </footer>
-            <SheetBooking1
-                opened={sheetOpened1}
-                onClose={() => setSheetOpened1(false)}
+            <SheetBookingMenu
+                opened={sheetOpenebMenu}
+                onClose={() => setSheetOpenebMenu(false)}
             />
         </Sheet>
     );

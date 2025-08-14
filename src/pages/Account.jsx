@@ -283,7 +283,7 @@ const AccountPage = () => {
                             <div className='fs-14 mt-4'>Mật khẩu cũ</div>
                             <div className="position-relative rounded-pill mt-2 w-100" style={{ border: "0.5px solid #f07" }}>
                                 <input
-                                    className="rounded-pill  w-100 pe-5 px-3"
+                                    className="rounded-pill w-100 pe-5 px-3"
                                     placeholder="Mật khẩu"
                                     type={showPasswordold ? 'text' : 'password'}
                                 />
@@ -390,13 +390,13 @@ const AccountPage = () => {
                     <Block className='my-3'>
                         <List className='my-2'>
                             <div className='fs-14 mt-4'>Họ và tên</div>
-                            <input type='text' className='rounded-pill mt-2 w-100' placeholder='Họ và tên'></input>
+                            <input type='text' className='rounded-pill border-input mt-2 w-100' placeholder='Họ và tên'></input>
                             <div className='fs-14 mt-4'>Email</div>
-                            <input type='email' className='rounded-pill mt-2 w-100' placeholder='Email'></input>
+                            <input type='email' className='rounded-pill border-input mt-2 w-100' placeholder='Email'></input>
                             <div className='fs-14 mt-4'>Ngày sinh</div>
-                            <input type='date' className='rounded-pill mt-2 w-100' placeholder='Ngày sinh'></input>
+                            <input type='date' className='rounded-pill border-input mt-2 w-100' placeholder='Ngày sinh'></input>
                             <div className='fs-14 mt-4'>Giới tính</div>
-                            <select className='rounded-pill mt-2 w-100'>
+                            <select className='rounded-pill border-input mt-2 w-100'>
                                 <option value="1">Nam</option>
                                 <option value="2">Nữ</option>
                             </select>
