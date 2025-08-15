@@ -122,7 +122,7 @@ const MyApp = () => {
               className=' me-1'
               >
             </lord-icon>
-            <div  style={{ fontSize: "11px"}} >Home</div>
+            <div  style={{ fontSize: "11px", fontWeight:"bold"}} >Home</div>
           </Link>
           <Link tabLink="#view-chat" onClick={()=>{handleActive("chat")}} className={currentPath === 'chat' ? 'tab-selected' : 'ion-tab-button-custom'}>
             <lord-icon
@@ -132,7 +132,7 @@ const MyApp = () => {
               className=' me-1'
               >
             </lord-icon>
-            <div  style={{ fontSize: "11px" }}>Chat</div>
+            <div  style={{ fontSize: "11px", fontWeight:"bold" }}>Chat</div>
           </Link>
           <Link tabLink="#view-history" onClick={()=>{handleActive("history")}} className={currentPath === 'history' ? 'tab-selected' : 'ion-tab-button-custom'}>
             <lord-icon
@@ -142,7 +142,7 @@ const MyApp = () => {
               className=' me-1'
               >
             </lord-icon>
-            <div  style={{ fontSize: "11px" }}>History</div>
+            <div  style={{ fontSize: "11px", fontWeight:"bold" }}>History</div>
           </Link>
           <Link tabLink="#view-social" onClick={()=>{handleActive("social")}} className={currentPath === 'social' ? 'tab-selected' : 'ion-tab-button-custom'}>
             <lord-icon
@@ -152,7 +152,7 @@ const MyApp = () => {
               className=' me-1'
               >
             </lord-icon>
-            <div  style={{ fontSize: "11px" }}>Social</div>
+            <div  style={{ fontSize: "11px", fontWeight:"bold" }}>Social</div>
           </Link>
           <Link tabLink="#view-account" onClick={()=>{handleActive("account")}} className={currentPath === 'account' ? 'tab-selected' : 'ion-tab-button-custom'}>
             <lord-icon
@@ -162,7 +162,7 @@ const MyApp = () => {
               className=' me-1'
               >
             </lord-icon>
-            <div  style={{ fontSize: "11px" }}>Account</div>
+            <div  style={{ fontSize: "11px", fontWeight:"bold" }}>Account</div>
           </Link>
         </Toolbar>
         <View id="view-home" main tab tabActive url="/home/" pushState={true} />

@@ -884,7 +884,7 @@ const SocialPage = () => {
     };
 
     const viewSocial = {
-        "avatar": "https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png",
+        "avatar": "https://www.in.pro.vn/wp-content/uploads/2025/01/avatar-nu-diu-dang.webp",
         "access": "1",
         "name": "Thanh Thúy",
         "date": "31/07/2025",
@@ -896,7 +896,7 @@ const SocialPage = () => {
         "share": 0,
         "comments": [
             {
-                "avatar": "https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png",
+                "avatar": "https://www.in.pro.vn/wp-content/uploads/2025/01/avatar-nu-diu-dang.webp",
                 "name": "Nguyễn Văn A",
                 "date": "31/07/2025",
                 "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
@@ -906,221 +906,324 @@ const SocialPage = () => {
 
     const textComment = [
         {
-            "avatar": "https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png",
+            "avatar": "https://www.in.pro.vn/wp-content/uploads/2025/01/avatar-nu-diu-dang.webp",
             "account": "Nguyễn Văn A",
             "date": "31/07/2025",
             "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             "active": "1234567890",
         },
         {
-            "avatar": "https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png",
+            "avatar": "https://www.in.pro.vn/wp-content/uploads/2025/01/avatar-nu-diu-dang.webp",
             "account": "Nguyễn Văn A",
             "date": "31/07/2025",
             "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             "active": "1234567890",
         },
         {
-            "avatar": "https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png",
+            "avatar": "https://www.in.pro.vn/wp-content/uploads/2025/01/avatar-nu-diu-dang.webp",
             "account": "Nguyễn Văn A",
             "date": "31/07/2025",
             "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             "active": "1234567890",
         },
         {
-            "avatar": "https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png",
+            "avatar": "https://www.in.pro.vn/wp-content/uploads/2025/01/avatar-nu-diu-dang.webp",
             "account": "Nguyễn Văn A",
             "date": "31/07/2025",
             "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             "active": "1234567890",
         },
         {
-            "avatar": "https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png",
+            "avatar": "https://www.in.pro.vn/wp-content/uploads/2025/01/avatar-nu-diu-dang.webp",
             "account": "Nguyễn Văn A",
             "date": "31/07/2025",
             "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             "active": "1234567890",
         },
         {
-            "avatar": "https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png",
+            "avatar": "https://www.in.pro.vn/wp-content/uploads/2025/01/avatar-nu-diu-dang.webp",
             "account": "Nguyễn Văn A",
             "date": "31/07/2025",
             "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             "active": "1234567890",
         },
         {
-            "avatar": "https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png",
+            "avatar": "https://www.in.pro.vn/wp-content/uploads/2025/01/avatar-nu-diu-dang.webp",
             "account": "Nguyễn Văn A",
             "date": "31/07/2025",
             "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             "active": "1234567890",
         },
         {
-            "avatar": "https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png",
+            "avatar": "https://www.in.pro.vn/wp-content/uploads/2025/01/avatar-nu-diu-dang.webp",
             "account": "Nguyễn Văn A",
             "date": "31/07/2025",
             "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             "active": "1234567890",
         }
     ]
+
+    const [expanded, setExpanded] = useState(false);
+
+    const [liked, setLiked] = useState(false);
     return (
         <Page name="social" >
             <CommonNavbar />
 
             {/* Page content */}
-
-            <div className='m-3'>
-                <div className=' p-3  border border-light shadow-sm rounded-4'>
+            <PageContent style={{ backgroundColor: "rgb(223 223 223)", paddingTop: "0" }}>
+                <Card className='m-0 p-3 pb-2 rounded-0 border border-0'>
                     <div className='row d-flex align-items-center'>
                         <div className='col-8'>
                             <div className='d-flex align-items-center'>
                                 <Link fill popoverOpen=".popover-menu-social">
-                                    <img src="https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png" className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
+                                    <img src="https://www.in.pro.vn/wp-content/uploads/2025/01/avatar-nu-diu-dang.webp" className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
                                 </Link>
-                                <span className='fst-italic  ms-3'>{name} {t("how_are_you_today?")}</span>
+                                <span className='fst-italic  ms-3'>Bạn đang nghĩ gì?</span>
                             </div>
                         </div>
                         <div className='col-4 text-end'>
                             <Link className='d-flex align-items-center justify-content-end align-items-center' fill popupOpen="#add-social">
-                                <Icon f7="plus" size="20px" className='me-1'></Icon>
-                                <div className='mt-1'>Post</div>
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/wsaaegar.json"
+                                    trigger="loop"
+                                    colors="primary:#000000,secondary:#f30771"
+                                    className=' me-2'
+                                    style={{ width: '30px', height: '30px' }}>
+                                </lord-icon>
                             </Link>
                         </div>
                     </div>
-                </div>
-
-                <div className=' p-0  border border-light shadow-sm rounded-4'>
-                    <div className='d-flex align-items-center justify-content-between p-3'>
+                </Card>
+                <Card className='m-0 mt-1 p-0 rounded-0 border border-0'>
+                    <div className='d-flex align-items-center justify-content-between p-3 pb-1'>
                         <div className='d-flex align-items-center'>
-                            <img src="https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png" onClick={() => { profile_social(socials.account.uid) }} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
-                            <span className=' ms-2'>Thanh Thúy
-                                <div className='fs-12 text-secondary d-flex align-items-center'>31/07/2025
-
+                            <img src="https://www.in.pro.vn/wp-content/uploads/2025/01/avatar-nu-diu-dang.webp" onClick={() => { profile_social(socials.account.uid) }} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
+                            <span className=' ms-2 fs-13'>
+                                <span className='fw-bold'> Thanh Thúy</span>
+                                <div className='fs-11 text-secondary mt-1'>31/07/2025
                                 </div>
                             </span>
                         </div>
-                        <div className=''>
-                            <Button fill popoverOpen=".popover-menu" className='rounded-circle  p-2 text-center' style={{ width: "30px", height: "30px" }}> <Icon f7="ellipsis" size="20px" color='white'></Icon></Button>
+                        <div className='d-flex align-items-center'>
+                            <Button fill popoverOpen=".popover-menu" className='rounded-circle bg-transparent p-1 text-center me-2' style={{ width: "30px", height: "30px" }}> <Icon f7="ellipsis" size="20px" ></Icon></Button>
+                            <Button fill popoverOpen=".popover-menu" className='rounded-circle bg-transparent p-1 text-center' style={{ width: "30px", height: "30px" }}> <Icon f7="xmark" size="20px" ></Icon></Button>
                         </div>
                     </div>
-                    <div className='row px-4'>
-                        <div className='col-6 p-1'>
+                    <div className="p-2 px-3">
+                        <div
+                            className={`fs-13 ${expanded ? "" : "line-clamp"}`}
+                            style={{
+                                overflow: "hidden",
+                                display: "-webkit-box",
+                                WebkitLineClamp: expanded ? "unset" : 3, // số dòng
+                                WebkitBoxOrient: "vertical"
+                            }}
+                        >
+                            Happy Corp tiên phong trong việc kiến tạo các điểm đến giải trí mang phong cách Nightlife, nơi hội tụ không gian sáng tạo, dịch vụ tinh tế và trải nghiệm phong cachs sống hiện đại, nhằm mang đến giá trị khác biệt cho khách hàng.
+                        </div>
+
+                        <button
+                            className="btn btn-link p-0 text-start fs-13"
+                            onClick={() => setExpanded(!expanded)}
+                        >
+                            {expanded ? "Thu gọn" : "Xem thêm"}
+                        </button>
+                    </div>
+                    <div className='row'>
+                        <div className='col-6 p-0'>
                             <img src='https://media.macphun.com/img/uploads/customer/how-to/608/15542038745ca344e267fb80.28757312.jpg?q=85&w=1340' className='w-100'></img>
                         </div>
-                        <div className='col-6 p-1'>
+                        <div className='col-6 p-0'>
                             <img src='https://images.pexels.com/photos/1194775/pexels-photo-1194775.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' className='w-100'></img>
                         </div>
-
                     </div>
-                    <div className='mt-3' style={{ borderBottom: "0.5px solid #a8a7a7ff" }}></div>
-                    <div className='row my-3 d-flex align-items-center'>
-                        <div className='col-4 text-center'>
-                            <img src='../image/12.gif' className='size-icon'></img>
-                            1 {t("like")}
-                        </div>
-
-                        <Link className='col-4 text-center px-0 ' fill popupOpen="#comment-social">
-                            <img src='../image/4.gif' className='size-icon'></img>
-                            2 {t("comment")}
-                        </Link>
-                        <div className='col-4 text-center'>
-                            <img src='../image/icon-share.gif' className='size-icon'></img>
-                            {t("share")}
-                        </div>
-                    </div>
-                </div>
-
-                <div className=' p-0  border border-light shadow-sm rounded-4'>
-                    <div className='d-flex align-items-center justify-content-between p-3'>
+                    <div className='d-flex justify-content-between align-items-center fs-13 p-2 px-3'>
                         <div className='d-flex align-items-center'>
-                            <img src="https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png" onClick={() => { profile_social(socials.account.uid) }} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
-                            <span className=' ms-2'>Thanh Thúy
-                                <div className='fs-12 text-secondary d-flex align-items-center'>31/07/2025
+                            <Icon f7="hand_thumbsup_fill" size="20px" color='blue' className='me-1'></Icon> 12
+                        </div>
+                        <div className='d-flex align-items-center'>
+                            12 Bình luận  <span className='ms-2'>2 lượt chia sẻ</span>
+                        </div>
+                    </div>
+                    <div className='row my-3 d-flex align-items-center'>
+                        <div className='col-4 d-flex justify-content-center'>
+                            <div className='d-flex align-items-center'>
+                                <div onClick={() => setLiked(!liked)} style={{ cursor: "pointer" }}>
+                                    {liked ? (
+                                        <Icon
+                                            f7="hand_thumbsup_fill"
+                                            size="20px"
+                                            color="black"
+                                            className="me-1"
+                                        />
+                                    ) : (
+                                        <Icon
+                                            f7="hand_thumbsup"
+                                            size="20px"
+                                            color="black"
+                                            className="me-1"
+                                        />
+                                    )}
+                                </div>
+                                Like
+                            </div>
+                        </div>
+                        <div className='col-4 text-center'>
+                            <Link fill popupOpen="#comment-social">
+                                <Icon f7="chat_bubble" size="20px" color='black' className='me-1'></Icon>
+                                Comment
+                            </Link>
+                        </div>
+                        <div className='col-4 text-center'>
+                            <div>
+                                <Icon f7="arrowshape_turn_up_right" size="20px" color='black' className='me-1'></Icon>
+                                Share
+                            </div>
+                        </div>
+                    </div>
 
+
+                </Card>
+                <Card className='m-0 mt-1 p-0 rounded-0 border border-0'>
+                    <div className='d-flex align-items-center justify-content-between p-3 pb-1'>
+                        <div className='d-flex align-items-center'>
+                            <img src="https://www.in.pro.vn/wp-content/uploads/2025/01/avatar-nu-diu-dang.webp" onClick={() => { profile_social(socials.account.uid) }} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
+                            <span className=' ms-2 fs-13'>
+                                <span className='fw-bold'> Thanh Thúy</span>
+                                <div className='fs-11 text-secondary mt-1'>31/07/2025
                                 </div>
                             </span>
                         </div>
-                        <div className=''>
-                            <Button fill popoverOpen=".popover-menu" className='rounded-circle  p-2 text-center' style={{ width: "30px", height: "30px" }}> <Icon f7="ellipsis" size="20px" color='white'></Icon></Button>
+                        <div className='d-flex align-items-center'>
+                            <Button fill popoverOpen=".popover-menu" className='rounded-circle bg-transparent p-1 text-center me-2' style={{ width: "30px", height: "30px" }}> <Icon f7="ellipsis" size="20px" ></Icon></Button>
+                            <Button fill popoverOpen=".popover-menu" className='rounded-circle bg-transparent p-1 text-center' style={{ width: "30px", height: "30px" }}> <Icon f7="xmark" size="20px" ></Icon></Button>
                         </div>
                     </div>
-                    <div className='row px-4'>
+                    <div className="p-2 px-3">
                         <div
-                            className="position-relative"
-                            style={{ cursor: 'pointer' }}
-                            onClick={togglePlay}
+                            className={`fs-13 ${expanded ? "" : "line-clamp"}`}
+                            style={{
+                                overflow: "hidden",
+                                display: "-webkit-box",
+                                WebkitLineClamp: expanded ? "unset" : 3, // số dòng
+                                WebkitBoxOrient: "vertical"
+                            }}
                         >
-                            <video
-                                ref={videoRef}
-                                className="video-bg w-100"
-                                muted
-                                loop
-                                playsInline
-                            >
-                                <source
-                                    src="https://happycorp.com.vn/wp-content/uploads/2025/07/homevideo.mp4"
-                                    type="video/mp4"
-                                />
-                            </video>
+                            Happy Corp tiên phong trong việc kiến tạo các điểm đến giải trí mang phong cách Nightlife, nơi hội tụ không gian sáng tạo, dịch vụ tinh tế và trải nghiệm phong cachs sống hiện đại, nhằm mang đến giá trị khác biệt cho khách hàng.
+                        </div>
 
-                            {!isPlaying && (
-                                <div className="video-play-button">
-                                    ▶
+                        <button
+                            className="btn btn-link p-0 text-start fs-13"
+                            onClick={() => setExpanded(!expanded)}
+                        >
+                            {expanded ? "Thu gọn" : "Xem thêm"}
+                        </button>
+                    </div>
+                    <div className='row'>
+                        <div className='col-6 p-0'>
+                            <img src='https://media.macphun.com/img/uploads/customer/how-to/608/15542038745ca344e267fb80.28757312.jpg?q=85&w=1340' className='w-100'></img>
+                        </div>
+                        <div className='col-6 p-0'>
+                            <img src='https://images.pexels.com/photos/1194775/pexels-photo-1194775.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' className='w-100'></img>
+                        </div>
+                    </div>
+
+                    <div className='d-flex justify-content-between align-items-center fs-13 p-2 px-3'>
+                        <div className='d-flex align-items-center'>
+                            <Icon f7="hand_thumbsup_fill" size="20px" color='blue' className='me-1'></Icon> 12
+                        </div>
+                        <div className='d-flex align-items-center'>
+                            12 Bình luận
+                        </div>
+                    </div>
+                    <div className='row my-2 d-flex align-items-center'>
+                        <div className='col-4 d-flex justify-content-center'>
+                            <div className='d-flex align-items-center'>
+                                <div onClick={() => setLiked(!liked)} style={{ cursor: "pointer" }}>
+                                    {liked ? (
+                                        <Icon
+                                            f7="hand_thumbsup_fill"
+                                            size="20px"
+                                            color="black"
+                                            className="me-1"
+                                        />
+                                    ) : (
+                                        <Icon
+                                            f7="hand_thumbsup"
+                                            size="20px"
+                                            color="black"
+                                            className="me-1"
+                                        />
+                                    )}
                                 </div>
-                            )}
+                                Like
+                            </div>
+                        </div>
+                        <div className='col-4 text-center'>
+                            <Link fill popupOpen="#comment-social">
+                                <Icon f7="chat_bubble" size="20px" color='black' className='me-1'></Icon>
+                                Comment
+                            </Link>
+                        </div>
+                        <div className='col-4 text-center'>
+                            <div>
+                                <Icon f7="arrowshape_turn_up_right" size="20px" color='black' className='me-1'></Icon>
+                                Share
+                            </div>
                         </div>
                     </div>
-                    <div className='mt-3' style={{ borderBottom: "0.5px solid #a8a7a7ff" }}></div>
-                    <div className='row my-3 d-flex align-items-center'>
-                        <div className='col-4 text-center'>
-                            <img src='../image/12.gif' className='size-icon'></img>
-                            1 {t("like")}
-                        </div>
-
-                        <Link className='col-4 text-center px-0 ' fill sheetOpen=".comment-social-sheet">
-                            <img src='../image/4.gif' className='size-icon'></img>
-                            2 {t("comment")}
-                        </Link>
-                        <div className='col-4 text-center'>
-                            <img src='../image/icon-share.gif' className='size-icon'></img>
-                            {t("share")}
-                        </div>
-                    </div>
-                </div>
-
+                </Card>
                 {socials && socials.map((socials) => {
                     return (
                         <React.Fragment key={socials.id}>
-                            <Card className=' p-0  border border-0 shadow rounded-4'>
-                                <div className='d-flex align-items-center justify-content-between p-3'>
+                            <Card className='m-0 mt-1 p-0 rounded-0 border border-0'>
+                                <div className='d-flex align-items-center justify-content-between p-3 pb-1'>
                                     <div className='d-flex align-items-center'>
                                         <img src={`https://beta.ellm.io/${socials.account.avatar}`} onClick={() => { profile_social(socials.account.uid) }} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
-                                        <span className=' ms-2'>{socials.account.name}
-                                            <div className='fs-12 text-secondary d-flex align-items-center'>{socials.date}
-                                                {socials.access == 0 &&
-                                                    <Icon f7="globe" size="14px" className='ms-1'></Icon>
-                                                }
-                                                {socials.access == 1 &&
-                                                    <Icon f7="person_2" size="14px" className='ms-1'></Icon>
-                                                }
+                                        <span className=' ms-2 fs-13'>
+                                            <span className='fw-bold'> {socials.account.name}</span>
+                                            <div className='fs-11 text-secondary mt-1'>{socials.date}
                                             </div>
                                         </span>
                                     </div>
                                     <div className='d-flex align-items-center'>
-                                        {socials.lang !== language && <Button className='bg-none p-1  rounded-3 me-3 fs-12'>{t("translate")} </Button>}
-
-                                        <Button onClick={() => { getActive(socials.active, socials.account.uid, socials.accountsave) }} fill popoverOpen=".popover-menu" className='rounded-circle  p-2 text-center' style={{ width: "30px", height: "30px" }}> <Icon f7="ellipsis" size="20px" color='white'></Icon></Button>
+                                        <Button fill popoverOpen=".popover-menu" className='rounded-circle bg-transparent p-1 text-center me-2' style={{ width: "30px", height: "30px" }}> <Icon f7="ellipsis" size="20px" ></Icon></Button>
+                                        <Button fill popoverOpen=".popover-menu" className='rounded-circle bg-transparent p-1 text-center' style={{ width: "30px", height: "30px" }}> <Icon f7="xmark" size="20px" ></Icon></Button>
                                     </div>
                                 </div>
-                                <div className='mx-3'> {socials.content} </div>
+                                <div className="p-2 px-3">
+                                    <div
+                                        className={`fs-13 ${expanded ? "" : "line-clamp"}`}
+                                        style={{
+                                            overflow: "hidden",
+                                            display: "-webkit-box",
+                                            WebkitLineClamp: expanded ? "unset" : 3, // số dòng
+                                            WebkitBoxOrient: "vertical"
+                                        }}
+                                    >
+                                        {socials.content}
+                                    </div>
+
+                                    {socials.content.scrollHeight > 3 &&
+                                        <button
+                                            className="btn btn-link p-0 text-start fs-13"
+                                            onClick={() => setExpanded(!expanded)}
+                                        >
+                                            {expanded ? "Thu gọn" : "Xem thêm"}
+                                        </button>
+                                    }
+
+                                </div>
                                 {socials.type == 'images' && (
                                     <>
-                                        <div className="row px-4">
+                                        <div className="row ">
                                             {/* Xử lý khi chỉ có 1 hoặc 2 ảnh */}
                                             {socials.data.length <= 2 && socials.data.map((data, index) => (
-                                                <div key={index} className={`px-1 p-1 ${socials.data.length === 1 ? 'col-12' : 'col-6'}`}>
+                                                <div key={index} className={`p-0 ${socials.data.length === 1 ? 'col-12' : 'col-6'}`}>
                                                     <img style={{ minHeight: "240px", objectFit: "cover" }}
                                                         src={`https://beta.ellm.io/${data.data}`}
-                                                        className="w-100 rounded-2"
+                                                        className="w-100 "
                                                         onClick={() => handleClick(socials, index)}
                                                     />
                                                 </div>
@@ -1128,10 +1231,10 @@ const SocialPage = () => {
 
                                             {/* Hiển thị 3 ảnh đầu nếu có nhiều hơn 2 ảnh */}
                                             {socials.data.length > 2 && socials.data.slice(0, 3).map((data, index) => (
-                                                <div key={index} className="col-4 px-1 p-1">
+                                                <div key={index} className="col-4 p-1">
                                                     <img
                                                         src={`https://beta.ellm.io/${data.data}`}
-                                                        className="w-100 rounded-2"
+                                                        className="w-100 "
                                                         onClick={() => handleClick(socials, index)}
                                                     />
                                                 </div>
@@ -1140,26 +1243,26 @@ const SocialPage = () => {
 
                                         {/* Hàng dưới chứa 2 ảnh (nếu có ít nhất 4 ảnh) */}
                                         {socials.data.length > 3 && (
-                                            <div className="row px-4">
+                                            <div className="row ">
                                                 {/* Ảnh đầu tiên của hàng dưới */}
-                                                <div className="col-6 px-1 p-1">
+                                                <div className="col-6 p-1">
                                                     <img
                                                         src={`https://beta.ellm.io/${socials.data[3].data}`}
-                                                        className="w-100 rounded-2"
+                                                        className="w-100 "
                                                         onClick={() => handleClick(socials, 3)}
                                                     />
                                                 </div>
 
                                                 {/* Ảnh thứ hai của hàng dưới có overlay nếu có hơn 5 ảnh */}
                                                 {socials.data.length > 4 &&
-                                                    <div className="col-6 px-1 p-1 position-relative">
+                                                    <div className="col-6 p-1 position-relative">
                                                         <img
                                                             src={`https://beta.ellm.io/${socials.data[4].data}`}
-                                                            className="w-100 rounded-2"
+                                                            className="w-100 "
                                                         // onClick={() => handleClick(socials)}
                                                         />
                                                         {socials.data.length > 5 && (
-                                                            <div onClick={() => handleClick(socials, 4)} className="position-absolute top-0 start-0 w-100 h-100  bg-opacity-50 d-flex justify-content-center align-items-center rounded-2">
+                                                            <div onClick={() => handleClick(socials, 4)} className="position-absolute top-0 start-0 w-100 h-100  bg-opacity-50 d-flex justify-content-center align-items-center ">
                                                                 <span className=" fs-4 fw-bold">
                                                                     {`${socials.data.length - 5}+`}
                                                                 </span>
@@ -1171,49 +1274,59 @@ const SocialPage = () => {
                                         )}
                                     </>
                                 )}
-
-                                {socials.type == "audio" && (
-                                    <>
-                                        <div className="px-3 mt-1" >
-                                            {socials.data.map((voice, index) => (
-                                                <div key={index} className="my-2  rounded-4 border-secondary " style={{ backgroundColor: "unset" }}>
-                                                    <audio controls className="w-100">
-                                                        <source src={`https://beta.ellm.io/${voice.data}`} type="audio/mpeg" />
-                                                        Trình duyệt của bạn không hỗ trợ audio.
-                                                    </audio>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </>
-                                )}
-
-                                <div className='mt-3' style={{ borderBottom: "0.5px solid #353535" }}></div>
-                                <div className='row my-3'>
-                                    <div className='col-4 text-center' onClick={() => { LikeSocial(socials.active, socials.like) }}>
-                                        {socials.accountlike == 1 ?
-                                            <Icon f7="heart_fill" size="20px" className='me-1' color='red'></Icon>
-                                            :
-                                            <Icon f7="heart" size="20px" className='me-1'></Icon>
-                                        }
-
-                                        {socials.like} {t("like")}
+                                <div className='d-flex justify-content-between align-items-center fs-13 p-2 px-3'>
+                                    <div className='d-flex align-items-center'>
+                                        <Icon f7="hand_thumbsup_fill" size="20px" color='blue' className='me-1'></Icon> 12
                                     </div>
-
-                                    <Link className='col-4 text-center px-0 ' fill sheetOpen=".comment-social-sheet" onClick={() => { social_id(socials.active, socials.comment) }}>
-                                        <Icon f7="chat_bubble" size="20px" className='me-1'></Icon>
-                                        {socials.comment} {t("comment")}
-                                    </Link>
-                                    <div className='col-4 text-center'>
-                                        <Icon f7="arrowshape_turn_up_right" size="20px" className='me-1'></Icon>
-                                        {t("share")}
+                                    <div className='d-flex align-items-center'>
+                                        12 Bình luận
                                     </div>
                                 </div>
+                                <div className='row my-2 d-flex align-items-center'>
+                                    <div className='col-4 d-flex justify-content-center'>
+                                        <div className='d-flex align-items-center'>
+                                            <div onClick={() => setLiked(!liked)} style={{ cursor: "pointer" }}>
+                                                {liked ? (
+                                                    <Icon
+                                                        f7="hand_thumbsup_fill"
+                                                        size="20px"
+                                                        color="black"
+                                                        className="me-1"
+                                                    />
+                                                ) : (
+                                                    <Icon
+                                                        f7="hand_thumbsup"
+                                                        size="20px"
+                                                        color="black"
+                                                        className="me-1"
+                                                    />
+                                                )}
+                                            </div>
+                                            Like
+                                        </div>
+                                    </div>
+                                    <div className='col-4 text-center'>
+                                        <Link fill popupOpen="#comment-social">
+                                            <Icon f7="chat_bubble" size="20px" color='black' className='me-1'></Icon>
+                                            Comment
+                                        </Link>
+                                    </div>
+                                    <div className='col-4 text-center'>
+                                        <div>
+                                            <Icon f7="arrowshape_turn_up_right" size="20px" color='black' className='me-1'></Icon>
+                                            Share
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </Card>
                         </React.Fragment>
                     )
                 })}
 
-            </div>
+
+            </PageContent>
             {/* success  */}
             <Sheet
                 push
@@ -1372,37 +1485,67 @@ const SocialPage = () => {
                 <List className='px-3'>
                     <ListItem >
                         <Link className='d-flex align-items-center fs-14  fw-bold' href="/profile/" data-view=".view-main" popoverClose >
-                            <img src="https://images.vexels.com/content/145908/preview/male-avatar-maker-2a7919.png" className='rounded-circle me-2' style={{ width: "40px", height: "40px" }}></img>
+                            <img src="https://www.in.pro.vn/wp-content/uploads/2025/01/avatar-nu-diu-dang.webp" className='rounded-circle me-2' style={{ width: "40px", height: "40px" }}></img>
                             Thanh Thúy
                         </Link>
                     </ListItem>
                     <ListItem >
                         <Link className='d-flex align-items-center fs-14 ' href="/social/" data-view=".view-main" popoverClose >
-                            <Icon f7="doc_richtext" size="20px" className='me-2'></Icon>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/sobzmbzh.json"
+                                trigger="loop"
+                                colors="primary:#000000,secondary:#f30771"
+                                className=' me-2'
+                                style={{ width: '30px', height: '30px' }}>
+                            </lord-icon>
                             {t("feed")}
                         </Link>
                     </ListItem>
                     <ListItem >
                         <Link className='d-flex align-items-center fs-14 ' href="/chat-explore/" data-view=".view-main" popoverClose >
-                            <Icon f7="cursor_rays" size="20px" className='me-2'></Icon>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/rrbmabsx.json"
+                                trigger="loop"
+                                colors="primary:#000000,secondary:#f30771"
+                                className=' me-2'
+                                style={{ width: '30px', height: '30px' }}>
+                            </lord-icon>
                             {t("explore")}
                         </Link>
                     </ListItem>
                     <ListItem  >
                         <Link className='d-flex align-items-center fs-14 ' href="/social-follower/" data-view=".view-main" popoverClose >
-                            <Icon f7="person_3" size="20px" className='me-2'></Icon>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/cfoaotmk.json"
+                                trigger="loop"
+                                colors="primary:#000000,secondary:#f30771"
+                                className=' me-2'
+                                style={{ width: '20px', height: '20px' }}>
+                            </lord-icon>
                             {t("friends")}
                         </Link>
                     </ListItem>
                     <ListItem >
                         <PageTransition className='d-flex align-items-center fs-14 ' href="/social-save/" data-view=".view-main" popoverClose>
-                            <Icon f7="bookmark" size="20px" className='me-2'></Icon>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/lcvlsnre.json"
+                                trigger="loop"
+                                colors="primary:#000000,secondary:#f30771"
+                                className=' me-2'
+                                style={{ width: '20px', height: '20px' }}>
+                            </lord-icon>
                             {t("saved")}
                         </PageTransition>
                     </ListItem>
                     <ListItem  >
                         <PageTransition className='d-flex align-items-center fs-14 ' href="/social-hide/" data-view=".view-main" popoverClose>
-                            <Icon f7="eye_slash" size="20px" className='me-2'></Icon>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/dicvhxpz.json"
+                                trigger="loop"
+                                colors="primary:#000000,secondary:#f30771"
+                                className=' me-2'
+                                style={{ width: '20px', height: '20px' }}>
+                            </lord-icon>
                             {t("hidden")}
                         </PageTransition>
                     </ListItem>
@@ -1415,7 +1558,13 @@ const SocialPage = () => {
                     {/* {uid_account == selectuidSocial && */}
                     <ListItem >
                         <Link className='d-flex align-items-center fs-14 ' onClick={() => { social_id(selectActive) }} fill sheetOpen=".edit-social-sheet" popoverClose >
-                            <Icon f7="pencil_circle" size="20px" className='me-2'></Icon>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/fikcyfpp.json"
+                                trigger="loop"
+                                colors="primary:#f30771,secondary:#f30771"
+                                className=' me-2'
+                                style={{ width: '20px', height: '20px' }}>
+                            </lord-icon>
                             Chỉnh sửa
                         </Link>
                     </ListItem>
@@ -1423,13 +1572,27 @@ const SocialPage = () => {
 
                     <ListItem >
                         <Link className='d-flex align-items-center fs-14 ' onClick={() => { socialSave() }} popoverClose >
-                            <Icon f7="bookmark" size="20px" className='me-2'></Icon>
+
                             {selectSaveSocial == 1 ?
                                 <>
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/lcvlsnre.json"
+                                        trigger="loop"
+                                        colors="primary:#f30771,secondary:#f30771"
+                                        className=' me-2'
+                                        style={{ width: '20px', height: '20px' }}>
+                                    </lord-icon>
                                     Xóa lưu
                                 </>
                                 :
                                 <>
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/lcvlsnre.json"
+                                        trigger="loop"
+                                        colors="primary:#f30771,secondary:#f30771"
+                                        className=' me-2'
+                                        style={{ width: '20px', height: '20px' }}>
+                                    </lord-icon>
                                     Lưu bài viết
                                 </>
                             }
@@ -1437,26 +1600,50 @@ const SocialPage = () => {
                     </ListItem>
                     <ListItem popoverClose >
                         <Link className='d-flex align-items-center fs-14 ' onClick={() => { socialHide() }} popoverClose >
-                            <Icon f7="eye_slash" size="20px" className='me-2'></Icon>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/dicvhxpz.json"
+                                trigger="loop"
+                                colors="primary:#f30771,secondary:#f30771"
+                                className=' me-2'
+                                style={{ width: '20px', height: '20px' }}>
+                            </lord-icon>
                             Ẩn bài viết
                         </Link>
                     </ListItem>
                     <ListItem >
                         <div className='d-flex align-items-center fs-14'>
-                            <Icon f7="link_circle" size="20px" className='me-2'></Icon>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/evxithfv.json"
+                                trigger="loop"
+                                colors="primary:#f30771,secondary:#f30771"
+                                className=' me-2'
+                                style={{ width: '20px', height: '20px' }}>
+                            </lord-icon>
                             Copy bài viết
                         </div>
                     </ListItem>
                     <ListItem popoverClose >
                         <div className='d-flex align-items-center fs-14'>
-                            <Icon f7="ant" size="20px" className='me-2'></Icon>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/lltgvngb.json"
+                                trigger="loop"
+                                colors="primary:#f30771,secondary:#f30771"
+                                className=' me-2'
+                                style={{ width: '20px', height: '20px' }}>
+                            </lord-icon>
                             Báo cáo
                         </div>
                     </ListItem>
                     {/* {uid_account == selectuidSocial && */}
                     <ListItem popoverClose >
                         <Link className='d-flex align-items-center fs-14 ' fill sheetOpen=".delete-social-sheet" popoverClose >
-                            <Icon f7="trash" size="20px" className='me-2'></Icon>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/jzinekkv.json"
+                                trigger="loop"
+                                colors="primary:#f30771,secondary:#f30771"
+                                className=' me-2'
+                                style={{ width: '20px', height: '20px' }}>
+                            </lord-icon>
                             Xóa bài viết
                         </Link>
                     </ListItem>
@@ -1606,104 +1793,92 @@ const SocialPage = () => {
                         </Navbar>
                         <List className='mt-3 mb-4 px-2'>
 
-                            <Card className=' p-0 mx-1  border border-0 shadow-sm fs-13 rounded-4'>
-                                <div className='d-flex align-items-center justify-content-between p-3'>
+                            <Card className='m-0 mt-1 p-0 rounded-0 border border-0'>
+                                <div className='d-flex align-items-center justify-content-between p-3 pb-1'>
                                     <div className='d-flex align-items-center'>
-                                        <img src={`${viewSocial.avatar}`} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
-                                        <span className='border border-0  ms-2'>
-                                            {viewSocial.name}
-                                            <div className='fs-12 text-secondary d-flex align-items-center'>{viewSocial.date}
-                                                {viewSocial.access == 0 &&
-                                                    <Icon f7="globe" size="14px" className='ms-1'></Icon>
-                                                }
-                                                {viewSocial.access == 1 &&
-                                                    <Icon f7="person_2" size="14px" className='ms-1'></Icon>
-                                                }
+                                        <img src="https://www.in.pro.vn/wp-content/uploads/2025/01/avatar-nu-diu-dang.webp" onClick={() => { profile_social(socials.account.uid) }} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
+                                        <span className=' ms-2 fs-13'>
+                                            <span className='fw-bold'> Thanh Thúy</span>
+                                            <div className='fs-11 text-secondary mt-1'>31/07/2025
                                             </div>
                                         </span>
                                     </div>
+                                    <div className='d-flex align-items-center'>
+                                        <Button fill popoverOpen=".popover-menu" className='rounded-circle bg-transparent p-1 text-center me-2' style={{ width: "30px", height: "30px" }}> <Icon f7="ellipsis" size="20px" ></Icon></Button>
+                                        <Button fill popoverOpen=".popover-menu" className='rounded-circle bg-transparent p-1 text-center' style={{ width: "30px", height: "30px" }}> <Icon f7="xmark" size="20px" ></Icon></Button>
+                                    </div>
                                 </div>
-                                <div className='mx-3'> {viewSocial.content} </div>
+                                <div className="p-2 px-3">
+                                    <div
+                                        className={`fs-13 ${expanded ? "" : "line-clamp"}`}
+                                        style={{
+                                            overflow: "hidden",
+                                            display: "-webkit-box",
+                                            WebkitLineClamp: expanded ? "unset" : 3, // số dòng
+                                            WebkitBoxOrient: "vertical"
+                                        }}
+                                    >
+                                        Happy Corp tiên phong trong việc kiến tạo các điểm đến giải trí mang phong cách Nightlife, nơi hội tụ không gian sáng tạo, dịch vụ tinh tế và trải nghiệm phong cachs sống hiện đại, nhằm mang đến giá trị khác biệt cho khách hàng.
+                                    </div>
 
-                                {/* <div className="row px-4" >
-                                    {viewSocial.images.length <= 2 && viewSocial.images.map((data, index) => (
-                                        <div key={index} className={`px-1 p-1 ${viewSocial.images.length === 1 ? 'col-12' : 'col-6'}`}>
-                                            <img style={{ minHeight: "240px", objectFit: "cover" }}
-                                                src={`${data[index]}`}
-                                                className="w-100 rounded-2"
-                                                onClick={() => handleClick(viewSocial, index)}
-                                            />
-                                        </div>
-                                    ))}
-
-                                    {viewSocial.images.length > 2 && viewSocial.images.slice(0, 3).map((data, index) => (
-                                        <div key={index} className="col-4 px-1 p-1">
-                                            <img
-                                                src={`${data.data}`}
-                                                className="w-100 rounded-2"
-                                                onClick={() => handleClick(viewSocial, index)}
-                                            />
-                                        </div>
-                                    ))}
-                                </div> */}
-                                <div className='row px-4 mt-2'>
-                                    <div className='col-6 p-1'>
+                                    <button
+                                        className="btn btn-link p-0 text-start fs-13"
+                                        onClick={() => setExpanded(!expanded)}
+                                    >
+                                        {expanded ? "Thu gọn" : "Xem thêm"}
+                                    </button>
+                                </div>
+                                <div className='row'>
+                                    <div className='col-6 p-0'>
                                         <img src='https://media.macphun.com/img/uploads/customer/how-to/608/15542038745ca344e267fb80.28757312.jpg?q=85&w=1340' className='w-100'></img>
                                     </div>
-                                    <div className='col-6 p-1'>
+                                    <div className='col-6 p-0'>
                                         <img src='https://images.pexels.com/photos/1194775/pexels-photo-1194775.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' className='w-100'></img>
                                     </div>
                                 </div>
 
-                                {viewSocial.images.length > 3 && (
-                                    <div className="row px-4">
-                                        <div className="col-6 px-1 p-1">
-                                            <img
-                                                src={`${viewSocial.images[3].data}`}
-                                                className="w-100 rounded-2"
-                                                onClick={() => handleClick(viewSocial, 3)}
-                                            />
-                                        </div>
-
-                                        {viewSocial.images.length > 4 && (
-                                            <div className="col-6 px-1 p-1 position-relative">
-                                                <img
-                                                    src={`${viewSocial.images[4].data}`}
-                                                    className="w-100 rounded-2"
-                                                />
-                                                {viewSocial.images.length > 5 && (
-                                                    <div onClick={() => handleClick(viewSocial, 4)} className="position-absolute top-0 start-0 w-100 h-100  bg-opacity-50 d-flex justify-content-center align-items-center rounded-2">
-                                                        <span className=" fs-4 fw-bold">
-                                                            {`${viewSocial.images.length - 5}+`}
-                                                        </span>
-                                                    </div>
+                                <div className='d-flex justify-content-between align-items-center fs-13 p-2 px-3'>
+                                    <div className='d-flex align-items-center'>
+                                        <Icon f7="hand_thumbsup_fill" size="20px" color='blue' className='me-1'></Icon> 12
+                                    </div>
+                                    <div className='d-flex align-items-center'>
+                                        12 Bình luận
+                                    </div>
+                                </div>
+                                <div className='row my-2 d-flex align-items-center fs-13'>
+                                    <div className='col-4 d-flex justify-content-center'>
+                                        <div className='d-flex align-items-center'>
+                                            <div onClick={() => setLiked(!liked)} style={{ cursor: "pointer" }}>
+                                                {liked ? (
+                                                    <Icon
+                                                        f7="hand_thumbsup_fill"
+                                                        size="20px"
+                                                        color="black"
+                                                        className="me-1"
+                                                    />
+                                                ) : (
+                                                    <Icon
+                                                        f7="hand_thumbsup"
+                                                        size="20px"
+                                                        color="black"
+                                                        className="me-1"
+                                                    />
                                                 )}
                                             </div>
-                                        )}
-                                    </div>
-                                )}
-
-
-
-                                <div className='mt-3' style={{ borderBottom: "0.5px solid #353535" }}></div>
-                                <div className='row my-3'>
-                                    <div className='col-4 text-center' onClick={() => { LikeSocial(social_view.active, social_view.like) }}>
-                                        {acc_like_social == 1 ?
-                                            <Icon f7="heart_fill" size="20px" className='me-1' color='red'></Icon>
-                                            :
-                                            <Icon f7="heart" size="20px" className='me-1'></Icon>
-                                        }
-
-                                        {t("like")}
-                                    </div>
-
-                                    <div className='col-4 text-center px-0 ' >
-                                        <Icon f7="chat_bubble" size="20px" className='me-1'></Icon>
-                                        {social_view.comment} {t("comment")}
+                                            Like
+                                        </div>
                                     </div>
                                     <div className='col-4 text-center'>
-                                        <Icon f7="arrowshape_turn_up_right" size="20px" className='me-1'></Icon>
-                                        {t("share")}
+                                        <Link fill popupOpen="#comment-social">
+                                            <Icon f7="chat_bubble" size="20px" color='black' className='me-1'></Icon>
+                                            Comment
+                                        </Link>
+                                    </div>
+                                    <div className='col-4 text-center'>
+                                        <div>
+                                            <Icon f7="arrowshape_turn_up_right" size="20px" color='black' className='me-1'></Icon>
+                                            Share
+                                        </div>
                                     </div>
                                 </div>
                             </Card>
@@ -1711,22 +1886,36 @@ const SocialPage = () => {
                                 {textComment && textComment.map((cmt) => {
                                     return (
                                         <>
-                                            <div className='row mt-3 border-bottom'>
+                                            <div className='row mt-4'>
                                                 <div className='col-2'>
                                                     <img src={`${cmt.avatar}`} className='w-100 rounded-circle'></img>
                                                 </div>
-                                                <div className='col-10 ps-0'>
+                                                <div className='col-10 ps-0  border-bottom'>
                                                     <div className='d-flex align-items-center justify-content-between'>
-                                                        <div className='fs-15 fw-bold'>{cmt.account} <span className='fs-12 text-muted ms-2'> {cmt.date}</span></div>
+                                                        <div className='fs-15 fw-bold'>{cmt.account} <span className='fs-11 text-muted ms-2'> {cmt.date}</span></div>
                                                         {/* {cmt.id_account == acc_social_view.id ? */}
-                                                        <div className='fs-12 d-flex align-items-center' onClick={() => { deleteComment(cmt.active) }}><Icon f7='trash' color='red' size="16px" className='me-1'></Icon>Xóa</div>
+                                                        <div className='fs-11 d-flex align-items-center' onClick={() => { deleteComment(cmt.active) }}>
+                                                            <lord-icon
+                                                                src="https://cdn.lordicon.com/fozsorqm.json"
+                                                                trigger="loop"
+                                                                colors="primary:#000000,secondary:#000000"
+                                                                className=' me-3'
+                                                                style={{ width: '20px', height: '20px' }}>
+                                                            </lord-icon>
+                                                            <lord-icon
+                                                                src="https://cdn.lordicon.com/jzinekkv.json"
+                                                                trigger="loop"
+                                                                colors="primary:red,secondary:red"
+                                                                className=''
+                                                                style={{ width: '15px', height: '15px' }}>
+                                                            </lord-icon>
+                                                        </div>
                                                         {/* :
                                                         <div></div>
                                                          } */}
-
                                                     </div>
                                                     <div className='mt-1'>
-                                                        <div className='w-100  fs-15 p-2'>
+                                                        <div className='w-100  fs-15 py-2 pt-0 text-secondary'>
                                                             {cmt.content}
                                                         </div>
                                                     </div>
@@ -1735,44 +1924,27 @@ const SocialPage = () => {
                                         </>
                                     )
                                 })}
+
                             </div>
-                            <Card className='p-0 m-0 mt-4  mx-2 mb-2 border border-2 rounded-4 ' style={{
-                                // backgroundColor: "rgba(52, 58, 64)",
-                                position: "fixed",
+
+
+                            <div className='px-4 py-2 bg-white' style={{
+                                cursor: 'pointer', position: "fixed",
                                 bottom: 0,
                                 left: 0,
                                 right: 0,
-                                zIndex: 1000, // đảm bảo nổi lên trên
+                                zIndex: 1000,
                             }}>
-                                <div className="input-group m-0 mb-1  rounded-3 p-0 form-control rounded-pill-chat border border-0 " style={{ position: "relative" }}>
-                                    <input
-                                        rows={1}
-                                        className="border border-0 rounded-4c ps-2 rounded-3 fs-15  "
-                                        placeholder="Comment"
-                                        style={{
-                                            width: "90%",
-                                            height: "45px"
-                                        }}
-                                        value={content}
-                                        onChange={(e) => setContent(e.target.value)}
-                                        aria-describedby="basic-addon1"
-                                    ></input>
-                                    <span
-                                        className="clear-button position-absolute d-flex text-end justify-content-end rounded-4"
-                                        id="basic-addon2"
-                                        style={{
-                                            right: "5px",
-                                            top: "20px",
-                                            transform: "translateY(-50%)"
-                                        }}
-                                    >
-                                        <Button onClick={CommentSocial} className='p-2 mt-2 rounded-3 bg-pink ' style={{ width: "35px", height: "35px" }}>
-                                            <Icon f7="paperplane" size="20px" ></Icon>
-                                        </Button>
-                                    </span>
 
+                                <div className="d-flex align-items-center bg-light border border-secondary-10 rounded-3 p-1 row" style={{
+
+                                }}>
+                                    <input className='border bg-light rounded-3 border-0 p-2 px-3 fs-13 col-10' placeholder='Nhập nội dung'></input>
+                                    <Button fill={false} className=" col-2 pe-0 d-flex justify-content-end">
+                                        <Icon f7="location_fill" size="25px" color='pink' className='me-1'></Icon>
+                                    </Button>
                                 </div>
-                            </Card>
+                            </div>
 
 
                         </List>
