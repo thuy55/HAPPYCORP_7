@@ -264,7 +264,7 @@ const AccountPage = () => {
 
             </Card>
 
-            <Sheet push
+            <Sheet 
                 className="sheet-changepassword h-auto"
                 opened={sheetOpenedChangePass}
                 onSheetClosed={() => {
@@ -373,7 +373,7 @@ const AccountPage = () => {
                 </PageContent>
             </Sheet>
 
-            <Sheet push
+            <Sheet 
                 className="sheet-changeinfo h-auto"
                 opened={sheetOpenedChangeInfo}
                 onSheetClosed={() => {

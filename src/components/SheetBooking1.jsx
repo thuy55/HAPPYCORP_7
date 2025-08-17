@@ -1,7 +1,7 @@
 import { Sheet, Toolbar, PageContent, Block, Link, Card, ListInput, List, Icon, Button, Segmented } from "framework7-react";
 import { useEffect, useState } from "react";
 import moment from 'moment';
-import SheetBookingMenu from "./SheetBookingMenu";
+import SheetBookingCompleted from "./BookingCompleted";
 export default function SheetBooking1({ opened, onClose }) {
     const [selectedMonth, setSelectedMonth] = useState(moment().month()); // 0 - 11
     const [selectedYear, setSelectedYear] = useState(moment().year());
@@ -34,10 +34,11 @@ export default function SheetBooking1({ opened, onClose }) {
     }, []);
 
 
-      const [activeStrongButton, setActiveStrongButton] = useState(0);
+    const [activeStrongButton, setActiveStrongButton] = useState(0);
+    const [sheetOpenedCompleted, setSheetOpenedCompleted] = useState(false);
     return (
         <>
-            <Sheet
+            <Sheet 
                 className="demo-sheet-2 h-100 bg-light"
                 opened={opened}
                 onSheetClosed={onClose}
@@ -289,12 +290,15 @@ export default function SheetBooking1({ opened, onClose }) {
                 <footer className="fixed-bottom p-3 py-2 bg-white">
                     <div className="grid grid-cols-2 grid-gap">
                         <Button sheetClose className="bg-secondary bg-opacity-25 p-3 rounded-pill  fs-15">Hủy đơn</Button>
-                        <Button className="bg-pink p-3 rounded-pill text-white fs-15">Hoàn thành</Button>
+                        <Button className="bg-pink p-3 rounded-pill text-white fs-15" onClick={() => {setSheetOpenedCompleted(true)}}>Hoàn thành</Button>
                     </div>
                 </footer>
             </Sheet>
+            <SheetBookingCompleted
+                opened={sheetOpenedCompleted}
+                onClose={() => setSheetOpenedCompleted(false)}
+            />
 
-         
         </>
 
 

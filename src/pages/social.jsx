@@ -971,15 +971,17 @@ const SocialPage = () => {
             <CommonNavbar />
 
             {/* Page content */}
-            <PageContent style={{ backgroundColor: "rgb(223 223 223)", paddingTop: "0" }}>
-                <Card className='m-0 p-3 pb-2 rounded-0 border border-0'>
+            <div className='pb-2 pt-0' style={{ backgroundColor: "rgb(223 223 223)"}}>
+                <Card className='m-0 p-3 pb-2 rounded-0 border border-0' >
                     <div className='row d-flex align-items-center'>
                         <div className='col-8'>
                             <div className='d-flex align-items-center'>
                                 <Link fill popoverOpen=".popover-menu-social">
                                     <img src="https://www.in.pro.vn/wp-content/uploads/2025/01/avatar-nu-diu-dang.webp" className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
                                 </Link>
-                                <span className='fst-italic  ms-3'>Bạn đang nghĩ gì?</span>
+                                <Link fill popupOpen="#add-social">
+                                    <span className='fst-italic  ms-3'>Bạn đang nghĩ gì?</span>
+                                </Link>
                             </div>
                         </div>
                         <div className='col-4 text-end'>
@@ -1326,7 +1328,7 @@ const SocialPage = () => {
                 })}
 
 
-            </PageContent>
+            </div>
             {/* success  */}
             <Sheet
                 push
@@ -1655,18 +1657,28 @@ const SocialPage = () => {
             <Popup id="add-social">
                 <View>
                     <Page>
-                        <Navbar title="Thêm bài viết">
+                        <Navbar title="Tạo bài viết">
                             <NavRight>
                                 <Link popupClose>Close</Link>
                             </NavRight>
                         </Navbar>
                         <List className='mt-3 mb-4 px-2'>
-                            <div className='px-3'>
-
-                                <textarea rows={5} className=' rounded-3 border border-1 px-2  mb-3' placeholder="Hãy nêu cảm nghĩ của bạn" onChange={(e) => setContentAdd(e.target.value)}></textarea>
+                            <div className='row w-100'>
+                                <div className='col-2'>
+                                    <img src="https://www.in.pro.vn/wp-content/uploads/2025/01/avatar-nu-diu-dang.webp" className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
+                                </div>
+                                <div className='col-10 ps-0 '>
+                                    <div className='fs-15 fw-bold'>Nguyễn Thị Thanh Thúy</div>
+                                    <div className='fs-13 mt-2 fw-bold'>
+                                        <span className='text-primary p-1 px-2 rounded-2 bg-primary bg-opacity-25 me-1'>Bạn bè</span> <span className='text-primary p-1 px-2 rounded-2 bg-primary bg-opacity-25 me-1'>Trải nghiệm</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='px-2 mt-3'>
+                                <textarea rows={5} className=' rounded-3  px-2  mb-3' placeholder="Hãy nêu cảm nghĩ của bạn" onChange={(e) => setContentAdd(e.target.value)}></textarea>
                             </div>
 
-                            <div className="m-0 mx-3 p-3 rounded-4 border border-1" style={{ minHeight: "300px" }}>
+                            <div className="m-0 mx-2 p-3 pb-5" style={{ minHeight: "300px" }}>
                                 <div className="image-upload-container">
                                     <input
                                         id="fileInput"
@@ -1678,14 +1690,14 @@ const SocialPage = () => {
                                     />
 
                                     <div className="image-grid">
-                                        <div className="upload-box text-center mt-4" onClick={triggerFileInput} style={{ cursor: 'pointer' }}>
+                                        <div className="upload-box text-center mt-4 border border-1 p-2 rounded-3" onClick={triggerFileInput} style={{ cursor: 'pointer' }}>
                                             <Icon f7="cloud_upload" size="30px" />
                                             <div>Thêm hình ảnh / video</div>
                                         </div>
 
                                         <div className="row mt-3">
                                             {media.map((item, index) => (
-                                                <div key={index} className="image-item position-relative col-4 mb-3">
+                                                <div key={index} className="image-item position-relative col-6 mb-3">
                                                     <Button
                                                         className="btn bg-danger btn-sm position-absolute top-0 end-0 m-1 rounded-circle p-1"
                                                         onClick={() => handleDeleteMedia(index)}
@@ -1710,8 +1722,9 @@ const SocialPage = () => {
                                     </div>
                                 </div>
                             </div>
-
-                            <Button className=' rounded-pill p-4 bg-pink  mt-5 mx-3 fs-6' onClick={handleAddPost}>Đăng</Button>
+                            <footer className="fixed-bottom p-3 py-2 bg-white">
+                                <Button className=' rounded-pill p-4 bg-pink  mx-3 fs-6 fw-bold text-white' onClick={handleAddPost}>Đăng</Button>
+                            </footer>
                         </List>
                     </Page>
                 </View>
@@ -1828,7 +1841,7 @@ const SocialPage = () => {
                                         {expanded ? "Thu gọn" : "Xem thêm"}
                                     </button>
                                 </div>
-                                <div className='row'>
+                                <div className='row '>
                                     <div className='col-6 p-0'>
                                         <img src='https://media.macphun.com/img/uploads/customer/how-to/608/15542038745ca344e267fb80.28757312.jpg?q=85&w=1340' className='w-100'></img>
                                     </div>
@@ -1845,8 +1858,8 @@ const SocialPage = () => {
                                         12 Bình luận
                                     </div>
                                 </div>
-                                <div className='row my-2 d-flex align-items-center fs-13'>
-                                    <div className='col-4 d-flex justify-content-center'>
+                                <div className='grid grid-cols-3  grid-gap my-2  fs-13'>
+                                    <div className=' d-flex justify-content-center'>
                                         <div className='d-flex align-items-center'>
                                             <div onClick={() => setLiked(!liked)} style={{ cursor: "pointer" }}>
                                                 {liked ? (
@@ -1868,13 +1881,13 @@ const SocialPage = () => {
                                             Like
                                         </div>
                                     </div>
-                                    <div className='col-4 text-center'>
+                                    <div className=' text-center'>
                                         <Link fill popupOpen="#comment-social">
                                             <Icon f7="chat_bubble" size="20px" color='black' className='me-1'></Icon>
                                             Comment
                                         </Link>
                                     </div>
-                                    <div className='col-4 text-center'>
+                                    <div className=' text-center'>
                                         <div>
                                             <Icon f7="arrowshape_turn_up_right" size="20px" color='black' className='me-1'></Icon>
                                             Share

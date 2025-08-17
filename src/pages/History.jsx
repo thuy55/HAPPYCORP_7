@@ -13,7 +13,9 @@ import {
     Button,
     Segmented,
     f7,
-    List
+    List,
+    CardHeader,
+    CardContent
 } from 'framework7-react';
 import moment from 'moment';
 import CommonNavbar from '../components/CommonNavbar';
@@ -184,9 +186,7 @@ const HistoryPage = () => {
             {/* Period Selector */}
             <List className='m-2' simpleList>
                 <div className='d-flex align-items-center fs-6 fw-bold'>
-                    <PageTransition href="/">
-                        <img src='../image/icon-backward.gif' className='size-icon me-1'></img>
-                    </PageTransition>
+               
                     Lịch sử
                 </div>
             </List>
@@ -398,28 +398,176 @@ const HistoryPage = () => {
                 </div>
             </div>
             <div className="m-3">
-                <div onClick={() => { bookingDetail(1) }} className='border-bottom hieuung p-2 rounded-2 d-flex align-items-center fs-13'>
-                    <div className='bg-primary rounded-2' style={{ width: "35px", height: "35px" }}></div>
-                    <div className='ms-2'>
-                        <div className='fw-bold mb-1'>MR TRUNG & HUY NGUYỄN (K.BI)</div>
-                        <div>31/07/2025 12:00:00</div>
-                    </div>
-                </div>
-                <div onClick={() => { bookingDetail(1) }} className=' hieuung mt-2 p-2 rounded-2 d-flex align-items-center fs-13'>
-                    <div className='bg-primary rounded-2' style={{ width: "35px", height: "35px" }}></div>
-                    <div className='ms-2'>
-                        <div className='fw-bold mb-1'>MR TRUNG & HUY NGUYỄN (K.BI)</div>
-                        <div>31/07/2025 12:00:00</div>
-                    </div>
-                </div>
+                <Card expandable className='border  shadow-none  border-0 m-0 p-1'>
+                    <CardContent padding={false}>
+                        <div className="" >
+                            <CardHeader className="display-block p-2  px-3 pe-1">
+                                <div className='row w-100  d-flex align-items-center '>
+                                    <div className='col-2 p-0 ps-1'>
+                                        <img style={{ width: "100%", height: "100%" }} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className=' border border-2 rounded-3 border-danger'></img>
+                                    </div>
+                                    <div className='col-10 fs-13  border-bottom border-light'>
+                                        <div className='fw-bold d-flex justify-content-between'> Phòng: V.I.P 4 <span className='text-success'>Đã hoàn tất</span></div>
+                                        <div className='text-muted mt-1 mb-2'>18/07/2025 14:22:52</div>
+                                    </div>
+                                </div>
+                            </CardHeader>
+                            <Link
+                                cardClose
+                                color="white"
+                                className="card-opened-fade-in"
+                                style={{ position: 'absolute', right: '15px', top: '15px' }}
+                                iconF7="xmark_circle_fill"
+                            />
+                        </div>
+                        <div className="card-content-padding">
+                            <Block className='mt-0 '>
+                                <div className='fw-bold fs-6 mt-4'>Thông tin khách hàng</div>
+                                <List className='my-2 fs-13'>
+                                    <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                                        Khách hàng<div className='fw-bold'>MR TRUNG & HUY NGUYỄN (K.BI)</div>
+                                    </div>
+                                    <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                                        Ghi chú<div className='fw-bold'>Không có</div>
+                                    </div>
+                                </List>
+                                <div className='fw-bold fs-6 mt-4'>Thông tin đặt bàn</div>
+                                <List className='my-2 fs-13'>
+                                    <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                                        Nhà hàng<div className='fw-bold'>90s House</div>
+                                    </div>
+                                    <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                                        Mã booking<div className='fw-bold'>#8732465</div>
+                                    </div>
+                                    <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                                        Ngày<div className='fw-bold'>31/07/2025 12:00:00</div>
+                                    </div>
+                                    <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                                        Số người<div className='fw-bold'>3</div>
+                                    </div>
+
+                                    <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                                        Khu vực/ Phòng<div className='fw-bold'>V4</div>
+                                    </div>
+                                    <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                                        Trạng thái<span className='px-2 pb-1 bg-primary rounded-pill text-white'>Đã nhận phòng</span>
+                                    </div>
+                                    <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                                        Người đặt<div className='fw-bold'>Jatbirat</div>
+                                    </div>
+                                    <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                                        Ghi chú<div className='fw-bold'>Không có</div>
+                                    </div>
+                                </List>
+                                <div className='fw-bold fs-6 mt-4'>Thanh toán</div>
+                                <List className='my-2 fs-13'>
+                                    <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                                        Tổng tiền<div className='fw-bold'>0</div>
+                                    </div>
+                                </List>
+
+                                <div className=' grid grid-cols-2 grid-gap px-2 my-4'>
+                                    <div>
+                                        <button className='border border-0 rounded-pill p-3 bg-warning fs-13 fw-đơnd'>Tải hóa đơn</button>
+                                    </div>
+                                    <div>
+                                        <button className='border border-0 rounded-pill p-3 bg-warning fs-13 fw-đơnd'>Chia sẻ</button>
+                                    </div>
+                                </div>
+                            </Block>
+
+                        </div>
+                    </CardContent>
+                </Card>
+                <Card expandable className='border  shadow-none  border-0 m-0 p-1'>
+                    <CardContent padding={false}>
+                        <div className="" >
+                            <CardHeader className="display-block p-2  px-3 pe-1">
+                                <div className='row w-100  d-flex align-items-center '>
+                                    <div className='col-2 p-0 ps-1'>
+                                        <img style={{ width: "100%", height: "100%" }} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className=' border border-2 rounded-3 border-danger'></img>
+                                    </div>
+                                    <div className='col-10 fs-13  border-bottom border-light'>
+                                        <div className='fw-bold d-flex justify-content-between'> Phòng: V.I.P 4 <span className='text-success'>Đã hoàn tất</span></div>
+                                        <div className='text-muted mt-1 mb-2'>18/07/2025 14:22:52</div>
+                                    </div>
+                                </div>
+                            </CardHeader>
+                            <Link
+                                cardClose
+                                color="white"
+                                className="card-opened-fade-in"
+                                style={{ position: 'absolute', right: '15px', top: '15px' }}
+                                iconF7="xmark_circle_fill"
+                            />
+                        </div>
+                        <div className="card-content-padding">
+                            <Block className='mt-0 '>
+                                <div className='fw-bold fs-6 mt-4'>Thông tin khách hàng</div>
+                                <List className='my-2 fs-13'>
+                                    <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                                        Khách hàng<div className='fw-bold'>MR TRUNG & HUY NGUYỄN (K.BI)</div>
+                                    </div>
+                                    <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                                        Ghi chú<div className='fw-bold'>Không có</div>
+                                    </div>
+                                </List>
+                                <div className='fw-bold fs-6 mt-4'>Thông tin đặt bàn</div>
+                                <List className='my-2 fs-13'>
+                                    <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                                        Nhà hàng<div className='fw-bold'>90s House</div>
+                                    </div>
+                                    <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                                        Mã booking<div className='fw-bold'>#8732465</div>
+                                    </div>
+                                    <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                                        Ngày<div className='fw-bold'>31/07/2025 12:00:00</div>
+                                    </div>
+                                    <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                                        Số người<div className='fw-bold'>3</div>
+                                    </div>
+
+                                    <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                                        Khu vực/ Phòng<div className='fw-bold'>V4</div>
+                                    </div>
+                                    <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                                        Trạng thái<span className='px-2 pb-1 bg-primary rounded-pill text-white'>Đã nhận phòng</span>
+                                    </div>
+                                    <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                                        Người đặt<div className='fw-bold'>Jatbirat</div>
+                                    </div>
+                                    <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                                        Ghi chú<div className='fw-bold'>Không có</div>
+                                    </div>
+                                </List>
+                                <div className='fw-bold fs-6 mt-4'>Thanh toán</div>
+                                <List className='my-2 fs-13'>
+                                    <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
+                                        Tổng tiền<div className='fw-bold'>0</div>
+                                    </div>
+                                </List>
+
+                                <div className=' grid grid-cols-2 grid-gap px-2 my-4'>
+                                    <div>
+                                        <button className='border border-0 rounded-pill p-3 bg-warning fs-13 fw-đơnd'>Tải hóa đơn</button>
+                                    </div>
+                                    <div>
+                                        <button className='border border-0 rounded-pill p-3 bg-warning fs-13 fw-đơnd'>Chia sẻ</button>
+                                    </div>
+                                </div>
+                            </Block>
+
+                        </div>
+                    </CardContent>
+                </Card>
             </div>
             {/* Map/Chart Area */}
-            <Card className="mx-3 p-4 text-center border-0 shadow-sm" style={{ minHeight: '300px' }}>
+            {/* <Card className="mx-3 p-4 text-center border-0 shadow-sm" style={{ minHeight: '300px' }}>
                 <div className="position-relative d-flex align-items-center justify-content-center" style={{ height: '250px' }}>
                     <img src='../img/not-booking.svg' className='w-100'></img>
                 </div>
 
-            </Card>
+            </Card> */}
 
             <div className="pb-4"></div>
         </Page>

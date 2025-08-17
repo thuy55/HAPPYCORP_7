@@ -2,7 +2,7 @@ import { Navbar, NavLeft, NavTitle, NavRight, Link } from 'framework7-react';
 
 export default function CommonNavbar() {
   return (
-    <Navbar sliding={false}>
+    <Navbar sliding={false} className='fixed-top'>
       <NavLeft>
         <Link panelOpen="left">
 

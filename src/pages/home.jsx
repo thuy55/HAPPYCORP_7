@@ -29,6 +29,11 @@ import PageTransition from '../components/PageTransition';
 
 import { Player } from '@lordicon/react';
 import SheetBooking from "../components/SheetBooking";
+import SheetMenu from '../components/Menu';
+import SheetEvent from '../components/Event';
+import SheetEventDetail from '../components/EventDetail';
+import SheetEndow from '../components/Endow';
+import SheetEndowDetail from '../components/EndowDetail';
 
 const HomePage = () => {
   const week = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
@@ -93,7 +98,11 @@ const HomePage = () => {
   }
 
   const [sheetOpened, setSheetOpened] = useState(false);
-
+  const [sheetOpenedMenu, setSheetOpenedMenu] = useState(false);
+  const [sheetOpenedEvent, setSheetOpenedEvent] = useState(false);
+  const [sheetOpenedEndow, setSheetOpenedEndow] = useState(false);
+  const [sheetOpenedEventDetail, setSheetOpenedEventDetail] = useState(false);
+  const [sheetOpenedEndowDetail, setSheetOpenedEndowDetail] = useState(false);
 
   return (
 
@@ -170,44 +179,57 @@ const HomePage = () => {
       </List>
 
       <div className="grid grid-cols-4 px-2 mt-2">
-        <PageTransition href="/menu/">
+        <div onClick={() => setSheetOpenedMenu(true)}>
           <div className='text-center rounded-4 mx-2 p-1'>
             <img src='../img/catering.gif' className='w-50'></img>
             <div className=' fs-13 '>Thực đơn</div>
           </div>
-        </PageTransition>
-        <PageTransition href="/room/">
+        </div>
+        <div onClick={() => setSheetOpened(true)}>
           <div className='text-center rounded-4 mx-2 p-1'>
             <img src='../img/online-order.gif' className='w-50'></img>
             <div className=' fs-13'>Đặt bàn</div>
           </div>
-        </PageTransition>
-        <PageTransition href="/event/">
+        </div>
+        <div onClick={() => setSheetOpenedEvent(true)}>
           <div className='text-center rounded-4 mx-2 p-1'>
             <img src='../img/event.gif' className='w-50'></img>
             <div className=' fs-13'>Sự kiện</div>
           </div>
-        </PageTransition>
-        <Link href="/revenue/">
+        </div>
+         <Link href="/revenue/">
           <div className='text-center rounded-4 mx-2 p-1'>
             <img src='../img/bill.gif' className='w-50'></img>
             <div className=' fs-13'>Doanh thu</div>
           </div>
         </Link>
-
-        <div onClick={() => setSheetOpened(true)}>
-          <div className='text-center rounded-4 mx-2 p-1'>
-            <img src='../img/bill.gif' className='w-50'></img>
-            <div className=' fs-13'>Doanh thu</div>
-          </div>
-        </div>
       </div>
 
       <SheetBooking
         opened={sheetOpened}
         onClose={() => setSheetOpened(false)}
       />
-      <Link href="/endow/" className='fs-6 fw-bold mx-3 mt-3 justify-content-start d-flex align-items-center'>
+      <SheetMenu
+        opened={sheetOpenedMenu}
+        onClose={() => setSheetOpenedMenu(false)}
+      />
+      <SheetEvent
+        opened={sheetOpenedEvent}
+        onClose={() => setSheetOpenedEvent(false)}
+      />
+       <SheetEventDetail
+        opened={sheetOpenedEventDetail}
+        onClose={() => setSheetOpenedEventDetail(false)}
+      />
+      <SheetEndow
+        opened={sheetOpenedEndow}
+        onClose={() => setSheetOpenedEndow(false)}
+      />
+       <SheetEndowDetail
+        opened={sheetOpenedEndowDetail}
+        onClose={() => setSheetOpenedEndowDetail(false)}
+      />
+      <Link onClick={() => setSheetOpenedEndow(true)} className='fs-6 fw-bold mx-3 mt-3 justify-content-start d-flex align-items-center'>
         {/* <img src='../image/6.gif' className='size-icon'></img> */}
         <lord-icon
           src="https://cdn.lordicon.com/puebsmel.json"
@@ -221,9 +243,9 @@ const HomePage = () => {
       </Link>
       <div className='row d-flex flex-nowrap mx-2 mt-2 pb-2' style={{ overflowX: "auto", whiteSpace: "nowrap" }}>
         <div className='col-5 px-1'>
-          <Card className='m-0 border-light p-1 fs-13'>
+          <Card className='m-0 border-light p-1 fs-13' onClick={() => setSheetOpenedEndowDetail(true)}>
             <div>
-              <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
+              <img onClick={() => setSheetOpenedEndowDetail(true)} src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
               <div className='d-flex'>
                 <div className='mt-2 fst-italic'> <lord-icon
                   src="https://cdn.lordicon.com/puebsmel.json"
@@ -242,7 +264,7 @@ const HomePage = () => {
         <div className='col-5 px-1'>
           <Card className='m-0 border-light p-1 fs-13'>
             <div>
-              <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
+              <img onClick={() => setSheetOpenedEndowDetail(true)} src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
               <div className='d-flex'>
                 <div className='mt-2 fst-italic'>
                   <lord-icon
@@ -260,7 +282,7 @@ const HomePage = () => {
           </Card>
         </div>
         <div className='col-5 px-1'>
-          <Card className='m-0 border-light p-1 fs-13'>
+          <Card onClick={() => setSheetOpenedEndowDetail(true)} className='m-0 border-light p-1 fs-13'>
             <div>
               <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
               <div className='d-flex'>
@@ -300,7 +322,7 @@ const HomePage = () => {
           </Card>
         </div>
       </div>
-      <Link href="/event/" className='fs-6 fw-bold mx-3 mt-3'>
+      <Link onClick={() => setSheetOpenedEvent(true)} className='fs-6 fw-bold mx-3 mt-3'>
         <lord-icon
           src="https://cdn.lordicon.com/okgbpdra.json"
           trigger="loop"
@@ -315,10 +337,10 @@ const HomePage = () => {
         class=" mt-3 demo-swiper-multiple demo-swiper-multiple-auto ps-3"
         space-between="10"
         slides-per-view="1.15">
-        <swiper-slide><img src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image' ></img></swiper-slide>
-        <swiper-slide><img src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image'></img></swiper-slide>
-        <swiper-slide><img src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image'></img></swiper-slide>
-        <swiper-slide><img src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image' ></img></swiper-slide>
+        <swiper-slide><img onClick={() => setSheetOpenedEventDetail(true)} src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image' ></img></swiper-slide>
+        <swiper-slide><img onClick={() => setSheetOpenedEventDetail(true)} src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image'></img></swiper-slide>
+        <swiper-slide><img onClick={() => setSheetOpenedEventDetail(true)} src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image'></img></swiper-slide>
+        <swiper-slide><img onClick={() => setSheetOpenedEventDetail(true)} src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image' ></img></swiper-slide>
         <swiper-slide><img src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image'></img></swiper-slide>
         <swiper-slide><img src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image' ></img></swiper-slide>
         <swiper-slide><img src='https://wallpaperaccess.com/full/2300142.jpg' className='w-100 border-image'></img></swiper-slide>

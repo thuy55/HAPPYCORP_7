@@ -97,6 +97,7 @@ const MyApp = () => {
   // f7.views.main.router.navigate('/endow-detal/');
   function handleActive(e) {
     f7ready(() => {
+      chuyentrang(e);
       setCurrentPath(e);
       console.log('Current path:', e);
     });
@@ -107,6 +108,36 @@ const MyApp = () => {
     ? 'primary:#f30771,secondary:#f30771'
     : 'primary:#999999,secondary:#999999';
 };
+
+function chuyentrang(e){
+   f7.panel.close('left');
+  
+  setTimeout(() => {
+    // f7.views.main.router.navigate(`/${e}/`);
+    
+    // Force activate corresponding tab
+    setTimeout(() => {
+      if (e === 'home') {
+        f7.tab.show('#view-home');
+      } else if (e === 'account') {
+        f7.tab.show('#view-account');
+      } else if (e === 'chat') {
+        f7.tab.show('#view-chat');
+      } else if (e === 'history') {
+        f7.tab.show('#view-history');
+      } else if (e === 'social') {
+        f7.tab.show('#view-social');
+      }else {
+        f7.views.main.router.navigate(`/${e}/`);
+      }
+      
+      setCurrentPath(e);
+      console.log('Navigated and activated tab:', e);
+    }, 50);
+    
+  }, 100);
+  
+}
 
 
   return (
@@ -166,7 +197,7 @@ const MyApp = () => {
           </Link>
         </Toolbar>
         <View id="view-home" main tab tabActive url="/home/" pushState={true} />
-        <View id="view-chat"  tab url="/menu/" pushState={true} />
+        <View id="view-chat"  tab url="/chat/" pushState={true} />
         <View id="view-history"  tab url="/history/" pushState={true} />
         <View id="view-social" tab url="/social/" pushState={true} />
         <View id="view-account"  tab url="/account/" pushState={true} />
@@ -185,19 +216,27 @@ const MyApp = () => {
 
             <BlockTitle className='mb-1  mt-4 fs-13 '>Quản lý</BlockTitle>
             <List dividersIos={false} simpleList inset className='fs-13 list-custom mb-3'>
-              <ListItem href="/account/" data-view=".view-main" panelClose selected={selected === 'account'}
-                onClick={() => { setSelected('account'), console.log(123) }}>
-                <Link href="/account/" data-view=".view-main" panelClose selected={selected === 'account'}
-                  onClick={() => { setSelected('account'), console.log(123) }}>
-                  <lord-icon
-                    src="https://cdn.lordicon.com/shcfcebj.json"
-                    trigger="loop"
-                    colors="primary:#f30771,secondary:#f30771"
-                    className=' me-2'
-                    style={{ width: '25px', height: '25px' }}>
-                  </lord-icon> Tài khoản
-                </Link>
-              </ListItem>
+              {/* <ListItem  link="/account/" selected={selected === 'account'}
+                onClick={() => { setSelected('account'), console.log(123) }}> */}
+                <ListItem  onClick={() => { 
+                  chuyentrang("account");
+                  setSelected('account');
+                  console.log(123);
+                  setCurrentPath('account');
+                }}
+              >
+                <div className='d-flex align-items-center'>
+                <lord-icon
+                  src="https://cdn.lordicon.com/shcfcebj.json"
+                  trigger="loop"
+                  colors="primary:#f30771,secondary:#f30771"
+                  className=' me-2'
+                  style={{ width: '25px', height: '25px' }}
+                />
+                Tài khoản
+                </div>
+              </ListItem> 
+              {/* </ListItem> */}
               <ListItem >
                 <Link>
                   <lord-icon
@@ -276,7 +315,7 @@ const MyApp = () => {
             <div className='px-3'>
               <button className='p-2 rounded-pill bg-pink fs-13 border border-0 text-white fw-bold'>Đăng xuất</button>
             </div>
-            <div className='fixed-bottom mb-4'>
+            <div className='fixed-bottom '>
               <Card className="bg-pink-nhat border border-0 bg-danger m-0 rounded-0 fs-13 p-3 py-4">
                 <div>
                   <img src='../image/happy-corp-logo.png' className='w-25' />

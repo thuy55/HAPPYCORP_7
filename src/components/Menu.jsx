@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import moment from 'moment';
 import SheetBooking1 from "./SheetBooking1";
 import SheetMenuDetail from "./MenuDetail";
-export default function SheetBookingMenu({ opened, onClose }) {
+export default function SheetMenu({ opened, onClose }) {
     const [activeTab, setActiveTab] = useState('service');
 
     // Sample data cho từng tab
@@ -166,8 +166,7 @@ export default function SheetBookingMenu({ opened, onClose }) {
         return menuData[activeTab] || { categories: [] };
     };
 
-    const [sheetOpened1, setSheetOpened1] = useState(false);
-    const [sheetOpened2, setSheetOpened2] = useState(false);
+     const [sheetOpened1, setSheetOpened1] = useState(false);
     return (
         <>
             <Sheet
@@ -256,10 +255,10 @@ export default function SheetBookingMenu({ opened, onClose }) {
                                                 <div className="row g-3 py-3">
                                                     {category.items.map((item) => (
                                                         <div key={item.id} className="col-6">
-                                                            <Card className="m-0 border-0 shadow-sm p-2 h-100">
+                                                            <Card className="m-0 border-0 shadow-sm p-2 h-100" >
                                                                 <div className="text-center">
                                                                     <div className="mb-3">
-                                                                        <img  onClick={() => {setSheetOpened2(true)}}
+                                                                        <img onClick={() => {setSheetOpened1(true)}}
                                                                             src={item.image}
                                                                             alt={item.name}
                                                                             className="w-100 rounded-3"
@@ -309,22 +308,17 @@ export default function SheetBookingMenu({ opened, onClose }) {
                         )}
                     </Card>
                 </PageContent>
-                <footer className="fixed-bottom p-3 py-2 bg-white">
+                {/* <footer className="fixed-bottom p-3 py-2 bg-white">
                     <div className="grid grid-cols-2 grid-gap">
                         <Button sheetClose className="bg-secondary bg-opacity-25 p-3 rounded-pill  fs-15">Hủy đơn</Button>
-                        <Button className="bg-pink p-3 rounded-pill text-white fs-15" onClick={() => {
-                            setSheetOpened1(true), console.log(32354);
+                        <Button className="bg-pink p-3 rounded-pill text-white fs-15" onClick={() => {setSheetOpened1(true), console.log(32354);
                         }}>Tiếp tục</Button>
                     </div>
-                </footer>
+                </footer> */}
             </Sheet>
-            <SheetBooking1
+            <SheetMenuDetail
                 opened={sheetOpened1}
                 onClose={() => setSheetOpened1(false)}
-            />
-            <SheetMenuDetail
-                opened={sheetOpened2}
-                onClose={() => setSheetOpened2(false)}
             />
         </>
     );
