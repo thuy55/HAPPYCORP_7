@@ -2,6 +2,7 @@ import { Sheet, Toolbar, PageContent, Block, Link, Button, Card } from "framewor
 import SheetBooking1 from "./SheetBooking1";
 import { useState } from "react";
 import SheetBookingMenu from "./SheetBookingMenu";
+import SheetRoomDetail from "./RoomDetail";
 
 export default function SheetBooking({ opened, onClose }) {
     const [sheetOpenebMenu, setSheetOpenebMenu] = useState(false);
@@ -18,8 +19,8 @@ export default function SheetBooking({ opened, onClose }) {
                 </div>
             </Toolbar>
 
-            <PageContent className="px-4 fs-13 " style={{ paddingBottom: "80px" }}>
-                <div className='my-2'>
+            <PageContent className="px-3 fs-13 pb-4" >
+                <div className='my-2 px-2'>
                     <div className="d-flex align-items-center bg-light border border-secondary-10 rounded-pill p-1 row" style={{ cursor: 'pointer' }}>
                         <input className='border bg-light rounded-pill border-0 p-2 px-3 col-10' placeholder='Tìm kiếm'></input>
                         <Button fill={false} className=" col-2 pe-0 d-flex justify-content-end">
@@ -34,7 +35,7 @@ export default function SheetBooking({ opened, onClose }) {
                     </div>
                 </div>
 
-                <div className='fw-bold d-flex align-items-center fs-13 mt-4'>
+                <div className='fw-bold d-flex align-items-center fs-13 mt-3 fst-italic text-pink'>
                     <lord-icon
                         src="https://cdn.lordicon.com/edcgvlnw.json"
                         trigger="loop"
@@ -44,7 +45,6 @@ export default function SheetBooking({ opened, onClose }) {
                     </lord-icon>
                     Chốt phòng đã xem ngay !
                 </div>
-
                 <swiper-container
                     loop
                     autoplay='{"delay":5000, "disableOnInteraction": false}'
@@ -52,101 +52,101 @@ export default function SheetBooking({ opened, onClose }) {
                     space-between="10"
                     slides-per-view="1.15">
                     <swiper-slide>
-                        <Card className="border border-light rounded-3 shadow-none m-0 ms-3 mb-2 p-0">
+                        <Card className="border border-light shadow-sm rounded-3  m-0 ms-3 mb-2 p-0">
                             <div className="row">
-                                <div className="col-5 p-0">
-                                    <img src="https://img.freepik.com/premium-photo/elite-karaoke-suite-with-velvet-ropes-bartender_416256-24715.jpg" className="w-100 rounded-3"></img>
+                                <div className="col-5 p-0" onClick={() => setSheetOpenebMenu(true)}>
+                                    <img src="https://lh6.googleusercontent.com/proxy/OS1AF7PaqUDnbTCUYZvgrXYgisELl7HeD2NXqS4KQWLrQywwWQ2wsmAHxtM6NAkfJZetthQw-Ji3yhwPaYSsC91i8WHpYltNrWlr" className="w-100 rounded-3"></img>
                                 </div>
-                                <div className="col-7 fs-13">
-                                    <div className='fw-bold'>L1 - Phòng Private 1</div>
+                                <div className="col-7 fs-13 " onClick={() => setSheetOpenebMenu(true)}>
+                                    <div className='fw-bold mt-2'>Phòng Private 1 - Lầu 2</div>
                                     <div className="d-flex gap-1 my-1">
                                         {[...Array(5)].map((_, i) => (
                                             <lord-icon
                                                 key={i}
                                                 src="https://cdn.lordicon.com/cvwrvyjv.json"
                                                 trigger="loop"
-                                                colors="primary:#f30771,secondary:#f30771"
+                                                colors="primary:#eba707,secondary:#eba707"
                                                 style={{ width: '15px', height: '15px' }}
                                             />
                                         ))}
                                     </div>
 
-                                    <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11 fst-italic'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                                 </div>
                             </div>
                         </Card>
                     </swiper-slide>
                     <swiper-slide>
-                        <Card className="border border-light rounded-3 shadow-none m-0 ms-3 mb-2 p-0">
+                        <Card className="border border-light shadow-sm rounded-3  m-0 ms-3 mb-2 p-0">
                             <div className="row">
-                                <div className="col-5 p-0">
-                                    <img src="https://img.freepik.com/premium-photo/elite-karaoke-suite-with-velvet-ropes-bartender_416256-24715.jpg" className="w-100 rounded-3"></img>
+                                <div className="col-5 p-0" onClick={() => setSheetOpenebMenu(true)}>
+                                    <img src="https://dltm-cdn.vnptit3.vn/resources/portal//Images/AGG/quantrivien.vnptagg/images/entertainment/karaoke/cropper_988595705.jpg" className="w-100 rounded-3"></img>
                                 </div>
-                                <div className="col-7 fs-13">
-                                    <div className='fw-bold'>L1 - Phòng Private 1</div>
+                                <div className="col-7 fs-13 " onClick={() => setSheetOpenebMenu(true)}>
+                                    <div className='fw-bold mt-2'>Phòng Private 1 - Lầu 2</div>
                                     <div className="d-flex gap-1 my-1">
                                         {[...Array(5)].map((_, i) => (
                                             <lord-icon
                                                 key={i}
                                                 src="https://cdn.lordicon.com/cvwrvyjv.json"
                                                 trigger="loop"
-                                                colors="primary:#f30771,secondary:#f30771"
+                                                colors="primary:#eba707,secondary:#eba707"
                                                 style={{ width: '15px', height: '15px' }}
                                             />
                                         ))}
                                     </div>
 
-                                    <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11 fst-italic'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                                 </div>
                             </div>
                         </Card>
                     </swiper-slide>
                     <swiper-slide>
-                        <Card className="border border-light rounded-3 shadow-none m-0 ms-3 mb-2 p-0">
+                        <Card className="border border-light shadow-sm rounded-3  m-0 ms-3 mb-2 p-0">
                             <div className="row">
-                                <div className="col-5 p-0">
-                                    <img src="https://img.freepik.com/premium-photo/elite-karaoke-suite-with-velvet-ropes-bartender_416256-24715.jpg" className="w-100 rounded-3"></img>
+                                <div className="col-5 p-0" onClick={() => setSheetOpenebMenu(true)}>
+                                    <img src="https://viet-solar.com/wp-content/uploads/2021/02/bab-jpg.webp" className="w-100 rounded-3"></img>
                                 </div>
-                                <div className="col-7 fs-13">
-                                    <div className='fw-bold'>L1 - Phòng Private 1</div>
+                                <div className="col-7 fs-13 " onClick={() => setSheetOpenebMenu(true)}>
+                                    <div className='fw-bold mt-2'>Phòng Private 1 - Lầu 2</div>
                                     <div className="d-flex gap-1 my-1">
                                         {[...Array(5)].map((_, i) => (
                                             <lord-icon
                                                 key={i}
                                                 src="https://cdn.lordicon.com/cvwrvyjv.json"
                                                 trigger="loop"
-                                                colors="primary:#f30771,secondary:#f30771"
+                                                colors="primary:#eba707,secondary:#eba707"
                                                 style={{ width: '15px', height: '15px' }}
                                             />
                                         ))}
                                     </div>
 
-                                    <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11 fst-italic'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                                 </div>
                             </div>
                         </Card>
                     </swiper-slide>
                     <swiper-slide>
-                        <Card className="border border-light rounded-3 shadow-none m-0 ms-3 mb-2 p-0">
+                        <Card className="border border-light shadow-sm rounded-3  m-0 ms-3 mb-2 p-0">
                             <div className="row">
-                                <div className="col-5 p-0">
+                                <div className="col-5 p-0" onClick={() => setSheetOpenebMenu(true)}>
                                     <img src="https://img.freepik.com/premium-photo/elite-karaoke-suite-with-velvet-ropes-bartender_416256-24715.jpg" className="w-100 rounded-3"></img>
                                 </div>
-                                <div className="col-7 fs-13">
-                                    <div className='fw-bold'>L1 - Phòng Private 1</div>
+                                <div className="col-7 fs-13 " onClick={() => setSheetOpenebMenu(true)}>
+                                    <div className='fw-bold mt-2'>Phòng Private 1 - Lầu 2</div>
                                     <div className="d-flex gap-1 my-1">
                                         {[...Array(5)].map((_, i) => (
                                             <lord-icon
                                                 key={i}
                                                 src="https://cdn.lordicon.com/cvwrvyjv.json"
                                                 trigger="loop"
-                                                colors="primary:#f30771,secondary:#f30771"
+                                                colors="primary:#eba707,secondary:#eba707"
                                                 style={{ width: '15px', height: '15px' }}
                                             />
                                         ))}
                                     </div>
 
-                                    <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11 fst-italic'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                                 </div>
                             </div>
                         </Card>
@@ -155,25 +155,22 @@ export default function SheetBooking({ opened, onClose }) {
                 </swiper-container>
 
 
-                <div className=' d-flex align-items-center justify-content-between mt-3'>
-                    <div className="d-flex align-items-center fw-bold">
-                        <lord-icon
-                            src="https://cdn.lordicon.com/hqrhprrj.json"
-                            trigger="loop"
-                            colors="primary:#f30771,secondary:#f30771"
-                            className=' me-2 mb-2'
-                            style={{ width: '30px', height: '30px' }}>
-                        </lord-icon>
-                        Phòng siêu HOT
-                    </div>
-                    <small>Xem tất cả </small>
+                <div className="d-flex mt-3 align-items-center fw-bold fst-italic text-pink">
+                    <lord-icon
+                        src="https://cdn.lordicon.com/hqrhprrj.json"
+                        trigger="loop"
+                        colors="primary:#f30771,secondary:#f30771"
+                        className=' me-2 mb-2'
+                        style={{ width: '30px', height: '30px' }}>
+                    </lord-icon>
+                    Phòng siêu HOT
                 </div>
                 <div className='row d-flex flex-nowrap  mt-2 pb-2' style={{ overflowX: "auto", whiteSpace: "nowrap" }}>
                     <div className='col-5 px-1'>
-                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-none'>
+                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-sm'>
                             <div>
-                                <img src='https://img.freepik.com/premium-photo/elite-karaoke-suite-with-velvet-ropes-bartender_416256-24715.jpg' className='w-100 rounded-top-3'></img>
-                                <div className='p-1 w-100 bg-danger text-white text-center fw-bold'>HOT</div>
+                                <img src='https://lh6.googleusercontent.com/proxy/OS1AF7PaqUDnbTCUYZvgrXYgisELl7HeD2NXqS4KQWLrQywwWQ2wsmAHxtM6NAkfJZetthQw-Ji3yhwPaYSsC91i8WHpYltNrWlr' className='w-100 rounded-top-3'></img>
+                                <div className='p-1 w-100 bg-danger bg-opacity-75 text-white text-center fw-bold'>HOT</div>
                                 <div className='p-2'>
                                     <div className='fw-bold'>L1 - Phòng Private 1</div>
                                     <div className="d-flex gap-1 my-1">
@@ -187,16 +184,16 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                                 </div>
                             </div>
                         </Card>
                     </div>
                     <div className='col-5 px-1'>
-                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-none'>
+                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-sm'>
                             <div>
                                 <img src='https://media.istockphoto.com/id/518734599/photo/european-restaurant-in-bright-colors.jpg?s=612x612&w=0&k=20&c=Ygyz3vPgN27NM4iUTh1QlzBG7-83i_ZH0E3HJr8sr7w=' className='w-100 rounded-top-3'></img>
-                                <div className='p-1 w-100 bg-danger text-white text-center fw-bold'>HOT</div>
+                                <div className='p-1 w-100 bg-danger bg-opacity-75 text-white text-center fw-bold'>HOT</div>
                                 <div className='p-2'>
                                     <div className='fw-bold'>L1 - Phòng Private 1</div>
                                     <div className="d-flex gap-1 my-1">
@@ -210,16 +207,16 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                                 </div>
                             </div>
                         </Card>
                     </div>
                     <div className='col-5 px-1'>
-                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-none'>
+                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-sm'>
                             <div>
                                 <img src='https://ngominhaudio.com.vn/wp-content/uploads/2017/04/phoi-canh-3d-phong-karaoke-25m2.jpg' className='w-100 rounded-top-3'></img>
-                                <div className='p-1 w-100 bg-danger text-white text-center fw-bold'>HOT</div>
+                                <div className='p-1 w-100 bg-danger bg-opacity-75 text-white text-center fw-bold'>HOT</div>
                                 <div className='p-2'>
                                     <div className='fw-bold'>L1 - Phòng Private 1</div>
                                     <div className="d-flex gap-1 my-1">
@@ -233,16 +230,16 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                                 </div>
                             </div>
                         </Card>
                     </div>
                     <div className='col-5 px-1'>
-                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-none'>
+                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-sm'>
                             <div>
-                                <img src='https://img.freepik.com/premium-photo/elite-karaoke-suite-with-velvet-ropes-bartender_416256-24715.jpg' className='w-100 rounded-top-3'></img>
-                                <div className='p-1 w-100 bg-danger text-white text-center fw-bold'>HOT</div>
+                                <img src='https://viet-solar.com/wp-content/uploads/2021/02/bab-jpg.webp' className='w-100 rounded-top-3'></img>
+                                <div className='p-1 w-100 bg-danger bg-opacity-75 text-white text-center fw-bold'>HOT</div>
                                 <div className='p-2'>
                                     <div className='fw-bold'>L1 - Phòng Private 1</div>
                                     <div className="d-flex gap-1 my-1">
@@ -256,32 +253,30 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                                 </div>
                             </div>
                         </Card>
                     </div>
                 </div>
 
-                <div className=' d-flex align-items-center justify-content-between mt-3'>
-                    <div className="d-flex align-items-center fw-bold">
-                        <lord-icon
-                            src="https://cdn.lordicon.com/vttzorhw.json"
-                            trigger="loop"
-                            colors="primary:#f30771,secondary:#f30771"
-                            className=' me-2 mb-2'
-                            style={{ width: '30px', height: '30px' }}>
-                        </lord-icon>
-                        Phòng được yêu thích
-                    </div>
-                    <small>Xem tất cả </small>
+                <div className="d-flex align-items-center fw-bold mt-3  fst-italic text-pink">
+                    <lord-icon
+                        src="https://cdn.lordicon.com/vttzorhw.json"
+                        trigger="loop"
+                        colors="primary:#f30771,secondary:#f30771"
+                        className=' me-2 mb-2'
+                        style={{ width: '30px', height: '30px' }}>
+                    </lord-icon>
+                    Phòng được yêu thích
                 </div>
+
                 <div className='row d-flex flex-nowrap  mt-2 pb-2' style={{ overflowX: "auto", whiteSpace: "nowrap" }}>
                     <div className='col-5 px-1'>
-                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-none'>
+                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-sm'>
                             <div>
-                                <img src='https://img.freepik.com/premium-photo/elite-karaoke-suite-with-velvet-ropes-bartender_416256-24715.jpg' className='w-100 rounded-top-3'></img>
-                                <div className='p-1 w-100 bg-pink text-white text-center fw-bold'>Yêu thích</div>
+                                <img src='https://dltm-cdn.vnptit3.vn/resources/portal//Images/AGG/quantrivien.vnptagg/images/entertainment/karaoke/cropper_988595705.jpg' className='w-100 rounded-top-3'></img>
+                                <div className='p-1 w-100 bg-pink1 text-white text-center fw-bold'>Yêu thích</div>
                                 <div className='p-2'>
                                     <div className='fw-bold'>L1 - Phòng Private 1</div>
                                     <div className="d-flex gap-1 my-1">
@@ -295,16 +290,16 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                                 </div>
                             </div>
                         </Card>
                     </div>
                     <div className='col-5 px-1'>
-                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-none'>
+                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-sm'>
                             <div>
-                                <img src='https://img.freepik.com/premium-photo/elite-karaoke-suite-with-velvet-ropes-bartender_416256-24715.jpg' className='w-100 rounded-top-3'></img>
-                                <div className='p-1 w-100 bg-pink text-white text-center fw-bold'>Yêu thích</div>
+                                <img src='https://viet-solar.com/wp-content/uploads/2021/02/bab-jpg.webp' className='w-100 rounded-top-3'></img>
+                                <div className='p-1 w-100 bg-pink1 text-white text-center fw-bold'>Yêu thích</div>
                                 <div className='p-2'>
                                     <div className='fw-bold'>L1 - Phòng Private 1</div>
                                     <div className="d-flex gap-1 my-1">
@@ -318,16 +313,16 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                                 </div>
                             </div>
                         </Card>
                     </div>
                     <div className='col-5 px-1'>
-                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-none'>
+                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-sm'>
                             <div>
-                                <img src='https://img.freepik.com/premium-photo/elite-karaoke-suite-with-velvet-ropes-bartender_416256-24715.jpg' className='w-100 rounded-top-3'></img>
-                                <div className='p-1 w-100 bg-pink text-white text-center fw-bold'>Yêu thích</div>
+                                <img src='https://viet-solar.com/wp-content/uploads/2021/02/bab-jpg.webp' className='w-100 rounded-top-3'></img>
+                                <div className='p-1 w-100 bg-pink1 text-white text-center fw-bold'>Yêu thích</div>
                                 <div className='p-2'>
                                     <div className='fw-bold'>L1 - Phòng Private 1</div>
                                     <div className="d-flex gap-1 my-1">
@@ -341,16 +336,16 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                                 </div>
                             </div>
                         </Card>
                     </div>
                     <div className='col-5 px-1'>
-                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-none'>
+                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-sm'>
                             <div>
                                 <img src='https://img.freepik.com/premium-photo/elite-karaoke-suite-with-velvet-ropes-bartender_416256-24715.jpg' className='w-100 rounded-top-3'></img>
-                                <div className='p-1 w-100 bg-pink text-white text-center fw-bold'>Yêu thích</div>
+                                <div className='p-1 w-100 bg-pink1 text-white text-center fw-bold'>Yêu thích</div>
                                 <div className='p-2'>
                                     <div className='fw-bold'>L1 - Phòng Private 1</div>
                                     <div className="d-flex gap-1 my-1">
@@ -364,13 +359,13 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                                 </div>
                             </div>
                         </Card>
                     </div>
                 </div>
-                <div className='fw-bold d-flex align-items-center mt-3'>
+                <div className='fw-bold d-flex align-items-center mt-3  fst-italic text-pink'>
                     <lord-icon
                         src="https://cdn.lordicon.com/hqrhprrj.json"
                         trigger="loop"
@@ -399,7 +394,7 @@ export default function SheetBooking({ opened, onClose }) {
                                         ))}
                                     </div>
 
-                                    <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                                 </div>
                             </div>
                         </Card>
@@ -421,7 +416,7 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                                 </div>
                             </div>
                         </Card>
@@ -443,7 +438,7 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                                 </div>
                             </div>
                         </Card>
@@ -465,7 +460,7 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                                 </div>
                             </div>
                         </Card>
@@ -487,7 +482,7 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                                 </div>
                             </div>
                         </Card>
@@ -509,7 +504,7 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                                 </div>
                             </div>
                         </Card>
@@ -518,10 +513,10 @@ export default function SheetBooking({ opened, onClose }) {
 
 
             </PageContent>
-            <footer className="fixed-bottom p-3 py-2 bg-white">
-                <Button className="bg-pink p-3 rounded-pill text-white fs-15" onClick={() => setSheetOpenebMenu(true)}>Tiếp tục</Button>
-            </footer>
-            <SheetBookingMenu
+            {/* <footer className="fixed-bottom p-3 py-2 bg-white">
+                <Button className="bg-pink p-3 rounded-pill text-white fs-15">Tiếp tục</Button>
+            </footer> */}
+            <SheetRoomDetail
                 opened={sheetOpenebMenu}
                 onClose={() => setSheetOpenebMenu(false)}
             />

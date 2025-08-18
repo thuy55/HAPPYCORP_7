@@ -15,13 +15,17 @@ import {
     f7,
     List,
     CardHeader,
-    CardContent
+    CardContent,
+    ListItem
 } from 'framework7-react';
 import moment from 'moment';
 import CommonNavbar from '../components/CommonNavbar';
 import PageTransition from '../components/PageTransition';
+import SheetInvoices from '../components/Invoices';
 
 const HistoryPage = () => {
+    const [sheetOpenedInvoices, setSheetOpenedInvoices] = useState(false);
+
     const [selectedPeriod, setSelectedPeriod] = useState('date');
     const [currentDate, setCurrentDate] = useState(moment());
     const [showDatePicker, setShowDatePicker] = useState(false);
@@ -179,225 +183,226 @@ const HistoryPage = () => {
     }, []);
 
     return (
-        <Page name="revenue" >
-            {/* Top Navbar */}
-            <CommonNavbar />
+        <>
+            <Page name="revenue" >
+                {/* Top Navbar */}
+                <CommonNavbar />
 
-            {/* Period Selector */}
-            <List className='m-2' simpleList>
-                <div className='d-flex align-items-center fs-6 fw-bold'>
-               
-                    Lịch sử
+                {/* Period Selector */}
+                <List className='m-2' simpleList>
+                    <div className='d-flex align-items-center fs-6 fw-bold'>
+
+                        Lịch sử
+                    </div>
+                </List>
+                <div className="px-3 py-3">
+                    <div className="row g-2">
+                        <div className="col-4">
+                            <Button
+                                fill={selectedPeriod === 'date'}
+                                round
+                                color={selectedPeriod === 'date' ? 'pink' : 'gray'}
+                                className={`w-100 p-3 ${selectedPeriod === 'date' ? 'text-white bg-pink' : 'text-dark'}`}
+                                onClick={() => handlePeriodChange('date')}
+                            >
+                                <Icon f7="calendar" className="me-2" size="16px"></Icon>
+                                Date
+                            </Button>
+                        </div>
+                        <div className="col-4">
+                            <Button
+                                fill={selectedPeriod === 'week'}
+                                round
+                                color={selectedPeriod === 'week' ? 'pink' : 'gray'}
+                                className={`w-100 p-3 ${selectedPeriod === 'week' ? 'text-white' : 'text-dark'}`}
+                                onClick={() => handlePeriodChange('week')}
+                            >
+                                <Icon f7="calendar" className="me-2" size="16px"></Icon>
+                                Week
+                            </Button>
+                        </div>
+                        <div className="col-4">
+                            <Button
+                                fill={selectedPeriod === 'month'}
+                                round
+                                color={selectedPeriod === 'month' ? 'pink' : 'gray'}
+                                className={`w-100 p-3 ${selectedPeriod === 'month' ? 'text-white' : 'text-dark'}`}
+                                onClick={() => handlePeriodChange('month')}
+                            >
+                                <Icon f7="calendar" className="me-2" size="16px"></Icon>
+                                Month
+                            </Button>
+                        </div>
+                    </div>
                 </div>
-            </List>
-            <div className="px-3 py-3">
-                <div className="row g-2">
-                    <div className="col-4">
-                        <Button
-                            fill={selectedPeriod === 'date'}
-                            round
-                            color={selectedPeriod === 'date' ? 'pink' : 'gray'}
-                            className={`w-100 p-3 ${selectedPeriod === 'date' ? 'text-white bg-pink' : 'text-dark'}`}
-                            onClick={() => handlePeriodChange('date')}
-                        >
-                            <Icon f7="calendar" className="me-2" size="16px"></Icon>
-                            Date
-                        </Button>
-                    </div>
-                    <div className="col-4">
-                        <Button
-                            fill={selectedPeriod === 'week'}
-                            round
-                            color={selectedPeriod === 'week' ? 'pink' : 'gray'}
-                            className={`w-100 p-3 ${selectedPeriod === 'week' ? 'text-white' : 'text-dark'}`}
-                            onClick={() => handlePeriodChange('week')}
-                        >
-                            <Icon f7="calendar" className="me-2" size="16px"></Icon>
-                            Week
-                        </Button>
-                    </div>
-                    <div className="col-4">
-                        <Button
-                            fill={selectedPeriod === 'month'}
-                            round
-                            color={selectedPeriod === 'month' ? 'pink' : 'gray'}
-                            className={`w-100 p-3 ${selectedPeriod === 'month' ? 'text-white' : 'text-dark'}`}
-                            onClick={() => handlePeriodChange('month')}
-                        >
-                            <Icon f7="calendar" className="me-2" size="16px"></Icon>
-                            Month
-                        </Button>
-                    </div>
-                </div>
-            </div>
 
-            {/* Date Navigation */}
-            <div className="d-flex justify-content-between align-items-center px-3 py-2">
-                <Button fill={false} onClick={handlePrevious}>
-                    <Icon f7="chevron_left" size="20px"></Icon>
-                </Button>
+                {/* Date Navigation */}
+                <div className="d-flex justify-content-between align-items-center px-3 py-2">
+                    <Button fill={false} onClick={handlePrevious}>
+                        <Icon f7="chevron_left" size="20px"></Icon>
+                    </Button>
 
-                <div className="d-flex align-items-center" onClick={handleDateClick} style={{ cursor: 'pointer' }}>
-                    <span className="fw-semibold">{formatDate(currentDate, selectedPeriod)}</span>
-                    <Button fill={false} className="ms-2">
-                        <Icon f7="line_horizontal_3_decrease" size="16px"></Icon>
+                    <div className="d-flex align-items-center" onClick={handleDateClick} style={{ cursor: 'pointer' }}>
+                        <span className="fw-semibold">{formatDate(currentDate, selectedPeriod)}</span>
+                        <Button fill={false} className="ms-2">
+                            <Icon f7="line_horizontal_3_decrease" size="16px"></Icon>
+                        </Button>
+                    </div>
+
+                    <Button
+                        fill={false}
+                        onClick={handleNext}
+                        disabled={!canGoNext()}
+                        className={!canGoNext() ? 'opacity-50' : ''}
+                    >
+                        <Icon f7="chevron_right" size="20px"></Icon>
                     </Button>
                 </div>
 
-                <Button
-                    fill={false}
-                    onClick={handleNext}
-                    disabled={!canGoNext()}
-                    className={!canGoNext() ? 'opacity-50' : ''}
-                >
-                    <Icon f7="chevron_right" size="20px"></Icon>
-                </Button>
-            </div>
-
-            {/* Date Picker Collapse */}
-            {showDatePicker && (
-                <div className="px-3">
-                    <Card className="p-3 border border-0 m-0">
-                        {/* Picker cho Date và Week - giao diện giống nhau */}
-                        {(selectedPeriod === 'date' || selectedPeriod === 'week') && (
-                            <>
-                                <div className="row g-2 mb-3">
-                                    <div className="col-4">
-                                        <select
-                                            className="form-select form-select-sm bg-light border-1 rounded-3"
-                                            value={tempDate}
-                                            onChange={(e) => setTempDate(parseInt(e.target.value))}
-                                        >
-                                            {Array.from({ length: 31 }, (_, i) => (
-                                                <option key={i + 1} value={i + 1}>{i + 1}</option>
-                                            ))}
-                                        </select>
+                {/* Date Picker Collapse */}
+                {showDatePicker && (
+                    <div className="px-3">
+                        <Card className="p-3 border border-0 m-0">
+                            {/* Picker cho Date và Week - giao diện giống nhau */}
+                            {(selectedPeriod === 'date' || selectedPeriod === 'week') && (
+                                <>
+                                    <div className="row g-2 mb-3">
+                                        <div className="col-4">
+                                            <select
+                                                className="form-select form-select-sm bg-light border-1 rounded-3"
+                                                value={tempDate}
+                                                onChange={(e) => setTempDate(parseInt(e.target.value))}
+                                            >
+                                                {Array.from({ length: 31 }, (_, i) => (
+                                                    <option key={i + 1} value={i + 1}>{i + 1}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div className="col-4">
+                                            <select
+                                                className="form-select form-select-sm bg-light border-1 rounded-3"
+                                                value={tempMonth}
+                                                onChange={(e) => setTempMonth(parseInt(e.target.value))}
+                                            >
+                                                {moment.months().map((month, idx) => (
+                                                    <option key={idx} value={idx}>{month}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div className="col-4">
+                                            <select
+                                                className="form-select form-select-sm bg-light border-1 rounded-3"
+                                                value={tempYear}
+                                                onChange={(e) => setTempYear(parseInt(e.target.value))}
+                                            >
+                                                {Array.from({ length: 10 }, (_, i) => {
+                                                    const year = moment().year() - 5 + i;
+                                                    return <option key={year} value={year}>{year}</option>;
+                                                })}
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div className="col-4">
-                                        <select
-                                            className="form-select form-select-sm bg-light border-1 rounded-3"
-                                            value={tempMonth}
-                                            onChange={(e) => setTempMonth(parseInt(e.target.value))}
-                                        >
-                                            {moment.months().map((month, idx) => (
-                                                <option key={idx} value={idx}>{month}</option>
-                                            ))}
-                                        </select>
-                                    </div>
-                                    <div className="col-4">
-                                        <select
-                                            className="form-select form-select-sm bg-light border-1 rounded-3"
-                                            value={tempYear}
-                                            onChange={(e) => setTempYear(parseInt(e.target.value))}
-                                        >
-                                            {Array.from({ length: 10 }, (_, i) => {
-                                                const year = moment().year() - 5 + i;
-                                                return <option key={year} value={year}>{year}</option>;
-                                            })}
-                                        </select>
-                                    </div>
-                                </div>
-                            </>
-                        )}
+                                </>
+                            )}
 
-                        {/* Picker cho Month */}
-                        {selectedPeriod === 'month' && (
-                            <>
-                                <div className="row g-2 mb-3">
-                                    <div className="col-6">
-                                        <select
-                                            className="form-select form-select-sm bg-light border-1 rounded-3"
-                                            value={tempMonth}
-                                            onChange={(e) => setTempMonth(parseInt(e.target.value))}
-                                        >
-                                            {moment.months().map((month, idx) => (
-                                                <option key={idx} value={idx}>{month}</option>
-                                            ))}
-                                        </select>
+                            {/* Picker cho Month */}
+                            {selectedPeriod === 'month' && (
+                                <>
+                                    <div className="row g-2 mb-3">
+                                        <div className="col-6">
+                                            <select
+                                                className="form-select form-select-sm bg-light border-1 rounded-3"
+                                                value={tempMonth}
+                                                onChange={(e) => setTempMonth(parseInt(e.target.value))}
+                                            >
+                                                {moment.months().map((month, idx) => (
+                                                    <option key={idx} value={idx}>{month}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div className="col-6">
+                                            <select
+                                                className="form-select form-select-sm bg-light border-1 rounded-3"
+                                                value={tempYear}
+                                                onChange={(e) => setTempYear(parseInt(e.target.value))}
+                                            >
+                                                {Array.from({ length: 10 }, (_, i) => {
+                                                    const year = moment().year() - 5 + i;
+                                                    return <option key={year} value={year}>{year}</option>;
+                                                })}
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div className="col-6">
-                                        <select
-                                            className="form-select form-select-sm bg-light border-1 rounded-3"
-                                            value={tempYear}
-                                            onChange={(e) => setTempYear(parseInt(e.target.value))}
-                                        >
-                                            {Array.from({ length: 10 }, (_, i) => {
-                                                const year = moment().year() - 5 + i;
-                                                return <option key={year} value={year}>{year}</option>;
-                                            })}
-                                        </select>
-                                    </div>
-                                </div>
-                            </>
-                        )}
+                                </>
+                            )}
 
-                        {/* Button Apply */}
-                        <Button
-                            fill
-                            // color="pink" 
-                            className="w-100 bg-pink text-white  rounded-pill py-3"
-                            onClick={handleApplyDate}
-                        >
-                            <span className="fw-semibold">Xem</span>
-                        </Button>
-                    </Card>
-                </div>
-            )}
+                            {/* Button Apply */}
+                            <Button
+                                fill
+                                // color="pink" 
+                                className="w-100 bg-pink text-white  rounded-pill py-3"
+                                onClick={handleApplyDate}
+                            >
+                                <span className="fw-semibold">Xem</span>
+                            </Button>
+                        </Card>
+                    </div>
+                )}
 
-            {/* Statistics Cards */}
-            <div className="grid grid-cols-3 grid-gap px-3">
-                <div className="">
-                    <Card className="text-center m-1 p-3 border-0 shadow-sm text-pink">
-                        <div
-                            className="display-4 fw-bold mb-1"
-                        >
-                            0
-                        </div>
-                        <div className='fs-13'>Total </div>
-                    </Card>
+                {/* Statistics Cards */}
+                <div className="grid grid-cols-3 grid-gap px-3">
+                    <div className="">
+                        <Card className="text-center m-1 p-3 border-0 shadow-sm text-pink">
+                            <div
+                                className="display-4 fw-bold mb-1"
+                            >
+                                0
+                            </div>
+                            <div className='fs-13'>Total </div>
+                        </Card>
+                    </div>
+                    <div className="">
+                        <Card className="text-center m-1 p-3 border-0 shadow-sm  text-success">
+                            <div className="display-4 fw-bold mb-1">0</div>
+                            <div className='fs-13'>Paid</div>
+                        </Card>
+                    </div>
+                    <div className="">
+                        <Card className="text-center m-1 p-3 border-0 shadow-sm text-secondary">
+                            <div className="display-4 fw-bold  mb-1">0</div>
+                            <div className='fs-13'>Cancelled</div>
+                        </Card>
+                    </div>
                 </div>
-                <div className="">
-                    <Card className="text-center m-1 p-3 border-0 shadow-sm  text-success">
-                        <div className="display-4 fw-bold mb-1">0</div>
-                        <div className='fs-13'>Paid</div>
-                    </Card>
-                </div>
-                <div className="">
-                    <Card className="text-center m-1 p-3 border-0 shadow-sm text-secondary">
-                        <div className="display-4 fw-bold  mb-1">0</div>
-                        <div className='fs-13'>Cancelled</div>
-                    </Card>
-                </div>
-            </div>
 
-            {/* Legend */}
-            <div class="grid grid-cols-3 fs-13 mt-2 px-3">
-                <div className='d-flex align-items-center mt-2'>
-                    <div className='hinh-vuong bg-primary rounded-2 me-1'></div>
-                    4 Nhận khách
+                {/* Legend */}
+                <div class="grid grid-cols-3 fs-13 mt-2 px-3">
+                    <div className='d-flex align-items-center mt-2'>
+                        <div className='hinh-vuong bg-primary rounded-2 me-1'></div>
+                        4 Nhận khách
+                    </div>
+                    <div className='d-flex align-items-center mt-2'>
+                        <div className='hinh-vuong bg-success rounded-2 me-1'></div>
+                        4 Thanh toán
+                    </div>
+                    <div className='d-flex align-items-center mt-2'>
+                        <div className='hinh-vuong bg-warning rounded-2 me-1'></div>
+                        4 Đợi duyệt
+                    </div>
+                    <div className='d-flex align-items-center mt-2'>
+                        <div className='hinh-vuong bg-info rounded-2 me-1'></div>
+                        0 Chờ duyệt
+                    </div>
+                    <div className='d-flex align-items-center mt-2'>
+                        <div className='hinh-vuong bg-danger rounded-2 me-1'></div>
+                        0 Không duyệt
+                    </div>
+                    <div className='d-flex align-items-center mt-2'>
+                        <div className='hinh-vuong bg-secondary rounded-2 me-1'></div>
+                        0 Đã hủy
+                    </div>
                 </div>
-                <div className='d-flex align-items-center mt-2'>
-                    <div className='hinh-vuong bg-success rounded-2 me-1'></div>
-                    4 Thanh toán
-                </div>
-                <div className='d-flex align-items-center mt-2'>
-                    <div className='hinh-vuong bg-warning rounded-2 me-1'></div>
-                    4 Đợi duyệt
-                </div>
-                <div className='d-flex align-items-center mt-2'>
-                    <div className='hinh-vuong bg-info rounded-2 me-1'></div>
-                    0 Chờ duyệt
-                </div>
-                <div className='d-flex align-items-center mt-2'>
-                    <div className='hinh-vuong bg-danger rounded-2 me-1'></div>
-                    0 Không duyệt
-                </div>
-                <div className='d-flex align-items-center mt-2'>
-                    <div className='hinh-vuong bg-secondary rounded-2 me-1'></div>
-                    0 Đã hủy
-                </div>
-            </div>
-            <div className="m-3">
+                {/* <div className="m-3">
                 <Card expandable className='border  shadow-none  border-0 m-0 p-1'>
                     <CardContent padding={false}>
                         <div className="" >
@@ -560,17 +565,43 @@ const HistoryPage = () => {
                         </div>
                     </CardContent>
                 </Card>
-            </div>
-            {/* Map/Chart Area */}
-            {/* <Card className="mx-3 p-4 text-center border-0 shadow-sm" style={{ minHeight: '300px' }}>
+            </div> */}
+                <List className='px-4 mb-3 mt-3'>
+
+                    <ListItem onClick={() => { setSheetOpenedInvoices(true) }} className='row mt-2 list-no-chevron'>
+                        <div className='col-2'>
+                            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className='w-100 border border-2 rounded-3 border-danger'></img>
+                        </div>
+                        <div className='col-10 fs-13 ms-2 border-bottom border-light'>
+                            <div className='fw-bold d-flex justify-content-between'> Phòng: V.I.P 4 <span className='text-success'>Đã hoàn tất</span></div>
+                            <div className='text-muted mt-1 mb-2'>18/07/2025 14:22:52</div>
+                        </div>
+                    </ListItem>
+                    <ListItem onClick={() => { setSheetOpenedInvoices(true) }} className='row mt-2 list-no-chevron'>
+                        <div className='col-2'>
+                            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className='w-100 border border-2 rounded-3 border-danger'></img>
+                        </div>
+                        <div className='col-10 fs-13 ms-2 border-bottom border-light'>
+                            <div className='fw-bold d-flex justify-content-between'> Phòng: V.I.P 4 <span className='text-success'>Đã hoàn tất</span></div>
+                            <div className='text-muted mt-1 mb-2'>18/07/2025 14:22:52</div>
+                        </div>
+                    </ListItem>
+                </List>
+                {/* Map/Chart Area */}
+                {/* <Card className="mx-3 p-4 text-center border-0 shadow-sm" style={{ minHeight: '300px' }}>
                 <div className="position-relative d-flex align-items-center justify-content-center" style={{ height: '250px' }}>
                     <img src='../img/not-booking.svg' className='w-100'></img>
                 </div>
 
             </Card> */}
 
-            <div className="pb-4"></div>
-        </Page>
+                <div className="pb-4"></div>
+            </Page>
+            <SheetInvoices
+                opened={sheetOpenedInvoices}
+                onClose={() => setSheetOpenedInvoices(false)}
+            />
+        </>
     );
 };
 

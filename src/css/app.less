@@ -475,23 +475,25 @@ button {
     margin-top: 58% !important;
 }
 
-.list .item-content{
+.list .item-content {
     margin: 0 !important;
     padding-left: 5px !important;
     padding-right: 5px !important;
 
 }
-.segmented .button{
+
+.segmented .button {
     background-color: rgb(238, 238, 238) !important;
     box-shadow: 0 !important;
 }
 
-.segmented .button-active{
+.segmented .button-active {
     background-color: #f07 !important;
     box-shadow: 0 !important;
     color: white !important;
 }
-.fs-11{
+
+.fs-11 {
     font-size: 11px;
 }
 
@@ -511,6 +513,18 @@ button {
     padding-top: var(--f7-navbar-height) !important;
 }
 
+// .sheet .page-content {
+
+// }
+.page:not(.sheet-modal) .page-content {
+    padding-top: var(--f7-navbar-height) !important;
+}
+
+/* còn trong sheet thì bỏ */
+.sheet-modal .page-content {
+    padding-top: 0 !important;
+}
+
 /* Fix cho iOS safe area */
 .ios .navbar {
     padding-top: env(safe-area-inset-top) !important;
@@ -526,8 +540,14 @@ button {
     padding-top: 0 !important;
 }
 
-.fs-15{
+.fs-15 {
     font-size: 15px !important;
 }
 
-// ...existing code...
+.card-backdrop {
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+}
+.bg-pink1{
+    background-color: #f166b5;
+}
