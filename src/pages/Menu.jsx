@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
     Page,
     Navbar,
@@ -15,7 +15,8 @@ import {
     AccordionItem,
     AccordionContent,
     AccordionToggle,
-    f7
+    f7,
+    PageContent
 } from 'framework7-react';
 import CommonNavbar from '../components/CommonNavbar';
 import PageTransition from '../components/PageTransition';
@@ -24,6 +25,74 @@ const MenuPage = () => {
     const [activeTab, setActiveTab] = useState('service');
 
     // Sample data cho từng tab
+
+
+    const formatPrice = (price) => {
+        if (price === 0) return '0';
+        return price.toLocaleString('vi-VN');
+    };
+
+
+    // const [menu, setMenu] = useState([
+    //     {
+    //         id: 1,
+    //         name: "Cơm chiên",
+    //         content: "Cơm chiên dương châu hải sản tôm Cơm chiên dương châu",
+    //         image: "https://bianhapkhau.net/wp-content/uploads/2023/11/uong-ruou-vang-an-gi.jpg",
+    //         price: "9.000.000",
+    //         quantity: 0
+
+    //     },
+    //     {
+    //         id: 2,
+    //         name: "Cơm chiên hải sản",
+    //         content: "Cơm chiên dương châu hải sản tôm Cơm chiên dương châu",
+    //         image: "https://bianhapkhau.net/wp-content/uploads/2023/11/uong-ruou-vang-an-gi.jpg",
+    //         price: "9.000.000",
+    //         quantity: 0
+    //     },
+    //     {
+    //         id: 3,
+    //         name: "Lẩu hải sản",
+    //         content: "Cơm chiên dương châu hải sản tôm Cơm chiên dương châu",
+    //         image: "https://bianhapkhau.net/wp-content/uploads/2023/11/uong-ruou-vang-an-gi.jpg",
+    //         price: "9.000.000",
+    //         quantity: 0
+    //     },
+    //     {
+    //         id: 4,
+    //         name: "Trái cây tươi mát",
+    //         content: "Cơm chiên dương châu hải sản tôm Cơm chiên dương châu",
+    //         image: "https://bianhapkhau.net/wp-content/uploads/2023/11/uong-ruou-vang-an-gi.jpg",
+    //         price: "9.000.000",
+    //         quantity: 0
+    //     },
+    //     {
+    //         id: 5,
+    //         name: "Cơm chiên hải sản ssfsdfg",
+    //         content: "Cơm chiên dương châu hải sản tôm Cơm chiên dương châu",
+    //         image: "https://bianhapkhau.net/wp-content/uploads/2023/11/uong-ruou-vang-an-gi.jpg",
+    //         price: "9.000.000",
+    //         quantity: 0
+    //     },
+    //     {
+    //         id: 6,
+    //         name: "Lẩu hải sản fdhgbfd",
+    //         content: "Cơm chiên dương châu hải sản tôm Cơm chiên dương châu",
+    //         image: "https://bianhapkhau.net/wp-content/uploads/2023/11/uong-ruou-vang-an-gi.jpg",
+    //         price: "9.000.000",
+    //         quantity: 0
+    //     },
+    //     {
+    //         id: 7,
+    //         name: "Trái cây tươi mát fgsd",
+    //         content: "Cơm chiên dương châu hải sản tôm Cơm chiên dương châu",
+    //         image: "https://bianhapkhau.net/wp-content/uploads/2023/11/uong-ruou-vang-an-gi.jpg",
+    //         price: "9.000.000",
+    //         quantity: 0
+    //     }
+    // ]);
+
     const menuData = {
         service: {
             categories: [
@@ -174,20 +243,151 @@ const MenuPage = () => {
         }
     };
 
-    const formatPrice = (price) => {
-        if (price === 0) return '0';
-        return price.toLocaleString('vi-VN');
+    // hàm thêm quantity = 0 vào tất cả item
+    const addQuantityToMenu = (menu) => {
+        const newMenu = {};
+        Object.keys(menu).forEach((sectionKey) => {
+            newMenu[sectionKey] = {
+                ...menu[sectionKey],
+                categories: menu[sectionKey].categories.map((cat) => ({
+                    ...cat,
+                    items: cat.items.map((item) => ({
+                        ...item,
+                        quantity: item.quantity ?? 0   // nếu chưa có thì gán = 0
+                    }))
+                }))
+            };
+        });
+        return newMenu;
     };
 
+
+    const [menu, setMenu] = useState(addQuantityToMenu(menuData));
+
+    useEffect(() => {
+       localStorage.removeItem("cart");
+
+
+    }, [])
+
     const getCurrentData = () => {
-        return menuData[activeTab] || { categories: [] };
+        return menu[activeTab] || { categories: [] };
     };
+
+    // tăng giảm
+    const increaseQty = (sectionKey, categoryId, itemId) => {
+        setMenu((prev) => {
+            const updated = { ...prev };
+            updated[sectionKey] = {
+                ...updated[sectionKey],
+                categories: updated[sectionKey].categories.map((cat) =>
+                    cat.id === categoryId
+                        ? {
+                            ...cat,
+                            items: cat.items.map((it) =>
+                                it.id === itemId
+                                    ? { ...it, quantity: it.quantity + 1 }
+                                    : it
+                            )
+                        }
+                        : cat
+                )
+            };
+            saveCart(updated);
+            return updated;
+        });
+    };
+
+    const decreaseQty = (sectionKey, categoryId, itemId) => {
+        setMenu((prev) => {
+            const updated = { ...prev };
+            updated[sectionKey] = {
+                ...updated[sectionKey],
+                categories: updated[sectionKey].categories.map((cat) =>
+                    cat.id === categoryId
+                        ? {
+                            ...cat,
+                            items: cat.items.map((it) =>
+                                it.id === itemId && it.quantity > 0
+                                    ? { ...it, quantity: it.quantity - 1 }
+                                    : it
+                            )
+                        }
+                        : cat
+                )
+            };
+            saveCart(updated);
+            return updated;
+        });
+    };
+
+    // tổng số lượng
+    const totalQty = Object.values(menu).reduce((sum, section) => {
+        return (
+            sum +
+            section.categories.reduce((catSum, cat) => {
+                return catSum + cat.items.reduce((iSum, it) => iSum + it.quantity, 0);
+            }, 0)
+        );
+    }, 0);
+    // lưu luôn cả services và categories
+    const saveCart = (menu) => {
+        let cart = [];
+
+        Object.keys(menu).forEach((serviceKey) => {
+            const service = menu[serviceKey];
+
+            service.categories.forEach((cat) => {
+                const itemsWithQty = cat.items.filter((item) => item.quantity > 0);
+
+                if (itemsWithQty.length > 0) {
+                    cart.push({
+                        serviceId: serviceKey,          // service key (ví dụ: "drink")
+                        serviceTitle: service.title,    // tên service
+                        categoryId: cat.id,             // id category
+                        categoryTitle: cat.title,       // tên category
+                        items: itemsWithQty.map((it) => ({
+                            id: it.id,
+                            name: it.name,
+                            price: it.price,
+                            quantity: it.quantity
+                        }))
+                    });
+                }
+            });
+        });
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+            let cart1 = [];
+        Object.keys(menu).forEach((sectionKey) => {
+            menu[sectionKey].categories.forEach((cat1) => {
+                cat1.items.forEach((item) => {
+                    if (item.quantity > 0) {
+                        cart1.push({
+                            id: item.id,
+                            name: item.name,
+                            price: item.price,
+                            quantity: item.quantity
+                        });
+                    }
+                });
+            });
+        });
+        localStorage.setItem("cart1", JSON.stringify(cart1));
+    };
+
 
     return (
         <Page name="menu">
             {/* Top Navbar */}
             <CommonNavbar />
-
+            <div className="grid grid-cols-2 grid-gap">
+                <Button sheetClose className="bg-secondary bg-opacity-25 p-3 rounded-pill  fs-15">Hủy đơn</Button>
+                <Button className="bg-pink p-3 rounded-pill text-white fs-15" onClick={() => {
+                    setSheetOpened1(true), console.log(32354);
+                }}>{totalQty} Món</Button>
+            </div>
             {/* Header with back button */}
             <List className='m-2' simpleList>
                 <div className='d-flex align-items-center fs-6 fw-bold'>
@@ -198,16 +398,15 @@ const MenuPage = () => {
                 </div>
             </List>
 
-            {/* Tab Buttons */}
-            <div className="px-3 py-2">
+            <div className="px-1 py-2">
                 <div className="row g-2">
                     <div className="col-4">
                         <Button
                             fill={activeTab === 'service'}
                             round
                             className={`w-100 py-3 ${activeTab === 'service'
-                                    ? 'bg-pink text-white border-0'
-                                    : 'bg-light text-pink border-0'
+                                ? 'bg-pink text-white border-0'
+                                : 'bg-light text-pink border-0'
                                 }`}
                             onClick={() => setActiveTab('service')}
                         >
@@ -219,8 +418,8 @@ const MenuPage = () => {
                             fill={activeTab === 'food'}
                             round
                             className={`w-100 py-3 ${activeTab === 'food'
-                                    ? 'bg-pink text-white border-0'
-                                    : 'bg-light text-pink border-0'
+                                ? 'bg-pink text-white border-0'
+                                : 'bg-light text-pink border-0'
                                 }`}
                             onClick={() => setActiveTab('food')}
                         >
@@ -232,8 +431,8 @@ const MenuPage = () => {
                             fill={activeTab === 'combo'}
                             round
                             className={`w-100 py-3 ${activeTab === 'combo'
-                                    ? 'bg-pink text-white border-0'
-                                    : 'bg-light text-pink border-0'
+                                ? 'bg-pink text-white border-0'
+                                : 'bg-light text-pink border-0'
                                 }`}
                             onClick={() => setActiveTab('combo')}
                         >
@@ -243,24 +442,14 @@ const MenuPage = () => {
                 </div>
             </div>
 
-            {/* Accordion Content */}
-            <div className="px-4">
-                <div accordionList className='my-3'>
+            <div className="px-2 fs-13">
+                <div accordionList className="my-3">
                     {getCurrentData().categories.map((category) => (
-                        <AccordionItem
-                            key={category.id}
-                            accordionOpened={category.isOpen}
-                        >
+                        <AccordionItem key={category.id} accordionOpened={category.isOpen}>
                             <AccordionToggle>
                                 <div className="d-flex justify-content-between align-items-center w-100 py-3 mt-2">
-                                    <span className="fw-semibold text-dark fs-6">
-                                        {category.title}
-                                    </span>
-                                    <Icon
-                                        f7="chevron_down"
-                                        size="16px"
-                                        className="text-muted accordion-toggle-icon"
-                                    />
+                                    <span className="fw-semibold fs-13">{category.title}</span>
+                                    <Icon f7="chevron_down" size="16px" className="text-muted accordion-toggle-icon" />
                                 </div>
                             </AccordionToggle>
 
@@ -269,32 +458,33 @@ const MenuPage = () => {
                                     <div className="row g-3 py-3">
                                         {category.items.map((item) => (
                                             <div key={item.id} className="col-6">
-                                                <Card className="m-0 border-0 shadow-sm p-2 h-100">
-                                                    <div className="text-center">
-                                                        <div className="mb-3">
-                                                            <img
-                                                                src={item.image}
-                                                                alt={item.name}
-                                                                className="w-100 rounded-3"
-                                                                style={{
-                                                                    height: '120px',
-                                                                    objectFit: 'cover',
-                                                                    backgroundColor: '#f8f9fa'
-                                                                }}
-                                                                onError={(e) => {
-                                                                    e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiBmaWxsPSIjRjhGOUZBIi8+CjxjaXJjbGUgY3g9IjYwIiBjeT0iNjAiIHI9IjIwIiBmaWxsPSIjREVFMkU2Ii8+PC9zdmc+';
-                                                                }}
-                                                            />
+                                                <Card className="m-0 p-0 rounded-3 shadow-sm border-light">
+                                                    <img src={item.image} className="w-100 rounded-top-3" />
+                                                    <div className="p-2">
+                                                        <div className="fw-bold fs-13">
+                                                            {item.name}
                                                         </div>
-
-                                                        <div className="mb-2">
-                                                            <h6 className="fw-bold mb-1 fs-13 text-uppercase">
-                                                                {item.name}
-                                                            </h6>
-                                                            <p className="text-dark fw-bold mb-0 fs-6">
-                                                                {formatPrice(item.price)}
-                                                                {item.price > 0 && <span className="fs-12 text-muted">đ</span>}
-                                                            </p>
+                                                        <div className="d-flex align-items-center justify-content-between">
+                                                            <div className="fs-11 fw-bold text-secondary">
+                                                                {formatPrice(item.price)}đ
+                                                            </div>
+                                                            <div className="d-flex align-items-center gap-2 mt-2 fs-13">
+                                                                <button
+                                                                    className="bg-light p-1"
+                                                                    onClick={() => decreaseQty(activeTab, category.id, item.id)}
+                                                                >
+                                                                    <Icon f7="minus" size="15px" />
+                                                                </button>
+                                                                <span style={{ minWidth: "15px", textAlign: "center" }}>
+                                                                    {item.quantity}
+                                                                </span>
+                                                                <button
+                                                                    className="bg-light p-1"
+                                                                    onClick={() => increaseQty(activeTab, category.id, item.id)}
+                                                                >
+                                                                    <Icon f7="plus" size="15px" />
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </Card>
@@ -303,9 +493,7 @@ const MenuPage = () => {
                                     </div>
                                 ) : (
                                     <div className="text-center py-4">
-                                        <p className="text-muted fs-13 mb-0">
-                                            Không có dữ liệu
-                                        </p>
+                                        <p className="text-muted fs-13 mb-0">Không có dữ liệu</p>
                                     </div>
                                 )}
                             </AccordionContent>
@@ -314,15 +502,53 @@ const MenuPage = () => {
                 </div>
             </div>
 
-            {/* Empty state if no categories */}
-            {getCurrentData().categories.length === 0 && (
-                <div className="text-center py-5">
-                    <Icon f7="square_list" size="48px" className="text-muted mb-3" />
-                    <p className="text-muted">Không có dữ liệu</p>
-                </div>
-            )}
 
-            <div className="pb-5"></div>
+            {/* <div className="grid grid-cols-2 grid-gap mx-2">
+
+                    {menu && menu.map((food, key) => {
+                        return (
+                            <>
+                                <div>
+                                    <Card className='m-0 p-0 rounded-3 shadow-sm border-light'>
+                                        <img src={`${food.image}`} className='w-100 rounded-top-3'></img>
+                                        <div className='p-2'>
+                                            <div className='fw-bold fs-13'>{food.name}</div>
+                                            <div className='fs-11'>{food.content}</div>
+                                            <div className='d-flex align-items-center justify-content-between'>
+                                                <div className='fs-11 fw-bold text-secondary'>
+                                                    {food.price}đ
+                                                </div>
+                                              
+                                                <div className="d-flex justify-content-center align-items-center gap-2 mt-2 fs-13">
+                                                    <button className='bg-light p-1'
+                                                        onClick={() => decreaseQty(food.id)}
+                                                    >
+                                                        <Icon f7="minus" size="15px"></Icon>
+                                                    </button>
+
+                                                    <span style={{ minWidth: "15px", textAlign: "center" }}>{food.quantity}</span>
+
+                                                    <button className='bg-light p-1'
+                                                        size="small"
+                                                        fill="outline"
+                                                        onClick={() => increaseQty(food.id)}
+                                                    >
+                                                        <Icon f7='plus' size="15px"></Icon>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Card>
+                                </div>
+                            </>
+                        )
+                    })}
+
+                </div> */}
+            {/* <footer className="fixed-bottom p-3 py-2 bg-white">
+               
+            </footer> */}
+
         </Page>
     );
 };

@@ -211,6 +211,13 @@ const HomePage = () => {
             </div>
           </div>
 
+          <PageTransition href="/menu/">
+            <div className='text-center rounded-4 mx-2 p-1'>
+              <img src='../img/bill.gif' className='w-50'></img>
+              <div className=' fs-13'>Doanh thu</div>
+            </div>
+          </PageTransition>
+
         </div>
 
 
