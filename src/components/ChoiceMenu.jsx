@@ -4,31 +4,13 @@ import moment from 'moment';
 import SheetBooking1 from "./SheetBooking1";
 import SheetMenuDetail from "./MenuDetail";
 export default function SheetChoiceMenu({ opened, onClose }) {
-  
+
     const formatPrice = (price) => {
         if (price === 0) return '0';
         return price.toLocaleString('vi-VN');
     };
 
-
-
-
     const [menu, setMenu] = useState([]);
-
-    useEffect(() => {
-        setTimeout(() => {
-            const a = localStorage.getItem("cart1");
-            if (a) {
-                try {
-                    setMenu(JSON.parse(a)); // chuyển string -> mảng
-                    console.log(123, JSON.parse(a));
-
-                } catch (e) {
-                    console.error("Không parse được cart1:", e);
-                }
-            }
-        }, 500);
-    }, [])
 
     // tăng giảm
     const increaseQty = (id) => {
@@ -38,7 +20,6 @@ export default function SheetChoiceMenu({ opened, onClose }) {
                     ? { ...item, quantity: item.quantity + 1 }
                     : item
             );
-
             localStorage.setItem("cart1", JSON.stringify(updated));
             return updated;
         });
@@ -52,12 +33,10 @@ export default function SheetChoiceMenu({ opened, onClose }) {
                         : item
                 )
                 .filter(item => item.quantity > 0); // loại bỏ item có quantity = 0
-
             localStorage.setItem("cart1", JSON.stringify(updated));
             return updated;
         });
     };
-
 
     // tổng số lượng
     // const totalQty = Object.values(menu).reduce((sum, section) => {
@@ -78,21 +57,29 @@ export default function SheetChoiceMenu({ opened, onClose }) {
                 className="demo-sheet-2 h-100 bg-light"
                 opened={opened}
                 onSheetClosed={onClose}
+                onSheetOpened={() => {
+                    const a = localStorage.getItem("cart1");
+                    if (a) {
+                        try {
+                            setMenu(JSON.parse(a));
+                        } catch (e) {
+                            console.error("Không parse được cart1:", e);
+                        }
+                    }
+                }}
             >
                 <Toolbar className="">
                     <div className="left fw-bold d-flex align-items-center">
                         <Link sheetClose>
                             <img src='../image/icon-backward.gif' className='size-icon me-1'></img>
                         </Link>
-                        Chọn menu
+                        Danh sách 
                     </div>
                     <div className="right">
                     </div>
                 </Toolbar>
                 <PageContent>
                     <Card className="rounded-4 p-3 shadow-none border border-light fs-13">
-
-
                         {menu && menu.map((item) => (
                             <>
 

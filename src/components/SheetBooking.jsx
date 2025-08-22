@@ -35,14 +35,14 @@ export default function SheetBooking({ opened, onClose }) {
                     </div>
                 </div>
 
-                <div className='fw-bold d-flex align-items-center fs-13 mt-3 fst-italic text-pink'>
-                    <lord-icon
+                <div className='fw-bold d-flex align-items-center fs-13 mt-3 fst-italic'>
+                    {/* <lord-icon
                         src="https://cdn.lordicon.com/edcgvlnw.json"
                         trigger="loop"
                         colors="primary:#f30771,secondary:#f30771"
                         className=' me-2 '
                         style={{ width: '30px', height: '30px' }}>
-                    </lord-icon>
+                    </lord-icon> */}
                     Chốt phòng đã xem ngay !
                 </div>
                 <swiper-container
@@ -55,7 +55,7 @@ export default function SheetBooking({ opened, onClose }) {
                         <Card className="border border-light shadow-sm rounded-3  m-0 ms-3 mb-2 p-0">
                             <div className="row">
                                 <div className="col-5 p-0" onClick={() => setSheetOpenebMenu(true)}>
-                                    <img src="https://lh6.googleusercontent.com/proxy/OS1AF7PaqUDnbTCUYZvgrXYgisELl7HeD2NXqS4KQWLrQywwWQ2wsmAHxtM6NAkfJZetthQw-Ji3yhwPaYSsC91i8WHpYltNrWlr" className="w-100 rounded-3"></img>
+                                    <img src="https://ngominhaudio.com.vn/wp-content/uploads/2017/04/phoi-canh-3d-phong-karaoke-25m2.jpg" className="w-100 rounded-3"></img>
                                 </div>
                                 <div className="col-7 fs-13 " onClick={() => setSheetOpenebMenu(true)}>
                                     <div className='fw-bold mt-2'>Phòng Private 1 - Lầu 2</div>
@@ -71,7 +71,10 @@ export default function SheetBooking({ opened, onClose }) {
                                         ))}
                                     </div>
 
-                                    <div className='limited-lines2 fst-italic fs-11 fst-italic'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11 fst-italic'>Cách âm:
+                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                    Tiêu âm:
+                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -96,7 +99,10 @@ export default function SheetBooking({ opened, onClose }) {
                                         ))}
                                     </div>
 
-                                    <div className='limited-lines2 fst-italic fs-11 fst-italic'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11 fst-italic'>Cách âm:
+                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                    Tiêu âm:
+                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -121,7 +127,10 @@ export default function SheetBooking({ opened, onClose }) {
                                         ))}
                                     </div>
 
-                                    <div className='limited-lines2 fst-italic fs-11 fst-italic'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11 fst-italic'>Cách âm:
+                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                    Tiêu âm:
+                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -146,7 +155,10 @@ export default function SheetBooking({ opened, onClose }) {
                                         ))}
                                     </div>
 
-                                    <div className='limited-lines2 fst-italic fs-11 fst-italic'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11 fst-italic'>Cách âm:
+                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                    Tiêu âm:
+                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -155,21 +167,21 @@ export default function SheetBooking({ opened, onClose }) {
                 </swiper-container>
 
 
-                <div className="d-flex mt-3 align-items-center fw-bold fst-italic text-pink">
-                    <lord-icon
+                <div className="d-flex mt-3 align-items-center fw-bold fst-italic">
+                    {/* <lord-icon
                         src="https://cdn.lordicon.com/hqrhprrj.json"
                         trigger="loop"
                         colors="primary:#f30771,secondary:#f30771"
                         className=' me-2 mb-2'
                         style={{ width: '30px', height: '30px' }}>
-                    </lord-icon>
+                    </lord-icon> */}
                     Phòng siêu HOT
                 </div>
                 <div className='row d-flex flex-nowrap  mt-2 pb-2' style={{ overflowX: "auto", whiteSpace: "nowrap" }}>
                     <div className='col-5 px-1'>
                         <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-sm'>
                             <div>
-                                <img src='https://lh6.googleusercontent.com/proxy/OS1AF7PaqUDnbTCUYZvgrXYgisELl7HeD2NXqS4KQWLrQywwWQ2wsmAHxtM6NAkfJZetthQw-Ji3yhwPaYSsC91i8WHpYltNrWlr' className='w-100 rounded-top-3'></img>
+                                <img src='https://ngominhaudio.com.vn/wp-content/uploads/2017/04/phoi-canh-3d-phong-karaoke-25m2.jpg' className='w-100 rounded-top-3'></img>
                                 <div className='p-1 w-100 bg-danger bg-opacity-75 text-white text-center fw-bold'>HOT</div>
                                 <div className='p-2'>
                                     <div className='fw-bold'>L1 - Phòng Private 1</div>
@@ -184,7 +196,10 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
+                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                    Tiêu âm:
+                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -207,7 +222,10 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
+                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                    Tiêu âm:
+                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -230,7 +248,10 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
+                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                    Tiêu âm:
+                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -253,21 +274,24 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
+                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                    Tiêu âm:
+                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
                     </div>
                 </div>
 
-                <div className="d-flex align-items-center fw-bold mt-3  fst-italic text-pink">
-                    <lord-icon
+                <div className="d-flex align-items-center fw-bold mt-3  fst-italic">
+                    {/* <lord-icon
                         src="https://cdn.lordicon.com/vttzorhw.json"
                         trigger="loop"
                         colors="primary:#f30771,secondary:#f30771"
                         className=' me-2 mb-2'
                         style={{ width: '30px', height: '30px' }}>
-                    </lord-icon>
+                    </lord-icon> */}
                     Phòng được yêu thích
                 </div>
 
@@ -290,7 +314,10 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
+                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                    Tiêu âm:
+                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -313,7 +340,10 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
+                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                    Tiêu âm:
+                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -336,7 +366,10 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
+                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                    Tiêu âm:
+                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -359,20 +392,23 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
+                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                    Tiêu âm:
+                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
                     </div>
                 </div>
-                <div className='fw-bold d-flex align-items-center mt-3  fst-italic text-pink'>
-                    <lord-icon
+                <div className='fw-bold d-flex align-items-center mt-3  fst-italic'>
+                    {/* <lord-icon
                         src="https://cdn.lordicon.com/hqrhprrj.json"
                         trigger="loop"
                         colors="primary:#f30771,secondary:#f30771"
                         className=' me-2 mb-2'
                         style={{ width: '30px', height: '30px' }}>
-                    </lord-icon>
+                    </lord-icon> */}
                     Tất cả
                 </div>
                 <div className="grid grid-cols-2 grid-gap">
@@ -394,7 +430,10 @@ export default function SheetBooking({ opened, onClose }) {
                                         ))}
                                     </div>
 
-                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
+                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                    Tiêu âm:
+                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -416,7 +455,10 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
+                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                    Tiêu âm:
+                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -438,7 +480,10 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
+                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                    Tiêu âm:
+                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -460,7 +505,10 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
+                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                    Tiêu âm:
+                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -482,7 +530,10 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
+                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                    Tiêu âm:
+                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -504,7 +555,10 @@ export default function SheetBooking({ opened, onClose }) {
                                             />
                                         ))}
                                     </div>
-                                    <div className='limited-lines2 fst-italic fs-11'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
+                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
+                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                    Tiêu âm:
+                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>

@@ -33,7 +33,7 @@ export default function SheetEndow({ opened, onClose }) {
                         </div>
                     </div>
                     <List className=' mb-3 mt-0'>
-                        <Card className='border-1 border-light my-3 shadow-sm p-1 rounded-3'>
+                        <Card className='border-1 border-light my-3 shadow-none p-1 rounded-3'>
                             <div className="row ">
                                 <div className='col-4'>
                                     <img src='https://topgo.vn/wp-content/uploads/2017/07/3-Karaoke-Olala-3.jpg' className='rounded-3 w-100'></img>
