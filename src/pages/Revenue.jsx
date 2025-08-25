@@ -185,14 +185,14 @@ const RevenuePage = () => {
             <List className='m-2' simpleList>
                 <div className='d-flex align-items-center fs-6 fw-bold'>
                     {/* <PageTransition href="/home/">
-                        <img src='../image/icon-backward.gif' className='size-icon me-1'></img>
+                        <img src='../img/backward.gif' className='size-icon me-1'></img>
                     </PageTransition> */}
                     <PageTransition
                         href="/"
                         className="me-1"
                     >
                         <img
-                            src='../image/icon-backward.gif'
+                            src='../img/backward.gif'
                             className='size-icon'
                             alt="Back"
                             style={{

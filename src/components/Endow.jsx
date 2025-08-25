@@ -6,13 +6,13 @@ export default function SheetEndow({ opened, onClose }) {
     return (
         <>
             <Sheet
-                className="demo-sheet-2 h-100 bg-light"
+                className="demo-sheet-2 h-100 "
                 opened={opened}
                 onSheetClosed={onClose}
             >
                 <Toolbar className="">
                     <div className="left fw-bold d-flex align-items-center">
-                       Ưu đãi
+                        Ưu đãi
                     </div>
                     <div className="right fs-13">
                         <Link sheetClose>Close</Link>
@@ -45,7 +45,7 @@ export default function SheetEndow({ opened, onClose }) {
                                     <div className='fw-bold '>Giảm 10%</div>
                                     <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                                     <div className='d-flex justify-content-end mt-2'>
-                                        <button className=' p-1 px-3 rounded-3 border-btn ' onClick={() => setSheetOpened1(true)}>Xem ngay</button>
+                                         <button className=' p-1 px-3 rounded-3 border-btn text-pink' style={{ width: "auto", display: "inline-block" }} onClick={() => setSheetOpened1(true)}>Xem ngay</button>
                                     </div>
                                 </div>
                             </div>
@@ -63,7 +63,9 @@ export default function SheetEndow({ opened, onClose }) {
                                     <div className='fw-bold '>Giảm 10%</div>
                                     <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                                     <div className='d-flex justify-content-end mt-2'>
-                                        <button className=' p-1 px-3 rounded-3 border-btn '  onClick={() => setSheetOpened1(true)}>Xem ngay</button>
+                                        <div className='d-flex justify-content-end  mt-2'>
+                                            <button className=' p-1 px-3 rounded-3 border-btn text-pink' style={{ width: "auto", display: "inline-block" }} onClick={() => setSheetOpened1(true)}>Xem ngay</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +82,7 @@ export default function SheetEndow({ opened, onClose }) {
                                     <div className='fw-bold '>Giảm 10%</div>
                                     <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                                     <div className='d-flex justify-content-end mt-2'>
-                                        <button className=' p-1 px-3 rounded-3 border-btn '  onClick={() => setSheetOpened1(true)}>Xem ngay</button>
+                                        <button className=' p-1 px-3 rounded-3 border-btn text-pink' style={{ width: "auto", display: "inline-block" }} onClick={() => setSheetOpened1(true)}>Xem ngay</button>
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +99,7 @@ export default function SheetEndow({ opened, onClose }) {
                                     <div className='fw-bold text-pink'>Giảm 10%</div>
                                     <div className='limited-lines2'>Giảm tối đa tiền mặt 1.000.000đ cho hóa đơn từ 50.000.000đ</div>
                                     <div className='d-flex justify-content-end mt-2'>
-                                        <button className=' p-1 px-3 rounded-3 border-btn ' onClick={() => setSheetOpened1(true)}>Xem ngay</button>
+                                         <button className=' p-1 px-3 rounded-3 border-btn text-pink' style={{ width: "auto", display: "inline-block" }} onClick={() => setSheetOpened1(true)}>Xem ngay</button>
                                     </div>
                                 </div>
                             </div>

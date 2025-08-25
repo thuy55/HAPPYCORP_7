@@ -5,11 +5,11 @@ export default function SheetMenuDetail({ opened, onClose }) {
     return (
         <>
             <Sheet
-                className="demo-sheet-2 h-100 bg-light"
+                className="demo-sheet-2 h-100"
                 opened={opened}
                 onSheetClosed={onClose}
             >
-                <Toolbar className="">
+                {/* <Toolbar className="">
                     <div className="left fw-bold d-flex align-items-center">
 
                         Chi tiết món ăn
@@ -17,10 +17,26 @@ export default function SheetMenuDetail({ opened, onClose }) {
                     <div className="right fs-13">
                         <Link sheetClose>Close</Link>
                     </div>
-                </Toolbar>
+                </Toolbar> */}
                 <PageContent className="pb-5">
-                    <div className=' mt-3'>
+                    {/* <div className=' mt-3'>
                         <img src='https://tse1.mm.bing.net/th/id/OIP.oLxcg5eheNmd3t3ansSW-wHaEK?pid=Api&P=0&h=180' className=' w-100'></img>
+                    </div> */}
+                     <div className="position-relative">
+                        <img
+                            src="https://tse1.mm.bing.net/th/id/OIP.oLxcg5eheNmd3t3ansSW-wHaEK?pid=Api&P=0&h=180"
+                            className="w-100"
+                            alt="karaoke"
+                        />
+
+                        {/* nút đóng */}
+                        <button
+                            className="rounded-circle border-0 bg-light position-absolute top-0 end-0 m-2 d-flex justify-content-center"
+                            style={{ width: "30px", height: "30px", lineHeight: "30px" }}
+                            onClick={() => f7.sheet.close()}
+                        >
+                            ✕
+                        </button>
                     </div>
                     <div className="row m-3 mx-0 d-flex align-items-center">
                         <div className="col-9 fs-15 fw-bold">

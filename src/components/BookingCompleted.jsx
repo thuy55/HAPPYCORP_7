@@ -24,7 +24,7 @@ export default function SheetBookingCompleted({ opened, onClose }) {
     return (
         <>
             <Sheet
-                className="demo-sheet-2 h-100 bg-light"
+                className="demo-sheet-2 h-100"
                 opened={opened}
                 onSheetClosed={onClose}
             >

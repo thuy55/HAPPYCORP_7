@@ -93,7 +93,7 @@ const RoomPage = () => {
                 <List className='mx-2 my-2' simpleList>
                     <div className='d-flex align-items-center fs-6 fw-bold'>
                         <Link back>
-                            <img src='../image/icon-backward.gif' className='size-icon me-1'></img>
+                            <img src='../img/backward.gif' className='size-icon me-1'></img>
                         </Link>
                         Sơ đồ phòng
                     </div>

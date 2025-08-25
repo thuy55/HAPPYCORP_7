@@ -52,10 +52,15 @@ export default function SheetBooking({ opened, onClose }) {
                     space-between="10"
                     slides-per-view="1.15">
                     <swiper-slide>
-                        <Card className="border border-light shadow-sm rounded-3  m-0 ms-3 mb-2 p-0">
-                            <div className="row">
-                                <div className="col-5 p-0" onClick={() => setSheetOpenebMenu(true)}>
-                                    <img src="https://ngominhaudio.com.vn/wp-content/uploads/2017/04/phoi-canh-3d-phong-karaoke-25m2.jpg" className="w-100 rounded-3"></img>
+                        <Card className="border border-light shadow-sm rounded-3  m-0 me-3 mb-2 p-0">
+                            <div className="row d-flex align-items-center">
+                                <div className="col-5 pe-0" onClick={() => setSheetOpenebMenu(true)}>
+                                    <img src="https://ngominhaudio.com.vn/wp-content/uploads/2017/04/phoi-canh-3d-phong-karaoke-25m2.jpg" className="w-100 rounded-3" style={{
+
+                                        objectFit: "cover",   // cắt ảnh thừa, fill khung
+                                        objectPosition: "center", // căn giữa ảnh
+                                        display: "block",     // tránh ảnh bị inline làm hở khoảng trắng
+                                    }}></img>
                                 </div>
                                 <div className="col-7 fs-13 " onClick={() => setSheetOpenebMenu(true)}>
                                     <div className='fw-bold mt-2'>Phòng Private 1 - Lầu 2</div>
@@ -72,17 +77,17 @@ export default function SheetBooking({ opened, onClose }) {
                                     </div>
 
                                     <div className='limited-lines2 fst-italic fs-11 fst-italic'>Cách âm:
-                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                    Tiêu âm:
-                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
+                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                        Tiêu âm:
+                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
                     </swiper-slide>
                     <swiper-slide>
-                        <Card className="border border-light shadow-sm rounded-3  m-0 ms-3 mb-2 p-0">
+                        <Card className="border border-light shadow-sm rounded-3  m-0 me-3 mb-2 p-0">
                             <div className="row">
-                                <div className="col-5 p-0" onClick={() => setSheetOpenebMenu(true)}>
+                                <div className="col-5 pe-0" onClick={() => setSheetOpenebMenu(true)}>
                                     <img src="https://dltm-cdn.vnptit3.vn/resources/portal//Images/AGG/quantrivien.vnptagg/images/entertainment/karaoke/cropper_988595705.jpg" className="w-100 rounded-3"></img>
                                 </div>
                                 <div className="col-7 fs-13 " onClick={() => setSheetOpenebMenu(true)}>
@@ -100,17 +105,17 @@ export default function SheetBooking({ opened, onClose }) {
                                     </div>
 
                                     <div className='limited-lines2 fst-italic fs-11 fst-italic'>Cách âm:
-                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                    Tiêu âm:
-                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
+                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                        Tiêu âm:
+                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
                     </swiper-slide>
                     <swiper-slide>
-                        <Card className="border border-light shadow-sm rounded-3  m-0 ms-3 mb-2 p-0">
+                        <Card className="border border-light shadow-sm rounded-3  m-0 me-3 mb-2 p-0">
                             <div className="row">
-                                <div className="col-5 p-0" onClick={() => setSheetOpenebMenu(true)}>
+                                <div className="col-5 pe-0" onClick={() => setSheetOpenebMenu(true)}>
                                     <img src="https://viet-solar.com/wp-content/uploads/2021/02/bab-jpg.webp" className="w-100 rounded-3"></img>
                                 </div>
                                 <div className="col-7 fs-13 " onClick={() => setSheetOpenebMenu(true)}>
@@ -128,17 +133,17 @@ export default function SheetBooking({ opened, onClose }) {
                                     </div>
 
                                     <div className='limited-lines2 fst-italic fs-11 fst-italic'>Cách âm:
-                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                    Tiêu âm:
-                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
+                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                        Tiêu âm:
+                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
                     </swiper-slide>
                     <swiper-slide>
-                        <Card className="border border-light shadow-sm rounded-3  m-0 ms-3 mb-2 p-0">
+                        <Card className="border border-light shadow-sm rounded-3  m-0 me-3 mb-2 p-0">
                             <div className="row">
-                                <div className="col-5 p-0" onClick={() => setSheetOpenebMenu(true)}>
+                                <div className="col-5 pe-0" onClick={() => setSheetOpenebMenu(true)}>
                                     <img src="https://img.freepik.com/premium-photo/elite-karaoke-suite-with-velvet-ropes-bartender_416256-24715.jpg" className="w-100 rounded-3"></img>
                                 </div>
                                 <div className="col-7 fs-13 " onClick={() => setSheetOpenebMenu(true)}>
@@ -156,9 +161,9 @@ export default function SheetBooking({ opened, onClose }) {
                                     </div>
 
                                     <div className='limited-lines2 fst-italic fs-11 fst-italic'>Cách âm:
-                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                    Tiêu âm:
-                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
+                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                        Tiêu âm:
+                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -197,9 +202,9 @@ export default function SheetBooking({ opened, onClose }) {
                                         ))}
                                     </div>
                                     <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                    Tiêu âm:
-                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
+                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                        Tiêu âm:
+                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -223,9 +228,9 @@ export default function SheetBooking({ opened, onClose }) {
                                         ))}
                                     </div>
                                     <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                    Tiêu âm:
-                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
+                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                        Tiêu âm:
+                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -249,9 +254,9 @@ export default function SheetBooking({ opened, onClose }) {
                                         ))}
                                     </div>
                                     <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                    Tiêu âm:
-                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
+                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                        Tiêu âm:
+                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -275,9 +280,9 @@ export default function SheetBooking({ opened, onClose }) {
                                         ))}
                                     </div>
                                     <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                    Tiêu âm:
-                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
+                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                        Tiêu âm:
+                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -315,9 +320,9 @@ export default function SheetBooking({ opened, onClose }) {
                                         ))}
                                     </div>
                                     <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                    Tiêu âm:
-                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
+                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                        Tiêu âm:
+                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -341,9 +346,9 @@ export default function SheetBooking({ opened, onClose }) {
                                         ))}
                                     </div>
                                     <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                    Tiêu âm:
-                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
+                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                        Tiêu âm:
+                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -367,9 +372,9 @@ export default function SheetBooking({ opened, onClose }) {
                                         ))}
                                     </div>
                                     <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                    Tiêu âm:
-                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
+                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                        Tiêu âm:
+                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -393,9 +398,9 @@ export default function SheetBooking({ opened, onClose }) {
                                         ))}
                                     </div>
                                     <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                    Tiêu âm:
-                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
+                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                        Tiêu âm:
+                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -431,9 +436,9 @@ export default function SheetBooking({ opened, onClose }) {
                                     </div>
 
                                     <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                    Tiêu âm:
-                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
+                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                        Tiêu âm:
+                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -456,9 +461,9 @@ export default function SheetBooking({ opened, onClose }) {
                                         ))}
                                     </div>
                                     <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                    Tiêu âm:
-                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
+                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                        Tiêu âm:
+                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -481,9 +486,9 @@ export default function SheetBooking({ opened, onClose }) {
                                         ))}
                                     </div>
                                     <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                    Tiêu âm:
-                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
+                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                        Tiêu âm:
+                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -506,9 +511,9 @@ export default function SheetBooking({ opened, onClose }) {
                                         ))}
                                     </div>
                                     <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                    Tiêu âm:
-                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
+                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                        Tiêu âm:
+                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -531,9 +536,9 @@ export default function SheetBooking({ opened, onClose }) {
                                         ))}
                                     </div>
                                     <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                    Tiêu âm:
-                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
+                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                        Tiêu âm:
+                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>
@@ -556,9 +561,9 @@ export default function SheetBooking({ opened, onClose }) {
                                         ))}
                                     </div>
                                     <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                    Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                    Tiêu âm:
-                                    Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
+                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
+                                        Tiêu âm:
+                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
                                 </div>
                             </div>
                         </Card>

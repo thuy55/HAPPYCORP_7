@@ -6,7 +6,7 @@ export default function SheetRoomDetail({ opened, onClose }) {
     return (
         <>
             <Sheet
-                className="demo-sheet-2 h-100 bg-light"
+                className="demo-sheet-2 h-100"
                 opened={opened}
                 onSheetClosed={onClose}
             >
@@ -48,13 +48,16 @@ export default function SheetRoomDetail({ opened, onClose }) {
                             999.000đ
                         </div>
                     </div>
-                    <div className="row m-3 pb-1 mx-0 d-flex align-items-center border-bottom">
+                    <div className="row mt-3 pb-1 mx-0 d-flex align-items-center border-bottom">
                         <div>Giới thiệu phòng</div>
                         <ul className="fst-italic fs-13 px-5 mt-2">
-                            <li>
+                             <li className="mt-1">
+                                Địa chỉ: 90 – 92 Lê Thị Riêng, Quận 1, TP.HCM
+                            </li>
+                            <li className="mt-1">
                                 Kích thước: 30 m²
                             </li>
-                            <li>
+                            <li className="mt-1">
                                 Sức chứa: 30 người
                             </li>
                         </ul>

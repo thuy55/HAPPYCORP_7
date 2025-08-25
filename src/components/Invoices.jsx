@@ -19,7 +19,7 @@ export default function SheetInvoices({ opened, onClose }) {
     return (
         <>
             <Sheet
-                className="demo-sheet-2 h-100 bg-light"
+                className="demo-sheet-2 h-100"
                 opened={opened}
                 onSheetClosed={onClose}
             >
@@ -154,7 +154,7 @@ export default function SheetInvoices({ opened, onClose }) {
                         </div>
                     </Card>
                 </PageContent>
-                <footer className="fixed-bottom p-3 py-1 bg-white">
+                <footer className="fixed-bottom p-3 py-1 ">
                     <div className=' grid grid-cols-2 grid-gap px-2 my-2'>
                         <div>
                             <button className='border border-0 rounded-pill p-3 bg-warning fs-13 fw-đơnd'>Tải hóa đơn</button>

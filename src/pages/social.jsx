@@ -972,7 +972,7 @@ const SocialPage = () => {
                 <CommonNavbar />
 
                 {/* Page content */}
-                <div className='pb-2 pt-0' style={{ backgroundColor: "rgb(223 223 223)" }}>
+                <div className='pb-2 pt-0 bg-social'>
                     <Card className='m-0 p-3 pb-2 rounded-0 border border-0' >
                         <div className='row d-flex align-items-center'>
                             <div className='col-8'>
@@ -990,7 +990,7 @@ const SocialPage = () => {
                                     <lord-icon
                                         src="https://cdn.lordicon.com/wsaaegar.json"
                                         trigger="loop"
-                                        colors="primary:#000000,secondary:#f30771"
+                                        colors="primary:#f30771,secondary:#f30771"
                                         className=' me-2'
                                         style={{ width: '30px', height: '30px' }}>
                                     </lord-icon>
@@ -1057,15 +1057,13 @@ const SocialPage = () => {
                                             <Icon
                                                 f7="hand_thumbsup_fill"
                                                 size="20px"
-                                                color="black"
-                                                className="me-1"
+                                                className="me-1 color-icon"
                                             />
                                         ) : (
                                             <Icon
                                                 f7="hand_thumbsup"
                                                 size="20px"
-                                                color="black"
-                                                className="me-1"
+                                                className="me-1 color-icon"
                                             />
                                         )}
                                     </div>
@@ -1074,13 +1072,13 @@ const SocialPage = () => {
                             </div>
                             <div className='col-4 text-center'>
                                 <Link fill popupOpen="#comment-social">
-                                    <Icon f7="chat_bubble" size="20px" color='black' className='me-1'></Icon>
+                                    <Icon f7="chat_bubble" size="20px" className="me-1 color-icon"></Icon>
                                     Comment
                                 </Link>
                             </div>
                             <div className='col-4 text-center'>
                                 <div>
-                                    <Icon f7="arrowshape_turn_up_right" size="20px" color='black' className='me-1'></Icon>
+                                    <Icon f7="arrowshape_turn_up_right" size="20px" className="me-1 color-icon"></Icon>
                                     Share
                                 </div>
                             </div>
@@ -1148,15 +1146,13 @@ const SocialPage = () => {
                                             <Icon
                                                 f7="hand_thumbsup_fill"
                                                 size="20px"
-                                                color="black"
-                                                className="me-1"
+                                                className="me-1 color-icon"
                                             />
                                         ) : (
                                             <Icon
                                                 f7="hand_thumbsup"
                                                 size="20px"
-                                                color="black"
-                                                className="me-1"
+                                                className="me-1 color-icon"
                                             />
                                         )}
                                     </div>
@@ -1165,13 +1161,13 @@ const SocialPage = () => {
                             </div>
                             <div className='col-4 text-center'>
                                 <Link fill popupOpen="#comment-social">
-                                    <Icon f7="chat_bubble" size="20px" color='black' className='me-1'></Icon>
+                                    <Icon f7="chat_bubble" size="20px" className="me-1 color-icon"></Icon>
                                     Comment
                                 </Link>
                             </div>
                             <div className='col-4 text-center'>
                                 <div>
-                                    <Icon f7="arrowshape_turn_up_right" size="20px" color='black' className='me-1'></Icon>
+                                    <Icon f7="arrowshape_turn_up_right" size="20px" className="me-1 color-icon"></Icon>
                                     Share
                                 </div>
                             </div>
@@ -1352,7 +1348,7 @@ const SocialPage = () => {
                             <lord-icon
                                 src="https://cdn.lordicon.com/sobzmbzh.json"
                                 trigger="loop"
-                                colors="primary:#000000,secondary:#f30771"
+                                colors="primary:#f30771,secondary:#f30771"
                                 className=' me-2'
                                 style={{ width: '30px', height: '30px' }}>
                             </lord-icon>
@@ -1364,7 +1360,7 @@ const SocialPage = () => {
                             <lord-icon
                                 src="https://cdn.lordicon.com/rrbmabsx.json"
                                 trigger="loop"
-                                colors="primary:#000000,secondary:#f30771"
+                                colors="primary:#f30771,secondary:#f30771"
                                 className=' me-2'
                                 style={{ width: '30px', height: '30px' }}>
                             </lord-icon>
@@ -1376,7 +1372,7 @@ const SocialPage = () => {
                             <lord-icon
                                 src="https://cdn.lordicon.com/cfoaotmk.json"
                                 trigger="loop"
-                                colors="primary:#000000,secondary:#f30771"
+                                colors="primary:#f30771,secondary:#f30771"
                                 className=' me-2'
                                 style={{ width: '20px', height: '20px' }}>
                             </lord-icon>
@@ -1388,7 +1384,7 @@ const SocialPage = () => {
                             <lord-icon
                                 src="https://cdn.lordicon.com/lcvlsnre.json"
                                 trigger="loop"
-                                colors="primary:#000000,secondary:#f30771"
+                                colors="primary:#f30771,secondary:#f30771"
                                 className=' me-2'
                                 style={{ width: '20px', height: '20px' }}>
                             </lord-icon>
@@ -1400,7 +1396,7 @@ const SocialPage = () => {
                             <lord-icon
                                 src="https://cdn.lordicon.com/dicvhxpz.json"
                                 trigger="loop"
-                                colors="primary:#000000,secondary:#f30771"
+                                colors="primary:#f30771,secondary:#f30771"
                                 className=' me-2'
                                 style={{ width: '20px', height: '20px' }}>
                             </lord-icon>
@@ -1578,7 +1574,7 @@ const SocialPage = () => {
                                     </div>
                                 </div>
                             </div>
-                            <footer className="fixed-bottom p-3 py-2 bg-white">
+                            <footer className="fixed-bottom p-3 py-2">
                                 <Button className=' rounded-pill p-4 bg-pink  mx-3 fs-6 fw-bold text-white' onClick={handleAddPost}>Đăng</Button>
                             </footer>
                         </List>
@@ -1660,7 +1656,7 @@ const SocialPage = () => {
                                 <Link popupClose>Close</Link>
                             </NavRight>
                         </Navbar>
-                        <List className='mt-3 mb-4 px-2'>
+                        <List className='mt-0 mb-4 px-2'>
 
                             <Card className='m-0 mt-1 p-0 rounded-0 border border-0'>
                                 <div className='d-flex align-items-center justify-content-between p-3 pb-1'>
@@ -1722,15 +1718,13 @@ const SocialPage = () => {
                                                     <Icon
                                                         f7="hand_thumbsup_fill"
                                                         size="20px"
-                                                        color="black"
-                                                        className="me-1"
+                                                        className="me-1 color-icon"
                                                     />
                                                 ) : (
                                                     <Icon
                                                         f7="hand_thumbsup"
                                                         size="20px"
-                                                        color="black"
-                                                        className="me-1"
+                                                        className="me-1 color-icon"
                                                     />
                                                 )}
                                             </div>
@@ -1739,13 +1733,13 @@ const SocialPage = () => {
                                     </div>
                                     <div className=' text-center'>
                                         <Link fill popupOpen="#comment-social">
-                                            <Icon f7="chat_bubble" size="20px" color='black' className='me-1'></Icon>
+                                            <Icon f7="chat_bubble" size="20px" className="me-1 color-icon"></Icon>
                                             Comment
                                         </Link>
                                     </div>
                                     <div className=' text-center'>
                                         <div>
-                                            <Icon f7="arrowshape_turn_up_right" size="20px" color='black' className='me-1'></Icon>
+                                            <Icon f7="arrowshape_turn_up_right" size="20px" className="me-1 color-icon"></Icon>
                                             Share
                                         </div>
                                     </div>
@@ -1761,13 +1755,13 @@ const SocialPage = () => {
                                                 </div>
                                                 <div className='col-10 ps-0  border-bottom'>
                                                     <div className='d-flex align-items-center justify-content-between'>
-                                                        <div className='fs-15 fw-bold'>{cmt.account} <span className='fs-11 text-muted ms-2'> {cmt.date}</span></div>
+                                                        <div className='fs-15 fw-bold'>{cmt.account} <span className='fs-11 text-secondary ms-2'> {cmt.date}</span></div>
                                                         {/* {cmt.id_account == acc_social_view.id ? */}
                                                         <div className='fs-11 d-flex align-items-center' onClick={() => { deleteComment(cmt.active) }}>
                                                             <lord-icon
                                                                 src="https://cdn.lordicon.com/fozsorqm.json"
                                                                 trigger="loop"
-                                                                colors="primary:#000000,secondary:#000000"
+                                                                colors="primary:#f30771,secondary:#f30771"
                                                                 className=' me-3'
                                                                 style={{ width: '20px', height: '20px' }}>
                                                             </lord-icon>
@@ -1797,7 +1791,7 @@ const SocialPage = () => {
                             </div>
 
 
-                            <div className='px-4 py-2 bg-white' style={{
+                            <div className='px-4 py-2 ' style={{
                                 cursor: 'pointer', position: "fixed",
                                 bottom: 0,
                                 left: 0,
@@ -1805,10 +1799,10 @@ const SocialPage = () => {
                                 zIndex: 1000,
                             }}>
 
-                                <div className="d-flex align-items-center bg-light border border-secondary-10 rounded-3 p-1 row" style={{
+                                <div className="d-flex align-items-center bg-input  rounded-3 p-1 row" style={{
 
                                 }}>
-                                    <input className='border bg-light rounded-3 border-0 p-2 px-3 fs-13 col-10' placeholder='Nhập nội dung'></input>
+                                    <input className='border bg-input rounded-3 border-0 p-2 px-3 fs-13 col-10' placeholder='Nhập nội dung'></input>
                                     <Button fill={false} className=" col-2 pe-0 d-flex justify-content-end">
                                         <Icon f7="location_fill" size="25px" color='pink' className='me-1'></Icon>
                                     </Button>

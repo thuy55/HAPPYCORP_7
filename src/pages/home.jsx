@@ -123,7 +123,7 @@ const HomePage = () => {
               src="https://cdn.lordicon.com/vmiwgvnx.json"
               trigger="loop"
               state="loop-spin"
-              colors="primary:#00000,secondary:#f30771"
+              colors="primary:#f30771,secondary:#f30771"
               className='size-icon me-2'>
             </lord-icon></Link>
         </NavLeft>
@@ -343,7 +343,7 @@ const HomePage = () => {
           </lord-icon>
           Lịch Booking tháng 07/2025</div>
         <div className='p-3  mt1'>
-          <div className="calendar  p-1  rounded-4 shadow-sm bg-light" style={{ backdropFilter: "blur(50px)" }}>
+          <div className="calendar  p-1  rounded-4 shadow-sm " style={{ backdropFilter: "blur(50px)" }}>
             <div className="d-flex justify-content-between text-center mb-2 py-1">
               {week.map((day, idx) => (
                 <div key={idx} className="flex-fill fw-bold bg-pink mx-1 py-2 rounded-3 p-1" style={{ fontSize: "13px" }}>{day}</div>
@@ -356,7 +356,7 @@ const HomePage = () => {
                   <Link className='m-0 p-0' fill popupOpen="#popup-view-booking">
                     <Card
                       key={idx}
-                      className={`card-animated-bg rounded-3 m-1 p-1 ${isCurrentMonth ? 'border-light bg-white' : 'border border-0 bg-light'} `}
+                      className={`card-animated-bg rounded-3 m-1 p-1 ${isCurrentMonth ? 'border-light ' : 'border border-0 '} `}
                       style={{
                         width: "12%",
                         color: isCurrentMonth ? undefined : 'transparent',
@@ -520,18 +520,18 @@ const HomePage = () => {
             <div className='col-2'>
               <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className='w-100 border border-2 rounded-3 border-danger'></img>
             </div>
-            <div className='col-10 fs-13 ms-2 border-bottom border-light'>
+            <div className='col-10 fs-13 ms-2 border-bottom'>
               <div className='fw-bold d-flex justify-content-between'> Phòng: V.I.P 4 <span className='text-success'>Đã hoàn tất</span></div>
-              <div className='text-muted mt-1 mb-2'>18/07/2025 14:22:52</div>
+              <div className=' mt-1 mb-2'>18/07/2025 14:22:52</div>
             </div>
           </ListItem>
           <ListItem onClick={() => { setSheetOpenedInvoices(true) }} className='row mt-2 list-no-chevron'>
             <div className='col-2'>
               <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className='w-100 border border-2 rounded-3 border-danger'></img>
             </div>
-            <div className='col-10 fs-13 ms-2 border-bottom border-light'>
+            <div className='col-10 fs-13 ms-2 border-bottom'>
               <div className='fw-bold d-flex justify-content-between'> Phòng: V.I.P 4 <span className='text-success'>Đã hoàn tất</span></div>
-              <div className='text-muted mt-1 mb-2'>18/07/2025 14:22:52</div>
+              <div className=' mt-1 mb-2'>18/07/2025 14:22:52</div>
             </div>
           </ListItem>
         </List>

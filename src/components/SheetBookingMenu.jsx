@@ -303,14 +303,14 @@ export default function SheetBookingMenu({ opened, onClose }) {
     return (
         <>
             <Sheet
-                className="demo-sheet-2 h-100 bg-light"
+                className="demo-sheet-2 h-100"
                 opened={opened}
                 onSheetClosed={onClose}
             >
                 <Toolbar className="">
                     <div className="left fw-bold d-flex align-items-center">
                         <Link sheetClose>
-                            <img src='../image/icon-backward.gif' className='size-icon me-1'></img>
+                            <img src='../img/backward.gif' className='size-icon me-1'></img>
                         </Link>
                         Chọn menu
                     </div>
@@ -431,7 +431,7 @@ export default function SheetBookingMenu({ opened, onClose }) {
                         <Button sheetClose className="bg-secondary bg-opacity-25 p-3 rounded-pill  fs-15">Hủy</Button>
                         <Button className="bg-pink p-3 rounded-pill text-white fs-15" onClick={() => {
                             setSheetOpened1(true), console.log(32354);
-                        }}>{totalQty} Món</Button>
+                        }}>{totalQty} Giỏ hàng</Button>
                     </div>
                 </footer>
             </Sheet>

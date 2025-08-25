@@ -971,7 +971,7 @@ const SocialSavePage = () => {
             <List className='m-2' simpleList>
                 <div className='d-flex align-items-center fs-6 fw-bold'>
                     <PageTransition href="/" >
-                        <img src='../image/icon-backward.gif' className='size-icon me-1'></img>
+                        <img src='../img/backward.gif' className='size-icon me-1'></img>
                     </PageTransition>
                     Bài viết đã lưu
                 </div>

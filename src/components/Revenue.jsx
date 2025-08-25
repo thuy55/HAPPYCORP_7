@@ -164,7 +164,7 @@ export default function SheetRevenue({ opened, onClose }) {
     return (
         <>
             <Sheet
-                className="demo-sheet-2 h-100 bg-light"
+                className="demo-sheet-2 h-100"
                 opened={opened}
                 onSheetClosed={onClose}
             >
@@ -185,7 +185,7 @@ export default function SheetRevenue({ opened, onClose }) {
                                     fill={selectedPeriod === 'date'}
                                     round
                                     color={selectedPeriod === 'date' ? 'pink' : 'gray'}
-                                    className={`w-100 p-3 ${selectedPeriod === 'date' ? 'text-white bg-pink' : 'text-dark'}`}
+                                    className={`w-100 p-3 ${selectedPeriod === 'date' ? 'text-white bg-pink' : ''}`}
                                     onClick={() => handlePeriodChange('date')}
                                 >
                                     <Icon f7="calendar" className="me-2" size="16px"></Icon>
@@ -197,7 +197,7 @@ export default function SheetRevenue({ opened, onClose }) {
                                     fill={selectedPeriod === 'week'}
                                     round
                                     color={selectedPeriod === 'week' ? 'pink' : 'gray'}
-                                    className={`w-100 p-3 ${selectedPeriod === 'week' ? 'text-white bg-pink' : 'text-dark'}`}
+                                    className={`w-100 p-3 ${selectedPeriod === 'week' ? 'text-white bg-pink' : ''}`}
                                     onClick={() => handlePeriodChange('week')}
                                 >
                                     <Icon f7="calendar" className="me-2" size="16px"></Icon>
@@ -209,7 +209,7 @@ export default function SheetRevenue({ opened, onClose }) {
                                     fill={selectedPeriod === 'month'}
                                     round
                                     color={selectedPeriod === 'month' ? 'pink' : 'gray'}
-                                    className={`w-100 p-3 ${selectedPeriod === 'month' ? 'text-white bg-pink' : 'text-dark'}`}
+                                    className={`w-100 p-3 ${selectedPeriod === 'month' ? 'text-white bg-pink' : ''}`}
                                     onClick={() => handlePeriodChange('month')}
                                 >
                                     <Icon f7="calendar" className="me-2" size="16px"></Icon>

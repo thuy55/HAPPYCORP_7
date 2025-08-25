@@ -25,7 +25,8 @@ import {
   Icon,
   Card,
   NavLeft,
-  NavTitle
+  NavTitle,
+  Button
 } from 'framework7-react';
 
 import capacitorApp from '../js/capacitor-app';
@@ -139,6 +140,30 @@ function chuyentrang(e){
   
 }
 
+//Chế độ sáng tối
+ const [dark, setDark] = useState(false);
+
+  // Lưu theme vào localStorage để nhớ lần mở sau
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      setDark(true);
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
+
+  const setLightTheme = () => {
+    setDark(false);
+    document.documentElement.classList.remove("dark");
+    localStorage.setItem("theme", "light");
+  };
+
+  const setDarkTheme = () => {
+    setDark(true);
+    document.documentElement.classList.add("dark");
+    localStorage.setItem("theme", "dark");
+  };
+
 
   return (
     <App {...f7params}>
@@ -215,6 +240,7 @@ function chuyentrang(e){
 
 
             <BlockTitle className='mb-1  mt-4 fs-13 '>Quản lý</BlockTitle>
+            
             <List dividersIos={false} simpleList inset className='fs-13 list-custom mb-3'>
               {/* <ListItem  link="/account/" selected={selected === 'account'}
                 onClick={() => { setSelected('account'), console.log(123) }}> */}
@@ -264,28 +290,32 @@ function chuyentrang(e){
             <BlockTitle className='mb-1  mt-3 fs-13 '>Giao diện</BlockTitle>
             <List dividersIos={false} simpleList inset className='fs-13 list-custom mb-3'>
               <ListItem>
-                <Link>
-                  <lord-icon
-                    src="https://cdn.lordicon.com/bsdkzyjd.json"
-                    trigger="loop"
-                    colors="primary:#f30771,secondary:#f30771"
-                    className=' me-2'
-                    style={{ width: '25px', height: '25px' }}>
-                  </lord-icon>Sáng
-                </Link>
-              </ListItem>
-              <ListItem >
-                <Link>
-                  <lord-icon
-                    src="https://cdn.lordicon.com/yodwgokk.json"
-                    trigger="loop"
-                    colors="primary:#f30771,secondary:#f30771"
-                    className=' me-2'
-                    style={{ width: '25px', height: '25px' }}>
-                  </lord-icon> Tối
-                </Link>
-              </ListItem>
+              <Link onClick={setLightTheme}>
+                <lord-icon
+                  src="https://cdn.lordicon.com/bsdkzyjd.json"
+                  trigger="loop"
+                  colors="primary:#f30771,secondary:#f30771"
+                  className="me-2"
+                  style={{ width: "25px", height: "25px" }}
+                />
+                Sáng
+              </Link>
+            </ListItem>
+
+            <ListItem>
+              <Link onClick={setDarkTheme}>
+                <lord-icon
+                  src="https://cdn.lordicon.com/yodwgokk.json"
+                  trigger="loop"
+                  colors="primary:#f30771,secondary:#f30771"
+                  className="me-2"
+                  style={{ width: "25px", height: "25px" }}
+                />
+                Tối
+              </Link>
+            </ListItem>
             </List>
+                  
 
             <BlockTitle className='mb-1  mt-3 fs-13 '>Ngôn ngữ</BlockTitle>
             <List dividersIos={false} simpleList inset className='fs-13 list-custom mb-3'>
@@ -317,6 +347,7 @@ function chuyentrang(e){
             </div>
             <div className='fixed-bottom '>
               <Card className="bg-pink-nhat border border-0 bg-danger m-0 rounded-0 fs-13 p-3 py-4">
+           
                 <div>
                   <img src='../image/happy-corp-logo.png' className='w-25' />
                 </div>

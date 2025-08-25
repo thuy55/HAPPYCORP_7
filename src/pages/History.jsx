@@ -202,7 +202,7 @@ const HistoryPage = () => {
                                 fill={selectedPeriod === 'date'}
                                 round
                                 color={selectedPeriod === 'date' ? 'pink' : 'gray'}
-                                className={`w-100 p-3 ${selectedPeriod === 'date' ? 'text-white bg-pink' : 'text-dark'}`}
+                                className={`w-100 p-3 ${selectedPeriod === 'date' ? 'text-white bg-pink' : ''}`}
                                 onClick={() => handlePeriodChange('date')}
                             >
                                 <Icon f7="calendar" className="me-2" size="16px"></Icon>
@@ -214,7 +214,7 @@ const HistoryPage = () => {
                                 fill={selectedPeriod === 'week'}
                                 round
                                 color={selectedPeriod === 'week' ? 'pink' : 'gray'}
-                                className={`w-100 p-3 ${selectedPeriod === 'week' ? 'text-white' : 'text-dark'}`}
+                                className={`w-100 p-3 ${selectedPeriod === 'week' ? 'text-white' : ''}`}
                                 onClick={() => handlePeriodChange('week')}
                             >
                                 <Icon f7="calendar" className="me-2" size="16px"></Icon>
@@ -226,7 +226,7 @@ const HistoryPage = () => {
                                 fill={selectedPeriod === 'month'}
                                 round
                                 color={selectedPeriod === 'month' ? 'pink' : 'gray'}
-                                className={`w-100 p-3 ${selectedPeriod === 'month' ? 'text-white' : 'text-dark'}`}
+                                className={`w-100 p-3 ${selectedPeriod === 'month' ? 'text-white' : ''}`}
                                 onClick={() => handlePeriodChange('month')}
                             >
                                 <Icon f7="calendar" className="me-2" size="16px"></Icon>
@@ -572,18 +572,18 @@ const HistoryPage = () => {
                         <div className='col-2'>
                             <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className='w-100 border border-2 rounded-3 border-danger'></img>
                         </div>
-                        <div className='col-10 fs-13 ms-2 border-bottom border-light'>
+                        <div className='col-10 fs-13 ms-2 border-bottom '>
                             <div className='fw-bold d-flex justify-content-between'> Phòng: V.I.P 4 <span className='text-success'>Đã hoàn tất</span></div>
-                            <div className='text-muted mt-1 mb-2'>18/07/2025 14:22:52</div>
+                            <div className=' mt-1 mb-2'>18/07/2025 14:22:52</div>
                         </div>
                     </ListItem>
                     <ListItem onClick={() => { setSheetOpenedInvoices(true) }} className='row mt-2 list-no-chevron'>
                         <div className='col-2'>
                             <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className='w-100 border border-2 rounded-3 border-danger'></img>
                         </div>
-                        <div className='col-10 fs-13 ms-2 border-bottom border-light'>
+                        <div className='col-10 fs-13 ms-2 border-bottom '>
                             <div className='fw-bold d-flex justify-content-between'> Phòng: V.I.P 4 <span className='text-success'>Đã hoàn tất</span></div>
-                            <div className='text-muted mt-1 mb-2'>18/07/2025 14:22:52</div>
+                            <div className=' mt-1 mb-2'>18/07/2025 14:22:52</div>
                         </div>
                     </ListItem>
                 </List>

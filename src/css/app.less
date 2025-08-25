@@ -1,13 +1,13 @@
 .navbar-bg {
-    background-color: white !important;
+    // background-color: white !important;
 }
 
 .toolbar {
-    background-color: white !important;
+    // background-color: white !important;
 }
 
 .page {
-    background-color: white !important;
+    // background-color: white !important;
 }
 
 .border-image {
@@ -544,6 +544,55 @@ button {
     background-color: transparent !important;
     backdrop-filter: none !important;
 }
-.bg-pink1{
+
+.bg-pink1 {
     background-color: #f166b5;
+}
+
+/* sáng (mặc định) */
+.sheet-modal-bottom,
+.sheet-modal:not(.sheet-modal-top) {
+    background-color: var(--f7-theme-color-light, #f8f9fa);
+    /* bg-light */
+    color: #000;
+}
+
+/* tối */
+.dark .sheet-modal-bottom,
+.dark .sheet-modal:not(.sheet-modal-top) {
+    background-color: var(--f7-theme-color-dark, #212529);
+    /* bg-dark */
+    color: #fff;
+}
+
+.nav-link {
+    color: #000 !important;
+    /* chữ đen khi không active */
+}
+
+.dark .nav-link {
+    color: #fff !important;
+}
+
+.nav-link.active {
+    background-color: #f30771 !important;
+    color: #fff !important;
+}
+.bg-social{
+    background-color: #999999;
+}
+.dark .bg-social{
+    background-color: #212529;
+}
+.color-icon{
+    color: black;
+}
+.dark .color-icon{
+    color: white;
+}
+.bg-input{
+    background-color: lightgray;
+}
+.dark .bg-input{
+    background-color: #212529;
 }

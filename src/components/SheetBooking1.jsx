@@ -39,14 +39,14 @@ export default function SheetBooking1({ opened, onClose }) {
     return (
         <>
             <Sheet 
-                className="demo-sheet-2 h-100 bg-light"
+                className="demo-sheet-2 h-100"
                 opened={opened}
                 onSheetClosed={onClose}
             >
                 <Toolbar className="">
                     <div className="left fw-bold d-flex align-items-center">
                         <Link sheetClose>
-                            <img src='../image/icon-backward.gif' className='size-icon me-1'></img>
+                            <img src='../img/backward.gif' className='size-icon me-1'></img>
                         </Link>
                         Tạo đơn
                     </div>
