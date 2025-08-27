@@ -39,7 +39,7 @@ export default function SheetInvoices({ opened, onClose }) {
                         </div>
                     </div> */}
                     {/* <div className='d-flex justify-content-center mt-2 fs-13 fw-bold'>#0000111</div> */}
-                    <Card className="rounded-4 p-3 shadow-none border border-light fs-13">
+                    <Card className="rounded-4 p-3 shadow-none border border-0 fs-13">
                         <div className=" fs-13 text-pink mb-2 fw-bold">
                             Thông tin khách hàng
                         </div>
@@ -56,7 +56,7 @@ export default function SheetInvoices({ opened, onClose }) {
                             Xác nhận <div className='fw-bold'>Đã xác nhận qua Zalo</div>
                         </div>
                     </Card>
-                    <Card className="rounded-4 p-3 shadow-none border border-light fs-13">
+                    <Card className="rounded-4 p-3 shadow-none border border-0 fs-13">
                         <div className=" fs-13 text-pink mb-2 fw-bold">
                             Thông tin đặt bàn
                         </div>
@@ -82,7 +82,7 @@ export default function SheetInvoices({ opened, onClose }) {
                             Ghi chú <div className='fw-bold'>Yêu cầu có DJ</div>
                         </div>
                     </Card>
-                    <Card className="rounded-4 p-3 shadow-none border border-light fs-13">
+                    <Card className="rounded-4 p-3 shadow-none border border-0 fs-13">
                         <div className=" fs-13 text-pink mb-2 fw-bold">
                             Chi tiết dịch vụ/ Món ăn
                         </div>
@@ -101,7 +101,7 @@ export default function SheetInvoices({ opened, onClose }) {
                             <div className='fw-bold'>4.500.000đ</div>
                         </div>
                     </Card>
-                    <Card className="rounded-4 p-3 shadow-none border border-light fs-13">
+                    <Card className="rounded-4 p-3 shadow-none border border-0 fs-13">
                         <div className=" fs-13 text-pink mb-2 fw-bold">
                             Thông tin thanh toán
                         </div>
@@ -131,7 +131,7 @@ export default function SheetInvoices({ opened, onClose }) {
                         </div>
 
                     </Card>
-                    <Card className="rounded-4 p-3 shadow-none border border-light fs-13 mb-5">
+                    <Card className="rounded-4 p-3 shadow-none border border-0 fs-13 mb-5">
                         <div className=" fs-13 text-pink mb-2 fw-bold">
                             Phương thức thanh toán
                         </div>

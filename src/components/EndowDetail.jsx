@@ -39,12 +39,12 @@ export default function SheetEndowDetail({ opened, onClose }) {
                     </div>
 
 
-                    <List className='mb-2 ' style={{
+                    <List className='mb-2 mx-2' style={{
                         position: 'relative',
                         marginTop: '-8%', // đè lên 1/5 list trên
                         zIndex: 10,        // đảm bảo nổi lên
                     }}>
-                        <Card className='rounded-4 border-light border-1 p-3 shadow-sm m-2'>
+                        <Card className='rounded-4 border border-0 p-3 shadow-sm m-2'>
                             <div className='text-center fw-bold'>
                                 HappyCorp - Câu chuyện kinh doanh
                             </div>
@@ -52,8 +52,8 @@ export default function SheetEndowDetail({ opened, onClose }) {
                             <div className='fs-13 mt-2 text-center '>𝐇𝐀𝐏𝐏𝐘 𝐂𝐎𝐑𝐏</div>
                         </Card>
                     </List>
-                    <List className='my-2'>
-                        <Card className='rounded-4 border-light border-1 p-2 shadow-sm fs-13 m-2'>
+                    <List className='m-2 mt-3'>
+                        <Card className='rounded-4 border border-0 p-2 shadow-sm fs-13 m-2'>
                             <div className='fw-bold'>Thông tin sự kiện</div>
                             <div className="m-2" style={{ whiteSpace: "pre-line" }}>
                                 {`✨ 90’s HOUSE – BIỂU TƯỢNG MỚI CỦA GIẢI TRÍ & ẨM THỰC CAO CẤP TẠI TP.HCM ✨

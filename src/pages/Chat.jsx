@@ -142,9 +142,7 @@ const ChatPage = () => {
                                 </div>
                             </div>
                         </List>
-                       
                     </List>
-
                 </div>
                 <div className="tab-pane" id="nav-friend">
                     <List className='p-3 m-0'>

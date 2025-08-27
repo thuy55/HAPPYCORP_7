@@ -97,39 +97,31 @@ const AccountPage = () => {
                     <div className=''>thuy@gmail.com</div>
 
                 </div>
-                <List className='my-4 fs-13  list-no-chevron mx-3' dividersIos mediaList outlineIos strongIos>
+                <List className='my-4 fs-13 rounded-3 list-no-chevron mx-3' dividersIos mediaList outlineIos strongIos>
                     <ListItem className='px-3'
                         title={
                             <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                                <span className="text-muted">Mã của bạn:</span>
+                                <span className="text-color">Mã của bạn:</span>
                                 <span className="fw-bold">#00001</span>
                             </div>
                         }
                     >
-                        {/* <lord-icon
-                        slot="media"
-                        src="https://cdn.lordicon.com/puebsmel.json"
-                        trigger="loop"
-                        colors="primary:#f30771,secondary:#f30771"
-                        style={{ width: '20px', height: '20px' }}
-                    ></lord-icon> */}
                         <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
                     </ListItem>
                     <ListItem className='px-3'
                         title={
                             <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                                <span className="text-muted">Họ và tên:</span>
+                                <span className="text-color">Họ và tên:</span>
                                 <span className="fw-bold">Nguyễn Thị Thanh Thúy</span>
                             </div>
                         }
                     >
                         <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
                     </ListItem>
-
                     <ListItem className='px-3'
                         title={
                             <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                                <span className="text-muted">Số điện thoại:</span>
+                                <span className="text-color">Số điện thoại:</span>
                                 <span className="fw-bold">0123456789</span>
                             </div>
                         }
@@ -139,7 +131,7 @@ const AccountPage = () => {
                     <ListItem className='px-3'
                         title={
                             <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                                <span className="text-muted">Email:</span>
+                                <span className="text-color">Email:</span>
                                 <span className="fw-bold">thuy@gmail.com</span>
                             </div>
                         }
@@ -149,7 +141,7 @@ const AccountPage = () => {
                     <ListItem className='px-3'
                         title={
                             <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                                <span className="text-muted">Tài khoản:</span>
+                                <span className="text-color">Tài khoản:</span>
                                 <span className="fw-bold">thanhthuy</span>
                             </div>
                         }
@@ -159,7 +151,7 @@ const AccountPage = () => {
                     <ListItem className='px-3'
                         title={
                             <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                                <span className="text-muted">Ngày sinh:</span>
+                                <span className="text-color">Ngày sinh:</span>
                                 <span className="fw-bold">05/05/2000</span>
                             </div>
                         }
@@ -169,7 +161,7 @@ const AccountPage = () => {
                     <ListItem className='px-3'
                         title={
                             <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                                <span className="text-muted">Giới tính:</span>
+                                <span className="text-color">Giới tính:</span>
                                 <span className="fw-bold">Nữ</span>
                             </div>
                         }
@@ -179,7 +171,7 @@ const AccountPage = () => {
                     <ListItem className='px-3'
                         title={
                             <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                                <span className="text-muted">Ngày đăng ký:</span>
+                                <span className="text-color">Ngày đăng ký:</span>
                                 <span className="fw-bold">21/07/2025</span>
                             </div>
                         }
@@ -187,7 +179,7 @@ const AccountPage = () => {
                         <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
                     </ListItem>
                 </List>
-                <Card className='p-0 border border-secondary-10 rounded-4'>
+                <Card className='p-0 border border-0 rounded-4'>
                     <List className='fs-13 m-0 ' dividersIos mediaList outlineIos strongIos>
                         <ListItem className='px-3 pt-2 ' fill sheetOpen=".sheet-changepassword" link
                             title="Đổi mật khẩu"
@@ -214,7 +206,7 @@ const AccountPage = () => {
                     </List>
                 </Card>
 
-                <Card className='p-3 border border-secondary-10 rounded-4'>
+                <Card className='p-3 border border-0 rounded-4'>
                     <BlockTitle className='m-0 mb-3'>Mời bạn bè</BlockTitle>
                     <div className='row d-flex align-items-center'>
                         <div className='col-1'>
@@ -255,16 +247,10 @@ const AccountPage = () => {
                             navigator.clipboard.writeText(`https://beta.ellm.io/?`);
                             alert("Coppy success");
                         }} >
-
-                            <Icon f7="doc_on_doc" size='20px'
-                            >
-                            </Icon>
+                            <Icon f7="doc_on_doc" size='20px'></Icon>
                         </div>
                     </div>
-
                 </Card>
-
-
             </Page>
             <Sheet
                 className="sheet-changepassword h-auto"
@@ -362,15 +348,13 @@ const AccountPage = () => {
                             </div>
                             <div className='mt-4 grid grid-cols-2 grid-gap'>
                                 <div>
-                                    <button className='p-2 rounded-pill border border-secondary bg-transparent fs-14'>Hủy</button>
+                                    <button className='p-2 rounded-pill border border-secondary bg-transparent fs-14 text-color'>Hủy</button>
                                 </div>
                                 <div>
-                                    <button type="button" className='p-2 rounded-pill border-btn fs-14'>Cập nhật</button>
+                                    <button type="button" className='p-2 rounded-pill border-btn fs-14 text-pink'>Cập nhật</button>
                                 </div>
                             </div>
                         </List>
-
-
                     </Block>
                 </PageContent>
             </Sheet>

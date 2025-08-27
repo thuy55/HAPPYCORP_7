@@ -146,10 +146,22 @@ function chuyentrang(e){
   // Lưu theme vào localStorage để nhớ lần mở sau
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
+    console.log("aaa",savedTheme);
+    
+    if (savedTheme === null){
+      setDark(true);
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    }
     if (savedTheme === "dark") {
       setDark(true);
       document.documentElement.classList.add("dark");
     }
+    if (savedTheme === "light") {
+      setDark(false);
+      document.documentElement.classList.remove("dark");
+    }
+
   }, []);
 
   const setLightTheme = () => {

@@ -1,11 +1,6 @@
 // Import các tệp dịch ngôn ngữ của bạn
 import translationEN from "./locales/en/translation.json";
 import translationVI from "./locales/vi/translation.json";
-import translationJA from "./locales/ja/translation.json";
-import translationKO from "./locales/ko/translation.json";
-import translationZH from "./locales/zh/translation.json";
-import translationRU from "./locales/ru/translation.json";
-import translationES from "./locales/es/translation.json";
 
 // Import i18n & các plugin
 import i18n from "i18next";
@@ -19,11 +14,6 @@ i18n
         resources: {
             vi: { translation: translationVI },
             en: { translation: translationEN },
-            ja: { translation: translationJA },
-            ko: { translation: translationKO },
-            zh: { translation: translationZH },
-            ru: { translation: translationRU },
-            es: { translation: translationES },
             // Thêm các ngôn ngữ khác nếu cần
         },
         lng: localStorage.getItem("ELLM_language") || "en", // Lấy ngôn ngữ từ localStorage

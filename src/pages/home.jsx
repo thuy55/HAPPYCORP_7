@@ -38,8 +38,11 @@ import SheetEndowDetail from '../components/EndowDetail';
 import SheetRevenue from '../components/Revenue';
 import SheetRoomDetail from '../components/RoomDetail';
 import SheetInvoices from '../components/Invoices';
+import { useTranslation } from 'react-i18next';
 
 const HomePage = () => {
+  const { t, i18n } = useTranslation();
+
   const week = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
   const [calendarDays, setCalendarDays] = useState([]);
 
@@ -155,13 +158,13 @@ const HomePage = () => {
       </Navbar>
       <PageContent className=''>
         <div className='px-4 my-2 mt-4'>
-          <div className="d-flex align-items-center bg-light border border-secondary-10 rounded-pill p-1 row" style={{ cursor: 'pointer' }}>
-            <input className='border bg-light rounded-pill border-0 p-2 px-3 col-10' placeholder='Tìm kiếm'></input>
+          <div className="d-flex align-items-center bg-input  rounded-pill p-1 row" style={{ cursor: 'pointer' }}>
+            <input className='border bg-input rounded-pill border-0 p-2 px-3 col-10' placeholder='Tìm kiếm'></input>
             <Button fill={false} className=" col-2 pe-0 d-flex justify-content-end">
               <lord-icon
                 src="https://cdn.lordicon.com/wjyqkiew.json"
                 trigger="loop"
-                colors="primary:#000000,secondary:#f30771"
+                colors="primary:#f30771,secondary:#f30771"
                 className=' me-2'
                 style={{ width: '30px', height: '30px' }}>
               </lord-icon>
@@ -229,7 +232,7 @@ const HomePage = () => {
         </Link>
         <div className='row d-flex flex-nowrap mx-2 mt-2 pb-2' style={{ overflowX: "auto", whiteSpace: "nowrap" }}>
           <div className='col-5 px-1'>
-            <Card className='m-0 border-light p-1 fs-13' onClick={() => setSheetOpenedEndowDetail(true)}>
+            <Card className='m-0 border border-0 p-1 fs-13' onClick={() => setSheetOpenedEndowDetail(true)}>
               <div>
                 <img onClick={() => setSheetOpenedEndowDetail(true)} src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
                 <div className='d-flex'>
@@ -248,7 +251,7 @@ const HomePage = () => {
             </Card>
           </div>
           <div className='col-5 px-1'>
-            <Card className='m-0 border-light p-1 fs-13'>
+            <Card className='m-0 border border-0 p-1 fs-13'>
               <div>
                 <img onClick={() => setSheetOpenedEndowDetail(true)} src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
                 <div className='d-flex'>
@@ -268,7 +271,7 @@ const HomePage = () => {
             </Card>
           </div>
           <div className='col-5 px-1'>
-            <Card onClick={() => setSheetOpenedEndowDetail(true)} className='m-0 border-light p-1 fs-13'>
+            <Card onClick={() => setSheetOpenedEndowDetail(true)} className='m-0 border border-0 p-1 fs-13'>
               <div>
                 <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
                 <div className='d-flex'>
@@ -288,7 +291,7 @@ const HomePage = () => {
             </Card>
           </div>
           <div className='col-5 px-1'>
-            <Card className='m-0 border-light p-1 fs-13'>
+            <Card className='m-0 border border-0 p-1 fs-13'>
               <div>
                 <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
                 <div className='d-flex'>
@@ -356,7 +359,7 @@ const HomePage = () => {
                   <Link className='m-0 p-0' fill popupOpen="#popup-view-booking">
                     <Card
                       key={idx}
-                      className={`card-animated-bg rounded-3 m-1 p-1 ${isCurrentMonth ? 'border-light ' : 'border border-0 '} `}
+                      className={`card-animated-bg rounded-3 m-1 p-1 border border-0 ${isCurrentMonth ? '' : 'bg-date'} `}
                       style={{
                         width: "12%",
                         color: isCurrentMonth ? undefined : 'transparent',
@@ -520,7 +523,7 @@ const HomePage = () => {
             <div className='col-2'>
               <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className='w-100 border border-2 rounded-3 border-danger'></img>
             </div>
-            <div className='col-10 fs-13 ms-2 border-bottom'>
+            <div className='col-10 fs-13 ms-2'>
               <div className='fw-bold d-flex justify-content-between'> Phòng: V.I.P 4 <span className='text-success'>Đã hoàn tất</span></div>
               <div className=' mt-1 mb-2'>18/07/2025 14:22:52</div>
             </div>
@@ -529,7 +532,7 @@ const HomePage = () => {
             <div className='col-2'>
               <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className='w-100 border border-2 rounded-3 border-danger'></img>
             </div>
-            <div className='col-10 fs-13 ms-2 border-bottom'>
+            <div className='col-10 fs-13 ms-2'>
               <div className='fw-bold d-flex justify-content-between'> Phòng: V.I.P 4 <span className='text-success'>Đã hoàn tất</span></div>
               <div className=' mt-1 mb-2'>18/07/2025 14:22:52</div>
             </div>
@@ -584,95 +587,20 @@ const HomePage = () => {
                   </div>
                 </div>
                 <List className='my-3'>
-                  <div onClick={() => { bookingDetail(1) }} className=' hieuung p-2 rounded-2 d-flex align-items-center fs-13'>
+                  <div onClick={() => { bookingDetail(1) }} className='mt-1 hieuung p-2 rounded-2 d-flex align-items-center fs-13'>
                     <div className='bg-primary rounded-2' style={{ width: "35px", height: "35px" }}></div>
                     <div className='ms-2'>
                       <div className='fw-bold mb-1'>MR TRUNG & HUY NGUYỄN (K.BI)</div>
                       <div>31/07/2025 12:00:00</div>
                     </div>
                   </div>
-                  <div className=' border-bottom mb-2  '></div>
-
-                  <Card expandable className='border  shadow-none  border-0 m-2 mx-0 p-1'>
-                    <CardContent padding={false}>
-                      <div className="" >
-                        <CardHeader className="display-block p-2 px-2">
-                          <div className=' w-100  d-flex align-items-center '>
-                            <div className='bg-primary rounded-2' style={{ width: "35px", height: "35px" }}></div>
-                            <div className='ms-2  fs-13'>
-                              <div className='fw-bold mb-1'>MR TRUNG & HUY NGUYỄN (K.BI)</div>
-                              <div>31/07/2025 12:00:00</div>
-                            </div>
-                          </div>
-                        </CardHeader>
-                        <Link
-                          cardClose
-                          color="white"
-                          className="card-opened-fade-in"
-                          style={{ position: 'absolute', right: '15px', top: '15px' }}
-                          iconF7="xmark_circle_fill"
-                        />
-                      </div>
-                      <div className="card-content-padding">
-                        <Block className='mt-0 '>
-                          <div className='fw-bold fs-6 mt-4'>Thông tin khách hàng</div>
-                          <List className='my-2 fs-13'>
-                            <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
-                              Khách hàng<div className='fw-bold'>MR TRUNG & HUY NGUYỄN (K.BI)</div>
-                            </div>
-                            <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
-                              Ghi chú<div className='fw-bold'>Không có</div>
-                            </div>
-                          </List>
-                          <div className='fw-bold fs-6 mt-4'>Thông tin đặt bàn</div>
-                          <List className='my-2 fs-13'>
-                            <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
-                              Nhà hàng<div className='fw-bold'>90s House</div>
-                            </div>
-                            <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
-                              Mã booking<div className='fw-bold'>#8732465</div>
-                            </div>
-                            <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
-                              Ngày<div className='fw-bold'>31/07/2025 12:00:00</div>
-                            </div>
-                            <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
-                              Số người<div className='fw-bold'>3</div>
-                            </div>
-
-                            <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
-                              Khu vực/ Phòng<div className='fw-bold'>V4</div>
-                            </div>
-                            <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
-                              Trạng thái<span className='px-2 pb-1 bg-primary rounded-pill text-white'>Đã nhận phòng</span>
-                            </div>
-                            <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
-                              Người đặt<div className='fw-bold'>Jatbirat</div>
-                            </div>
-                            <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
-                              Ghi chú<div className='fw-bold'>Không có</div>
-                            </div>
-                          </List>
-                          <div className='fw-bold fs-6 mt-4'>Thanh toán</div>
-                          <List className='my-2 fs-13'>
-                            <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
-                              Tổng tiền<div className='fw-bold'>0</div>
-                            </div>
-                          </List>
-
-                          <div className=' grid grid-cols-2 grid-gap px-2 my-4'>
-                            <div>
-                              <button className='border border-0 rounded-pill p-3 bg-warning fs-13 fw-đơnd'>Tải hóa đơn</button>
-                            </div>
-                            <div>
-                              <button className='border border-0 rounded-pill p-3 bg-warning fs-13 fw-đơnd'>Chia sẻ</button>
-                            </div>
-                          </div>
-                        </Block>
-
-                      </div>
-                    </CardContent>
-                  </Card>
-
+                  <div onClick={() => { bookingDetail(1) }} className='mt-1 hieuung p-2 rounded-2 d-flex align-items-center fs-13'>
+                    <div className='bg-primary rounded-2' style={{ width: "35px", height: "35px" }}></div>
+                    <div className='ms-2'>
+                      <div className='fw-bold mb-1'>MR TRUNG & HUY NGUYỄN (K.BI)</div>
+                      <div>31/07/2025 12:00:00</div>
+                    </div>
+                  </div>
                 </List>
                 <div className='fw-bold fs-6 text-pink'>Phòng trống</div>
                 <List className='mt-0'>
@@ -747,7 +675,7 @@ const HomePage = () => {
                     Ghi chú<div className='fw-bold'>Không có</div>
                   </div>
                 </List>
-                <div className='fw-bold fs-6 mt-4'>Thông tin đặt bàn</div>
+                <div className='fw-bold fs-6 mt-4'>Thông tin đặt phòng</div>
                 <List className='my-2 fs-13'>
                   <div className='d-flex justify-content-between align-items-center pb-2 mt-3 border-bottom'>
                     Nhà hàng<div className='fw-bold'>90s House</div>

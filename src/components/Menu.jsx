@@ -194,7 +194,7 @@ export default function SheetMenu({ opened, onClose }) {
                                         round
                                         className={`w-100 py-3 ${activeTab === 'service'
                                             ? 'bg-pink text-white border-0'
-                                            : 'bg-light text-pink border-0'
+                                            : ' text-color border-0'
                                             }`}
                                         onClick={() => setActiveTab('service')}
                                     >
@@ -207,7 +207,7 @@ export default function SheetMenu({ opened, onClose }) {
                                         round
                                         className={`w-100 py-3 ${activeTab === 'food'
                                             ? 'bg-pink text-white border-0'
-                                            : 'bg-light text-pink border-0'
+                                            : ' text-color border-0'
                                             }`}
                                         onClick={() => setActiveTab('food')}
                                     >
@@ -220,7 +220,7 @@ export default function SheetMenu({ opened, onClose }) {
                                         round
                                         className={`w-100 py-3 ${activeTab === 'combo'
                                             ? 'bg-pink text-white border-0'
-                                            : 'bg-light text-pink border-0'
+                                            : ' text-color border-0'
                                             }`}
                                         onClick={() => setActiveTab('combo')}
                                     >
@@ -277,7 +277,7 @@ export default function SheetMenu({ opened, onClose }) {
                                                                         <h6 className=" mb-1 fs-13 text-uppercase">
                                                                             {item.name}
                                                                         </h6>
-                                                                        <p className="text-dark fw fs-13">
+                                                                        <p className=" fw fs-13">
                                                                             {formatPrice(item.price)}
                                                                             {item.price > 0 && <span className="fs-12 text-muted">đ</span>}
                                                                         </p>
@@ -289,7 +289,7 @@ export default function SheetMenu({ opened, onClose }) {
                                                 </div>
                                             ) : (
                                                 <div className="text-center py-4">
-                                                    <p className="text-muted fs-13 mb-0">
+                                                    <p className=" fs-13 mb-0">
                                                         Không có dữ liệu
                                                     </p>
                                                 </div>
@@ -299,22 +299,14 @@ export default function SheetMenu({ opened, onClose }) {
                                 ))}
                             </div>
                         </div>
-
                         {getCurrentData().categories.length === 0 && (
                             <div className="text-center py-5">
-                                <Icon f7="square_list" size="48px" className="text-muted mb-3" />
-                                <p className="text-muted">Không có dữ liệu</p>
+                                <Icon f7="square_list" size="48px" className=" mb-3" />
+                                <p className="">Không có dữ liệu</p>
                             </div>
                         )}
                     </Card>
                 </PageContent>
-                {/* <footer className="fixed-bottom p-3 py-2 bg-white">
-                    <div className="grid grid-cols-2 grid-gap">
-                        <Button sheetClose className="bg-secondary bg-opacity-25 p-3 rounded-pill  fs-15">Hủy đơn</Button>
-                        <Button className="bg-pink p-3 rounded-pill text-white fs-15" onClick={() => {setSheetOpened1(true), console.log(32354);
-                        }}>Tiếp tục</Button>
-                    </div>
-                </footer> */}
             </Sheet>
             <SheetMenuDetail
                 opened={sheetOpened1}

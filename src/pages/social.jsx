@@ -1527,10 +1527,10 @@ const SocialPage = () => {
                                 </div>
                             </div>
                             <div className='px-2 mt-3'>
-                                <textarea rows={5} className=' rounded-3  px-2  mb-3' placeholder="Hãy nêu cảm nghĩ của bạn" onChange={(e) => setContentAdd(e.target.value)}></textarea>
+                                <textarea rows={5} className=' rounded-3 fs-13 px-2  mb-3' placeholder="Hãy nêu cảm nghĩ của bạn" onChange={(e) => setContentAdd(e.target.value)}></textarea>
                             </div>
 
-                            <div className="m-0 mx-2 p-3 pb-5" style={{ minHeight: "300px" }}>
+                            <div className="m-0 p-3 pb-5" style={{ minHeight: "300px" }}>
                                 <div className="image-upload-container">
                                     <input
                                         id="fileInput"
@@ -1542,11 +1542,10 @@ const SocialPage = () => {
                                     />
 
                                     <div className="image-grid">
-                                        <div className="upload-box text-center mt-4 border border-1 p-2 rounded-3" onClick={triggerFileInput} style={{ cursor: 'pointer' }}>
+                                        <div className="upload-box text-center mt-4 border border-1 p-2 rounded-3 fs-13" onClick={triggerFileInput} style={{ cursor: 'pointer' }}>
                                             <Icon f7="cloud_upload" size="30px" />
                                             <div>Thêm hình ảnh / video</div>
                                         </div>
-
                                         <div className="row mt-3">
                                             {media.map((item, index) => (
                                                 <div key={index} className="image-item position-relative col-6 mb-3">
@@ -1656,9 +1655,9 @@ const SocialPage = () => {
                                 <Link popupClose>Close</Link>
                             </NavRight>
                         </Navbar>
-                        <List className='mt-0 mb-4 px-2'>
+                        <List className='mt-0 mb-4 '>
 
-                            <Card className='m-0 mt-1 p-0 rounded-0 border border-0'>
+                            <Card className='m-0  p-0 rounded-0 border border-0'>
                                 <div className='d-flex align-items-center justify-content-between p-3 pb-1'>
                                     <div className='d-flex align-items-center'>
                                         <img src="https://www.in.pro.vn/wp-content/uploads/2025/01/avatar-nu-diu-dang.webp" onClick={() => { profile_social(socials.account.uid) }} className='rounded-circle' style={{ width: "40px", height: "40px" }}></img>
@@ -1670,7 +1669,7 @@ const SocialPage = () => {
                                     </div>
                                     <div className='d-flex align-items-center'>
                                         <Button fill popoverOpen=".popover-menu" className='rounded-circle bg-transparent p-1 text-center me-2' style={{ width: "30px", height: "30px" }}> <Icon f7="ellipsis" size="20px" ></Icon></Button>
-                                        <Button fill popoverOpen=".popover-menu" className='rounded-circle bg-transparent p-1 text-center' style={{ width: "30px", height: "30px" }}> <Icon f7="xmark" size="20px" ></Icon></Button>
+                                        {/* <Button fill popoverOpen=".popover-menu" className='rounded-circle bg-transparent p-1 text-center' style={{ width: "30px", height: "30px" }}> <Icon f7="xmark" size="20px" ></Icon></Button> */}
                                     </div>
                                 </div>
                                 <div className="p-2 px-3">
@@ -1778,7 +1777,7 @@ const SocialPage = () => {
                                                          } */}
                                                     </div>
                                                     <div className='mt-1'>
-                                                        <div className='w-100  fs-15 py-2 pt-0 text-secondary'>
+                                                        <div className='w-100  fs-13 py-2 pt-0 text-secondary'>
                                                             {cmt.content}
                                                         </div>
                                                     </div>

@@ -38,7 +38,7 @@ export default function SheetEvent({ opened, onClose }) {
                     </div>
 
                     <List className=' mb-3 mt-0'>
-                        <Card className='border-1 border-light my-2 mx-2 shadow-none p-1 rounded-3'>
+                        <Card className='border border-0 my-2 mx-2 shadow-none p-1 rounded-3'>
                             <div className="row ">
                                 <div className='col-4'>
                                     <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKv4lB6fNSa_h68PcOdC13yJFniPqZaq2uow&s' className='rounded-3 w-100'></img>
@@ -55,7 +55,7 @@ export default function SheetEvent({ opened, onClose }) {
                             </div>
                         </Card>
 
-                        <Card className='border-1 border-light my-2 mx-2 shadow-none p-1 rounded-3'>
+                        <Card className='border border-0 my-2 mx-2 shadow-none p-1 rounded-3'>
                             <div className="row ">
                                 <div className='col-4'>
                                     <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKv4lB6fNSa_h68PcOdC13yJFniPqZaq2uow&s' className='rounded-3 w-100'></img>
@@ -71,7 +71,7 @@ export default function SheetEvent({ opened, onClose }) {
                                 </div>
                             </div>
                         </Card>
-                        <Card className='border-1 border-light my-2 mx-2 shadow-none p-1 rounded-3'>
+                        <Card className='border border-0 my-2 mx-2 shadow-none p-1 rounded-3'>
                             <div className="row ">
                                 <div className='col-4'>
                                     <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKv4lB6fNSa_h68PcOdC13yJFniPqZaq2uow&s' className='rounded-3 w-100'></img>
@@ -87,7 +87,7 @@ export default function SheetEvent({ opened, onClose }) {
                                 </div>
                             </div>
                         </Card>
-                        <Card className='border-1 border-light my-2 mx-2 shadow-none p-1 rounded-3'>
+                        <Card className='border border-0 my-2 mx-2 shadow-none p-1 rounded-3'>
                             <div className="row ">
                                 <div className='col-4'>
                                     <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKv4lB6fNSa_h68PcOdC13yJFniPqZaq2uow&s' className='rounded-3 w-100'></img>
@@ -109,7 +109,7 @@ export default function SheetEvent({ opened, onClose }) {
                     <div className='fs-6 fw-bold mx-3 mt-4 d-flex align-items-center'><img src='../image/6.gif' className='size-icon'></img>  Ưu đãi</div>
                     <div className='row d-flex flex-nowrap mx-2 mt-2 pb-2' style={{ overflowX: "auto", whiteSpace: "nowrap" }}>
                         <div className='col-5 px-1'>
-                            <Card className='m-0 border-light p-1 fs-13'>
+                            <Card className='m-0 border border-0 p-1 fs-13'>
                                 <div>
                                     <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
                                     <div className='d-flex'>
@@ -121,7 +121,7 @@ export default function SheetEvent({ opened, onClose }) {
                             </Card>
                         </div>
                         <div className='col-5 px-1'>
-                            <Card className='m-0 border-light p-1 fs-13'>
+                            <Card className='m-0 border border-0 p-1 fs-13'>
                                 <div>
                                     <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
                                     <div className='d-flex'>
@@ -133,7 +133,7 @@ export default function SheetEvent({ opened, onClose }) {
                             </Card>
                         </div>
                         <div className='col-5 px-1'>
-                            <Card className='m-0 border-light p-1 fs-13'>
+                            <Card className='m-0 border border-0 p-1 fs-13'>
                                 <div>
                                     <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
                                     <div className='d-flex'>
@@ -145,7 +145,7 @@ export default function SheetEvent({ opened, onClose }) {
                             </Card>
                         </div>
                         <div className='col-5 px-1'>
-                            <Card className='m-0 border-light p-1 fs-13'>
+                            <Card className='m-0 border border-0 p-1 fs-13'>
                                 <div>
                                     <img src='https://image.made-in-china.com/202f0j00vzJeGPLHZIoB/Gold-Restaurant-Bar-Counter-Square-U-Stylish-Wholesale-Night-Club-Bar-Design.webp' className='w-100 rounded-3'></img>
                                     <div className='d-flex'>
