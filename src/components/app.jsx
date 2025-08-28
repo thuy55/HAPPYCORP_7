@@ -36,6 +36,14 @@ import PageTransition from './PageTransition';
 
 import '../css/app.less';
 const MyApp = () => {
+//   useEffect(() => {
+//   const token = localStorage.getItem("a-token");
+//   if (token) {
+//     f7.views.main.router.navigate("/home/");
+//   } else {
+//     f7.views.main.router.navigate("/login/");
+//   }
+// }, []);
   // Login screen demo data
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -139,6 +147,9 @@ function chuyentrang(e){
   }, 100);
   
 }
+let token = localStorage.getItem("a-token");
+console.log(258, localStorage.getItem("a-token"));
+
 
 //Chế độ sáng tối
  const [dark, setDark] = useState(false);
@@ -178,9 +189,10 @@ function chuyentrang(e){
 
 
   return (
-    <App {...f7params}>
+    <App {...f7params} theme="auto" routes={routes}>
       {/* Views/Tabs container */}
-      <Views id="main-view" url="/" main tabs className="safe-areas">
+       {localStorage.getItem("a-token") ? (
+<Views id="main-view" main tabs className="safe-areas">
         <Toolbar tabbar icons bottom className='custom-tabbar'>
           <Link tabLink="#view-home" onClick={()=>{handleActive("home")}} tabLinkActive className={currentPath === 'home' ? 'tab-selected' : 'ion-tab-button-custom'} >
             <lord-icon
@@ -239,6 +251,15 @@ function chuyentrang(e){
         <View id="view-social" tab url="/social/" pushState={true} />
         <View id="view-account"  tab url="/account/" pushState={true} />
       </Views>
+       ):(
+<View
+      main
+      tab
+      url="/login/"
+    />
+       )}
+      
+      
 
       {/* Left panel with cover effect*/}
       <Panel left cover>
@@ -404,22 +425,6 @@ function chuyentrang(e){
         </View>
       </Panel>
  
-
-      {/* Popup */}
-  {/* <Popup id=" my-popup">
-<View>
-          <Page>
-            <Navbar title="Popup">
-              <NavRight>
-                <Link popupClose>Close</Link>
-              </NavRight>
-            </Navbar>
-            <Block>
-              <p>Popup content goes here.</p>
-            </Block>
-          </Page>
-        </View>
-      </Popup> */}
 
       <LoginScreen id="my-login-screen">
         <View>
