@@ -56,12 +56,11 @@ const LoginPage = () => {
         console.log(123, data);
 
         const api = axios.create({
-            baseURL: "https://booking.happycorp.com.vn/api",
+            baseURL: "https://api-happy.eclo.io/api",
         });
         api.post("/login", data, {
             headers: {
                 "Content-Type": "application/json",
-                'Authorization': 'Bearer 123123ellm',
             },
         }).then((res) => {
             if (res.data.status === "error") {
@@ -72,18 +71,15 @@ const LoginPage = () => {
                 console.log(res.data.data);
                 f7.dialog.alert(res.data.content, 'Success', () => {
                     console.log(123);
-                    // f7.views.main.router.navigate('/');
-
-                    // f7.views.main.router.navigate('/');
+                    localStorage.setItem("HappyCorp-id-device", id)
+                    localStorage.setItem("HappyCorp-token-app", res.data.data.token)
+                    localStorage.setItem("HappyCorp-token-active", res.data.data.active)
+                    localStorage.setItem("HappyCorp-token-phone", res.data.data.phone)
+                    localStorage.setItem("HappyCorp-token-name", res.data.data.name)
+                    localStorage.setItem("HappyCorp-token-avatar", res.data.data.avatar)
+                    localStorage.setItem("HappyCorp-token-email", res.data.data.email)
+                    window.location.href = '/';
                 });
-
-                // localStorage.setItem("ELLM-token", res.data.data.token)
-                // localStorage.setItem("ELLM-active", res.data.data.active)
-                // localStorage.setItem("ELLM-lang", res.data.data.lang)
-                // localStorage.setItem("ELLM-avatar", "https://beta.ellm.io/" + res.data.data.avatar)
-                // localStorage.setItem("ELLM-email", res.data.data.email)
-                // localStorage.setItem("ELLM-name", res.data.data.name)
-                // localStorage.setItem("ELLM-uid", res.data.data.uid)
             }
         })
             .catch((error) => {
@@ -91,7 +87,6 @@ const LoginPage = () => {
                 console.log("k ket noi dc api");
 
             });
-        // ws.current.send(JSON.stringify(data));
     }
     const { t } = useTranslation();
     const [showPassword, setShowPassword] = useState(false);
@@ -110,15 +105,15 @@ const LoginPage = () => {
                 <div className=' fs-2 text-center fw-bold'>ĐĂNG NHẬP</div>
                 <List className='mt-4'>
                     <div className='fs-13 '>Số điện thoại</div>
-                    <input value={phone} onChange={(e)=>{setPhone(e.target.value)}}
+                    <input value={phone} onChange={(e) => { setPhone(e.target.value) }}
                         className="rounded-3 bg-input mt-2 p-2 fs-13 w-100 "
                         placeholder="Số điện thoại"
                         type="tel"
                     ></input>
-                    <div className='fs-14 mt-3'>Mật khẩu</div>
+                    <div className='fs-13 mt-3'>Mật khẩu</div>
                     {/* <input className='rounded-3 mt-2 w-100' placeholder='Mật khẩu'></input> */}
                     <div className="position-relative rounded-3 mt-2 w-100 bg-input" >
-                        <input value={password} onChange={(e)=>{setPassword(e.target.value)}}
+                        <input value={password} onChange={(e) => { setPassword(e.target.value) }}
                             className="rounded-3 bg-input w-100 p-2"
                             placeholder="Mật khẩu"
                             type={showPassword ? 'text' : 'password'}
@@ -154,7 +149,7 @@ const LoginPage = () => {
                     </div>
                     <Link className='text-pink fw-bold' href="/forgot-password/" data-view=".view-main">Quên mật khẩu </Link>
                 </div>
-                <Button className='p-4 rounded-pill bg-pink text-white text-center fs-15 my-4' onClick={()=>{login()}}>Đăng nhập</Button>
+                <Button className='p-4 rounded-pill bg-pink text-white text-center fs-15 my-4' onClick={() => { login() }}>Đăng nhập</Button>
                 <div className='d-flex justify-content-between align-items-center fs-13 fw-bold '>
                     <div className=''>Bạn chưa có tài khoản</div>
                     <Link className='text-pink' href="/register/" data-view=".view-main">Đăng kí</Link>

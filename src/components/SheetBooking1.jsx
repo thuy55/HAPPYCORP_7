@@ -277,7 +277,7 @@ export default function SheetBooking1({ opened, onClose }) {
                         </div>
 
                         <div className=' fs-13 mt-3'>Hình thức</div>
-                        <Segmented strong tag="p" className="w-100 bg-white">
+                        <Segmented strong tag="p" className="w-100 ">
                             <Button active={activeStrongButton === 0} onClick={() => setActiveStrongButton(0)}>
                                 Chuyển khoản
                             </Button>
@@ -287,7 +287,7 @@ export default function SheetBooking1({ opened, onClose }) {
                         </Segmented>
                     </Card>
                 </PageContent>
-                <footer className="fixed-bottom p-3 py-2 bg-white">
+                <footer className="fixed-bottom p-3 py-2 ">
                     <div className="grid grid-cols-2 grid-gap">
                         <Button sheetClose className="bg-secondary bg-opacity-25 p-3 rounded-pill  fs-15">Hủy đơn</Button>
                         <Button className="bg-pink p-3 rounded-pill text-white fs-15" onClick={() => {setSheetOpenedCompleted(true)}}>Hoàn thành</Button>

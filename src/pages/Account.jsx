@@ -25,6 +25,7 @@ import {
 import moment from 'moment';
 import { number } from 'prop-types';
 import CommonNavbar from '../components/CommonNavbar';
+import axios from 'axios';
 
 
 const AccountPage = () => {
@@ -36,7 +37,6 @@ const AccountPage = () => {
 
     function handleRefresh(event) {
         setTimeout(() => {
-            // Any calls to load data go here
             event.detail.complete();
         }, 2000);
     }
@@ -48,20 +48,19 @@ const AccountPage = () => {
     const [sheetOpenedChangePass, setSheetOpenedChangePass] = useState(false);
     const [sheetOpenedChangeInfo, setSheetOpenedChangeInfo] = useState(false);
 
-    // const [avatar, setAvatar] = useState < File | null > (null);
     const [updateAvatar, setUpdateAvatar] = useState("");
 
-    // const fileInputRef = useRef <HTMLInputElement> (null);
+    const fileInputRef = useRef(null);
 
     const triggerFileInputAvatar = () => {
-        // fileInputRef.current?.click();
-        document.getElementById("fileInput").click();
+        fileInputRef.current?.click();
     };
 
     const handleImageAvatar = (event) => {
+
         const file = event.target.files?.[0];
         if (file) {
-            // setAvatar(file);
+            setavatar(file);
             const reader = new FileReader();
             reader.onload = (e) => {
                 if (e.target?.result) {
@@ -73,9 +72,153 @@ const AccountPage = () => {
     };
 
     const handleDeleteImageAddAvatar = () => {
-        // setAvatar(null);
         setUpdateAvatar("");
     };
+
+    const [name, setName] = useState("");
+    const [account, setAccount] = useState("");
+    const [email, setemail] = useState("");
+    const [birthday, setbirthday] = useState("");
+    const [gender, setgender] = useState("");
+    const [phone, setphone] = useState("");
+    const [avatar, setavatar] = useState("");
+    const [dateRegister, setdateRegister] = useState("");
+    const [code, setcode] = useState("");
+    const profile = () => {
+        const token = localStorage.getItem("HappyCorp-token-app");
+        const data = {
+            "token": token
+        }
+        const api = axios.create({
+            baseURL: "https://api-happy.eclo.io/api",
+        });
+        api.post("/profile", data, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then((res) => {
+            if (res.data.status === "error") {
+                console.log('lỗi');
+                f7.dialog.alert(res.data.content, 'Error');
+
+            } else if (res.data.status === "success") {
+                console.log(res.data.data);
+                setName(res.data.data.name);
+                setAccount(res.data.data.account);
+                setemail(res.data.data.email);
+                setbirthday(res.data.data.birthday);
+                setgender(res.data.data.gender);
+                setphone(res.data.data.phone);
+                setavatar(res.data.data.avatar);
+                setdateRegister(res.data.data.date)
+                setcode(res.data.data.id);
+
+            }
+        })
+            .catch((error) => {
+                f7.dialog.alert(error, 'Error');
+                console.log("k ket noi dc api");
+
+            });
+    }
+    useEffect(() => {
+        profile()
+    }, [])
+    function formatDate(dateStr) {
+        const date = new Date(dateStr);
+        return date.toLocaleDateString("vi-VN");
+    }
+
+    const [passwordOld, setPasswordOld] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordconfirm, setPasswordconfirm] = useState("");
+
+    function changePassword() {
+        const token = localStorage.getItem("HappyCorp-token-app");
+        const data = {
+            "token": token,
+            "password-old": passwordOld,
+            "password": password,
+            "password-confirm": passwordconfirm
+
+        }
+        console.log("change", data);
+
+        const api = axios.create({
+            baseURL: "https://api-happy.eclo.io/api",
+        });
+        api.post("/change-password", data, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then((res) => {
+            if (res.data.status === "error") {
+                console.log('lỗi');
+                f7.dialog.alert(res.data.content, 'Error');
+
+            } else if (res.data.status === "success") {
+                console.log(res.data.data);
+                f7.dialog.alert(res.data.content, 'Success', () => {
+                    f7.sheet.close();
+                });
+
+            }
+        })
+            .catch((error) => {
+                f7.dialog.alert(error, 'Error');
+                console.log("k ket noi dc api");
+
+            });
+    }
+
+    function changeInfo() {
+        const token = localStorage.getItem("HappyCorp-token-app");
+        const data = {
+            "token": token,
+            "name": name,
+            "email": email,
+            "birthday": birthday,
+            "gender": gender,
+            "images": avatar
+
+        }
+        console.log("change", data);
+        let formData = new FormData();
+
+        formData.append("token", token);
+        formData.append("name", name);
+        formData.append("email", email);
+        formData.append("birthday", birthday);
+        formData.append("gender", gender);
+        formData.append("images", avatar);
+
+        const api = axios.create({
+            baseURL: "https://api-happy.eclo.io/api",
+        });
+        api.post("/change-infomation", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        }).then((res) => {
+            if (res.data.status === "error") {
+                console.log('lỗi');
+                f7.dialog.alert(res.data.content, 'Error');
+
+            } else if (res.data.status === "success") {
+                console.log(res.data.data);
+                f7.dialog.alert(res.data.content, 'Success', () => {
+                    f7.sheet.close();
+                    profile()
+                });
+            }
+        })
+            .catch((error) => {
+                f7.dialog.alert(error, 'Error');
+                console.log("k ket noi dc api");
+
+            });
+    }
+
     return (
 
         <>
@@ -85,16 +228,16 @@ const AccountPage = () => {
                 {/* Page content */}
 
                 <div className='p-2 position-relative'>
-                    <img src="https://hinhnenpowerpoint.com/wp-content/uploads/images/tai-hinh-nen-powerpoint-mau-trang-mien-phi.jpg" className=' rounded-4 w-100' style={{ height: '200px', objectFit: 'cover' }}></img>
+                    <img src="../image/nen-den.webp" className=' rounded-4 w-100' style={{ height: '200px', objectFit: 'cover' }}></img>
 
                     <div className='position-absolute top-0 end-0 m-3'>
                         <img src='../image/happy-corp-logo.png' style={{ height: "70px" }}></img>
                     </div>
-                    <img src="https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/Image%20FP_2024/anh-dai-dien-tet-44.jpg" className='rounded-circle border border-4 border-dark position-absolute top-50 start-0 m-3' style={{ height: "150px", width: "150px" }}></img>
+                    <img src={`https://api-happy.eclo.io/${avatar}`} className='rounded-circle border border-4 border-dark position-absolute top-50 start-0 m-3' style={{ height: "150px", width: "150px" }}></img>
                 </div>
                 <div className=' mx-4 ' style={{ marginTop: "15%" }}>
-                    <div className='fs-5 fw-bold mt-4'>Thanh Thúy</div>
-                    <div className=''>thuy@gmail.com</div>
+                    <div className='fs-5 fw-bold mt-4'>{name}</div>
+                    <div className=''>{email}</div>
 
                 </div>
                 <List className='my-4 fs-13 rounded-3 list-no-chevron mx-3' dividersIos mediaList outlineIos strongIos>
@@ -102,7 +245,7 @@ const AccountPage = () => {
                         title={
                             <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
                                 <span className="text-color">Mã của bạn:</span>
-                                <span className="fw-bold">#00001</span>
+                                <span className="fw-bold">#{code}</span>
                             </div>
                         }
                     >
@@ -112,7 +255,7 @@ const AccountPage = () => {
                         title={
                             <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
                                 <span className="text-color">Họ và tên:</span>
-                                <span className="fw-bold">Nguyễn Thị Thanh Thúy</span>
+                                <span className="fw-bold">{name}</span>
                             </div>
                         }
                     >
@@ -122,7 +265,7 @@ const AccountPage = () => {
                         title={
                             <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
                                 <span className="text-color">Số điện thoại:</span>
-                                <span className="fw-bold">0123456789</span>
+                                <span className="fw-bold">{phone}</span>
                             </div>
                         }
                     >
@@ -132,7 +275,7 @@ const AccountPage = () => {
                         title={
                             <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
                                 <span className="text-color">Email:</span>
-                                <span className="fw-bold">thuy@gmail.com</span>
+                                <span className="fw-bold">{email}</span>
                             </div>
                         }
                     >
@@ -142,7 +285,7 @@ const AccountPage = () => {
                         title={
                             <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
                                 <span className="text-color">Tài khoản:</span>
-                                <span className="fw-bold">thanhthuy</span>
+                                <span className="fw-bold">{account}</span>
                             </div>
                         }
                     >
@@ -152,7 +295,7 @@ const AccountPage = () => {
                         title={
                             <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
                                 <span className="text-color">Ngày sinh:</span>
-                                <span className="fw-bold">05/05/2000</span>
+                                <span className="fw-bold">{formatDate(birthday)}</span>
                             </div>
                         }
                     >
@@ -162,7 +305,7 @@ const AccountPage = () => {
                         title={
                             <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
                                 <span className="text-color">Giới tính:</span>
-                                <span className="fw-bold">Nữ</span>
+                                <span className="fw-bold">{gender == "1" ? "Nữ" : "Nam"}</span>
                             </div>
                         }
                     >
@@ -172,7 +315,7 @@ const AccountPage = () => {
                         title={
                             <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
                                 <span className="text-color">Ngày đăng ký:</span>
-                                <span className="fw-bold">21/07/2025</span>
+                                <span className="fw-bold">{dateRegister}</span>
                             </div>
                         }
                     >
@@ -270,7 +413,7 @@ const AccountPage = () => {
                         <List className='my-2'>
                             <div className='fs-14 mt-4'>Mật khẩu cũ</div>
                             <div className="position-relative rounded-pill mt-2 w-100" style={{ border: "0.5px solid #f07" }}>
-                                <input
+                                <input value={passwordOld} onChange={(e) => { setPasswordOld(e.target.value) }}
                                     className="rounded-pill w-100 pe-5 px-3"
                                     placeholder="Mật khẩu"
                                     type={showPasswordold ? 'text' : 'password'}
@@ -296,7 +439,7 @@ const AccountPage = () => {
                             </div>
                             <div className='fs-14 mt-4'>Mật khẩu mới</div>
                             <div className="position-relative rounded-pill mt-2 w-100" style={{ border: "0.5px solid #f07" }}>
-                                <input
+                                <input value={password} onChange={(e) => { setPassword(e.target.value) }}
                                     className="rounded-pill  w-100 pe-5 px-3"
                                     placeholder="Mật khẩu"
                                     type={showPassword ? 'text' : 'password'}
@@ -322,7 +465,7 @@ const AccountPage = () => {
                             </div>
                             <div className='fs-14 mt-4'>Nhập lại mật khẩu</div>
                             <div className="position-relative rounded-pill mt-2 w-100" style={{ border: "0.5px solid #f07" }}>
-                                <input
+                                <input value={passwordconfirm} onChange={(e) => { setPasswordconfirm(e.target.value) }}
                                     className="rounded-pill  w-100 pe-5 px-3"
                                     placeholder="Mật khẩu"
                                     type={showRePassword ? 'text' : 'password'}
@@ -348,10 +491,10 @@ const AccountPage = () => {
                             </div>
                             <div className='mt-4 grid grid-cols-2 grid-gap'>
                                 <div>
-                                    <button className='p-2 rounded-pill border border-secondary bg-transparent fs-14 text-color'>Hủy</button>
+                                    <button className='p-2 rounded-pill border border-secondary bg-transparent fs-14 text-color' onClick={() => { f7.sheet.close() }}>Hủy</button>
                                 </div>
                                 <div>
-                                    <button type="button" className='p-2 rounded-pill border-btn fs-14 text-pink'>Cập nhật</button>
+                                    <button type="button" className='p-2 rounded-pill border-btn fs-14 text-pink' onClick={() => { changePassword() }}>Cập nhật</button>
                                 </div>
                             </div>
                         </List>
@@ -376,19 +519,19 @@ const AccountPage = () => {
                     <Block className='my-3'>
                         <List className='my-2'>
                             <div className='fs-14 mt-4'>Họ và tên</div>
-                            <input type='text' className='rounded-pill border-input mt-2 w-100' placeholder='Họ và tên'></input>
+                            <input value={name} onChange={(e) => { setName(e.target.value) }} type='text' className='rounded-pill border-input mt-2 w-100' placeholder='Họ và tên'></input>
                             <div className='fs-14 mt-4'>Email</div>
-                            <input type='email' className='rounded-pill border-input mt-2 w-100' placeholder='Email'></input>
+                            <input value={email} onChange={(e) => { setemail(e.target.value) }} type='email' className='rounded-pill border-input mt-2 w-100' placeholder='Email'></input>
                             <div className='fs-14 mt-4'>Ngày sinh</div>
-                            <input type='date' className='rounded-pill border-input mt-2 w-100' placeholder='Ngày sinh'></input>
+                            <input value={birthday} onChange={(e) => { setbirthday(e.target.value) }} type='date' className='rounded-pill border-input mt-2 w-100' placeholder='Ngày sinh'></input>
                             <div className='fs-14 mt-4'>Giới tính</div>
-                            <select className='rounded-pill border-input mt-2 w-100'>
-                                <option value="1">Nam</option>
-                                <option value="2">Nữ</option>
+                            <select value={gender} onChange={(e) => { setgender(e.target.value) }} className='rounded-pill border-input mt-2 w-100 '>
+                                <option value="1">Nữ</option>
+                                <option value="2">Nam</option>
                             </select>
                             <div className='fs-14 mt-4'>Ảnh đại diện</div>
 
-                            <Card>
+                            <Card className='m-1 mt-3 p-3'>
                                 <div style={{ cursor: "pointer" }}>
                                     {updateAvatar ? (
                                         <div className="position-relative">
@@ -414,12 +557,14 @@ const AccountPage = () => {
                                             <div className="d-flex justify-content-center">
                                                 <Icon f7="cloud_upload" size="30px" />
                                             </div>
-                                            <div className="d-flex justify-content-center mt-3">Nhấn vào để tải hình ảnh của bạn lên</div>
+                                            <div className="d-flex fs-13 justify-content-center mt-3">Nhấn vào để tải hình ảnh của bạn lên</div>
                                         </div>
                                     )}
 
                                     {/* Input file ẩn */}
                                     <input
+                                        ref={fileInputRef}
+                                        id="fileInput"
                                         type="file"
                                         accept="image/*"
                                         // ref={fileInputRef}
@@ -430,10 +575,10 @@ const AccountPage = () => {
                             </Card>
                             <div className='mt-4 grid grid-cols-2 grid-gap'>
                                 <div>
-                                    <button className='p-2 rounded-pill border border-secondary bg-transparent fs-14'>Hủy</button>
+                                    <button className='p-2 rounded-pill border border-secondary bg-transparent fs-14 color-icon' onClick={() => { f7.sheet.close() }}>Hủy</button>
                                 </div>
                                 <div>
-                                    <button type="button" className='p-2 rounded-pill border-btn fs-14'>Cập nhật</button>
+                                    <button type="button" className='p-2 rounded-pill border-btn fs-14 color-icon' onClick={() => { changeInfo() }}>Cập nhật</button>
                                 </div>
                             </div>
                         </List>

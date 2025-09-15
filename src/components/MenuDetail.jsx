@@ -1,6 +1,44 @@
 import { Sheet, Toolbar, PageContent, Block, Link, Card, ListInput, List, Icon, Button, Segmented, ListItem, f7 } from "framework7-react";
 import { useEffect, useState } from "react";
 export default function SheetMenuDetail({ opened, onClose }) {
+    useEffect(()=>{
+       const active = localStorage.getItem("menu-active")
+       console.log(active);
+       
+    })
+
+    // function OnclickDetail(e) {
+    //     const token = localStorage.getItem("HappyCorp-token-app")
+    //     const data = {
+    //         "token": token,
+    //         "brand": 1,
+    //         "active": e
+    //     }
+    //     console.log(36456);
+
+    //     const api = axios.create({
+    //         baseURL: "https://api-happy.eclo.io/api",
+    //     });
+    //     api.post("/menu/" + e, data, {
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //     }).then((res) => {
+    //         if (res.data.status === "error") {
+    //             console.log('lỗi');
+    //             f7.dialog.alert(res.data.content, 'Error');
+
+    //         } else if (res.data.status === "success") {
+    //             console.log(res.data.data);
+
+    //         }
+    //     })
+    //         .catch((error) => {
+    //             f7.dialog.alert(error, 'Error');
+    //             console.log("k ket noi dc api");
+
+    //         });
+    // }
 
     return (
         <>
@@ -22,7 +60,7 @@ export default function SheetMenuDetail({ opened, onClose }) {
                     {/* <div className=' mt-3'>
                         <img src='https://tse1.mm.bing.net/th/id/OIP.oLxcg5eheNmd3t3ansSW-wHaEK?pid=Api&P=0&h=180' className=' w-100'></img>
                     </div> */}
-                     <div className="position-relative">
+                    <div className="position-relative">
                         <img
                             src="https://tse1.mm.bing.net/th/id/OIP.oLxcg5eheNmd3t3ansSW-wHaEK?pid=Api&P=0&h=180"
                             className="w-100"
@@ -64,10 +102,10 @@ export default function SheetMenuDetail({ opened, onClose }) {
                             Thạch Trái Cây: Mát lạnh, tươi ngon, rất thích hợp cho những ai thích sự thanh mát.
                         </div>
                     </div>
-                   
+
 
                 </PageContent>
-           
+
             </Sheet>
 
 

@@ -140,7 +140,7 @@ export default function SheetBookingCompleted({ opened, onClose }) {
                         </div>
                     </Card>
                 </PageContent>
-                <footer className="fixed-bottom p-3 py-2 bg-white">
+                <footer className="fixed-bottom p-3 py-2 ">
                     <div className="">
                         <Button className="bg-pink p-3 rounded-pill text-white fs-15" onClick={() => {
                             handleCloseAllModals();

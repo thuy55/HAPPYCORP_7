@@ -151,7 +151,7 @@ export default function SheetChoiceMenu({ opened, onClose }) {
 
                     </Card>
                 </PageContent>
-                <footer className="fixed-bottom p-3 py-2 bg-white">
+                <footer className="fixed-bottom p-3 py-2 ">
                     <div className="grid grid-cols-2 grid-gap">
                         <Button sheetClose className="bg-secondary bg-opacity-25 p-3 rounded-pill  fs-15">Quay lại</Button>
                         <Button className="bg-pink p-3 rounded-pill text-white fs-15" onClick={() => {

@@ -36,14 +36,14 @@ import PageTransition from './PageTransition';
 
 import '../css/app.less';
 const MyApp = () => {
-//   useEffect(() => {
-//   const token = localStorage.getItem("a-token");
-//   if (token) {
-//     f7.views.main.router.navigate("/home/");
-//   } else {
-//     f7.views.main.router.navigate("/login/");
-//   }
-// }, []);
+  useEffect(() => {
+  const token = localStorage.getItem("HappyCorp-token-app");
+  if (token) {
+    f7.views.main.router.navigate("/home/");
+  } else {
+    f7.views.main.router.navigate("/login/");
+  }
+}, []);
   // Login screen demo data
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -76,7 +76,11 @@ const MyApp = () => {
     });
   }
   f7ready(() => {
-
+    const splash = document.getElementById('splash-screen');
+    if (splash) {
+      splash.style.opacity = 0;
+      setTimeout(() => splash.remove(), 300); // animation ẩn dần
+    }
     // Init capacitor APIs (see capacitor-app.js)
     if (f7.device.capacitor) {
       capacitorApp.init(f7);
@@ -191,7 +195,7 @@ console.log(258, localStorage.getItem("a-token"));
   return (
     <App {...f7params} theme="auto" routes={routes}>
       {/* Views/Tabs container */}
-       {localStorage.getItem("a-token") ? (
+       {localStorage.getItem("HappyCorp-token-app") ? (
 <Views id="main-view" main tabs className="safe-areas">
         <Toolbar tabbar icons bottom className='custom-tabbar'>
           <Link tabLink="#view-home" onClick={()=>{handleActive("home")}} tabLinkActive className={currentPath === 'home' ? 'tab-selected' : 'ion-tab-button-custom'} >
