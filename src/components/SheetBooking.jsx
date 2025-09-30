@@ -1,11 +1,48 @@
 import { Sheet, Toolbar, PageContent, Block, Link, Button, Card } from "framework7-react";
 import SheetBooking1 from "./SheetBooking1";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SheetBookingMenu from "./SheetBookingMenu";
 import SheetRoomDetail from "./RoomDetail";
+import axios from "axios";
 
 export default function SheetBooking({ opened, onClose }) {
     const [sheetOpenebMenu, setSheetOpenebMenu] = useState(false);
+
+    const [event, setevent] = useState([]);
+
+    useEffect(() => {
+        if (opened) {
+            const brand = localStorage.getItem("happyCorp_brand");
+            const token = localStorage.getItem("HappyCorp-token-app");
+            const data = {
+                "token": token,
+                "brand": brand
+            }
+
+            console.log("Call API /event with:", data);
+
+            const api = axios.create({
+                baseURL: "https://api-happy.eclo.io/api",
+            });
+
+            api.post("/room", data, {
+                headers: { "Content-Type": "application/json" },
+            })
+                .then((res) => {
+                    if (res.data.status === "error") {
+                        console.log("lỗi");
+                        f7.dialog.alert(res.data.content, "Error");
+                    } else if (res.data.status === "success") {
+                        console.log(res.data.data);
+                        setevent(res.data.data);
+                    }
+                })
+                .catch((error) => {
+                    f7.dialog.alert(error, "Error");
+                    console.log("k ket noi dc api");
+                });
+        }
+    }, [opened]);
     return (
         <Sheet
             className="demo-sheet-1 h-100"

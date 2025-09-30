@@ -1,6 +1,43 @@
+import axios from "axios";
 import { Sheet, Toolbar, PageContent, Block, Link, Card, ListInput, List, Icon, Button, Segmented, ListItem, f7 } from "framework7-react";
 import { useEffect, useState } from "react";
 export default function SheetEventDetail({ opened, onClose }) {
+
+    const [event, setevent] = useState();
+
+    useEffect(() => {
+        if (opened) {
+            const active = localStorage.getItem("HappyCorp_Event_id");
+            const token = localStorage.getItem("HappyCorp-token-app");
+            const data = {
+                "token": token,
+                "active": active
+            }
+
+            console.log("Call API /event with:", data);
+
+            const api = axios.create({
+                baseURL: "https://api-happy.eclo.io/api",
+            });
+
+            api.post("/events/" + active, data, {
+                headers: { "Content-Type": "application/json" },
+            })
+                .then((res) => {
+                    if (res.data.status === "error") {
+                        console.log("lỗi");
+                        f7.dialog.alert(res.data.content, "Error");
+                    } else if (res.data.status === "success") {
+                        console.log(res.data.data);
+                        setevent(res.data.data);
+                    }
+                })
+                .catch((error) => {
+                    f7.dialog.alert(error, "Error");
+                    console.log("k ket noi dc api");
+                });
+        }
+    }, [opened]);
 
     return (
         <>
@@ -20,14 +57,12 @@ export default function SheetEventDetail({ opened, onClose }) {
                     </div>
                 </Toolbar> */}
                 <PageContent className="pb-2">
-
                     <div className="position-relative">
                         <img
                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKv4lB6fNSa_h68PcOdC13yJFniPqZaq2uow&s"
                             className="w-100"
                             alt="karaoke"
                         />
-
                         {/* nút đóng */}
                         <button
                             className="rounded-circle border-0 bg-light position-absolute top-0 end-0 m-2 d-flex justify-content-center"
@@ -46,7 +81,7 @@ export default function SheetEventDetail({ opened, onClose }) {
                     }}>
                         <Card className='rounded-4 border border-0 p-3 shadow-sm m-2'>
                             <div className='text-center fw-bold'>
-                                HappyCorp - Câu chuyện kinh doanh
+                                {event && event.name}
                             </div>
                             <div className='fs-13 text-center mt-2 pb-4 border-bottom'>90's House - Biểu tượng mới của giải trí và ẩm thực cao cấp tại thành phố Hồ Chí Minh </div>
                             <div className='fs-13 mt-2 text-center '>𝐇𝐀𝐏𝐏𝐘 𝐂𝐎𝐑𝐏</div>

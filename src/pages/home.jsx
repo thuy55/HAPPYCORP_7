@@ -39,6 +39,7 @@ import SheetRevenue from '../components/Revenue';
 import SheetRoomDetail from '../components/RoomDetail';
 import SheetInvoices from '../components/Invoices';
 import { useTranslation } from 'react-i18next';
+import SheetBrand from '../components/brand';
 
 const HomePage = () => {
   const { t, i18n } = useTranslation();
@@ -113,6 +114,10 @@ const HomePage = () => {
   const [sheetOpenedRevenue, setSheetOpenedRevenue] = useState(false);
   const [sheetOpenedInvoices, setSheetOpenedInvoices] = useState(false);
 
+  const [sheetOpenedBrand, setSheetOpenedBrand] = useState(false);
+
+
+
   return (
 
 
@@ -132,11 +137,19 @@ const HomePage = () => {
         </NavLeft>
         <NavTitle className='text-dark' sliding>
           <img src='../image/happy-corp-logo.png' style={{ height: "35px" }}></img>
+
         </NavTitle>
         <NavRight>
           <Link >
             <lord-icon
               src="https://cdn.lordicon.com/wjyqkiew.json"
+              trigger="loop"
+              colors="primary:#f30771,secondary:#f30771"
+              className='size-icon'>
+            </lord-icon></Link>
+          <Link onClick={() => setSheetOpenedBrand(true)} >
+            <lord-icon
+              src="https://cdn.lordicon.com/lbcxnxti.json"
               trigger="loop"
               colors="primary:#f30771,secondary:#f30771"
               className='size-icon me-2'>
@@ -753,6 +766,11 @@ const HomePage = () => {
       <SheetInvoices
         opened={sheetOpenedInvoices}
         onClose={() => setSheetOpenedInvoices(false)}
+      />
+
+      <SheetBrand
+        opened={sheetOpenedBrand}
+        onClose={() => setSheetOpenedBrand(false)}
       />
     </Page>
 

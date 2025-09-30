@@ -21,10 +21,11 @@ export default function SheetMenu({ opened, onClose }) {
 
     const [menu, setMenu] = useState([]);
     useEffect(() => {
+        const brand = localStorage.getItem("happyCorp_brand")
         const token = localStorage.getItem("HappyCorp-token-app")
         const data = {
             "token": token,
-            "brand": 1
+            "brand": brand
         }
         const api = axios.create({
             baseURL: "https://api-happy.eclo.io/api",
@@ -88,10 +89,11 @@ export default function SheetMenu({ opened, onClose }) {
     }
 
     function OnclickDetail(e) {
+        const brand = localStorage.getItem("happyCorp_brand")
         const token = localStorage.getItem("HappyCorp-token-app")
         const data = {
             "token": token,
-            "brand": 1,
+            "brand": brand,
             "active": e
         }
         console.log(36456);

@@ -576,9 +576,7 @@ button {
 .bg-input{
     background-color: lightgray;
 }
-.dark .bg-input{
-    background-color: #212529;
-}
+
 .text-color{
     color: #1f1f1f;
 }
@@ -597,8 +595,43 @@ button {
     // padding: 10px;
 }
 .dark .bg-input{
-    background-color: #242424 !important;
-    // padding: 10px !important;
+    background-color: #313131 !important;
+    padding: 5px !important;
+    font-size: 13px !important;
 }
+
+
+.demo-sheet-brand {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  translate: -50% -50%;
+  width: 400px !important;
+  max-width: 80% !important;
+  height: auto !important;       /* modal co giãn */
+  max-height: 70vh;              /* giới hạn chiều cao */
+
+  border-radius: 15px !important;
+  overflow: hidden;              /* tránh tràn nội dung */
+}
+
+.demo-sheet-brand .sheet-modal-inner {
+  display: block !important; /* bỏ flex mặc định */
+  height: auto !important;
+  max-height: 80vh;
+}
+
+.demo-sheet-brand .page {
+  height: auto !important;
+}
+
+.demo-sheet-brand .page-content {
+  height: auto !important;
+  max-height: 70vh;
+  overflow-y: auto !important;
+}
+
+
+
 
 

@@ -106,13 +106,13 @@ const LoginPage = () => {
                 <List className='mt-4'>
                     <div className='fs-13 '>Số điện thoại</div>
                     <input value={phone} onChange={(e) => { setPhone(e.target.value) }}
-                        className="rounded-3 bg-input mt-2 p-2 fs-13 w-100 "
+                        className="rounded-3 bg-input mt-2 fs-13 w-100 " style={{height:"40px"}}
                         placeholder="Số điện thoại"
                         type="tel"
                     ></input>
                     <div className='fs-13 mt-3'>Mật khẩu</div>
                     {/* <input className='rounded-3 mt-2 w-100' placeholder='Mật khẩu'></input> */}
-                    <div className="position-relative rounded-3 mt-2 w-100 bg-input" >
+                    <div className="position-relative rounded-3 mt-2 w-100 bg-input"  style={{height:"40px"}}>
                         <input value={password} onChange={(e) => { setPassword(e.target.value) }}
                             className="rounded-3 bg-input w-100 p-2"
                             placeholder="Mật khẩu"
@@ -126,7 +126,7 @@ const LoginPage = () => {
                                 top: '50%',
                                 transform: 'translateY(-50%)',
                                 cursor: 'pointer',
-                                color: '#666'
+                                color: 'white'
 
                             }}
                         >

@@ -14,10 +14,11 @@ export default function SheetMenuDetail({ opened, onClose, active }) {
 
     const [food, setFood]= useState("");
     function OnclickDetail(active) {
+        const brand = localStorage.getItem("happyCorp_brand")
         const token = localStorage.getItem("HappyCorp-token-app")
         const data = {
             "token": token,
-            "brand": 1,
+            "brand": brand,
             "active": active
         }
         console.log(36456);
