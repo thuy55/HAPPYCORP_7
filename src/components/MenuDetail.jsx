@@ -1,44 +1,51 @@
+import axios from "axios";
 import { Sheet, Toolbar, PageContent, Block, Link, Card, ListInput, List, Icon, Button, Segmented, ListItem, f7 } from "framework7-react";
 import { useEffect, useState } from "react";
-export default function SheetMenuDetail({ opened, onClose }) {
-    useEffect(()=>{
-       const active = localStorage.getItem("menu-active")
-       console.log(active);
-       
-    })
+export default function SheetMenuDetail({ opened, onClose, active }) {
 
-    // function OnclickDetail(e) {
-    //     const token = localStorage.getItem("HappyCorp-token-app")
-    //     const data = {
-    //         "token": token,
-    //         "brand": 1,
-    //         "active": e
-    //     }
-    //     console.log(36456);
 
-    //     const api = axios.create({
-    //         baseURL: "https://api-happy.eclo.io/api",
-    //     });
-    //     api.post("/menu/" + e, data, {
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //     }).then((res) => {
-    //         if (res.data.status === "error") {
-    //             console.log('lỗi');
-    //             f7.dialog.alert(res.data.content, 'Error');
+    useEffect(() => {
+        if (active) {
+            // gọi API hoặc xử lý dữ liệu theo active
+            console.log("Active từ cha:", active);
+            OnclickDetail(active)
+        }
+    }, [active]);
 
-    //         } else if (res.data.status === "success") {
-    //             console.log(res.data.data);
+    const [food, setFood]= useState("");
+    function OnclickDetail(active) {
+        const token = localStorage.getItem("HappyCorp-token-app")
+        const data = {
+            "token": token,
+            "brand": 1,
+            "active": active
+        }
+        console.log(36456);
 
-    //         }
-    //     })
-    //         .catch((error) => {
-    //             f7.dialog.alert(error, 'Error');
-    //             console.log("k ket noi dc api");
+        const api = axios.create({
+            baseURL: "https://api-happy.eclo.io/api",
+        });
+        api.post("/menu/" + active, data, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then((res) => {
+            if (res.data.status === "error") {
+                console.log('lỗi');
+                f7.dialog.alert(res.data.content, 'Error');
 
-    //         });
-    // }
+            } else if (res.data.status === "success") {
+                console.log(res.data.data);
+                setFood(res.data.data)
+
+            }
+        })
+            .catch((error) => {
+                f7.dialog.alert(error, 'Error');
+                console.log("k ket noi dc api");
+
+            });
+    }
 
     return (
         <>

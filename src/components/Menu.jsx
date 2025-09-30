@@ -110,7 +110,7 @@ export default function SheetMenu({ opened, onClose }) {
 
             } else if (res.data.status === "success") {
                 console.log(res.data.data);
-                
+
             }
         })
             .catch((error) => {
@@ -119,6 +119,14 @@ export default function SheetMenu({ opened, onClose }) {
 
             });
     }
+
+    const [activeId, setActiveId] = useState(null);                     // lưu active
+
+    // Hàm xử lý khi click card
+    const handleCardClick = (active) => {
+        setActiveId(active);          // lưu lại id/active để modal detail dùng
+        setSheetOpened1(true); 
+    };
     return (
         <>
             <Sheet
@@ -323,7 +331,7 @@ export default function SheetMenu({ opened, onClose }) {
                                                                 <div
                                                                     className="position-absolute top-0 start-0 w-100 h-100"
                                                                     style={{ zIndex: 10, cursor: "pointer" }}
-                                                                    onClick={() => {OnclickDetail(item.active); setSheetOpened1(true)}}
+                                                                    onClick={() => { handleCardClick(item.active) }}
                                                                 ></div>
                                                                 <div className="text-center">
                                                                     <div className="mb-3">
@@ -372,7 +380,10 @@ export default function SheetMenu({ opened, onClose }) {
             <SheetMenuDetail
                 opened={sheetOpened1}
                 onClose={() => setSheetOpened1(false)}
-            />
+                active={activeId}
+            >
+              
+            </SheetMenuDetail>
         </>
     );
 }
