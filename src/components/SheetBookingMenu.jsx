@@ -35,15 +35,29 @@ export default function SheetBookingMenu({ opened, onClose }) {
                     isOpen: true,
                     items: [
                         {
-                            id: 1,
-                            name: 'KHĂN LẠNH',
-                            price: 0,
+                            id: 1468,
+                            tax: 10,
+                            check: 1,
+                            products_active: "b54adfcb-07d9-4c4e-8406-8d35cf8bc1d6",
+                            discount: 0,
+                            name: 'MN - CUA RANG MUỐI',
+                            code:"MNĐA00157",
+                            price: 1500000,
+                            group:9,
+                            category:21,
                             image: 'https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/Image%20FP_2024/anh-dai-dien-tet-41.jpg'
                         },
                         {
-                            id: 2,
-                            name: 'WELCOME DRINK',
-                            price: 0,
+                            id: 1467,
+                            tax: 10,
+                            check: 1,
+                            products_active: "596946f0-df89-4d47-8f03-0d269aac3380",
+                            discount:0,
+                            name: 'MN - HENNESY VSOP',
+                            code:"MNTU00046",
+                            price: 5963000,
+                            group:9,
+                            category:28,
                             image: 'https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/Image%20FP_2024/anh-dai-dien-tet-41.jpg'
                         }
                     ]
@@ -163,8 +177,8 @@ export default function SheetBookingMenu({ opened, onClose }) {
         return price.toLocaleString('vi-VN');
     };
 
-    // hàm thêm quantity = 0 vào tất cả item
-    const addQuantityToMenu = (menu) => {
+    // hàm thêm amount = 0 vào tất cả item
+    const addamountToMenu = (menu) => {
         const newMenu = {};
         Object.keys(menu).forEach((sectionKey) => {
             newMenu[sectionKey] = {
@@ -173,7 +187,7 @@ export default function SheetBookingMenu({ opened, onClose }) {
                     ...cat,
                     items: cat.items.map((item) => ({
                         ...item,
-                        quantity: item.quantity ?? 0   // nếu chưa có thì gán = 0
+                        amount: item.amount ?? 0   // nếu chưa có thì gán = 0
                     }))
                 }))
             };
@@ -182,7 +196,7 @@ export default function SheetBookingMenu({ opened, onClose }) {
     };
 
 
-    const [menu, setMenu] = useState(addQuantityToMenu(menuData));
+    const [menu, setMenu] = useState(addamountToMenu(menuData));
 
     useEffect(() => {
         // localStorage.removeItem("cart");
@@ -206,7 +220,7 @@ export default function SheetBookingMenu({ opened, onClose }) {
                             ...cat,
                             items: cat.items.map((it) =>
                                 it.id === itemId
-                                    ? { ...it, quantity: it.quantity + 1 }
+                                    ? { ...it, amount: it.amount + 1 }
                                     : it
                             )
                         }
@@ -228,8 +242,8 @@ export default function SheetBookingMenu({ opened, onClose }) {
                         ? {
                             ...cat,
                             items: cat.items.map((it) =>
-                                it.id === itemId && it.quantity > 0
-                                    ? { ...it, quantity: it.quantity - 1 }
+                                it.id === itemId && it.amount > 0
+                                    ? { ...it, amount: it.amount - 1 }
                                     : it
                             )
                         }
@@ -246,7 +260,7 @@ export default function SheetBookingMenu({ opened, onClose }) {
         return (
             sum +
             section.categories.reduce((catSum, cat) => {
-                return catSum + cat.items.reduce((iSum, it) => iSum + it.quantity, 0);
+                return catSum + cat.items.reduce((iSum, it) => iSum + it.amount, 0);
             }, 0)
         );
     }, 0);
@@ -258,7 +272,7 @@ export default function SheetBookingMenu({ opened, onClose }) {
             const service = menu[serviceKey];
 
             service.categories.forEach((cat) => {
-                const itemsWithQty = cat.items.filter((item) => item.quantity > 0);
+                const itemsWithQty = cat.items.filter((item) => item.amount > 0);
 
                 if (itemsWithQty.length > 0) {
                     cart.push({
@@ -270,7 +284,7 @@ export default function SheetBookingMenu({ opened, onClose }) {
                             id: it.id,
                             name: it.name,
                             price: it.price,
-                            quantity: it.quantity
+                            amount: it.amount
                         }))
                     });
                 }
@@ -283,12 +297,12 @@ export default function SheetBookingMenu({ opened, onClose }) {
         Object.keys(menu).forEach((sectionKey) => {
             menu[sectionKey].categories.forEach((cat1) => {
                 cat1.items.forEach((item) => {
-                    if (item.quantity > 0) {
+                    if (item.amount > 0) {
                         cart1.push({
                             id: item.id,
                             name: item.name,
                             price: item.price,
-                            quantity: item.quantity,
+                            amount: item.amount,
                             image: item.image
                         });
                     }
@@ -397,7 +411,7 @@ export default function SheetBookingMenu({ opened, onClose }) {
                                                                                 <Icon f7="minus" size="10px" />
                                                                             </button>
                                                                             <span style={{ minWidth: "10px", textAlign: "center" }}>
-                                                                                {item.quantity}
+                                                                                {item.amount}
                                                                             </span>
                                                                             <button
                                                                                 className="bg-light p-1 d-flex align-items-center"
