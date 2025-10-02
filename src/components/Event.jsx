@@ -69,7 +69,7 @@ export default function SheetEvent({ opened, onClose }) {
                         <img src="../image/nen-den.webp" className=' rounded-bottom-4 w-100' style={{ height: '200px', objectFit: 'cover' }}></img>
 
                         <div className='position-absolute top-0 end-0 m-3'>
-                            <img src='../image/happy-corp-logo.png' style={{ height: "70px" }}></img>
+                            <img src='../image/happy-corp-logo.png' style={{ height: "50px" }}></img>
                         </div>
                         <div className='position-absolute bottom-0 start-0 m-3 mt-0 text-pink fs-15 fw-bold fst-italic'>
                             <div className="mb-2"> Where style meets nightlife</div>

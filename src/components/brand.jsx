@@ -68,6 +68,9 @@ export default function SheetBrand({ opened, onClose }) {
                 className="demo-sheet-brand "
                 opened={opened}
                 onSheetClosed={onClose}
+                swipeToClose
+                swipeToStep
+                push
             >
 
                 <PageContent className="h-auto">

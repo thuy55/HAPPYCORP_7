@@ -1,13 +1,83 @@
+/* Ghi đè màu nền cho toàn bộ ứng dụng */
+body,
+.app-root,
+.view,
+.page {
+    /* Sử dụng màu xanh tím đậm của bạn */
+    background-image: url('../image/bg-x.jpg') !important;
+
+    /* 2. Đảm bảo hình ảnh phủ kín toàn bộ khu vực */
+    background-size: cover !important;
+
+    /* 3. Căn giữa hình ảnh */
+    background-position: center center !important;
+
+    /* 4. Ngăn hình ảnh lặp lại */
+    background-repeat: no-repeat !important;
+
+    /* 5. Cố định hình ảnh khi cuộn (tùy chọn) */
+    background-attachment: fixed !important;
+
+    /* 6. Màu nền dự phòng (sẽ hiển thị nếu ảnh không tải được) */
+    background-color: #292489 !important;
+    color: #ffff !important;
+}
+
+.page-content {
+    background-image: url('../image/bg-x.jpg') !important;
+    background-size: cover !important;
+
+    /* 3. Căn giữa hình ảnh */
+    background-position: center center !important;
+
+    /* 4. Ngăn hình ảnh lặp lại */
+    background-repeat: no-repeat !important;
+
+    /* 5. Cố định hình ảnh khi cuộn (tùy chọn) */
+    background-attachment: fixed !important;
+
+    /* 6. Màu nền dự phòng (sẽ hiển thị nếu ảnh không tải được) */
+    background-color: #292489 !important;
+    color: #ffff !important;
+}
+
+/* --- THANH NAVIGATION BAR --- */
+.navbar-bg {
+    background-color: #292489 !important;
+}
+
+.navbar {
+    color: #ffff !important;
+}
+
+.navbar .link,
+.navbar a.link,
+.navbar .icon,
+.navbar .title {
+    color: #ffff !important;
+}
+
+.toolbar {
+    background-color: #292489 !important;
+    color: #ffff !important;
+}
+
+.toolbar .link,
+.toolbar a.link,
+.toolbar .icon {
+    color: #ffff !important;
+}
+
 .border-image {
     border-radius: 30px;
 }
 
 .bg-pink {
-    background-color: #f07 !important;
+    background-color: #fd1678 !important;
 }
 
 .text-pink {
-    color: #f07 !important;
+    color: #fd1678 !important;
 }
 
 .fs-13 {
@@ -42,12 +112,12 @@
 
 // input,
 // input[type='text'] {
-//     border: 0.5px solid #f07 !important;
+//     border: 0.5px solid #fd1678 !important;
 //     font-size: 14px !important;
 //     padding: 12px !important;
 // }
 .border-input {
-    border: 0.5px solid #f07 !important;
+    border: 0.5px solid #fd1678 !important;
     font-size: 14px !important;
     padding: 0px 12px !important;
 }
@@ -59,17 +129,17 @@
 
 .form-check-input {
     padding: 5px;
-    border-color: #f07;
+    border-color: #fd1678;
 }
 
 .form-check-input:checked {
     padding: 5px;
-    background-color: #f07;
-    border-color: #f07;
+    background-color: #fd1678;
+    border-color: #fd1678;
 }
 
 .form-check-input:focus {
-    border-color: #f07;
+    border-color: #fd1678;
     outline: 0;
     box-shadow: 0 0 0 .1rem rgb(241, 178, 207);
 }
@@ -106,7 +176,7 @@
     padding: 3px 10px 3px 10px;
 
     font-size: 11px;
-    background: linear-gradient(#f07, #f0606c, #f86f56);
+    background: linear-gradient(#fd1678, #f0606c, #f86f56);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     letter-spacing: 0.5px;
     animation: pulseGlow 1.5s infinite
@@ -467,7 +537,7 @@ button {
 }
 
 .segmented .button-active {
-    background-color: #f07 !important;
+    background-color: #fd1678 !important;
     box-shadow: 0 !important;
     color: white !important;
 }
@@ -561,40 +631,49 @@ button {
     background-color: #f30771 !important;
     color: #fff !important;
 }
-.bg-social{
+
+.bg-social {
     background-color: #999999;
 }
-.dark .bg-social{
+
+.dark .bg-social {
     background-color: #212529;
 }
-.color-icon{
+
+.color-icon {
     color: black;
 }
-.dark .color-icon{
+
+.dark .color-icon {
     color: white;
 }
-.bg-input{
+
+.bg-input {
     background-color: lightgray;
 }
 
-.text-color{
+.text-color {
     color: #1f1f1f;
 }
-.dark .text-color{
+
+.dark .text-color {
     color: #bebebe;
 }
 
-.bg-date{
+.bg-date {
     background-color: #fff;
 }
-.dark .bg-date{
+
+.dark .bg-date {
     background-color: #000;
 }
-.bg-input{
+
+.bg-input {
     background-color: #bebebe !important;
     // padding: 10px;
 }
-.dark .bg-input{
+
+.dark .bg-input {
     background-color: #313131 !important;
     padding: 5px !important;
     font-size: 13px !important;
@@ -602,36 +681,45 @@ button {
 
 
 .demo-sheet-brand {
-  position: fixed !important;
-  top: 50% !important;
-  left: 50% !important;
-  translate: -50% -50%;
-  width: 400px !important;
-  max-width: 80% !important;
-  height: auto !important;       /* modal co giãn */
-  max-height: 70vh;              /* giới hạn chiều cao */
-
-  border-radius: 15px !important;
-  overflow: hidden;              /* tránh tràn nội dung */
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    translate: -50% -50%;
+    width: 400px !important;
+    max-width: 80% !important;
+    height: auto !important;
+    /* modal co giãn */
+    max-height: 70vh !important;
+    /* giới hạn chiều cao */
+    background-color: transparent;
+    background-color: unset !important;
+    border-radius: 15px !important;
+    // overflow: hidden;
+    //  background-image: url('../image/bg-x.jpg') !important;
+    /* tránh tràn nội dung */
 }
 
 .demo-sheet-brand .sheet-modal-inner {
-  display: block !important; /* bỏ flex mặc định */
-  height: auto !important;
-  max-height: 80vh;
+    display: block !important;
+    /* bỏ flex mặc định */
+    background: transparent !important;
+    height: auto !important;
+    max-height: 80vh;
 }
 
 .demo-sheet-brand .page {
-  height: auto !important;
+    height: auto !important;
 }
 
 .demo-sheet-brand .page-content {
-  height: auto !important;
-  max-height: 70vh;
-  overflow-y: auto !important;
+    height: auto !important;
+    max-height: 70vh;
+    overflow-y: auto !important;
+    border-radius: 15px !important;
+    padding-bottom: 10px;
+
 }
 
-
-
-
-
+.card {
+    background-color: #292489;
+}

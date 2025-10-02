@@ -147,7 +147,7 @@ export default function SheetMenu({ opened, onClose }) {
                     </div>
                 </Toolbar>
                 <PageContent>
-                    <Card className="rounded-4 p-3 shadow-none border border-light fs-13">
+                    <Card className="rounded-4 p-3 shadow-none border border-light fs-13 bg-transparent">
                         {/* <div className="px-1 py-2">
                             <div className="row g-2">
                                 <div className="col-4">
@@ -329,7 +329,7 @@ export default function SheetMenu({ opened, onClose }) {
                                                 <div className="row g-3 py-3">
                                                     {category.items.map((item) => (
                                                         <div key={item.id} className="col-6 px-0 m-0">
-                                                            <Card className="m-0 border-0 shadow-sm p-2 pb-0 h-100 position-relative" >
+                                                            <Card className="m-0 border-0 shadow-sm p-2 pb-0 h-100  bg-transparent position-relative" >
                                                                 <div
                                                                     className="position-absolute top-0 start-0 w-100 h-100"
                                                                     style={{ zIndex: 10, cursor: "pointer" }}

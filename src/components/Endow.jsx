@@ -27,8 +27,8 @@ export default function SheetEndow({ opened, onClose }) {
                                 <div className="p-2 pt-3">Hãy đến với HappyCorp để nào</div>
                                 <div className='mt-1 ps-2'> <span className='bg-pink rounded-1  px-2'>đến 50%</span></div>
                             </div>
-                            <div className='col-5'>
-                                <img src='../image/10.gif' className='w-100'></img>
+                            <div className='col-5 py-3 d-flex justify-content-end'>
+                                <img src='../image/flash-sale-removebg.png' style={{width:"120px"}}></img>
                             </div>
                         </div>
                     </div>

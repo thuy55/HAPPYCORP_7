@@ -156,40 +156,39 @@ console.log(258, localStorage.getItem("a-token"));
 
 
 //Chế độ sáng tối
- const [dark, setDark] = useState(false);
+//  const [dark, setDark] = useState(false);
 
-  // Lưu theme vào localStorage để nhớ lần mở sau
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    console.log("aaa",savedTheme);
+//   useEffect(() => {
+//     const savedTheme = localStorage.getItem("theme");
+//     console.log("aaa",savedTheme);
     
-    if (savedTheme === null){
-      setDark(true);
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    }
-    if (savedTheme === "dark") {
-      setDark(true);
-      document.documentElement.classList.add("dark");
-    }
-    if (savedTheme === "light") {
-      setDark(false);
-      document.documentElement.classList.remove("dark");
-    }
+//     if (savedTheme === null){
+//       setDark(true);
+//       document.documentElement.classList.add("dark");
+//       localStorage.setItem("theme", "dark");
+//     }
+//     if (savedTheme === "dark") {
+//       setDark(true);
+//       document.documentElement.classList.add("dark");
+//     }
+//     if (savedTheme === "light") {
+//       setDark(false);
+//       document.documentElement.classList.remove("dark");
+//     }
 
-  }, []);
+//   }, []);
 
-  const setLightTheme = () => {
-    setDark(false);
-    document.documentElement.classList.remove("dark");
-    localStorage.setItem("theme", "light");
-  };
+//   const setLightTheme = () => {
+//     setDark(false);
+//     document.documentElement.classList.remove("dark");
+//     localStorage.setItem("theme", "light");
+//   };
 
-  const setDarkTheme = () => {
-    setDark(true);
-    document.documentElement.classList.add("dark");
-    localStorage.setItem("theme", "dark");
-  };
+//   const setDarkTheme = () => {
+//     setDark(true);
+//     document.documentElement.classList.add("dark");
+//     localStorage.setItem("theme", "dark");
+//   };
 
 
   return (
@@ -324,7 +323,7 @@ console.log(258, localStorage.getItem("a-token"));
               </ListItem>
             </List>
 
-            <BlockTitle className='mb-1  mt-3 fs-13 '>Giao diện</BlockTitle>
+            {/* <BlockTitle className='mb-1  mt-3 fs-13 '>Giao diện</BlockTitle>
             <List dividersIos={false} simpleList inset className='fs-13 list-custom mb-3'>
               <ListItem>
               <Link onClick={setLightTheme}>
@@ -351,7 +350,7 @@ console.log(258, localStorage.getItem("a-token"));
                 Tối
               </Link>
             </ListItem>
-            </List>
+            </List> */}
                   
 
             <BlockTitle className='mb-1  mt-3 fs-13 '>Ngôn ngữ</BlockTitle>

@@ -127,13 +127,15 @@ const HomePage = () => {
         <NavLeft>
           {/* <Link iconIos="f7:menu" iconMd="material:menu" panelOpen="left" /> */}
           <Link panelOpen="left" >
-            <lord-icon
+            {/* <lord-icon
               src="https://cdn.lordicon.com/vmiwgvnx.json"
               trigger="loop"
               state="loop-spin"
-              colors="primary:#f30771,secondary:#f30771"
+              colors="primary:#fd1678,secondary:#fd1678"
               className='size-icon me-2'>
-            </lord-icon></Link>
+            </lord-icon> */}
+            <img src='../image/menu.png' style={{width:"30px"}}></img>
+            </Link>
         </NavLeft>
         <NavTitle className='text-dark' sliding>
           <img src='../image/happy-corp-logo.png' style={{ height: "35px" }}></img>
@@ -144,14 +146,14 @@ const HomePage = () => {
             <lord-icon
               src="https://cdn.lordicon.com/wjyqkiew.json"
               trigger="loop"
-              colors="primary:#f30771,secondary:#f30771"
+              colors="primary:#fd1678,secondary:#fd1678"
               className='size-icon'>
             </lord-icon></Link>
           <Link onClick={() => setSheetOpenedBrand(true)} >
             <lord-icon
-              src="https://cdn.lordicon.com/lbcxnxti.json"
+              src="https://cdn.lordicon.com/tjjwskjx.json"
               trigger="loop"
-              colors="primary:#f30771,secondary:#f30771"
+              colors="primary:#fd1678,secondary:#fd1678"
               className='size-icon me-2'>
             </lord-icon></Link>
         </NavRight>
@@ -169,7 +171,7 @@ const HomePage = () => {
           </div>
         </NavTitleLarge>
       </Navbar>
-      <PageContent className=''>
+      <PageContent className='pb-0' style={{paddingBottom:"0px !important"}}>
         <div className='px-4 my-2 mt-4'>
           <div className="d-flex align-items-center bg-input  rounded-pill p-1 row" style={{ cursor: 'pointer' }}>
             <input className='border bg-input rounded-pill border-0 p-2 px-3 col-10' placeholder='Tìm kiếm'></input>
@@ -177,7 +179,7 @@ const HomePage = () => {
               <lord-icon
                 src="https://cdn.lordicon.com/wjyqkiew.json"
                 trigger="loop"
-                colors="primary:#f30771,secondary:#f30771"
+                colors="primary:#fd1678,secondary:#fd1678"
                 className=' me-2'
                 style={{ width: '30px', height: '30px' }}>
               </lord-icon>
@@ -226,17 +228,14 @@ const HomePage = () => {
               <div className=' fs-13'>Doanh thu</div>
             </div>
           </div>
-
-
         </div>
-
 
         <Link onClick={() => setSheetOpenedEndow(true)} className='fs-6 fw-bold mx-3 mt-3 justify-content-start d-flex align-items-center'>
           {/* <img src='../image/6.gif' className='size-icon'></img> */}
           <lord-icon
             src="https://cdn.lordicon.com/puebsmel.json"
             trigger="loop"
-            colors="primary:#f30771,secondary:#f30771"
+            colors="primary:#fd1678,secondary:#fd1678"
             className=' me-1'
             style={{ width: '30px', height: '30px' }}>
           </lord-icon>
@@ -252,7 +251,7 @@ const HomePage = () => {
                   <div className='mt-2 fst-italic'> <lord-icon
                     src="https://cdn.lordicon.com/puebsmel.json"
                     trigger="loop"
-                    colors="primary:#f30771,secondary:#f30771"
+                    colors="primary:#fd1678,secondary:#fd1678"
                     className=' me-1'
                     style={{ width: '20px', height: '20px' }}>
                   </lord-icon>
@@ -272,7 +271,7 @@ const HomePage = () => {
                     <lord-icon
                       src="https://cdn.lordicon.com/puebsmel.json"
                       trigger="loop"
-                      colors="primary:#f30771,secondary:#f30771"
+                      colors="primary:#fd1678,secondary:#fd1678"
                       className=' me-1'
                       style={{ width: '20px', height: '20px' }}>
                     </lord-icon>
@@ -292,7 +291,7 @@ const HomePage = () => {
                     <lord-icon
                       src="https://cdn.lordicon.com/puebsmel.json"
                       trigger="loop"
-                      colors="primary:#f30771,secondary:#f30771"
+                      colors="primary:#fd1678,secondary:#fd1678"
                       className=' me-1'
                       style={{ width: '20px', height: '20px' }}>
                     </lord-icon>
@@ -312,7 +311,7 @@ const HomePage = () => {
                     <lord-icon
                       src="https://cdn.lordicon.com/puebsmel.json"
                       trigger="loop"
-                      colors="primary:#f30771,secondary:#f30771"
+                      colors="primary:#fd1678,secondary:#fd1678"
                       className=' me-1'
                       style={{ width: '20px', height: '20px' }}>
                     </lord-icon>
@@ -328,7 +327,7 @@ const HomePage = () => {
           <lord-icon
             src="https://cdn.lordicon.com/okgbpdra.json"
             trigger="loop"
-            colors="primary:#f30771,secondary:#f30771"
+            colors="primary:#fd1678,secondary:#fd1678"
             className=' me-1'
             style={{ width: '30px', height: '30px' }}>
           </lord-icon>
@@ -353,7 +352,7 @@ const HomePage = () => {
           <lord-icon
             src="https://cdn.lordicon.com/uphbloed.json"
             trigger="loop"
-            colors="primary:#f30771,secondary:#f30771"
+            colors="primary:#fd1678,secondary:#fd1678"
             className=' me-1'
             style={{ width: '30px', height: '30px' }}>
           </lord-icon>
@@ -437,7 +436,7 @@ const HomePage = () => {
             <lord-icon
               src="https://cdn.lordicon.com/psyssele.json"
               trigger="loop"
-              colors="primary:#f30771,secondary:#f30771"
+              colors="primary:#fd1678,secondary:#fd1678"
               className=' me-1'
               style={{ width: '30px', height: '30px' }}>
             </lord-icon>
@@ -534,7 +533,7 @@ const HomePage = () => {
 
           <ListItem onClick={() => { setSheetOpenedInvoices(true) }} className='row mt-2 list-no-chevron'>
             <div className='col-2'>
-              <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className='w-100 border border-2 rounded-3 border-danger'></img>
+              <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className='w-100 border border-2 rounded-3 ' style={{borderColor:"#ff9700"}}></img>
             </div>
             <div className='col-10 fs-13 ms-2'>
               <div className='fw-bold d-flex justify-content-between'> Phòng: V.I.P 4 <span className='text-success'>Đã hoàn tất</span></div>
@@ -543,7 +542,7 @@ const HomePage = () => {
           </ListItem>
           <ListItem onClick={() => { setSheetOpenedInvoices(true) }} className='row mt-2 list-no-chevron'>
             <div className='col-2'>
-              <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className='w-100 border border-2 rounded-3 border-danger'></img>
+              <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className='w-100 border border-2 rounded-3 '></img>
             </div>
             <div className='col-10 fs-13 ms-2'>
               <div className='fw-bold d-flex justify-content-between'> Phòng: V.I.P 4 <span className='text-success'>Đã hoàn tất</span></div>

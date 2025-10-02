@@ -1,14 +1,15 @@
-import { Sheet, Toolbar, PageContent, Block, Link, Button, Card } from "framework7-react";
+import { Sheet, Toolbar, PageContent, Block, Link, Button, Card, BlockTitle, List } from "framework7-react";
 import SheetBooking1 from "./SheetBooking1";
 import { useEffect, useState } from "react";
 import SheetBookingMenu from "./SheetBookingMenu";
 import SheetRoomDetail from "./RoomDetail";
 import axios from "axios";
+import React from "react";
 
 export default function SheetBooking({ opened, onClose }) {
     const [sheetOpenebMenu, setSheetOpenebMenu] = useState(false);
 
-    const [event, setevent] = useState([]);
+    const [room, setRoom] = useState([]);
 
     useEffect(() => {
         if (opened) {
@@ -19,13 +20,11 @@ export default function SheetBooking({ opened, onClose }) {
                 "brand": brand
             }
 
-            console.log("Call API /event with:", data);
-
             const api = axios.create({
                 baseURL: "https://api-happy.eclo.io/api",
             });
 
-            api.post("/room", data, {
+            api.post("/room-booking", data, {
                 headers: { "Content-Type": "application/json" },
             })
                 .then((res) => {
@@ -34,7 +33,7 @@ export default function SheetBooking({ opened, onClose }) {
                         f7.dialog.alert(res.data.content, "Error");
                     } else if (res.data.status === "success") {
                         console.log(res.data.data);
-                        setevent(res.data.data);
+                        setRoom(res.data.data);
                     }
                 })
                 .catch((error) => {
@@ -43,6 +42,9 @@ export default function SheetBooking({ opened, onClose }) {
                 });
         }
     }, [opened]);
+
+    const defaultImageUrl = 'https://img.freepik.com/premium-photo/elite-karaoke-suite-with-velvet-ropes-bartender_416256-24715.jpg';
+
     return (
         <Sheet
             className="demo-sheet-1 h-100"
@@ -72,14 +74,7 @@ export default function SheetBooking({ opened, onClose }) {
                     </div>
                 </div>
 
-                <div className='fw-bold d-flex align-items-center fs-13 mt-3 fst-italic'>
-                    {/* <lord-icon
-                        src="https://cdn.lordicon.com/edcgvlnw.json"
-                        trigger="loop"
-                        colors="primary:#f30771,secondary:#f30771"
-                        className=' me-2 '
-                        style={{ width: '30px', height: '30px' }}>
-                    </lord-icon> */}
+                {/* <div className='fw-bold d-flex align-items-center fs-13 mt-3 fst-italic'>
                     Chốt phòng đã xem ngay !
                 </div>
                 <swiper-container
@@ -206,134 +201,46 @@ export default function SheetBooking({ opened, onClose }) {
                         </Card>
 
                     </swiper-slide>
-                </swiper-container>
+                </swiper-container> */}
 
+                <div className="p-1">
+                    {room && room.map((diagram, key) => {
+                        return (
+                            <div key={key}>
+                                <div className="d-flex mt-3 align-items-center fw-bold fst-italic room-group-title">
+                                    {diagram.name}
+                                </div>
+                                <div className='row  mt-2 pb-2 '>
+                                    {diagram.rooms && diagram.rooms.map((roomItem, index) => {
+                                        const imageUrl = roomItem.images || defaultImageUrl;
+                                        return (
+                                            <div className='col-4 p-1 mt-2' key={index}>
+                                                <div className=' position-relative' style={{
+                                                    // Thêm box-shadow để tạo viền phát sáng
+                                                    boxShadow: '0 0 5px 0 #ff9700, 0 0 10px 0 #fd1678', 
+                                                    borderRadius: '8px', 
+                                                    border: '0.5px solid #ff9700'
+                                                }}>
+                                                    <img src={imageUrl} className=' rounded-3 w-100' style={{ objectFit: 'cover' }}></img>
 
-                <div className="d-flex mt-3 align-items-center fw-bold fst-italic">
-                    {/* <lord-icon
-                        src="https://cdn.lordicon.com/hqrhprrj.json"
-                        trigger="loop"
-                        colors="primary:#f30771,secondary:#f30771"
-                        className=' me-2 mb-2'
-                        style={{ width: '30px', height: '30px' }}>
-                    </lord-icon> */}
-                    Phòng siêu HOT
-                </div>
-                <div className='row d-flex flex-nowrap  mt-2 pb-2' style={{ overflowX: "auto", whiteSpace: "nowrap" }}>
-                    <div className='col-5 px-1'>
-                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-sm'>
-                            <div>
-                                <img src='https://ngominhaudio.com.vn/wp-content/uploads/2017/04/phoi-canh-3d-phong-karaoke-25m2.jpg' className='w-100 rounded-top-3'></img>
-                                <div className='p-1 w-100 bg-danger bg-opacity-75 text-white text-center fw-bold'>HOT</div>
-                                <div className='p-2'>
-                                    <div className='fw-bold'>L1 - Phòng Private 1</div>
-                                    <div className="d-flex gap-1 my-1">
-                                        {[...Array(5)].map((_, i) => (
-                                            <lord-icon
-                                                key={i}
-                                                src="https://cdn.lordicon.com/cvwrvyjv.json"
-                                                trigger="loop"
-                                                colors="primary:#f30771,secondary:#f30771"
-                                                style={{ width: '15px', height: '15px' }}
-                                            />
-                                        ))}
-                                    </div>
-                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                        Tiêu âm:
-                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
+                                                    <div className='position-absolute bottom-0 start-0 m-2'>
+                                                        <div className='fw-bold fs-13 text-white rounded-3 px-1' style={{backgroundColor:"#ff9700", letterSpacing: '2px'}}>
+                                                            ROOM {roomItem.name}
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
                                 </div>
                             </div>
-                        </Card>
-                    </div>
-                    <div className='col-5 px-1'>
-                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-sm'>
-                            <div>
-                                <img src='https://media.istockphoto.com/id/518734599/photo/european-restaurant-in-bright-colors.jpg?s=612x612&w=0&k=20&c=Ygyz3vPgN27NM4iUTh1QlzBG7-83i_ZH0E3HJr8sr7w=' className='w-100 rounded-top-3'></img>
-                                <div className='p-1 w-100 bg-danger bg-opacity-75 text-white text-center fw-bold'>HOT</div>
-                                <div className='p-2'>
-                                    <div className='fw-bold'>L1 - Phòng Private 1</div>
-                                    <div className="d-flex gap-1 my-1">
-                                        {[...Array(5)].map((_, i) => (
-                                            <lord-icon
-                                                key={i}
-                                                src="https://cdn.lordicon.com/cvwrvyjv.json"
-                                                trigger="loop"
-                                                colors="primary:#f30771,secondary:#f30771"
-                                                style={{ width: '15px', height: '15px' }}
-                                            />
-                                        ))}
-                                    </div>
-                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                        Tiêu âm:
-                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
-                                </div>
-                            </div>
-                        </Card>
-                    </div>
-                    <div className='col-5 px-1'>
-                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-sm'>
-                            <div>
-                                <img src='https://ngominhaudio.com.vn/wp-content/uploads/2017/04/phoi-canh-3d-phong-karaoke-25m2.jpg' className='w-100 rounded-top-3'></img>
-                                <div className='p-1 w-100 bg-danger bg-opacity-75 text-white text-center fw-bold'>HOT</div>
-                                <div className='p-2'>
-                                    <div className='fw-bold'>L1 - Phòng Private 1</div>
-                                    <div className="d-flex gap-1 my-1">
-                                        {[...Array(5)].map((_, i) => (
-                                            <lord-icon
-                                                key={i}
-                                                src="https://cdn.lordicon.com/cvwrvyjv.json"
-                                                trigger="loop"
-                                                colors="primary:#f30771,secondary:#f30771"
-                                                style={{ width: '15px', height: '15px' }}
-                                            />
-                                        ))}
-                                    </div>
-                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                        Tiêu âm:
-                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
-                                </div>
-                            </div>
-                        </Card>
-                    </div>
-                    <div className='col-5 px-1'>
-                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-sm'>
-                            <div>
-                                <img src='https://viet-solar.com/wp-content/uploads/2021/02/bab-jpg.webp' className='w-100 rounded-top-3'></img>
-                                <div className='p-1 w-100 bg-danger bg-opacity-75 text-white text-center fw-bold'>HOT</div>
-                                <div className='p-2'>
-                                    <div className='fw-bold'>L1 - Phòng Private 1</div>
-                                    <div className="d-flex gap-1 my-1">
-                                        {[...Array(5)].map((_, i) => (
-                                            <lord-icon
-                                                key={i}
-                                                src="https://cdn.lordicon.com/cvwrvyjv.json"
-                                                trigger="loop"
-                                                colors="primary:#f30771,secondary:#f30771"
-                                                style={{ width: '15px', height: '15px' }}
-                                            />
-                                        ))}
-                                    </div>
-                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                        Tiêu âm:
-                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
-                                </div>
-                            </div>
-                        </Card>
-                    </div>
+                        );
+                        // --- Kết thúc Group ---
+                    })}
                 </div>
 
-                <div className="d-flex align-items-center fw-bold mt-3  fst-italic">
-                    {/* <lord-icon
-                        src="https://cdn.lordicon.com/vttzorhw.json"
-                        trigger="loop"
-                        colors="primary:#f30771,secondary:#f30771"
-                        className=' me-2 mb-2'
-                        style={{ width: '30px', height: '30px' }}>
-                    </lord-icon> */}
+                {/* <div className="d-flex align-items-center fw-bold mt-3  fst-italic">
                     Phòng được yêu thích
                 </div>
 
@@ -442,170 +349,8 @@ export default function SheetBooking({ opened, onClose }) {
                             </div>
                         </Card>
                     </div>
-                </div>
-                <div className='fw-bold d-flex align-items-center mt-3  fst-italic'>
-                    {/* <lord-icon
-                        src="https://cdn.lordicon.com/hqrhprrj.json"
-                        trigger="loop"
-                        colors="primary:#f30771,secondary:#f30771"
-                        className=' me-2 mb-2'
-                        style={{ width: '30px', height: '30px' }}>
-                    </lord-icon> */}
-                    Tất cả
-                </div>
-                <div className="grid grid-cols-2 grid-gap">
-                    <div>
-                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-sm'>
-                            <div>
-                                <img src='https://img.freepik.com/premium-photo/elite-karaoke-suite-with-velvet-ropes-bartender_416256-24715.jpg' className='w-100 rounded-top-3'></img>
-                                <div className='p-2'>
-                                    <div className='fw-bold'>L1 - Phòng Private 1</div>
-                                    <div className="d-flex gap-1 my-1">
-                                        {[...Array(5)].map((_, i) => (
-                                            <lord-icon
-                                                key={i}
-                                                src="https://cdn.lordicon.com/cvwrvyjv.json"
-                                                trigger="loop"
-                                                colors="primary:#f30771,secondary:#f30771"
-                                                style={{ width: '15px', height: '15px' }}
-                                            />
-                                        ))}
-                                    </div>
-
-                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                        Tiêu âm:
-                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
-                                </div>
-                            </div>
-                        </Card>
-                    </div>
-                    <div>
-                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-sm'>
-                            <div>
-                                <img src='https://img.freepik.com/premium-photo/elite-karaoke-suite-with-velvet-ropes-bartender_416256-24715.jpg' className='w-100 rounded-top-3'></img>
-                                <div className='p-2'>
-                                    <div className='fw-bold'>L1 - Phòng Private 1</div>
-                                    <div className="d-flex gap-1 my-1">
-                                        {[...Array(5)].map((_, i) => (
-                                            <lord-icon
-                                                key={i}
-                                                src="https://cdn.lordicon.com/cvwrvyjv.json"
-                                                trigger="loop"
-                                                colors="primary:#f30771,secondary:#f30771"
-                                                style={{ width: '15px', height: '15px' }}
-                                            />
-                                        ))}
-                                    </div>
-                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                        Tiêu âm:
-                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
-                                </div>
-                            </div>
-                        </Card>
-                    </div>
-                    <div>
-                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-sm'>
-                            <div>
-                                <img src='https://img.freepik.com/premium-photo/elite-karaoke-suite-with-velvet-ropes-bartender_416256-24715.jpg' className='w-100 rounded-top-3'></img>
-                                <div className='p-2'>
-                                    <div className='fw-bold'>L1 - Phòng Private 1</div>
-                                    <div className="d-flex gap-1 my-1">
-                                        {[...Array(5)].map((_, i) => (
-                                            <lord-icon
-                                                key={i}
-                                                src="https://cdn.lordicon.com/cvwrvyjv.json"
-                                                trigger="loop"
-                                                colors="primary:#f30771,secondary:#f30771"
-                                                style={{ width: '15px', height: '15px' }}
-                                            />
-                                        ))}
-                                    </div>
-                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                        Tiêu âm:
-                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
-                                </div>
-                            </div>
-                        </Card>
-                    </div>
-                    <div>
-                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-sm'>
-                            <div>
-                                <img src='https://img.freepik.com/premium-photo/elite-karaoke-suite-with-velvet-ropes-bartender_416256-24715.jpg' className='w-100 rounded-top-3'></img>
-                                <div className='p-2'>
-                                    <div className='fw-bold'>L1 - Phòng Private 1</div>
-                                    <div className="d-flex gap-1 my-1">
-                                        {[...Array(5)].map((_, i) => (
-                                            <lord-icon
-                                                key={i}
-                                                src="https://cdn.lordicon.com/cvwrvyjv.json"
-                                                trigger="loop"
-                                                colors="primary:#f30771,secondary:#f30771"
-                                                style={{ width: '15px', height: '15px' }}
-                                            />
-                                        ))}
-                                    </div>
-                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                        Tiêu âm:
-                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
-                                </div>
-                            </div>
-                        </Card>
-                    </div>
-                    <div>
-                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-sm'>
-                            <div>
-                                <img src='https://img.freepik.com/premium-photo/elite-karaoke-suite-with-velvet-ropes-bartender_416256-24715.jpg' className='w-100 rounded-top-3'></img>
-                                <div className='p-2'>
-                                    <div className='fw-bold'>L1 - Phòng Private 1</div>
-                                    <div className="d-flex gap-1 my-1">
-                                        {[...Array(5)].map((_, i) => (
-                                            <lord-icon
-                                                key={i}
-                                                src="https://cdn.lordicon.com/cvwrvyjv.json"
-                                                trigger="loop"
-                                                colors="primary:#f30771,secondary:#f30771"
-                                                style={{ width: '15px', height: '15px' }}
-                                            />
-                                        ))}
-                                    </div>
-                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                        Tiêu âm:
-                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
-                                </div>
-                            </div>
-                        </Card>
-                    </div>
-                    <div>
-                        <Card className='m-0 border-light p-0 fs-13 rounded-3 shadow-sm'>
-                            <div>
-                                <img src='https://img.freepik.com/premium-photo/elite-karaoke-suite-with-velvet-ropes-bartender_416256-24715.jpg' className='w-100 rounded-top-3'></img>
-                                <div className='p-2'>
-                                    <div className='fw-bold'>L1 - Phòng Private 1</div>
-                                    <div className="d-flex gap-1 my-1">
-                                        {[...Array(5)].map((_, i) => (
-                                            <lord-icon
-                                                key={i}
-                                                src="https://cdn.lordicon.com/cvwrvyjv.json"
-                                                trigger="loop"
-                                                colors="primary:#f30771,secondary:#f30771"
-                                                style={{ width: '15px', height: '15px' }}
-                                            />
-                                        ))}
-                                    </div>
-                                    <div className='limited-lines2 fst-italic fs-11'>Cách âm:
-                                        Sử dụng các vật liệu như bông khoáng, mút trứng, cao su non, thạch cao kết hợp các lớp cách âm để ngăn âm thanh lọt ra ngoài và giữ âm thanh trong phòng.
-                                        Tiêu âm:
-                                        Bố trí các vật liệu tiêu âm như mút gai, mút trứng, hoặc các vật dụng trang trí có khả năng hấp thụ âm thanh để giảm tiếng vang và tạo không gian âm thanh tốt hơn.</div>
-                                </div>
-                            </div>
-                        </Card>
-                    </div>
-                </div>
+                </div> */}
+          
 
 
             </PageContent>
