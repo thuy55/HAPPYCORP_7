@@ -16,6 +16,46 @@ export default function SheetInvoices({ opened, onClose }) {
             console.error("Error closing modals:", error);
         }
     };
+
+    const [invoices, setInvoices] = useState();
+    const [bill, setBill] = useState([]);
+    const [pay, setPay] = useState();
+
+    useEffect(() => {
+        if (opened) {
+            const active = localStorage.getItem("HappyCorp_id_invoices");
+            const token = localStorage.getItem("HappyCorp-token-app");
+            const data = {
+                "token": token,
+                "active": active
+            }
+
+            console.log("Call API /event with:", data);
+
+            const api = axios.create({
+                baseURL: "https://api-happy.eclo.io/api",
+            });
+
+            api.post("/invoices/" + active, data, {
+                headers: { "Content-Type": "application/json" },
+            })
+                .then((res) => {
+                    if (res.data.status === "error") {
+                        console.log("lỗi");
+                        f7.dialog.alert(res.data.content, "Error");
+                    } else if (res.data.status === "success") {
+                        console.log(res.data.data);
+                        setInvoices(res.data.data);
+                        setBill(res.data.invoiceDetail);
+                        setPay(res.data.pay)
+                    }
+                })
+                .catch((error) => {
+                    f7.dialog.alert(error, "Error");
+                    console.log("k ket noi dc api");
+                });
+        }
+    }, [opened]);
     return (
         <>
             <Sheet
@@ -29,7 +69,7 @@ export default function SheetInvoices({ opened, onClose }) {
                         Chi tiết đơn đặt hàng
                     </div>
                     <div className="right fs-13">
-                        <Link onClick={()=>{handleCloseAllModals()}}>Close</Link>
+                        <Link onClick={() => { handleCloseAllModals() }}>Close</Link>
                     </div>
                 </Toolbar>
                 <PageContent className="pb-5">
@@ -44,13 +84,13 @@ export default function SheetInvoices({ opened, onClose }) {
                             Thông tin khách hàng
                         </div>
                         <div className='d-flex align-items-center justify-content-between p-2'>
-                            Khách hàng <div className='fw-bold'>Mr Nick</div>
+                            Khách hàng <div className='fw-bold'>{invoices && invoices.account}</div>
                         </div>
                         <div className='d-flex align-items-center justify-content-between p-2'>
-                            Điện thoại <div className='fw-bold'>0123456789</div>
+                            Điện thoại <div className='fw-bold'>{invoices && invoices.phone}</div>
                         </div>
                         <div className='d-flex align-items-center justify-content-between p-2'>
-                            Ghi chú <div className='fw-bold'>Chọn ems xinh</div>
+                            Ghi chú <div className='fw-bold'>{invoices && invoices.notes_customer}</div>
                         </div>
                         <div className='d-flex align-items-center justify-content-between p-2'>
                             Xác nhận <div className='fw-bold'>Đã xác nhận qua Zalo</div>
@@ -61,45 +101,45 @@ export default function SheetInvoices({ opened, onClose }) {
                             Thông tin đặt bàn
                         </div>
                         <div className='d-flex align-items-center justify-content-between p-2'>
-                            Nhà hàng <div className='fw-bold'>90s House</div>
+                            Nhà hàng <div className='fw-bold'>{invoices && invoices.brands}</div>
                         </div>
                         <div className='d-flex align-items-center justify-content-between p-2'>
-                            Mã booking <div className='fw-bold'>#002</div>
+                            Mã booking <div className='fw-bold'>#{invoices && invoices.code}</div>
                         </div>
                         <div className='d-flex align-items-center justify-content-between p-2'>
-                            Ngày <div className='fw-bold'>15:00 05/05/2025</div>
+                            Ngày <div className='fw-bold'>{invoices && invoices.date}</div>
                         </div>
                         <div className='d-flex align-items-center justify-content-between p-2'>
-                            Số người <div className='fw-bold'>10</div>
+                            Số người <div className='fw-bold'>{invoices && invoices.amount}</div>
                         </div>
                         <div className='d-flex align-items-center justify-content-between p-2'>
-                            Khu vực / Phòng<div className='fw-bold'>Happy</div>
+                            Khu vực / Phòng<div className='fw-bold'>{invoices && invoices.areas_name}</div>
                         </div>
                         <div className='d-flex align-items-center justify-content-between p-2'>
-                            Trạng thái <div className='fw-bold text-success'>Đã chuẩn bị phòng</div>
+                            Trạng thái
+                            {invoices && invoices.status == 1 && <div className='fw-bold text-success'>Đã chuẩn bị phòng</div>}
                         </div>
                         <div className='d-flex align-items-center justify-content-between p-2'>
-                            Ghi chú <div className='fw-bold'>Yêu cầu có DJ</div>
+                            Ghi chú <div className='fw-bold'>{invoices && invoices.notes}</div>
                         </div>
                     </Card>
                     <Card className="rounded-4 p-3 shadow-none border border-0 fs-13">
                         <div className=" fs-13 text-pink mb-2 fw-bold">
                             Chi tiết dịch vụ/ Món ăn
                         </div>
-                        <div className='d-flex justify-content-between align-items-center p-2'>
-                            <div className=''>
-                                <div>Combo1 <span className='fw-bold text-pink'>x 1</span></div>
-                                <div>4.500.000đ</div>
-                            </div>
-                            <div className='fw-bold'>4.500.000đ</div>
-                        </div>
-                        <div className='d-flex justify-content-between align-items-center p-2'>
-                            <div className=''>
-                                <div>Combo1 <span className='fw-bold text-pink'>x 1</span></div>
-                                <div>4.500.000đ</div>
-                            </div>
-                            <div className='fw-bold'>4.500.000đ</div>
-                        </div>
+                        {bill && bill.map((menu) => {
+                            return (
+                                <>
+                                    <div className='d-flex justify-content-between align-items-center p-2'>
+                                        <div className=''>
+                                            <div>{menu.name} <span className='fw-bold text-pink'>x {menu.amount}</span></div>
+                                            <div>{menu.price}đ</div>
+                                        </div>
+                                        <div className='fw-bold'>{menu.total}đ</div>
+                                    </div>
+                                </>
+                            )
+                        })}
                     </Card>
                     <Card className="rounded-4 p-3 shadow-none border border-0 fs-13">
                         <div className=" fs-13 text-pink mb-2 fw-bold">

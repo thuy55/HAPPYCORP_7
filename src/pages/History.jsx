@@ -22,6 +22,7 @@ import moment from 'moment';
 import CommonNavbar from '../components/CommonNavbar';
 import PageTransition from '../components/PageTransition';
 import SheetInvoices from '../components/Invoices';
+import axios from 'axios';
 
 const HistoryPage = () => {
     const [sheetOpenedInvoices, setSheetOpenedInvoices] = useState(false);
@@ -116,6 +117,7 @@ const HistoryPage = () => {
                 month: tempMonth,
                 day: tempDate
             });
+            historyDate();
         } else if (selectedPeriod === 'week') {
             // Với week, chọn ngày cụ thể và lấy tuần chứa ngày đó
             newDate = moment({
@@ -123,6 +125,7 @@ const HistoryPage = () => {
                 month: tempMonth,
                 day: tempDate
             }).startOf('week');
+            historyWeek();
         } else {
             // Chọn ngày đầu tiên của tháng
             newDate = moment({
@@ -130,6 +133,7 @@ const HistoryPage = () => {
                 month: tempMonth,
                 day: 1
             });
+            historyMonth()
         }
         setCurrentDate(newDate);
         loadRevenueData(newDate, selectedPeriod);
@@ -180,7 +184,107 @@ const HistoryPage = () => {
 
     useEffect(() => {
         loadRevenueData(currentDate, selectedPeriod);
+        historyDate();
+        // historyMonth();
+        // historyWeek();
     }, []);
+
+    const [invoices, setInvoices] = useState([]);
+    function historyDate() {
+        const brand = localStorage.getItem("happyCorp_brand");
+        const token = localStorage.getItem("HappyCorp-token-app");
+        const data = {
+            "token": token,
+            "brand": brand,
+            "day": tempDate,
+            "month": tempMonth + 1,
+            "year": tempYear
+        }
+
+        const api = axios.create({
+            baseURL: "https://api-happy.eclo.io/api",
+        });
+
+        api.post("/invoicesDate", data, {
+            headers: { "Content-Type": "application/json" },
+        })
+            .then((res) => {
+                if (res.data.status === "error") {
+                    console.log("lỗi");
+                    f7.dialog.alert(res.data.content, "Error");
+                } else if (res.data.status === "success") {
+                    console.log("date", res.data.data);
+                    setInvoices(res.data.data);
+                }
+            })
+            .catch((error) => {
+                f7.dialog.alert(error, "Error");
+                console.log("k ket noi dc api");
+            });
+    }
+    function historyWeek() {
+        const brand = localStorage.getItem("happyCorp_brand");
+        const token = localStorage.getItem("HappyCorp-token-app");
+        const data = {
+            "token": token,
+            "brand": brand,
+            "day": tempDate,
+            "month": tempMonth + 1,
+            "year": tempYear
+        }
+
+        const api = axios.create({
+            baseURL: "https://api-happy.eclo.io/api",
+        });
+
+        api.post("/invoicesWeek", data, {
+            headers: { "Content-Type": "application/json" },
+        })
+            .then((res) => {
+                if (res.data.status === "error") {
+                    console.log("lỗi");
+                    f7.dialog.alert(res.data.content, "Error");
+                } else if (res.data.status === "success") {
+                    console.log("week", res.data.data);
+                    setInvoices(res.data.data);
+                }
+            })
+            .catch((error) => {
+                f7.dialog.alert(error, "Error");
+                console.log("k ket noi dc api");
+            });
+    }
+    function historyMonth() {
+        const brand = localStorage.getItem("happyCorp_brand");
+        const token = localStorage.getItem("HappyCorp-token-app");
+        const data = {
+            "token": token,
+            "brand": brand,
+            "day": tempDate,
+            "month": tempMonth + 1,
+            "year": tempYear
+        }
+
+        const api = axios.create({
+            baseURL: "https://api-happy.eclo.io/api",
+        });
+        api.post("/invoicesMonth", data, {
+            headers: { "Content-Type": "application/json" },
+        })
+            .then((res) => {
+                if (res.data.status === "error") {
+                    console.log("lỗi");
+                    f7.dialog.alert(res.data.content, "Error");
+                } else if (res.data.status === "success") {
+                    console.log("month", res.data.data);
+                    setInvoices(res.data.data);
+                }
+            })
+            .catch((error) => {
+                f7.dialog.alert(error, "Error");
+                console.log("k ket noi dc api");
+            });
+    }
 
     return (
         <>
@@ -203,7 +307,7 @@ const HistoryPage = () => {
                                 round
                                 color={selectedPeriod === 'date' ? 'pink' : 'gray'}
                                 className={`w-100 p-3 ${selectedPeriod === 'date' ? 'text-white bg-pink' : ''}`}
-                                onClick={() => handlePeriodChange('date')}
+                                onClick={() => { handlePeriodChange('date'); historyDate() }}
                             >
                                 <Icon f7="calendar" className="me-2" size="16px"></Icon>
                                 Date
@@ -215,7 +319,7 @@ const HistoryPage = () => {
                                 round
                                 color={selectedPeriod === 'week' ? 'pink' : 'gray'}
                                 className={`w-100 p-3 ${selectedPeriod === 'week' ? 'text-white' : ''}`}
-                                onClick={() => handlePeriodChange('week')}
+                                onClick={() => { handlePeriodChange('week'); historyWeek() }}
                             >
                                 <Icon f7="calendar" className="me-2" size="16px"></Icon>
                                 Week
@@ -227,7 +331,7 @@ const HistoryPage = () => {
                                 round
                                 color={selectedPeriod === 'month' ? 'pink' : 'gray'}
                                 className={`w-100 p-3 ${selectedPeriod === 'month' ? 'text-white' : ''}`}
-                                onClick={() => handlePeriodChange('month')}
+                                onClick={() => { handlePeriodChange('month'); historyMonth() }}
                             >
                                 <Icon f7="calendar" className="me-2" size="16px"></Icon>
                                 Month
@@ -376,7 +480,7 @@ const HistoryPage = () => {
                 </div>
 
                 {/* Legend */}
-                <div class="grid grid-cols-3 fs-13 mt-2 px-3">
+                {/* <div class="grid grid-cols-3 fs-13 mt-2 px-3">
                     <div className='d-flex align-items-center mt-2'>
                         <div className='hinh-vuong bg-primary rounded-2 me-1'></div>
                         4 Nhận khách
@@ -401,7 +505,7 @@ const HistoryPage = () => {
                         <div className='hinh-vuong bg-secondary rounded-2 me-1'></div>
                         0 Đã hủy
                     </div>
-                </div>
+                </div> */}
                 {/* <div className="m-3">
                 <Card expandable className='border  shadow-none  border-0 m-0 p-1'>
                     <CardContent padding={false}>
@@ -567,33 +671,29 @@ const HistoryPage = () => {
                 </Card>
             </div> */}
                 <List className='px-4 mb-3 mt-3'>
+                    {invoices.length > 0 ? invoices.map((invoice) => {
+                        return (
+                            <>
+                                <ListItem onClick={() => { setSheetOpenedInvoices(true); localStorage.setItem("HappyCorp_id_invoices", invoice.active) }} className='row mt-2 list-no-chevron'>
+                                    <div className='col-2'>
+                                        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className='w-100 border border-2 rounded-3 border-danger'></img>
+                                    </div>
+                                    <div className='col-10 fs-13 ms-2 border-bottom '>
+                                        <div className='fw-bold d-flex justify-content-between'> Phòng: {invoice.room_name} {invoice.completed_date && <span className='text-success'>Đã hoàn tất</span>}</div>
+                                        <div className=' mt-1 mb-2'>{invoice.date}</div>
+                                    </div>
+                                </ListItem>
+                            </>
+                        )
+                    }) : (
+                        <>
+                            <img src='../image/not-booking.svg' className='w-100'></img>
+                            <div className='text-center fs-15 mt-2'>Không có dữ liệu</div>
+                        </>
+                    )}
 
-                    <ListItem onClick={() => { setSheetOpenedInvoices(true) }} className='row mt-2 list-no-chevron'>
-                        <div className='col-2'>
-                            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className='w-100 border border-2 rounded-3 border-danger'></img>
-                        </div>
-                        <div className='col-10 fs-13 ms-2 border-bottom '>
-                            <div className='fw-bold d-flex justify-content-between'> Phòng: V.I.P 4 <span className='text-success'>Đã hoàn tất</span></div>
-                            <div className=' mt-1 mb-2'>18/07/2025 14:22:52</div>
-                        </div>
-                    </ListItem>
-                    <ListItem onClick={() => { setSheetOpenedInvoices(true) }} className='row mt-2 list-no-chevron'>
-                        <div className='col-2'>
-                            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className='w-100 border border-2 rounded-3 border-danger'></img>
-                        </div>
-                        <div className='col-10 fs-13 ms-2 border-bottom '>
-                            <div className='fw-bold d-flex justify-content-between'> Phòng: V.I.P 4 <span className='text-success'>Đã hoàn tất</span></div>
-                            <div className=' mt-1 mb-2'>18/07/2025 14:22:52</div>
-                        </div>
-                    </ListItem>
                 </List>
-                {/* Map/Chart Area */}
-                {/* <Card className="mx-3 p-4 text-center border-0 shadow-sm" style={{ minHeight: '300px' }}>
-                <div className="position-relative d-flex align-items-center justify-content-center" style={{ height: '250px' }}>
-                    <img src='../img/not-booking.svg' className='w-100'></img>
-                </div>
-
-            </Card> */}
+           
 
                 <div className="pb-4"></div>
             </Page>

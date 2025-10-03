@@ -19,8 +19,6 @@ export default function SheetBookingCompleted({ opened, onClose }) {
             console.error("Error closing modals:", error);
         }
     };
-
-
     return (
         <>
             <Sheet
