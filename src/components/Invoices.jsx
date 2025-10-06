@@ -1,6 +1,7 @@
 import { Sheet, Toolbar, PageContent, Block, Link, Card, ListInput, List, Icon, Button, Segmented, ListItem, f7 } from "framework7-react";
 import { useEffect, useState } from "react";
 import SheetEventDetail from "./EventDetail";
+import axios from "axios";
 export default function SheetInvoices({ opened, onClose }) {
     const handleCloseAllModals = () => {
         try {
@@ -56,6 +57,10 @@ export default function SheetInvoices({ opened, onClose }) {
                 });
         }
     }, [opened]);
+
+    const formatCurrency = (amount) => {
+        return new Intl.NumberFormat('vi-VN').format(amount) + 'đ';
+    };
     return (
         <>
             <Sheet
@@ -66,13 +71,13 @@ export default function SheetInvoices({ opened, onClose }) {
                 <Toolbar className="">
                     <div className="left fw-bold d-flex align-items-center">
 
-                        Chi tiết đơn đặt hàng
+                        Hóa đơn #{invoices && invoices.code}
                     </div>
                     <div className="right fs-13">
                         <Link onClick={() => { handleCloseAllModals() }}>Close</Link>
                     </div>
                 </Toolbar>
-                <PageContent className="pb-5">
+                <PageContent >
                     {/* <div className='d-flex justify-content-center mt-4'>
                         <div className='bg-white w-50 p-3 rounded-4 shadow-sm'>
                             <img src='https://quickchart.io/qr?text=akjshdiasjhdiauhsdiuasdi&ecLevel=Q&margin=0&size=500' className=' w-100'></img>
@@ -127,7 +132,7 @@ export default function SheetInvoices({ opened, onClose }) {
                         <div className=" fs-13 text-pink mb-2 fw-bold">
                             Chi tiết dịch vụ/ Món ăn
                         </div>
-                        {bill && bill.map((menu) => {
+                        {bill.length > 0 ? bill.map((menu) => {
                             return (
                                 <>
                                     <div className='d-flex justify-content-between align-items-center p-2'>
@@ -139,35 +144,45 @@ export default function SheetInvoices({ opened, onClose }) {
                                     </div>
                                 </>
                             )
-                        })}
+                        }) : (
+                            <>
+                                <div className="mt-3 text-center fs-13">
+                                    Không có dữ liệu
+                                </div>
+                            </>
+                        )}
                     </Card>
                     <Card className="rounded-4 p-3 shadow-none border border-0 fs-13">
                         <div className=" fs-13 text-pink mb-2 fw-bold">
                             Thông tin thanh toán
                         </div>
                         <div className='d-flex justify-content-between align-items-center text-success fw-bold  p-2'>
-                            <div>Thanh toán :</div>
-                            <div>5.000.000đ</div>
+                            <div>Tổng tiền :</div>
+                            <div>{pay && formatCurrency(pay.provisional_before)}</div>
                         </div>
                         <div className='d-flex justify-content-between align-items-center text-warning fw-bold  p-2'>
                             <div>Đã cọc :</div>
-                            <div>5.000.000đ</div>
+                            <div>{pay && formatCurrency(pay.total_payments)}</div>
                         </div>
                         <div className='d-flex justify-content-between align-items-center text-primary fw-bold  p-2'>
-                            <div>Phụ thu :</div>
-                            <div>5.000.000đ</div>
+                            <div>Thuế ({pay?.tax && Object.keys(pay.tax)[0]}%):</div>
+                            <div>{pay && formatCurrency(pay.total_tax)}</div>
+                        </div>
+                        <div className='d-flex justify-content-between align-items-center text-primary fw-bold  p-2'>
+                            <div>Phụ thu ({pay?.services_fee}%):</div>
+                            <div>{pay && formatCurrency(pay.services_price)}</div>
                         </div>
                         <div className='d-flex justify-content-between align-items-center text-danger fw-bold  p-2'>
                             <div>Giảm giá :</div>
-                            <div>5.000.000đ</div>
+                            <div>{pay && formatCurrency(pay.discount_price)}</div>
                         </div>
                         <div className='d-flex justify-content-between align-items-center fs-15 fw-bold  p-2'>
                             <div>Tổng thanh toán :</div>
-                            <div>5.000.000đ</div>
+                            <div>{pay && formatCurrency(pay.total_payments)}</div>
                         </div>
                         <div className='d-flex justify-content-between align-items-center text-danger fw-bold  p-2'>
                             <div>Nợ :</div>
-                            <div>0đ</div>
+                            <div>{pay && formatCurrency(pay["into-money"]?.price ?? 0)}</div>
                         </div>
 
                     </Card>
@@ -178,11 +193,11 @@ export default function SheetInvoices({ opened, onClose }) {
 
                         <div className='d-flex justify-content-between align-items-center p-2'>
                             <div className=''>Phương thức thanh toán</div>
-                            <div className='fw-bold'>Tiền mặt</div>
+                            <div className='fw-bold'>{pay && pay.details_payments.length>0 && pay.details_payments[0].form}</div>
                         </div>
                         <div className='d-flex justify-content-between align-items-center p-2'>
                             <div className=''>Ngày thanh toán</div>
-                            <div className='fw-bold'>17:00 05/05/2025</div>
+                            <div className='fw-bold'>{invoices && invoices.completed_date}</div>
                         </div>
                         <div className='d-flex justify-content-between align-items-center p-2'>
                             <div className=''>Lễ tân</div>
@@ -190,11 +205,11 @@ export default function SheetInvoices({ opened, onClose }) {
                         </div>
                         <div className='d-flex justify-content-between align-items-center p-2'>
                             <div className=''>Người đặt</div>
-                            <div className='fw-bold'>Mr Lee</div>
+                            <div className='fw-bold'>{invoices && invoices.account}</div>
                         </div>
                     </Card>
                 </PageContent>
-                <footer className="fixed-bottom p-3 py-1 ">
+                {/* <footer className="fixed-bottom p-3 py-1 ">
                     <div className=' grid grid-cols-2 grid-gap px-2 my-2'>
                         <div>
                             <button className='border border-0 rounded-pill p-3 bg-warning fs-13 fw-đơnd'>Tải hóa đơn</button>
@@ -203,7 +218,7 @@ export default function SheetInvoices({ opened, onClose }) {
                             <button className='border border-0 rounded-pill p-3 bg-warning fs-13 fw-đơnd'>Chia sẻ</button>
                         </div>
                     </div>
-                </footer>
+                </footer> */}
             </Sheet>
 
         </>

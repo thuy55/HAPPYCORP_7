@@ -40,6 +40,7 @@ import SheetRoomDetail from '../components/RoomDetail';
 import SheetInvoices from '../components/Invoices';
 import { useTranslation } from 'react-i18next';
 import SheetBrand from '../components/brand';
+import axios from 'axios';
 
 const HomePage = () => {
   const { t, i18n } = useTranslation();
@@ -116,11 +117,58 @@ const HomePage = () => {
 
   const [sheetOpenedBrand, setSheetOpenedBrand] = useState(false);
 
+  // tháng hiện tại
 
+  const currentDate = new Date();
+
+  // 2. Lấy tháng (0-11, nên phải +1) và năm
+  const currentMonth = currentDate.getMonth() + 1;
+  const currentYear = currentDate.getFullYear();
+
+  // 3. Định dạng tháng (thêm số 0 phía trước nếu cần)
+  const formattedMonth = String(currentMonth).padStart(2, '0');
+
+  const [ngaychon, setNgayChon] = useState("")
+
+  //Xem lịch booking theo ngày
+
+  const [invoiceDate, setInvoiceDate] = useState([]);
+  function historyDate(ngay, thang, nam) {
+    const brand = localStorage.getItem("happyCorp_brand");
+    const token = localStorage.getItem("HappyCorp-token-app");
+    const data = {
+      "token": token,
+      "brand": brand,
+      "day": 26,
+      "month": 9,
+      "year": 2025
+    }
+
+    const api = axios.create({
+      baseURL: "https://api-happy.eclo.io/api",
+    });
+
+    api.post("/invoicesDate", data, {
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => {
+        if (res.data.status === "error") {
+          console.log("lỗi");
+          f7.dialog.alert(res.data.content, "Error");
+        } else if (res.data.status === "success") {
+          console.log("date", res.data.invoices);
+          setInvoiceDate(res.data.invoices);
+          f7.popup.open('#popup-view-booking');
+
+        }
+      })
+      .catch((error) => {
+        f7.dialog.alert(error, "Error");
+        console.log("k ket noi dc api");
+      });
+  }
 
   return (
-
-
     <Page name="home">
       {/* Top Navbar */}
       <Navbar large sliding={false}>
@@ -134,8 +182,8 @@ const HomePage = () => {
               colors="primary:#fd1678,secondary:#fd1678"
               className='size-icon me-2'>
             </lord-icon> */}
-            <img src='../image/menu.png' style={{width:"30px"}}></img>
-            </Link>
+            <img src='../image/menu.png' style={{ width: "30px" }}></img>
+          </Link>
         </NavLeft>
         <NavTitle className='text-dark' sliding>
           <img src='../image/happy-corp-logo.png' style={{ height: "35px" }}></img>
@@ -171,7 +219,7 @@ const HomePage = () => {
           </div>
         </NavTitleLarge>
       </Navbar>
-      <PageContent className='pb-0' style={{paddingBottom:"0px !important"}}>
+      <PageContent className='pb-0' style={{ paddingBottom: "0px !important" }}>
         <div className='px-4 my-2 mt-4'>
           <div className="d-flex align-items-center bg-input  rounded-pill p-1 row" style={{ cursor: 'pointer' }}>
             <input className='border bg-input rounded-pill border-0 p-2 px-3 col-10' placeholder='Tìm kiếm'></input>
@@ -356,7 +404,8 @@ const HomePage = () => {
             className=' me-1'
             style={{ width: '30px', height: '30px' }}>
           </lord-icon>
-          Lịch Booking tháng 07/2025</div>
+          Lịch Booking tháng {formattedMonth}/{currentYear}
+        </div>
         <div className='p-3  mt1'>
           <div className="calendar  p-1  rounded-4 shadow-sm " style={{ backdropFilter: "blur(50px)" }}>
             <div className="d-flex justify-content-between text-center mb-2 py-1">
@@ -367,48 +416,60 @@ const HomePage = () => {
             <div className="d-flex flex-wrap text-center">
               {calendarDays.map((date, idx) => {
                 const isCurrentMonth = date.month() === searchMonth && date.year() === searchYear;
+
+                const handleDayClick = () => {
+                  const fullDate = date.format("DD/MM/YYYY");
+                  console.log("Ngày được chọn:", fullDate);
+                  setNgayChon(fullDate);
+                  const dateParts = fullDate.split('/'); // dateParts sẽ là ["05", "10", "2025"]
+
+                  const ngay = dateParts[0]; // Ngày (ví dụ: "05")
+                  const thang = dateParts[1]; // Tháng (ví dụ: "10")
+                  const nam = dateParts[2];
+                  historyDate(ngay, thang, nam); 
+                };
                 return (
-                  <Link className='m-0 p-0' fill popupOpen="#popup-view-booking">
-                    <Card
-                      key={idx}
-                      className={`card-animated-bg rounded-3 m-1 p-1 border border-0 ${isCurrentMonth ? '' : 'bg-date'} `}
-                      style={{
-                        width: "12%",
-                        color: isCurrentMonth ? undefined : 'transparent',
-                        fontSize: "10px",
-                        minHeight: "45px"
-                      }}
-                    >
-                      <div className='row m-0'>
-                        <div className='col-6 p-0 pe-1'>
-                          {date.format("DD")}
-                        </div>
-                        {datamonth && datamonth.map((book, key) => {
-                          if (book.time === date.format("DD/MM/YYYY")) {
-                            return (
-                              <>
-                                <div className='col-6 p-0 ps-1' key={key}>
-                                  <div className='bg-danger text-white rounded-2'>
-                                    {book.booking[0]}
-                                  </div>
-                                </div>
-                                <div className='col-6 p-0 mt-1 pe-1'>
-                                  <div className='bg-success text-white rounded-2'>
-                                    {book.booking[1]}
-                                  </div>
-                                </div>
-                                <div className='col-6 p-0 mt-1 ps-1'>
-                                  <div className='bg-warning text-white rounded-2'>
-                                    {book.booking[2]}
-                                  </div>
-                                </div>
-                              </>
-                            )
-                          }
-                        })}
+                  // <Link className='m-0 p-0' fill popupOpen="#popup-view-booking" onClick={handleDayClick} >
+                  <Card onClick={handleDayClick}
+                    key={idx}
+                    className={`card-animated-bg rounded-3 m-1 p-1 border border-0 ${isCurrentMonth ? '' : 'bg-date'} `}
+                    style={{
+                      width: "12%",
+                      color: isCurrentMonth ? undefined : 'transparent',
+                      fontSize: "10px",
+                      minHeight: "45px"
+                    }}
+                  >
+                    <div className='row m-0'>
+                      <div className='col-6 p-0 pe-1' onClick={handleDayClick}>
+                        {date.format("DD")}
                       </div>
-                    </Card>
-                  </Link>
+                      {datamonth && datamonth.map((book, key) => {
+                        if (book.time === date.format("DD/MM/YYYY")) {
+                          return (
+                            <>
+                              <div className='col-6 p-0 ps-1' key={key}>
+                                <div className='bg-danger text-white rounded-2'>
+                                  {book.booking[0]}
+                                </div>
+                              </div>
+                              <div className='col-6 p-0 mt-1 pe-1'>
+                                <div className='bg-success text-white rounded-2'>
+                                  {book.booking[1]}
+                                </div>
+                              </div>
+                              <div className='col-6 p-0 mt-1 ps-1'>
+                                <div className='bg-warning text-white rounded-2'>
+                                  {book.booking[2]}
+                                </div>
+                              </div>
+                            </>
+                          )
+                        }
+                      })}
+                    </div>
+                  </Card>
+                  // </Link>
                 );
               })}
             </div>
@@ -533,7 +594,7 @@ const HomePage = () => {
 
           <ListItem onClick={() => { setSheetOpenedInvoices(true) }} className='row mt-2 list-no-chevron'>
             <div className='col-2'>
-              <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className='w-100 border border-2 rounded-3 ' style={{borderColor:"#ff9700"}}></img>
+              <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className='w-100 border border-2 rounded-3 ' style={{ borderColor: "#ff9700" }}></img>
             </div>
             <div className='col-10 fs-13 ms-2'>
               <div className='fw-bold d-flex justify-content-between'> Phòng: V.I.P 4 <span className='text-success'>Đã hoàn tất</span></div>
@@ -555,7 +616,7 @@ const HomePage = () => {
         <Popup id="popup-view-booking">
           <View>
             <Page>
-              <Navbar title="Ngày 31/07/2025">
+              <Navbar title={`Ngày ${ngaychon}`}>
                 <NavRight>
                   <Link popupClose>Close</Link>
                 </NavRight>
@@ -599,6 +660,19 @@ const HomePage = () => {
                   </div>
                 </div>
                 <List className='my-3'>
+                  {invoiceDate ? invoiceDate.map(() => {
+                    <>
+                      <div onClick={() => { bookingDetail(1) }} className='mt-1 hieuung p-2 rounded-2 d-flex align-items-center fs-13'>
+                        <div className='bg-primary rounded-2' style={{ width: "35px", height: "35px" }}></div>
+                        <div className='ms-2'>
+                          <div className='fw-bold mb-1'>{invoiceDate.name}</div>
+                          <div>{invoiceDate.date}</div>
+                        </div>
+                      </div></>
+                  }) : (
+                    <>
+                      kjgfhdjh
+                    </>)}
                   <div onClick={() => { bookingDetail(1) }} className='mt-1 hieuung p-2 rounded-2 d-flex align-items-center fs-13'>
                     <div className='bg-primary rounded-2' style={{ width: "35px", height: "35px" }}></div>
                     <div className='ms-2'>
