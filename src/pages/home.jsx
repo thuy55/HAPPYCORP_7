@@ -426,7 +426,7 @@ const HomePage = () => {
                   const ngay = dateParts[0]; // Ngày (ví dụ: "05")
                   const thang = dateParts[1]; // Tháng (ví dụ: "10")
                   const nam = dateParts[2];
-                  historyDate(ngay, thang, nam); 
+                  historyDate(ngay, thang, nam);
                 };
                 return (
                   // <Link className='m-0 p-0' fill popupOpen="#popup-view-booking" onClick={handleDayClick} >
@@ -660,33 +660,23 @@ const HomePage = () => {
                   </div>
                 </div>
                 <List className='my-3'>
-                  {invoiceDate ? invoiceDate.map(() => {
-                    <>
-                      <div onClick={() => { bookingDetail(1) }} className='mt-1 hieuung p-2 rounded-2 d-flex align-items-center fs-13'>
-                        <div className='bg-primary rounded-2' style={{ width: "35px", height: "35px" }}></div>
-                        <div className='ms-2'>
-                          <div className='fw-bold mb-1'>{invoiceDate.name}</div>
-                          <div>{invoiceDate.date}</div>
+                  {invoiceDate ? invoiceDate.map((invoiceDate) => {
+                    return (
+                      <>
+                        <div onClick={() => { bookingDetail(1) }} className='mt-1 hieuung p-2 rounded-2 d-flex align-items-center fs-13'>
+                          <div className='bg-primary rounded-2' style={{ width: "35px", height: "35px" }}></div>
+                          <div className='ms-2'>
+                            <div className='fw-bold mb-1 text-white'>{invoiceDate.name}{invoiceDate.status=="3" && <span className='fs-11'>Đã hoàn thành</span>}</div>
+                            <div>{invoiceDate.date}</div>
+                          </div>
                         </div>
-                      </div></>
+                      </>
+                    )
                   }) : (
                     <>
                       kjgfhdjh
                     </>)}
-                  <div onClick={() => { bookingDetail(1) }} className='mt-1 hieuung p-2 rounded-2 d-flex align-items-center fs-13'>
-                    <div className='bg-primary rounded-2' style={{ width: "35px", height: "35px" }}></div>
-                    <div className='ms-2'>
-                      <div className='fw-bold mb-1'>MR TRUNG & HUY NGUYỄN (K.BI)</div>
-                      <div>31/07/2025 12:00:00</div>
-                    </div>
-                  </div>
-                  <div onClick={() => { bookingDetail(1) }} className='mt-1 hieuung p-2 rounded-2 d-flex align-items-center fs-13'>
-                    <div className='bg-primary rounded-2' style={{ width: "35px", height: "35px" }}></div>
-                    <div className='ms-2'>
-                      <div className='fw-bold mb-1'>MR TRUNG & HUY NGUYỄN (K.BI)</div>
-                      <div>31/07/2025 12:00:00</div>
-                    </div>
-                  </div>
+
                 </List>
                 <div className='fw-bold fs-6 text-pink'>Phòng trống</div>
                 <List className='mt-0'>
