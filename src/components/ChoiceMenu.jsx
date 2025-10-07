@@ -17,10 +17,10 @@ export default function SheetChoiceMenu({ opened, onClose }) {
         setMenu(prev => {
             const updated = prev.map(item =>
                 item.id === id
-                    ? { ...item, quantity: item.quantity + 1 }
+                    ? { ...item, amount: item.amount + 1 }
                     : item
             );
-            localStorage.setItem("cart1", JSON.stringify(updated));
+            localStorage.setItem("selectedBookingMenu", JSON.stringify(updated));
             return updated;
         });
     };
@@ -29,25 +29,15 @@ export default function SheetChoiceMenu({ opened, onClose }) {
             const updated = prev
                 .map(item =>
                     item.id === id
-                        ? { ...item, quantity: item.quantity - 1 }
+                        ? { ...item, amount: item.amount - 1 }
                         : item
                 )
-                .filter(item => item.quantity > 0); // loại bỏ item có quantity = 0
-            localStorage.setItem("cart1", JSON.stringify(updated));
+                .filter(item => item.amount > 0); // loại bỏ item có amount = 0
+            localStorage.setItem("selectedBookingMenu", JSON.stringify(updated));
             return updated;
         });
     };
 
-    // tổng số lượng
-    // const totalQty = Object.values(menu).reduce((sum, section) => {
-    //     return (
-    //         sum +
-    //         section.categories.reduce((catSum, cat) => {
-    //             return catSum + cat.items.reduce((iSum, it) => iSum + it.quantity, 0);
-    //         }, 0)
-    //     );
-    // }, 0);
-    // lưu luôn cả services và categories
 
     const [sheetOpened1, setSheetOpened1] = useState(false);
     const [sheetOpened2, setSheetOpened2] = useState(false);
@@ -58,12 +48,12 @@ export default function SheetChoiceMenu({ opened, onClose }) {
                 opened={opened}
                 onSheetClosed={onClose}
                 onSheetOpened={() => {
-                    const a = localStorage.getItem("cart1");
+                    const a = localStorage.getItem("selectedBookingMenu");
                     if (a) {
                         try {
                             setMenu(JSON.parse(a));
                         } catch (e) {
-                            console.error("Không parse được cart1:", e);
+                            console.error("Không parse được selectedBookingMenu:", e);
                         }
                     }
                 }}
@@ -73,14 +63,14 @@ export default function SheetChoiceMenu({ opened, onClose }) {
                         <Link sheetClose>
                             <img src='../img/backward.gif' className='size-icon me-1'></img>
                         </Link>
-                        Danh sách 
+                        Danh sách
                     </div>
                     <div className="right">
                     </div>
                 </Toolbar>
                 <PageContent>
-                    <Card className="rounded-4 p-3 shadow-none border border-light fs-13">
-                        {menu && menu.map((item) => (
+                    <Card className="rounded-4 p-3 shadow-none fs-13">
+                        {menu ? menu.map((item) => (
                             <>
 
                                 {/* <div key={item.id} className="col-6">
@@ -117,7 +107,7 @@ export default function SheetChoiceMenu({ opened, onClose }) {
                                         </div> */}
                                 <div className="row w-10 mt-3">
                                     <div className="col-2 p-1">
-                                        <img src={item.image} className="w-100 rounded-3"></img>
+                                        <img  src={item.images && item.images.trim() !== "" ? `${item.images}` : "../image/no-image.jpg"} className="w-100 rounded-3"></img>
                                     </div>
                                     <div className="col-10 p-1 pe-2">
                                         <div className="fs-13 fw-bold ">{item.name}</div>
@@ -125,16 +115,16 @@ export default function SheetChoiceMenu({ opened, onClose }) {
                                             <div className="fs-11 text-secondary">{formatPrice(item.price)}đ</div>
                                             <div className="d-flex align-items-center gap-2 mt-2 fs-13">
                                                 <button
-                                                    className="bg-light p-1 d-flex align-items-center"
+                                                    className="bg-light p-1 d-flex align-items-center rounded-circle"
                                                     onClick={() => decreaseQty(item.id)}
                                                 >
                                                     <Icon f7="minus" size="10px" />
                                                 </button>
                                                 <span style={{ minWidth: "10px", textAlign: "center" }}>
-                                                    {item.quantity}
+                                                    {item.amount}
                                                 </span>
                                                 <button
-                                                    className="bg-light p-1 d-flex align-items-center"
+                                                    className="bg-light p-1 d-flex align-items-center rounded-circle"
                                                     onClick={() => increaseQty(item.id)}
                                                 >
                                                     <Icon f7="plus" size="10px" />
@@ -145,15 +135,19 @@ export default function SheetChoiceMenu({ opened, onClose }) {
                                     </div>
                                 </div>
                             </>
-                        ))}
-
-
+                        )):(
+                            <>
+                            <div className="fs-13 text-center mt-3">
+                                Bạn đã không chọn món ăn
+                            </div>
+                            </>
+                        )}
 
                     </Card>
                 </PageContent>
                 <footer className="fixed-bottom p-3 py-2 ">
                     <div className="grid grid-cols-2 grid-gap">
-                        <Button sheetClose className="bg-secondary bg-opacity-25 p-3 rounded-pill  fs-15">Quay lại</Button>
+                        <Button sheetClose className="bg-secondary text-white p-3 rounded-pill  fs-15">Quay lại</Button>
                         <Button className="bg-pink p-3 rounded-pill text-white fs-15" onClick={() => {
                             setSheetOpened1(true), console.log(32354);
                         }}> Tiếp tục</Button>

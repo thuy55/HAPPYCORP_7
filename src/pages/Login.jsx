@@ -78,6 +78,7 @@ const LoginPage = () => {
                     localStorage.setItem("HappyCorp-token-name", res.data.data.name)
                     localStorage.setItem("HappyCorp-token-avatar", res.data.data.avatar)
                     localStorage.setItem("HappyCorp-token-email", res.data.data.email)
+                    localStorage.setItem("HappyCorp-id-account", res.data.data.id)
                     window.location.href = '/';
                 });
             }

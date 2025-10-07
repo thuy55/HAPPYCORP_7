@@ -89,7 +89,7 @@ export default function SheetInvoices({ opened, onClose }) {
                             Thông tin khách hàng
                         </div>
                         <div className='d-flex align-items-center justify-content-between p-2'>
-                            Khách hàng <div className='fw-bold'>{invoices && invoices.account}</div>
+                            Khách hàng <div className='fw-bold'>{invoices && invoices.name}</div>
                         </div>
                         <div className='d-flex align-items-center justify-content-between p-2'>
                             Điện thoại <div className='fw-bold'>{invoices && invoices.phone}</div>
@@ -122,7 +122,21 @@ export default function SheetInvoices({ opened, onClose }) {
                         </div>
                         <div className='d-flex align-items-center justify-content-between p-2'>
                             Trạng thái
-                            {invoices && invoices.status == 1 && <div className='fw-bold text-success'>Đã chuẩn bị phòng</div>}
+                            {invoices && invoices.process == 1 || invoices && invoices.process == 100 &&
+                                <span className='text-primary'>Nhận khách</span>
+                            }
+                            {invoices && invoices.process == 2 &&
+                                <span className='text-warning'>Đợi duyệt</span>
+                            }
+                            {invoices && invoices.process == 3 || invoices && invoices.process == 300 &&
+                                <span className='text-secondary'>Đã hủy</span>
+                            }
+                            {invoices && invoices.process == 20 &&
+                                <span className='text-danger'>Đã hủy</span>
+                            }
+                            {invoices && invoices.process == 200 &&
+                                <span className='text-success'>Đã hoàn tất</span>
+                            }
                         </div>
                         <div className='d-flex align-items-center justify-content-between p-2'>
                             Ghi chú <div className='fw-bold'>{invoices && invoices.notes}</div>
@@ -193,7 +207,7 @@ export default function SheetInvoices({ opened, onClose }) {
 
                         <div className='d-flex justify-content-between align-items-center p-2'>
                             <div className=''>Phương thức thanh toán</div>
-                            <div className='fw-bold'>{pay && pay.details_payments.length>0 && pay.details_payments[0].form}</div>
+                            <div className='fw-bold'>{pay && pay.details_payments.length > 0 && pay.details_payments[0].form}</div>
                         </div>
                         <div className='d-flex justify-content-between align-items-center p-2'>
                             <div className=''>Ngày thanh toán</div>

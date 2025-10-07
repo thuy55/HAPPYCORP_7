@@ -185,8 +185,6 @@ const HistoryPage = () => {
     useEffect(() => {
         loadRevenueData(currentDate, selectedPeriod);
         historyDate();
-        // historyMonth();
-        // historyWeek();
     }, []);
 
     const [invoices, setInvoices] = useState([]);
@@ -318,7 +316,7 @@ const HistoryPage = () => {
                                 fill={selectedPeriod === 'week'}
                                 round
                                 color={selectedPeriod === 'week' ? 'pink' : 'gray'}
-                                className={`w-100 p-3 ${selectedPeriod === 'week' ? 'text-white' : ''}`}
+                                className={`w-100 p-3 ${selectedPeriod === 'week' ? 'text-white bg-pink' : ''}`}
                                 onClick={() => { handlePeriodChange('week'); historyWeek() }}
                             >
                                 <Icon f7="calendar" className="me-2" size="16px"></Icon>
@@ -330,7 +328,7 @@ const HistoryPage = () => {
                                 fill={selectedPeriod === 'month'}
                                 round
                                 color={selectedPeriod === 'month' ? 'pink' : 'gray'}
-                                className={`w-100 p-3 ${selectedPeriod === 'month' ? 'text-white' : ''}`}
+                                className={`w-100 p-3 ${selectedPeriod === 'month' ? 'text-white bg-pink' : ''}`}
                                 onClick={() => { handlePeriodChange('month'); historyMonth() }}
                             >
                                 <Icon f7="calendar" className="me-2" size="16px"></Icon>

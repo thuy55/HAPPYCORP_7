@@ -214,7 +214,7 @@ export default function SheetBooking({ opened, onClose }) {
                                     {diagram.rooms && diagram.rooms.map((roomItem, index) => {
                                         const imageUrl = roomItem.images || defaultImageUrl;
                                         return (
-                                            <div className='col-4 p-1 mt-2' key={index}>
+                                            <div className='col-4 p-1 mt-2' onClick={()=>{setSheetOpenebMenu(true); localStorage.setItem("HappyCorp_active_room", roomItem.active)}} key={index}>
                                                 <div className=' position-relative' style={{
                                                     // Thêm box-shadow để tạo viền phát sáng
                                                     boxShadow: '0 0 5px 0 #ff9700, 0 0 10px 0 #fd1678', 

@@ -2,6 +2,7 @@ import { Sheet, Toolbar, PageContent, Block, Link, Card, ListInput, List, Icon, 
 import { useEffect, useState } from "react";
 import moment from 'moment';
 import SheetBookingMenu from "./SheetBookingMenu";
+import axios from "axios";
 export default function SheetBookingCompleted({ opened, onClose }) {
     // ...existing code...
 
@@ -18,6 +19,50 @@ export default function SheetBookingCompleted({ opened, onClose }) {
         } catch (error) {
             console.error("Error closing modals:", error);
         }
+    };
+
+      const [invoices, setInvoices] = useState();
+    const [bill, setBill] = useState([]);
+    const [pay, setPay] = useState();
+
+    useEffect(() => {
+        if (opened) {
+            const active = localStorage.getItem("HappyCorp_id_invoices");
+            const token = localStorage.getItem("HappyCorp-token-app");
+            const data = {
+                "token": token,
+                "active": active
+            }
+
+            console.log("Call API /event with:", data);
+
+            const api = axios.create({
+                baseURL: "https://api-happy.eclo.io/api",
+            });
+
+            api.post("/invoices/" + active, data, {
+                headers: { "Content-Type": "application/json" },
+            })
+                .then((res) => {
+                    if (res.data.status === "error") {
+                        console.log("lỗi");
+                        f7.dialog.alert(res.data.content, "Error");
+                    } else if (res.data.status === "success") {
+                        console.log(res.data.data);
+                        setInvoices(res.data.data);
+                        setBill(res.data.invoiceDetail);
+                        setPay(res.data.pay)
+                    }
+                })
+                .catch((error) => {
+                    f7.dialog.alert(error, "Error");
+                    console.log("k ket noi dc api");
+                });
+        }
+    }, [opened]);
+
+    const formatCurrency = (amount) => {
+        return new Intl.NumberFormat('vi-VN').format(amount) + 'đ';
     };
     return (
         <>

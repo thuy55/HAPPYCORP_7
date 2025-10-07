@@ -118,7 +118,7 @@ const MyApp = () => {
 
   const getIconColor = (tabName) => {
   return currentPath === tabName
-    ? 'primary:#f30771,secondary:#f30771'
+    ? 'primary:#1fc5f7,secondary:#1fc5f7'
     : 'primary:#999999,secondary:#999999';
 };
 
@@ -275,7 +275,7 @@ console.log(258, localStorage.getItem("a-token"));
             </Navbar>
 
 
-            <BlockTitle className='mb-1  mt-4 fs-13 '>Quản lý</BlockTitle>
+            <BlockTitle className='mb-1  mt-4 fs-13 text-white'>Quản lý</BlockTitle>
             
             <List dividersIos={false} simpleList inset className='fs-13 list-custom mb-3'>
               {/* <ListItem  link="/account/" selected={selected === 'account'}
@@ -291,7 +291,7 @@ console.log(258, localStorage.getItem("a-token"));
                 <lord-icon
                   src="https://cdn.lordicon.com/shcfcebj.json"
                   trigger="loop"
-                  colors="primary:#f30771,secondary:#f30771"
+                  colors="primary:#1fc5f7,secondary:#1fc5f7"
                   className=' me-2'
                   style={{ width: '25px', height: '25px' }}
                 />
@@ -304,7 +304,7 @@ console.log(258, localStorage.getItem("a-token"));
                   <lord-icon
                     src="https://cdn.lordicon.com/apmrcxtj.json"
                     trigger="loop"
-                    colors="primary:#f30771,secondary:#f30771"
+                    colors="primary:#1fc5f7,secondary:#1fc5f7"
                     className=' me-2'
                     style={{ width: '25px', height: '25px' }}>
                   </lord-icon>Thông báo
@@ -315,7 +315,7 @@ console.log(258, localStorage.getItem("a-token"));
                   <lord-icon
                     src="https://cdn.lordicon.com/jectmwqf.json"
                     trigger="loop"
-                    colors="primary:#f30771,secondary:#f30771"
+                    colors="primary:#1fc5f7,secondary:#1fc5f7"
                     className=' me-2'
                     style={{ width: '25px', height: '25px' }}>
                   </lord-icon>Nhật ký
@@ -330,7 +330,7 @@ console.log(258, localStorage.getItem("a-token"));
                 <lord-icon
                   src="https://cdn.lordicon.com/bsdkzyjd.json"
                   trigger="loop"
-                  colors="primary:#f30771,secondary:#f30771"
+                  colors="primary:#1fc5f7,secondary:#1fc5f7"
                   className="me-2"
                   style={{ width: "25px", height: "25px" }}
                 />
@@ -343,7 +343,7 @@ console.log(258, localStorage.getItem("a-token"));
                 <lord-icon
                   src="https://cdn.lordicon.com/yodwgokk.json"
                   trigger="loop"
-                  colors="primary:#f30771,secondary:#f30771"
+                  colors="primary:#1fc5f7,secondary:#1fc5f7"
                   className="me-2"
                   style={{ width: "25px", height: "25px" }}
                 />
@@ -353,14 +353,14 @@ console.log(258, localStorage.getItem("a-token"));
             </List> */}
                   
 
-            <BlockTitle className='mb-1  mt-3 fs-13 '>Ngôn ngữ</BlockTitle>
+            <BlockTitle className='mb-1  mt-3 fs-13 text-white'>Ngôn ngữ</BlockTitle>
             <List dividersIos={false} simpleList inset className='fs-13 list-custom mb-3'>
               <ListItem>
                 <Link>
                   <lord-icon
                     src="https://cdn.lordicon.com/bsdkzyjd.json"
                     trigger="loop"
-                    colors="primary:#f30771,secondary:#f30771"
+                    colors="primary:#1fc5f7,secondary:#1fc5f7"
                     className=' me-2'
                     style={{ width: '25px', height: '25px' }}>
                   </lord-icon>Tiếng Việt
@@ -371,7 +371,7 @@ console.log(258, localStorage.getItem("a-token"));
                   <lord-icon
                     src="https://cdn.lordicon.com/bsdkzyjd.json"
                     trigger="loop"
-                    colors="primary:#f30771,secondary:#f30771"
+                    colors="primary:#1fc5f7,secondary:#1fc5f7"
                     className=' me-2'
                     style={{ width: '25px', height: '25px' }}>
                   </lord-icon> Tiếng Anh
@@ -391,7 +391,7 @@ console.log(258, localStorage.getItem("a-token"));
                   <lord-icon
                     src="https://cdn.lordicon.com/onmwuuox.json"
                     trigger="loop"
-                    colors="primary:#f30771,secondary:#f30771"
+                    colors="primary:#292489,secondary:#292489"
                     className=' me-1 mt-2'
                     style={{ width: '20px', height: '20px' }}>
                   </lord-icon>
@@ -401,11 +401,10 @@ console.log(258, localStorage.getItem("a-token"));
                   <lord-icon
                     src="https://cdn.lordicon.com/pmivedvy.json"
                     trigger="loop"
-                    colors="primary:#f30771,secondary:#f30771"
+                    colors="primary:#292489,secondary:#292489"
                     className=' me-1'
                     style={{ width: '20px', height: '20px' }}>
                   </lord-icon>
-                  638008
                 </div>
                 <div className='mt-4'>
               

@@ -2,6 +2,7 @@ import { Sheet, Toolbar, PageContent, Block, Link, Card, ListInput, List, Icon, 
 import { useEffect, useState } from "react";
 import moment from 'moment';
 import SheetBookingCompleted from "./BookingCompleted";
+import axios from "axios";
 export default function SheetBooking1({ opened, onClose }) {
     const [selectedMonth, setSelectedMonth] = useState(moment().month()); // 0 - 11
     const [selectedYear, setSelectedYear] = useState(moment().year());
@@ -36,9 +37,182 @@ export default function SheetBooking1({ opened, onClose }) {
 
     const [activeStrongButton, setActiveStrongButton] = useState(0);
     const [sheetOpenedCompleted, setSheetOpenedCompleted] = useState(false);
+
+    const [roomDetail, setRoomDetail] = useState();
+
+    const [invoices, setInvoices] = useState();
+    const [area, setArea] = useState();
+    const [payment, setPayment] = useState([]);
+
+    const [selectPayment, setSelectPayment] = useState(1);
+    useEffect(() => {
+        if (opened) {
+            const activeRoom = localStorage.getItem("HappyCorp_active_room");
+            const token = localStorage.getItem("HappyCorp-token-app");
+            const data = {
+                "token": token,
+                "active": activeRoom
+            }
+
+            const api = axios.create({
+                baseURL: "https://api-happy.eclo.io/api",
+            });
+
+            api.post("/booking-room-detail", data, {
+                headers: { "Content-Type": "application/json" },
+            })
+                .then((res) => {
+                    if (res.data.status === "error") {
+                        console.log("lỗi");
+                        f7.dialog.alert(res.data.content, "Error");
+                    } else if (res.data.status === "success") {
+                        console.log(res.data.data);
+                        setRoomDetail(res.data.roomDetail);
+                        setInvoices(res.data.invoices);
+                        setArea(res.data.areas);
+
+                        const forms = res.data.forms;
+                        setPayment(forms); // Lưu danh sách forms
+
+                        // Lấy ID của phương thức thanh toán đầu tiên
+                        if (forms.length > 0) {
+                            const firstPaymentId = forms[0].id;
+                            setSelectPayment(firstPaymentId); // Gán ID đầu tiên vào state
+                        }
+                    }
+                })
+                .catch((error) => {
+                    f7.dialog.alert(error, "Error");
+                    console.log("k ket noi dc api");
+                });
+        }
+    }, [opened]);
+
+
+
+    function booking() {
+
+        const datePartMoment = moment(`${selectedYear}-${selectedMonth + 1}-${selectedDate}`, 'YYYY-M-D');
+        const dateString = datePartMoment.format('YYYY-MM-DD');
+        // Ví dụ: "2025-11-07"
+
+        // 2. Chuẩn bị phần Giờ: Lấy giá trị từ state `time` (HH:mm) và thêm giây (:00)
+        // Lấy giá trị HH:mm (vd: "18:06") và nối thêm ":00" cho giây
+        const timeStringWithSeconds = time ? `${time}:00` : moment().format('HH:mm:00');
+        // Ví dụ: "18:06:00"
+
+        // 3. Kết hợp
+        const combinedDateTime = `${dateString} ${timeStringWithSeconds}`;
+
+
+        const activeRoom = localStorage.getItem("HappyCorp_active_room");
+        const token = localStorage.getItem("HappyCorp-token-app");
+        const brand = localStorage.getItem("happyCorp_brand");
+        const data = {
+            "token": token,
+            "active-room": activeRoom,
+            "brand": brand,
+            "date": combinedDateTime,
+            "amount": amount,
+            "note": note,
+            "customers": localStorage.getItem("HappyCorp-id-account"),
+            "process": 1,
+            "card": "",
+        }
+
+        const api = axios.create({
+            baseURL: "https://api-happy.eclo.io/api",
+        });
+
+        api.post("/add-booking", data, {
+            headers: { "Content-Type": "application/json" },
+        })
+            .then((res) => {
+                if (res.data.status === "error") {
+                    console.log("lỗi");
+                    f7.dialog.alert(res.data.content, "Error");
+                } else if (res.data.status === "success") {
+                    console.log(res.data.active);
+                    addPayment(res.data.active);
+                    localStorage.setItem("HappyCorp_id_invoices", res.data.active)
+
+                }
+            })
+            .catch((error) => {
+                f7.dialog.alert(error, "Error");
+                console.log("k ket noi dc api");
+            });
+
+
+    }
+
+    function addPayment(e) {
+        const token = localStorage.getItem("HappyCorp-token-app");
+        const brand = localStorage.getItem("happyCorp_brand");
+        const listMenu = localStorage.getItem("selectedBookingMenu")
+        const data = {
+            "token": token,
+            "payment": selectPayment,
+            "brand": brand,
+            "active": e
+        }
+
+        const data2 = {
+            "token": token,
+            "brand": brand,
+            "active": e,
+            "items": listMenu
+
+        }
+        const api = axios.create({
+            baseURL: "https://api-happy.eclo.io/api",
+        });
+
+        api.post("/add-booking-payment", data, {
+            headers: { "Content-Type": "application/json" },
+        })
+            .then((res) => {
+                if (res.data.status === "error") {
+                    console.log("lỗi");
+                    f7.dialog.alert(res.data.content, "Error");
+                } else if (res.data.status === "success") {
+                    console.log(res.data.content);
+
+
+                }
+            })
+            .catch((error) => {
+                f7.dialog.alert(error, "Error");
+                console.log("k ket noi dc api");
+            });
+
+        api.post("/add-booking-product", data2, {
+            headers: { "Content-Type": "application/json" },
+        })
+            .then((res) => {
+                if (res.data.status === "error") {
+                    console.log("lỗi");
+                    f7.dialog.alert(res.data.content, "Error");
+                } else if (res.data.status === "success") {
+                    console.log(res.data.content);
+                    setSheetOpenedCompleted(true);
+                    localStorage.removeItem("selectedBookingMenu")
+
+                }
+            })
+            .catch((error) => {
+                f7.dialog.alert(error, "Error");
+                console.log("k ket noi dc api");
+            });
+    }
+
+    const [amount, setAmount] = useState(0);
+    const [note, setNote] = useState("");
+
+
     return (
         <>
-            <Sheet 
+            <Sheet
                 className="demo-sheet-2 h-100"
                 opened={opened}
                 onSheetClosed={onClose}
@@ -55,7 +229,7 @@ export default function SheetBooking1({ opened, onClose }) {
                 </Toolbar>
                 <PageContent className="pb-5">
                     <Card className="rounded-4 p-3 shadow-none border border-light">
-                        <div className="text-pink">
+                        <div className="text-pink fw-bold">
                             Ngày đặt <span className=" text-danger">(*)</span>
                         </div>
                         <List className="mx-0" strongIos dividersIos insetIos>
@@ -67,7 +241,7 @@ export default function SheetBooking1({ opened, onClose }) {
                             />
                             <div className='mt-3 row px-2'>
                                 <div className='col-4 p-1'>
-                                    <select className='p-2 rounded-3 fs-14 border border-1 w-100 ' value={selectedDate} onChange={(e) => setSelectedDate(parseInt(e.target.value))}>
+                                    <select className='p-2 rounded-3 fs-14 border border-1 w-100 select-white-text' value={selectedDate} onChange={(e) => setSelectedDate(parseInt(e.target.value))}>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -102,7 +276,7 @@ export default function SheetBooking1({ opened, onClose }) {
                                     </select>
                                 </div>
                                 <div className='col-4 p-1'>
-                                    <select className='p-2 rounded-3 fs-14 border border-1 w-100 ' value={selectedMonth}
+                                    <select className='p-2 rounded-3 fs-14 border border-1 w-100 select-white-text' value={selectedMonth}
                                         onChange={(e) => setSelectedMonth(parseInt(e.target.value))}>
                                         {moment.months().map((month, idx) => (
                                             <option key={idx} value={idx}>{month}</option>
@@ -111,7 +285,7 @@ export default function SheetBooking1({ opened, onClose }) {
 
                                 </div>
                                 <div className='col-4 p-1'>
-                                    <select className='p-2 rounded-3 fs-14 border border-1 w-100 ' value={selectedYear}
+                                    <select className='p-2 rounded-3 fs-14 border border-1 w-100 select-white-text' value={selectedYear}
                                         onChange={(e) => setSelectedYear(parseInt(e.target.value))}>
                                         {Array.from({ length: 10 }, (_, i) => {
                                             const year = moment().year() - 5 + i;
@@ -123,7 +297,7 @@ export default function SheetBooking1({ opened, onClose }) {
 
                         </List>
 
-                        <div className="mt-4 fs-13 text-pink">
+                        <div className="mt-4 fs-13 text-pink fw-bold">
                             Thông tin người đặt
                         </div>
                         <div className="position-relative rounded-3 mt-2 w-100 border border-1" style={{ padding: "12px" }}>
@@ -140,7 +314,7 @@ export default function SheetBooking1({ opened, onClose }) {
                                     slot="media"
                                     src="https://cdn.lordicon.com/shcfcebj.json"
                                     trigger="loop"
-                                    colors="secondary:#f30771"
+                                    colors="primary:#1fc5f7,secondary:#1fc5f7"
                                     style={{ width: '20px', height: '20px' }}
                                 ></lord-icon>
                             </span>
@@ -163,7 +337,7 @@ export default function SheetBooking1({ opened, onClose }) {
                                     slot="media"
                                     src="https://cdn.lordicon.com/sjoccsdj.json"
                                     trigger="loop"
-                                    colors="primary:#f30771,secondary:#f30771"
+                                    colors="primary:#1fc5f7,primary:#1fc5f7,secondary:#1fc5f7"
                                     style={{ width: '20px', height: '20px' }}
                                 ></lord-icon>
                             </span>
@@ -182,7 +356,7 @@ export default function SheetBooking1({ opened, onClose }) {
                                     slot="media"
                                     src="https://cdn.lordicon.com/shcfcebj.json"
                                     trigger="loop"
-                                    colors="secondary:#f30771"
+                                    colors="primary:#1fc5f7,secondary:#1fc5f7"
                                     style={{ width: '20px', height: '20px' }}
                                 ></lord-icon>
                             </span>
@@ -196,7 +370,7 @@ export default function SheetBooking1({ opened, onClose }) {
                             <Button className="p-3 bg-secondary bg-opacity-25 rounded-pill">Lưu thông tin người đặt</Button>
                         </div>
 
-                        <div className="mt-4 fs-13 text-pink">
+                        <div className="mt-4 fs-13 text-pink fw-bold">
                             Thông tin đặt
                         </div>
                         <div className="position-relative rounded-3 mt-3 w-100 border border-1" style={{ padding: "12px" }}>
@@ -213,13 +387,13 @@ export default function SheetBooking1({ opened, onClose }) {
                                     slot="media"
                                     src="https://cdn.lordicon.com/shcfcebj.json"
                                     trigger="loop"
-                                    colors="secondary:#f30771"
+                                    colors="primary:#1fc5f7,secondary:#1fc5f7"
                                     style={{ width: '20px', height: '20px' }}
                                 ></lord-icon>
                             </span>
                             <input
                                 className="rounded-3  w-100 " style={{ paddingLeft: "10%", paddingRight: "10%" }}
-                                placeholder="Số người"
+                                placeholder="Số người" value={amount} onChange={(e) => { setAmount(e.target.value) }}
                                 type="number"
                             />
                         </div>
@@ -238,17 +412,17 @@ export default function SheetBooking1({ opened, onClose }) {
                                     slot="media"
                                     src="https://cdn.lordicon.com/shcfcebj.json"
                                     trigger="loop"
-                                    colors="secondary:#f30771"
+                                    colors="primary:#1fc5f7,secondary:#1fc5f7"
                                     style={{ width: '20px', height: '20px' }}
                                 ></lord-icon>
                             </span>
                             <textarea rows={5}
                                 className="rounded-3  w-100 " style={{ paddingLeft: "10%", paddingRight: "10%" }}
-                                placeholder="Ghi chú"
+                                placeholder="Ghi chú" value={note} onChange={(e) => { setNote(e.target.value) }}
                             />
                         </div>
 
-                        <div className="mt-4 fs-13 text-pink">
+                        <div className="mt-4 fs-13 text-pink fw-bold">
                             Phương thức thanh toán
                         </div>
                         <div className="position-relative rounded-3 mt-3 w-100 border border-1" style={{ padding: "12px" }}>
@@ -265,7 +439,7 @@ export default function SheetBooking1({ opened, onClose }) {
                                     slot="media"
                                     src="https://cdn.lordicon.com/shcfcebj.json"
                                     trigger="loop"
-                                    colors="secondary:#f30771"
+                                    colors="primary:#1fc5f7,secondary:#1fc5f7"
                                     style={{ width: '20px', height: '20px' }}
                                 ></lord-icon>
                             </span>
@@ -277,20 +451,29 @@ export default function SheetBooking1({ opened, onClose }) {
                         </div>
 
                         <div className=' fs-13 mt-3'>Hình thức</div>
-                        <Segmented strong tag="p" className="w-100 ">
+                        {/* <Segmented strong tag="p" className="w-100 ">
                             <Button active={activeStrongButton === 0} onClick={() => setActiveStrongButton(0)}>
                                 Chuyển khoản
                             </Button>
                             <Button active={activeStrongButton === 1} onClick={() => setActiveStrongButton(1)}>
                                 Tiền mặt
                             </Button>
-                        </Segmented>
+                        </Segmented> */}
+                        <select className='p-2 rounded-3 fs-14 border border-1 w-100 select-white-text' value={selectPayment}
+                            onChange={(e) => setSelectPayment(parseInt(e.target.value))}>
+                            {payment && payment.map((payment, key) => {
+                                return (
+                                    <option value={payment.id}>{payment.name}</option>
+                                )
+                            })}
+
+                        </select>
                     </Card>
                 </PageContent>
                 <footer className="fixed-bottom p-3 py-2 ">
                     <div className="grid grid-cols-2 grid-gap">
                         <Button sheetClose className="bg-secondary bg-opacity-25 p-3 rounded-pill  fs-15">Hủy đơn</Button>
-                        <Button className="bg-pink p-3 rounded-pill text-white fs-15" onClick={() => {setSheetOpenedCompleted(true)}}>Hoàn thành</Button>
+                        <Button className="bg-pink p-3 rounded-pill text-white fs-15" onClick={() => { booking(); }}>Hoàn thành</Button>
                     </div>
                 </footer>
             </Sheet>

@@ -1,375 +1,245 @@
-import { Sheet, Toolbar, PageContent, Block, Link, Card, ListInput, List, Icon, Button, AccordionToggle, AccordionItem, AccordionContent } from "framework7-react";
+import { Sheet, Toolbar, PageContent, Link, Card, Icon, Button, AccordionToggle, AccordionItem, AccordionContent, f7 } from "framework7-react";
 import { useEffect, useState } from "react";
 import moment from 'moment';
-import SheetBooking1 from "./SheetBooking1";
+// import SheetBooking1 from "./SheetBooking1"; 
 import SheetMenuDetail from "./MenuDetail";
 import SheetChoiceMenu from "./ChoiceMenu";
+import axios from "axios";
+
+const typeMap = {
+    service: "services",
+    food: "menu",
+    combos: "combos",
+};
+
+// Định nghĩa props cho component
 export default function SheetBookingMenu({ opened, onClose }) {
+    
     const [activeTab, setActiveTab] = useState('service');
 
-    // Sample data cho từng tab
-    const menuData = {
-        service: {
-            categories: [
-                {
-                    id: 'private-room',
-                    title: 'Private Room',
-                    isOpen: false,
-                    items: []
-                },
-                {
-                    id: 'phu-thu',
-                    title: 'Phụ thu',
-                    isOpen: false,
-                    items: []
-                },
-                {
-                    id: 'giam-gia',
-                    title: 'Giảm giá',
-                    isOpen: false,
-                    items: []
-                },
-                {
-                    id: 'promotion',
-                    title: 'Promotion',
-                    isOpen: true,
-                    items: [
-                        {
-                            id: 1468,
-                            tax: 10,
-                            check: 1,
-                            products_active: "b54adfcb-07d9-4c4e-8406-8d35cf8bc1d6",
-                            discount: 0,
-                            name: 'MN - CUA RANG MUỐI',
-                            code:"MNĐA00157",
-                            price: 1500000,
-                            group:9,
-                            category:21,
-                            image: 'https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/Image%20FP_2024/anh-dai-dien-tet-41.jpg'
-                        },
-                        {
-                            id: 1467,
-                            tax: 10,
-                            check: 1,
-                            products_active: "596946f0-df89-4d47-8f03-0d269aac3380",
-                            discount:0,
-                            name: 'MN - HENNESY VSOP',
-                            code:"MNTU00046",
-                            price: 5963000,
-                            group:9,
-                            category:28,
-                            image: 'https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/Image%20FP_2024/anh-dai-dien-tet-41.jpg'
-                        }
-                    ]
-                }
-            ]
-        },
-        food: {
-            categories: [
-                {
-                    id: 'thuc-an',
-                    title: 'Thức ăn',
-                    isOpen: false,
-                    items: []
-                },
-                {
-                    id: 'do-uong',
-                    title: 'Đồ uống',
-                    isOpen: false,
-                    items: []
-                },
-                {
-                    id: 'trai-cay',
-                    title: 'TRÁI CÂY',
-                    isOpen: true,
-                    items: [
-                        {
-                            id: 3,
-                            name: 'FRUIT PLATTER',
-                            price: 690000,
-                            image: '../image/fruit-1.png'
-                        },
-                        {
-                            id: 4,
-                            name: 'Fruit Platter',
-                            price: 0,
-                            image: '../image/fruit-2.png'
-                        }
-                    ]
-                },
-                {
-                    id: 'do-kho',
-                    title: 'ĐỒ KHÔ',
-                    isOpen: false,
-                    items: []
-                },
-                {
-                    id: 'promotion-food',
-                    title: 'Promotion',
-                    isOpen: false,
-                    items: []
-                },
-                {
-                    id: 'funky',
-                    title: 'FUNKY',
-                    isOpen: false,
-                    items: []
-                },
-                {
-                    id: 'ss-tl-pod',
-                    title: 'SS/TL/POD',
-                    isOpen: false,
-                    items: []
-                }
-            ]
-        },
-        combo: {
-            categories: [
-                {
-                    id: 'combo-vip',
-                    title: 'Combo VIP',
-                    isOpen: false,
-                    items: []
-                },
-                {
-                    id: 'combo-add-on',
-                    title: 'Combo Add On',
-                    isOpen: false,
-                    items: []
-                },
-                {
-                    id: 'food-combo',
-                    title: 'Food Combo',
-                    isOpen: true,
-                    items: [
-                        {
-                            id: 5,
-                            name: 'CHILL & CHEER',
-                            price: 1900000,
-                            image: '../image/combo-1.png'
-                        },
-                        {
-                            id: 6,
-                            name: 'GLAMOUR NIGHT',
-                            price: 1900000,
-                            image: '../image/combo-2.png'
-                        }
-                    ]
-                },
-                {
-                    id: 'combo-8',
-                    title: 'COMBO 8',
-                    isOpen: false,
-                    items: []
-                },
-                {
-                    id: 'combo-16',
-                    title: 'COMBO 16',
-                    isOpen: false,
-                    items: []
-                }
-            ]
-        }
-    };
-
+    // Hàm format giá tiền
     const formatPrice = (price) => {
         if (price === 0) return '0';
-        return price.toLocaleString('vi-VN');
-    };
-
-    // hàm thêm amount = 0 vào tất cả item
-    const addamountToMenu = (menu) => {
-        const newMenu = {};
-        Object.keys(menu).forEach((sectionKey) => {
-            newMenu[sectionKey] = {
-                ...menu[sectionKey],
-                categories: menu[sectionKey].categories.map((cat) => ({
-                    ...cat,
-                    items: cat.items.map((item) => ({
-                        ...item,
-                        amount: item.amount ?? 0   // nếu chưa có thì gán = 0
-                    }))
-                }))
-            };
-        });
-        return newMenu;
-    };
-
-
-    const [menu, setMenu] = useState(addamountToMenu(menuData));
-
-    useEffect(() => {
-        // localStorage.removeItem("cart");
-
-
-    }, [])
-
-    const getCurrentData = () => {
-        return menu[activeTab] || { categories: [] };
-    };
-
-    // tăng giảm
-    const increaseQty = (sectionKey, categoryId, itemId) => {
-        setMenu((prev) => {
-            const updated = { ...prev };
-            updated[sectionKey] = {
-                ...updated[sectionKey],
-                categories: updated[sectionKey].categories.map((cat) =>
-                    cat.id === categoryId
-                        ? {
-                            ...cat,
-                            items: cat.items.map((it) =>
-                                it.id === itemId
-                                    ? { ...it, amount: it.amount + 1 }
-                                    : it
-                            )
-                        }
-                        : cat
-                )
-            };
-            saveCart(updated);
-            return updated;
-        });
-    };
-
-    const decreaseQty = (sectionKey, categoryId, itemId) => {
-        setMenu((prev) => {
-            const updated = { ...prev };
-            updated[sectionKey] = {
-                ...updated[sectionKey],
-                categories: updated[sectionKey].categories.map((cat) =>
-                    cat.id === categoryId
-                        ? {
-                            ...cat,
-                            items: cat.items.map((it) =>
-                                it.id === itemId && it.amount > 0
-                                    ? { ...it, amount: it.amount - 1 }
-                                    : it
-                            )
-                        }
-                        : cat
-                )
-            };
-            saveCart(updated);
-            return updated;
-        });
-    };
-
-    // tổng số lượng
-    const totalQty = Object.values(menu).reduce((sum, section) => {
-        return (
-            sum +
-            section.categories.reduce((catSum, cat) => {
-                return catSum + cat.items.reduce((iSum, it) => iSum + it.amount, 0);
-            }, 0)
-        );
-    }, 0);
-    // lưu luôn cả services và categories
-    const saveCart = (menu) => {
-        let cart = [];
-
-        Object.keys(menu).forEach((serviceKey) => {
-            const service = menu[serviceKey];
-
-            service.categories.forEach((cat) => {
-                const itemsWithQty = cat.items.filter((item) => item.amount > 0);
-
-                if (itemsWithQty.length > 0) {
-                    cart.push({
-                        serviceId: serviceKey,          // service key (ví dụ: "drink")
-                        serviceTitle: service.title,    // tên service
-                        categoryId: cat.id,             // id category
-                        categoryTitle: cat.title,       // tên category
-                        items: itemsWithQty.map((it) => ({
-                            id: it.id,
-                            name: it.name,
-                            price: it.price,
-                            amount: it.amount
-                        }))
-                    });
-                }
-            });
-        });
-
-        localStorage.setItem("cart", JSON.stringify(cart));
-
-        let cart1 = [];
-        Object.keys(menu).forEach((sectionKey) => {
-            menu[sectionKey].categories.forEach((cat1) => {
-                cat1.items.forEach((item) => {
-                    if (item.amount > 0) {
-                        cart1.push({
-                            id: item.id,
-                            name: item.name,
-                            price: item.price,
-                            amount: item.amount,
-                            image: item.image
-                        });
-                    }
-                });
-            });
-        });
-        localStorage.setItem("cart1", JSON.stringify(cart1));
+        return Number(price).toLocaleString('vi-VN');
     };
 
     const [sheetOpened1, setSheetOpened1] = useState(false);
     const [sheetOpened2, setSheetOpened2] = useState(false);
+
+    const [menu, setMenu] = useState([]);
+
+    // =======================================================
+    // 1. KHÔI PHỤC DỮ LIỆU TỪ LOCALSTORAGE (RESTORE LOGIC)
+    // =======================================================
+    const [selectedItems, setSelectedItems] = useState(() => {
+        try {
+            const storedItems = localStorage.getItem("selectedBookingMenu");
+            
+            if (!storedItems || storedItems === '[]') {
+                return {}; // Trả về Object rỗng
+            }
+            
+            // Đọc chuỗi JSON và chuyển thành MẢNG
+            const selectedArray = JSON.parse(storedItems);
+            
+            // Chuyển Mảng về lại OBJECT (Dùng item.id làm khóa)
+            return selectedArray.reduce((acc, item) => {
+                // CHỈNH SỬA QUAN TRỌNG: Ép item.id thành chuỗi (String) khi đặt làm khóa
+                if (item && item.id && item.amount > 0) { 
+                    acc[String(item.id)] = item; 
+                }
+                return acc;
+            }, {});
+            
+        } catch (error) { 
+            console.error("Lỗi khi khôi phục selectedItems từ localStorage:", error);
+            return {};
+        }
+    });
+
+    // useEffect để gọi API lấy menu
+    useEffect(() => {
+        const brand = localStorage.getItem("happyCorp_brand");
+        const token = localStorage.getItem("HappyCorp-token-app");
+        const data = {
+            "token": token,
+            "brand": brand
+        };
+        const api = axios.create({
+            baseURL: "https://api-happy.eclo.io/api",
+        });
+
+        api.post("/menu", data, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then((res) => {
+            if (res.data.status === "error") {
+                f7.dialog.alert(res.data.content, 'Error');
+            } else if (res.data.status === "success") {
+                setMenu(res.data.data);
+            }
+        })
+            .catch((error) => {
+                f7.dialog.alert(error.message || 'Lỗi kết nối API', 'Error');
+            });
+    }, [f7]); 
+
+    // =======================================================
+    // 2. LƯU DỮ LIỆU VÀO LOCALSTORAGE (SAVE LOGIC)
+    // =======================================================
+    // useEffect để lưu selectedItems vào localStorage khi có thay đổi
+    useEffect(() => {
+        // Chuyển đổi đối tượng selectedItems sang dạng mảng trước khi lưu
+        const selectedItemsArray = Object.values(selectedItems);
+
+        // Chuyển mảng thành chuỗi JSON
+        const itemsToStore = JSON.stringify(selectedItemsArray);
+
+        // Lưu chuỗi JSON vào localStorage
+        localStorage.setItem("selectedBookingMenu", itemsToStore);
+    }, [selectedItems]);
+
+    // Hàm xử lý tăng/giảm số lượng
+    const handleAmountChange = (item, change) => {
+        // CHỈNH SỬA QUAN TRỌNG: Ép kiểu item.id thành chuỗi (String) khi dùng làm khóa
+        const itemId = String(item.id); 
+        
+        const currentAmount = selectedItems[itemId]?.amount || 0;
+        let newAmount = currentAmount + change;
+
+        if (newAmount < 0) {
+            newAmount = 0;
+        }
+
+        setSelectedItems(prevItems => {
+            const updatedItems = { ...prevItems };
+
+            if (newAmount > 0) {
+                // Thêm hoặc cập nhật món ăn với số lượng mới
+                updatedItems[itemId] = { // Sử dụng itemId đã được ép kiểu chuỗi
+                    id: item.id,
+                    name: item.name,
+                    price: item.price,
+                    active: item.active,
+                    images: item.images, 
+                    amount: newAmount,
+                };
+            } else {
+                // Nếu số lượng về 0, xóa món ăn khỏi danh sách đã chọn
+                delete updatedItems[itemId];
+            }
+
+            return updatedItems;
+        });
+    };
+
+    function getTab() {
+        const currentType = typeMap[activeTab];
+        const filtered = menu.filter((item) => item.type === currentType);
+
+        const categories = filtered.reduce((acc, item) => {
+            const found = acc.find((c) => c.title === item.categorys_name);
+            const newItem = {
+                id: item.id,
+                active: item.active,
+                name: item.name,
+                price: item.price,
+                images: item.images || "",
+            };
+
+            if (found) {
+                found.items.push(newItem);
+            } else {
+                acc.push({
+                    id: item.categorys,
+                    title: item.categorys_name,
+                    isOpen: false,
+                    items: [newItem],
+                });
+            }
+            return acc;
+        }, []);
+
+        return { categories };
+    }
+
+    const [activeId, setActiveId] = useState(null);
+
+    // Hàm xử lý khi click card (để mở modal detail)
+    const handleCardClick = (active) => {
+        setActiveId(active);
+        setSheetOpened2(true); // Mở SheetMenuDetail
+    };
+
+    // Hàm tính tổng số loại món đã chọn (đã có sẵn trong Toolbar)
+    const numberOfUniqueItems = Object.keys(selectedItems).length;
+
     return (
         <>
             <Sheet
-                className="demo-sheet-2 h-100"
+                className="demo-sheet-2 h-100 "
                 opened={opened}
                 onSheetClosed={onClose}
             >
                 <Toolbar className="">
                     <div className="left fw-bold d-flex align-items-center">
                         <Link sheetClose>
-                            <img src='../img/backward.gif' className='size-icon me-1'></img>
+                            <img src='../img/backward.gif' className='size-icon me-1' alt="Back"></img>
                         </Link>
                         Chọn menu
                     </div>
                     <div className="right">
+                        {/* Hiển thị tổng số loại món đã chọn */}
+                        {numberOfUniqueItems > 0 && (
+                            <Button fill round className="bg-pink text-white" onClick={() => f7.dialog.alert('Bạn đã chọn: ' + numberOfUniqueItems + ' loại món.', 'Thông báo')}>
+                                Đã chọn ({numberOfUniqueItems})
+                            </Button>
+                        )}
                     </div>
                 </Toolbar>
                 <PageContent>
-                    <Card className="rounded-4 p-3 shadow-none border border-light fs-13">
+                    <Card className="rounded-4 p-3 shadow-none border border-light fs-13 bg-transparent">
+
+                        {/* Tabs để chuyển đổi giữa Dịch vụ, Món ăn, Combo */}
                         <div className="px-1 py-2">
                             <div className="row g-2">
+                                {/* ... (Phần buttons ActiveTab) ... */}
                                 <div className="col-4">
                                     <Button
-                                        fill={activeTab === 'service'}
+                                        fill={activeTab === "service"}
                                         round
-                                        className={`w-100 py-3 ${activeTab === 'service'
-                                            ? 'bg-pink text-white border-0'
-                                            : 'bg-light text-pink border-0'
+                                        className={`w-100 py-3 ${activeTab === "service"
+                                            ? "bg-pink text-white border-0"
+                                            : " text-color border-0"
                                             }`}
-                                        onClick={() => setActiveTab('service')}
+                                        onClick={() => setActiveTab("service")}
                                     >
                                         Dịch vụ
                                     </Button>
                                 </div>
                                 <div className="col-4">
                                     <Button
-                                        fill={activeTab === 'food'}
+                                        fill={activeTab === "food"}
                                         round
-                                        className={`w-100 py-3 ${activeTab === 'food'
-                                            ? 'bg-pink text-white border-0'
-                                            : 'bg-light text-pink border-0'
+                                        className={`w-100 py-3 ${activeTab === "food"
+                                            ? "bg-pink text-white border-0"
+                                            : " text-color border-0"
                                             }`}
-                                        onClick={() => setActiveTab('food')}
+                                        onClick={() => setActiveTab("food")}
                                     >
                                         Món ăn
                                     </Button>
                                 </div>
                                 <div className="col-4">
                                     <Button
-                                        fill={activeTab === 'combo'}
+                                        fill={activeTab === "combos"}
                                         round
-                                        className={`w-100 py-3 ${activeTab === 'combo'
-                                            ? 'bg-pink text-white border-0'
-                                            : 'bg-light text-pink border-0'
+                                        className={`w-100 py-3 ${activeTab === "combos"
+                                            ? "bg-pink text-white border-0"
+                                            : " text-color border-0"
                                             }`}
-                                        onClick={() => setActiveTab('combo')}
+                                        onClick={() => setActiveTab("combos")}
                                     >
                                         Combo
                                     </Button>
@@ -377,58 +247,98 @@ export default function SheetBookingMenu({ opened, onClose }) {
                             </div>
                         </div>
 
-                        <div className=" fs-13">
+                        {/* Accordion theo category */}
+                        <div className="px-2 fs-13">
                             <div accordionList className="my-3">
-                                {getCurrentData().categories.map((category) => (
-                                    <AccordionItem key={category.id} accordionOpened={category.isOpen}>
+                                {getTab().categories.map((category) => (
+                                    <AccordionItem
+                                        key={category.id}
+                                        accordionOpened={category.isOpen}
+                                    >
                                         <AccordionToggle>
                                             <div className="d-flex justify-content-between align-items-center w-100 py-3 mt-2">
                                                 <span className="fw-semibold fs-13">{category.title}</span>
-                                                <Icon f7="chevron_down" size="16px" className="text-muted accordion-toggle-icon" />
+                                                <Icon
+                                                    f7="chevron_down"
+                                                    size="16px"
+                                                    className="text-icon accordion-toggle-icon"
+                                                />
                                             </div>
                                         </AccordionToggle>
 
-                                        <AccordionContent className="bg-transparent ">
+                                        <AccordionContent>
                                             {category.items.length > 0 ? (
-                                                <div className="row g-3 py-3 bg-transparent">
-                                                    {category.items.map((item) => (
-                                                        <div key={item.id} className="col-6">
-                                                            <Card className="m-0 p-0 rounded-3 shadow-none border-light">
-                                                                <img src={item.image} className="w-100 rounded-top-3" onClick={()=>{setSheetOpened2(true)}} />
-                                                                <div className="p-2">
-                                                                    <div className="fw-bold fs-13">
-                                                                        {item.name}
-                                                                    </div>
-                                                                    <div className="d-flex align-items-center justify-content-between">
-                                                                        <div className="fs-11 fw-bold text-secondary">
-                                                                            {formatPrice(item.price)}đ
+                                                <div className="row g-3 py-3">
+                                                    {category.items.map((item) => {
+                                                        // Truy cập bằng String(item.id) để khớp với khóa trong selectedItems
+                                                        const currentAmount = selectedItems[String(item.id)]?.amount || 0;
+                                                        return (
+                                                            <div key={item.id} className="col-6 px-0 m-0">
+                                                                <Card className="m-0 border-0 shadow-sm p-2 pb-0 h-100 bg-transparent position-relative" style={{ backgroundColor: "#292489" }}>
+                                                                    
+                                                                    {/* Phần thông tin món ăn */}
+                                                                    <div className="text-center" onClick={() => { handleCardClick(item.active) }} style={{ cursor: "pointer" }}>
+                                                                        <div className="mb-3">
+                                                                            <img
+                                                                                src={item.images && item.images.trim() !== "" ? `${item.images}` : "../image/no-image.jpg"}
+                                                                                alt={item.name}
+                                                                                className="w-100 rounded-3"
+                                                                                style={{
+                                                                                    height: "120px",
+                                                                                    objectFit: "cover",
+                                                                                    backgroundColor: "#f8f9fa",
+                                                                                }}
+                                                                            />
                                                                         </div>
-                                                                        <div className="d-flex align-items-center gap-2 mt-2 fs-13">
-                                                                            <button
-                                                                                className="bg-light p-1 d-flex align-items-center"
-                                                                                onClick={() => decreaseQty(activeTab, category.id, item.id)}
-                                                                            >
-                                                                                <Icon f7="minus" size="10px" />
-                                                                            </button>
-                                                                            <span style={{ minWidth: "10px", textAlign: "center" }}>
-                                                                                {item.amount}
-                                                                            </span>
-                                                                            <button
-                                                                                className="bg-light p-1 d-flex align-items-center"
-                                                                                onClick={() => increaseQty(activeTab, category.id, item.id)}
-                                                                            >
-                                                                                <Icon f7="plus" size="10px" />
-                                                                            </button>
+
+                                                                        <div className="mb-1">
+                                                                            <h6 className="mb-1 fs-13 text-uppercase">
+                                                                                {item.name}
+                                                                            </h6>
+                                                                            <p className="fw fs-13">
+                                                                                {formatPrice(item.price)}
+                                                                                {item.price > 0 && (
+                                                                                    <span className="fs-12 text-muted"> đ</span>
+                                                                                )}
+                                                                            </p>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                            </Card>
-                                                        </div>
-                                                    ))}
+                                                                    
+                                                                    {/* Bộ điều chỉnh số lượng */}
+                                                                    <div className="d-flex justify-content-center align-items-center mb-2">
+                                                                        {/* Nút giảm */}
+                                                                        <Button
+                                                                            small
+                                                                            round
+                                                                            className={`w-30 ${currentAmount > 0 ? ' text-xanh' : 'text-secondary border'}`}
+                                                                            onClick={() => handleAmountChange(item, -1)}
+                                                                            disabled={currentAmount === 0}
+                                                                        >
+                                                                            <Icon f7="minus_circle"></Icon>
+                                                                        </Button>
+                                                                        
+                                                                        {/* Số lượng */}
+                                                                        <span className="mx-3 fw-bold fs-14 text-center" style={{ minWidth: '20px' }}>
+                                                                            {currentAmount}
+                                                                        </span>
+                                                                        
+                                                                        {/* Nút tăng */}
+                                                                        <Button
+                                                                            small
+                                                                            round
+                                                                            onClick={() => handleAmountChange(item, 1)}
+                                                                        >
+                                                                            <Icon f7="plus_circle" className="text-xanh"></Icon>
+                                                                        </Button>
+                                                                    </div>
+                                                                </Card>
+                                                            </div>
+                                                        );
+                                                    })}
                                                 </div>
                                             ) : (
                                                 <div className="text-center py-4">
-                                                    <p className="text-muted fs-13 mb-0">Không có dữ liệu</p>
+                                                    <p className="fs-13 mb-0">Không có dữ liệu</p>
                                                 </div>
                                             )}
                                         </AccordionContent>
@@ -437,26 +347,26 @@ export default function SheetBookingMenu({ opened, onClose }) {
                             </div>
                         </div>
 
-                    
                     </Card>
                 </PageContent>
-                <footer className="fixed-bottom p-3 py-2 ">
+                <footer className="fixed-bottom p-3 py-2">
                     <div className="grid grid-cols-2 grid-gap">
-                        <Button sheetClose className="bg-secondary bg-opacity-25 p-3 rounded-pill  fs-15">Hủy</Button>
+                        <Button sheetClose className="bg-secondary p-3 rounded-pill fs-15" onClick={() => { localStorage.removeItem("selectedBookingMenu"); onClose() }}>Hủy</Button>
                         <Button className="bg-pink p-3 rounded-pill text-white fs-15" onClick={() => {
                             setSheetOpened1(true), console.log(32354);
-                        }}>{totalQty} Giỏ hàng</Button>
+                        }}>({numberOfUniqueItems}) Món</Button>
                     </div>
                 </footer>
             </Sheet>
-            {/* <SheetBooking1
-                opened={sheetOpened1}
-                onClose={() => setSheetOpened1(false)}
-            /> */}
+
+            {/* Modal Detail */}
             <SheetMenuDetail
                 opened={sheetOpened2}
                 onClose={() => setSheetOpened2(false)}
+                activeId={activeId}
             />
+
+            {/* Sheet Choice Menu */}
             <SheetChoiceMenu
                 opened={sheetOpened1}
                 onClose={() => setSheetOpened1(false)}

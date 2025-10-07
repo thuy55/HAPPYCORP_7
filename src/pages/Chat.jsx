@@ -43,7 +43,7 @@ const ChatPage = () => {
 
             <div className="card-header mt-3 px-3">
                 <ul
-                    className="nav nav-pills row w-100 mx-3 d-flex justify-content-around"
+                    className="nav nav-pills row w-100 mx-3 d-flex justify-content-around text-white"
                     id="pills-tab"
                     role="tablist"
                 >

@@ -233,95 +233,103 @@ const AccountPage = () => {
                     <div className='position-absolute top-0 end-0 m-3'>
                         <img src='../image/happy-corp-logo.png' style={{ height: "70px" }}></img>
                     </div>
-                    <img src={`https://api-happy.eclo.io/${avatar}`} className='rounded-circle border border-4 border-dark position-absolute top-50 start-0 m-3' style={{ height: "150px", width: "150px" }}></img>
+                    <img src={`https://api-happy.eclo.io/${avatar}`}
+
+                        // Xử lý lỗi: Nếu hình ảnh trên không load được, thay thế nó bằng URL mặc định
+                        onError={(e) => {
+                            e.target.onerror = null; // Ngăn chặn vòng lặp vô hạn nếu hình mặc định cũng lỗi
+                            e.target.src = 'https://img.freepik.com/premium-vector/people-profile-icon_24877-40758.jpg?semt=ais_hybrid&w=740&q=80';
+                        }} className='rounded-circle border border-4 border-dark position-absolute top-50 start-0 m-3' style={{ height: "150px", width: "150px" }}></img>
                 </div>
                 <div className=' mx-4 ' style={{ marginTop: "15%" }}>
                     <div className='fs-5 fw-bold mt-4'>{name}</div>
                     <div className=''>{email}</div>
 
                 </div>
-                <List className='my-4 fs-13 rounded-3 list-no-chevron mx-3' dividersIos mediaList outlineIos strongIos>
-                    <ListItem className='px-3'
-                        title={
-                            <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                                <span className="text-color">Mã của bạn:</span>
-                                <span className="fw-bold">#{code}</span>
-                            </div>
-                        }
-                    >
-                        <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
-                    </ListItem>
-                    <ListItem className='px-3'
-                        title={
-                            <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                                <span className="text-color">Họ và tên:</span>
-                                <span className="fw-bold">{name}</span>
-                            </div>
-                        }
-                    >
-                        <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
-                    </ListItem>
-                    <ListItem className='px-3'
-                        title={
-                            <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                                <span className="text-color">Số điện thoại:</span>
-                                <span className="fw-bold">{phone}</span>
-                            </div>
-                        }
-                    >
-                        <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
-                    </ListItem>
-                    <ListItem className='px-3'
-                        title={
-                            <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                                <span className="text-color">Email:</span>
-                                <span className="fw-bold">{email}</span>
-                            </div>
-                        }
-                    >
-                        <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
-                    </ListItem>
-                    <ListItem className='px-3'
-                        title={
-                            <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                                <span className="text-color">Tài khoản:</span>
-                                <span className="fw-bold">{account}</span>
-                            </div>
-                        }
-                    >
-                        <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
-                    </ListItem>
-                    <ListItem className='px-3'
-                        title={
-                            <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                                <span className="text-color">Ngày sinh:</span>
-                                <span className="fw-bold">{formatDate(birthday)}</span>
-                            </div>
-                        }
-                    >
-                        <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
-                    </ListItem>
-                    <ListItem className='px-3'
-                        title={
-                            <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                                <span className="text-color">Giới tính:</span>
-                                <span className="fw-bold">{gender == "1" ? "Nữ" : "Nam"}</span>
-                            </div>
-                        }
-                    >
-                        <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
-                    </ListItem>
-                    <ListItem className='px-3'
-                        title={
-                            <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                                <span className="text-color">Ngày đăng ký:</span>
-                                <span className="fw-bold">{dateRegister}</span>
-                            </div>
-                        }
-                    >
-                        <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
-                    </ListItem>
-                </List>
+                <Card className='p-0 border border-0'>
+                    <List className='my-3 fs-13 rounded-3 list-no-chevron mx-2' dividersIos mediaList outlineIos strongIos>
+                        <ListItem className='px-3'
+                            title={
+                                <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                                    <span className="">Mã của bạn:</span>
+                                    <span className="fw-bold">#{code}</span>
+                                </div>
+                            }
+                        >
+                            <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
+                        </ListItem>
+                        <ListItem className='px-3'
+                            title={
+                                <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                                    <span className="">Họ và tên:</span>
+                                    <span className="fw-bold">{name}</span>
+                                </div>
+                            }
+                        >
+                            <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
+                        </ListItem>
+                        <ListItem className='px-3'
+                            title={
+                                <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                                    <span className="">Số điện thoại:</span>
+                                    <span className="fw-bold">{phone}</span>
+                                </div>
+                            }
+                        >
+                            <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
+                        </ListItem>
+                        <ListItem className='px-3'
+                            title={
+                                <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                                    <span className="">Email:</span>
+                                    <span className="fw-bold">{email}</span>
+                                </div>
+                            }
+                        >
+                            <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
+                        </ListItem>
+                        <ListItem className='px-3'
+                            title={
+                                <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                                    <span className="">Tài khoản:</span>
+                                    <span className="fw-bold">{account}</span>
+                                </div>
+                            }
+                        >
+                            <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
+                        </ListItem>
+                        <ListItem className='px-3'
+                            title={
+                                <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                                    <span className="">Ngày sinh:</span>
+                                    <span className="fw-bold">{formatDate(birthday)}</span>
+                                </div>
+                            }
+                        >
+                            <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
+                        </ListItem>
+                        <ListItem className='px-3'
+                            title={
+                                <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                                    <span className="">Giới tính:</span>
+                                    <span className="fw-bold">{gender == "1" ? "Nữ" : "Nam"}</span>
+                                </div>
+                            }
+                        >
+                            <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
+                        </ListItem>
+                        <ListItem className='px-3'
+                            title={
+                                <div className='mt-1' style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                                    <span className="">Ngày đăng ký:</span>
+                                    <span className="fw-bold">{dateRegister}</span>
+                                </div>
+                            }
+                        >
+                            <div slot="media" className='text-center bg-pink text-white rounded-circle' style={{ width: "8px", height: "8px" }}></div>
+                        </ListItem>
+                    </List>
+                </Card>
                 <Card className='p-0 border border-0 rounded-4'>
                     <List className='fs-13 m-0 ' dividersIos mediaList outlineIos strongIos>
                         <ListItem className='px-3 pt-2 ' fill sheetOpen=".sheet-changepassword" link
@@ -331,7 +339,7 @@ const AccountPage = () => {
                                 slot="media"
                                 src="https://cdn.lordicon.com/exymduqj.json"
                                 trigger="loop"
-                                colors="primary:#f30771,secondary:#f30771"
+                                colors="primary:#1fc5f7,secondary:#1fc5f7"
                                 style={{ width: '20px', height: '20px' }}
                             ></lord-icon>
                         </ListItem>
@@ -342,7 +350,7 @@ const AccountPage = () => {
                                 slot="media"
                                 src="https://cdn.lordicon.com/fikcyfpp.json"
                                 trigger="loop"
-                                colors="primary:#f30771,secondary:#f30771"
+                                colors="primary:#1fc5f7,secondary:#1fc5f7"
                                 style={{ width: '20px', height: '20px' }}
                             ></lord-icon>
                         </ListItem>
@@ -350,7 +358,7 @@ const AccountPage = () => {
                 </Card>
 
                 <Card className='p-3 border border-0 rounded-4'>
-                    <BlockTitle className='m-0 mb-3'>Mời bạn bè</BlockTitle>
+                    <BlockTitle className='m-0 mb-3 text-white'>Mời bạn bè</BlockTitle>
                     <div className='row d-flex align-items-center'>
                         <div className='col-1'>
                             <div className='text-center bg-primary text-white rounded-circle' style={{ width: "20px", height: "20px" }}>1</div>
@@ -382,7 +390,7 @@ const AccountPage = () => {
                             </Block>
                         </div>
                     </div>
-                    <BlockTitle className='m-0 mt-3 fs-14 '>Liên kết của bạn</BlockTitle>
+                    <BlockTitle className='m-0 mt-3 fs-14 text-white'>Liên kết của bạn</BlockTitle>
                     <div className="m-2 mx-1  row border border-1 rounded-pill p-2 d-flex align-items-center " >
                         <div className='col-11 p-1 border border-0 text-truncate'>https://beta.ellm.io/?</div>
 
@@ -409,12 +417,12 @@ const AccountPage = () => {
                     </div>
                 </Toolbar>
                 <PageContent>
-                    <Block className='my-3'>
+                    <Block className='my-3 text-white'>
                         <List className='my-2'>
                             <div className='fs-14 mt-4'>Mật khẩu cũ</div>
-                            <div className="position-relative rounded-pill mt-2 w-100" style={{ border: "0.5px solid #f07" }}>
+                            <div className="position-relative rounded-pill mt-2 w-100" style={{ border: "0.5px solid #1fc5f7" }}>
                                 <input value={passwordOld} onChange={(e) => { setPasswordOld(e.target.value) }}
-                                    className="rounded-pill w-100 pe-5 px-3"
+                                    className="rounded-pill w-100 pe-5 px-3 text-white"
                                     placeholder="Mật khẩu"
                                     type={showPasswordold ? 'text' : 'password'}
                                 />
@@ -438,9 +446,9 @@ const AccountPage = () => {
                                 </span>
                             </div>
                             <div className='fs-14 mt-4'>Mật khẩu mới</div>
-                            <div className="position-relative rounded-pill mt-2 w-100" style={{ border: "0.5px solid #f07" }}>
+                            <div className="position-relative rounded-pill mt-2 w-100" style={{ border: "0.5px solid #1fc5f7" }}>
                                 <input value={password} onChange={(e) => { setPassword(e.target.value) }}
-                                    className="rounded-pill  w-100 pe-5 px-3"
+                                    className="rounded-pill  w-100 pe-5 text-white px-3"
                                     placeholder="Mật khẩu"
                                     type={showPassword ? 'text' : 'password'}
                                 />
@@ -464,9 +472,9 @@ const AccountPage = () => {
                                 </span>
                             </div>
                             <div className='fs-14 mt-4'>Nhập lại mật khẩu</div>
-                            <div className="position-relative rounded-pill mt-2 w-100" style={{ border: "0.5px solid #f07" }}>
+                            <div className="position-relative rounded-pill mt-2 w-100" style={{ border: "0.5px solid #1fc5f7" }}>
                                 <input value={passwordconfirm} onChange={(e) => { setPasswordconfirm(e.target.value) }}
-                                    className="rounded-pill  w-100 pe-5 px-3"
+                                    className="rounded-pill  w-100  text-white pe-5 px-3"
                                     placeholder="Mật khẩu"
                                     type={showRePassword ? 'text' : 'password'}
                                 />
@@ -491,7 +499,7 @@ const AccountPage = () => {
                             </div>
                             <div className='mt-4 grid grid-cols-2 grid-gap'>
                                 <div>
-                                    <button className='p-2 rounded-pill border border-secondary bg-transparent fs-14 text-color' onClick={() => { f7.sheet.close() }}>Hủy</button>
+                                    <button className='p-2 rounded-pill border border-secondary bg-transparent fs-14 text-white' onClick={() => { f7.sheet.close() }}>Hủy</button>
                                 </div>
                                 <div>
                                     <button type="button" className='p-2 rounded-pill border-btn fs-14 text-pink' onClick={() => { changePassword() }}>Cập nhật</button>
@@ -575,10 +583,10 @@ const AccountPage = () => {
                             </Card>
                             <div className='mt-4 grid grid-cols-2 grid-gap'>
                                 <div>
-                                    <button className='p-2 rounded-pill border border-secondary bg-transparent fs-14 color-icon' onClick={() => { f7.sheet.close() }}>Hủy</button>
+                                    <button className='p-2 rounded-pill border border-secondary bg-transparent fs-14 text-white' onClick={() => { f7.sheet.close() }}>Hủy</button>
                                 </div>
                                 <div>
-                                    <button type="button" className='p-2 rounded-pill border-btn fs-14 color-icon' onClick={() => { changeInfo() }}>Cập nhật</button>
+                                    <button type="button" className='p-2 rounded-pill border-btn fs-14 text-white' onClick={() => { changeInfo() }}>Cập nhật</button>
                                 </div>
                             </div>
                         </List>

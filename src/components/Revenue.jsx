@@ -2,6 +2,7 @@ import { Sheet, Toolbar, PageContent, Block, Link, Card, ListInput, List, Icon, 
 import { useEffect, useState } from "react";
 import moment from 'moment';
 import SheetInvoices from "./Invoices";
+import axios from "axios";
 export default function SheetRevenue({ opened, onClose }) {
     const [sheetOpened1, setSheetOpened1] = useState(false);
 
@@ -96,6 +97,7 @@ export default function SheetRevenue({ opened, onClose }) {
                 month: tempMonth,
                 day: tempDate
             });
+            historyDate();
         } else if (selectedPeriod === 'week') {
             // Với week, chọn ngày cụ thể và lấy tuần chứa ngày đó
             newDate = moment({
@@ -103,6 +105,7 @@ export default function SheetRevenue({ opened, onClose }) {
                 month: tempMonth,
                 day: tempDate
             }).startOf('week');
+            historyWeek();
         } else {
             // Chọn ngày đầu tiên của tháng
             newDate = moment({
@@ -110,6 +113,7 @@ export default function SheetRevenue({ opened, onClose }) {
                 month: tempMonth,
                 day: 1
             });
+            historyMonth()
         }
         setCurrentDate(newDate);
         loadRevenueData(newDate, selectedPeriod);
@@ -160,7 +164,107 @@ export default function SheetRevenue({ opened, onClose }) {
 
     useEffect(() => {
         loadRevenueData(currentDate, selectedPeriod);
-    }, []);
+        if (opened) {
+            historyDate();
+        }
+    }, [opened]);
+
+    const [invoices, setInvoices] = useState([]);
+    function historyDate() {
+        const brand = localStorage.getItem("happyCorp_brand");
+        const token = localStorage.getItem("HappyCorp-token-app");
+        const data = {
+            "token": token,
+            "brand": brand,
+            "day": tempDate,
+            "month": tempMonth + 1,
+            "year": tempYear
+        }
+
+        const api = axios.create({
+            baseURL: "https://api-happy.eclo.io/api",
+        });
+
+        api.post("/invoicesDate", data, {
+            headers: { "Content-Type": "application/json" },
+        })
+            .then((res) => {
+                if (res.data.status === "error") {
+                    console.log("lỗi");
+                    f7.dialog.alert(res.data.content, "Error");
+                } else if (res.data.status === "success") {
+                    console.log("date", res.data.data);
+                    setInvoices(res.data.data);
+                }
+            })
+            .catch((error) => {
+                f7.dialog.alert(error, "Error");
+                console.log("k ket noi dc api");
+            });
+    }
+    function historyWeek() {
+        const brand = localStorage.getItem("happyCorp_brand");
+        const token = localStorage.getItem("HappyCorp-token-app");
+        const data = {
+            "token": token,
+            "brand": brand,
+            "day": tempDate,
+            "month": tempMonth + 1,
+            "year": tempYear
+        }
+
+        const api = axios.create({
+            baseURL: "https://api-happy.eclo.io/api",
+        });
+
+        api.post("/invoicesWeek", data, {
+            headers: { "Content-Type": "application/json" },
+        })
+            .then((res) => {
+                if (res.data.status === "error") {
+                    console.log("lỗi");
+                    f7.dialog.alert(res.data.content, "Error");
+                } else if (res.data.status === "success") {
+                    console.log("week", res.data.data);
+                    setInvoices(res.data.data);
+                }
+            })
+            .catch((error) => {
+                f7.dialog.alert(error, "Error");
+                console.log("k ket noi dc api");
+            });
+    }
+    function historyMonth() {
+        const brand = localStorage.getItem("happyCorp_brand");
+        const token = localStorage.getItem("HappyCorp-token-app");
+        const data = {
+            "token": token,
+            "brand": brand,
+            "day": tempDate,
+            "month": tempMonth + 1,
+            "year": tempYear
+        }
+
+        const api = axios.create({
+            baseURL: "https://api-happy.eclo.io/api",
+        });
+        api.post("/invoicesMonth", data, {
+            headers: { "Content-Type": "application/json" },
+        })
+            .then((res) => {
+                if (res.data.status === "error") {
+                    console.log("lỗi");
+                    f7.dialog.alert(res.data.content, "Error");
+                } else if (res.data.status === "success") {
+                    console.log("month", res.data.data);
+                    setInvoices(res.data.data);
+                }
+            })
+            .catch((error) => {
+                f7.dialog.alert(error, "Error");
+                console.log("k ket noi dc api");
+            });
+    }
     return (
         <>
             <Sheet
@@ -186,7 +290,7 @@ export default function SheetRevenue({ opened, onClose }) {
                                     round
                                     color={selectedPeriod === 'date' ? 'pink' : 'gray'}
                                     className={`w-100 p-3 ${selectedPeriod === 'date' ? 'text-white bg-pink' : ''}`}
-                                    onClick={() => handlePeriodChange('date')}
+                                    onClick={() => { handlePeriodChange('date'); historyDate }}
                                 >
                                     <Icon f7="calendar" className="me-2" size="16px"></Icon>
                                     Date
@@ -198,7 +302,7 @@ export default function SheetRevenue({ opened, onClose }) {
                                     round
                                     color={selectedPeriod === 'week' ? 'pink' : 'gray'}
                                     className={`w-100 p-3 ${selectedPeriod === 'week' ? 'text-white bg-pink' : ''}`}
-                                    onClick={() => handlePeriodChange('week')}
+                                    onClick={() => { handlePeriodChange('week'); historyWeek }}
                                 >
                                     <Icon f7="calendar" className="me-2" size="16px"></Icon>
                                     Week
@@ -210,7 +314,7 @@ export default function SheetRevenue({ opened, onClose }) {
                                     round
                                     color={selectedPeriod === 'month' ? 'pink' : 'gray'}
                                     className={`w-100 p-3 ${selectedPeriod === 'month' ? 'text-white bg-pink' : ''}`}
-                                    onClick={() => handlePeriodChange('month')}
+                                    onClick={() => { handlePeriodChange('month'); historyMonth() }}
                                 >
                                     <Icon f7="calendar" className="me-2" size="16px"></Icon>
                                     Month
@@ -252,7 +356,7 @@ export default function SheetRevenue({ opened, onClose }) {
                                         <div className="row g-2 mb-3">
                                             <div className="col-4">
                                                 <select
-                                                    className="form-select form-select-sm bg-light border-1 rounded-3"
+                                                    className="form-select form-select-sm bg-light border-1 rounded-3 text-dark"
                                                     value={tempDate}
                                                     onChange={(e) => setTempDate(parseInt(e.target.value))}
                                                 >
@@ -263,7 +367,7 @@ export default function SheetRevenue({ opened, onClose }) {
                                             </div>
                                             <div className="col-4">
                                                 <select
-                                                    className="form-select form-select-sm bg-light border-1 rounded-3"
+                                                    className="form-select form-select-sm bg-light border-1 rounded-3  text-dark"
                                                     value={tempMonth}
                                                     onChange={(e) => setTempMonth(parseInt(e.target.value))}
                                                 >
@@ -274,7 +378,7 @@ export default function SheetRevenue({ opened, onClose }) {
                                             </div>
                                             <div className="col-4">
                                                 <select
-                                                    className="form-select form-select-sm bg-light border-1 rounded-3"
+                                                    className="form-select form-select-sm bg-light border-1 rounded-3  text-dark"
                                                     value={tempYear}
                                                     onChange={(e) => setTempYear(parseInt(e.target.value))}
                                                 >
@@ -294,7 +398,7 @@ export default function SheetRevenue({ opened, onClose }) {
                                         <div className="row g-2 mb-3">
                                             <div className="col-6">
                                                 <select
-                                                    className="form-select form-select-sm bg-light border-1 rounded-3"
+                                                    className="form-select form-select-sm bg-light border-1 rounded-3  text-dark"
                                                     value={tempMonth}
                                                     onChange={(e) => setTempMonth(parseInt(e.target.value))}
                                                 >
@@ -305,7 +409,7 @@ export default function SheetRevenue({ opened, onClose }) {
                                             </div>
                                             <div className="col-6">
                                                 <select
-                                                    className="form-select form-select-sm bg-light border-1 rounded-3"
+                                                    className="form-select form-select-sm bg-light border-1 rounded-3 text-dark"
                                                     value={tempYear}
                                                     onChange={(e) => setTempYear(parseInt(e.target.value))}
                                                 >
@@ -362,45 +466,71 @@ export default function SheetRevenue({ opened, onClose }) {
                     <div class="grid grid-cols-3 fs-13 mt-2 px-3">
                         <div className='d-flex align-items-center mt-2'>
                             <div className='hinh-vuong bg-primary rounded-2 me-1'></div>
-                            4 Nhận khách
+                            Nhận khách
                         </div>
                         <div className='d-flex align-items-center mt-2'>
                             <div className='hinh-vuong bg-success rounded-2 me-1'></div>
-                            4 Thanh toán
+                            Thanh toán
                         </div>
                         <div className='d-flex align-items-center mt-2'>
                             <div className='hinh-vuong bg-warning rounded-2 me-1'></div>
-                            4 Đợi duyệt
+                            Đợi duyệt
                         </div>
                         <div className='d-flex align-items-center mt-2'>
                             <div className='hinh-vuong bg-info rounded-2 me-1'></div>
-                            0 Chờ duyệt
+                            Chờ duyệt
                         </div>
                         <div className='d-flex align-items-center mt-2'>
                             <div className='hinh-vuong bg-danger rounded-2 me-1'></div>
-                            0 Không duyệt
+                            Không duyệt
                         </div>
                         <div className='d-flex align-items-center mt-2'>
                             <div className='hinh-vuong bg-secondary rounded-2 me-1'></div>
-                            0 Đã hủy
+                            Đã hủy
                         </div>
                     </div>
-                    <div className="m-3">
-                        <div onClick={() => { setSheetOpened1(true) }} className='border-bottom hieuung p-2 rounded-2 d-flex align-items-center fs-13'>
-                            <div className='bg-primary rounded-2' style={{ width: "35px", height: "35px" }}></div>
-                            <div className='ms-2'>
-                                <div className='fw-bold mb-1'>MR TRUNG & HUY NGUYỄN (K.BI)</div>
-                                <div>31/07/2025 12:00:00</div>
-                            </div>
-                        </div>
-                        <div onClick={() => { setSheetOpened1(true) }} className=' hieuung mt-2 p-2 rounded-2 d-flex align-items-center fs-13'>
-                            <div className='bg-primary rounded-2' style={{ width: "35px", height: "35px" }}></div>
-                            <div className='ms-2'>
-                                <div className='fw-bold mb-1'>MR TRUNG & HUY NGUYỄN (K.BI)</div>
-                                <div>31/07/2025 12:00:00</div>
-                            </div>
-                        </div>
-                    </div>
+                    <List className='px-4 mb-3 mt-3'>
+                        {invoices.length > 0 ? invoices.map((invoice) => {
+                            return (
+                                <>
+                                    <ListItem onClick={() => { setSheetOpened1(true); localStorage.setItem("HappyCorp_id_invoices", invoice.active) }} className='row mt-2 list-no-chevron'>
+                                        <div className='col-2'>
+                                            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlyd6LH2s0z9gH9I33pj9ZTUzbO_GEv5fCPQ&s' className='w-100 border border-2 rounded-3 border-danger'></img>
+                                        </div>
+                                        <div className='col-10 fs-13 ms-2 border-bottom '>
+                                            <div className='fw-bold d-flex justify-content-between'>
+                                                Phòng: {invoice.room_name}
+                                                <div>
+                                                    {invoice.process == 1 || invoice.process == 100 &&
+                                                        <span className='text-primary'>Nhận khách</span>
+                                                    }
+                                                    {invoice.process == 2 &&
+                                                        <span className='text-warning'>Đợi duyệt</span>
+                                                    }
+                                                    {invoice.process == 3 || invoice.process == 300 &&
+                                                        <span className='text-secondary'>Đã hủy</span>
+                                                    }
+                                                    {invoice.process == 20 &&
+                                                        <span className='text-danger'>Đã hủy</span>
+                                                    }
+                                                    {invoice.process == 200 &&
+                                                        <span className='text-success'>Đã hoàn tất</span>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div className=' mt-1 mb-2'>{invoice.date}</div>
+                                        </div>
+                                    </ListItem>
+                                </>
+                            )
+                        }) : (
+                            <>
+                                <img src='../image/not-booking.svg' className='w-100'></img>
+                                <div className='text-center fs-15 mt-2'>Không có dữ liệu</div>
+                            </>
+                        )}
+
+                    </List>
                 </PageContent>
 
             </Sheet>

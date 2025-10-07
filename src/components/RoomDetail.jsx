@@ -1,8 +1,47 @@
 import { Sheet, Toolbar, PageContent, Block, Link, Card, ListInput, List, Icon, Button, Segmented, ListItem, f7 } from "framework7-react";
 import { useEffect, useState } from "react";
 import SheetBookingMenu from "./SheetBookingMenu";
+import axios from "axios";
 export default function SheetRoomDetail({ opened, onClose }) {
     const [sheetOpenebMenu, setSheetOpenebMenu] = useState(false);
+
+    const [roomDetail, setRoomDetail]= useState();
+
+    const [invoices, setInvoices]= useState();
+    const [area, setArea]= useState();
+    useEffect(() => {
+        if (opened) {
+            const activeRoom = localStorage.getItem("HappyCorp_active_room");
+            const token = localStorage.getItem("HappyCorp-token-app");
+            const data = {
+                "token": token,
+                "active": activeRoom
+            }
+
+            const api = axios.create({
+                baseURL: "https://api-happy.eclo.io/api",
+            });
+
+            api.post("/booking-room-detail", data, {
+                headers: { "Content-Type": "application/json" },
+            })
+                .then((res) => {
+                    if (res.data.status === "error") {
+                        console.log("lỗi");
+                        f7.dialog.alert(res.data.content, "Error");
+                    } else if (res.data.status === "success") {
+                        console.log(res.data.data);
+                        setRoomDetail(res.data.roomDetail);
+                        setInvoices(res.data.invoices);
+                        setArea(res.data.areas)
+                    }
+                })
+                .catch((error) => {
+                    f7.dialog.alert(error, "Error");
+                    console.log("k ket noi dc api");
+                });
+        }
+    }, [opened]);
     return (
         <>
             <Sheet
@@ -32,7 +71,7 @@ export default function SheetRoomDetail({ opened, onClose }) {
 
                         {/* nút đóng */}
                         <button
-                            className="rounded-circle border-0 bg-light position-absolute top-0 end-0 m-2 p-2"
+                            className="rounded-circle border-0 bg-light position-absolute top-0 end-0 m-2 "
                             style={{ width: "30px", height: "30px", lineHeight: "30px" }}
                             onClick={() => f7.sheet.close()}
                         >
@@ -42,16 +81,16 @@ export default function SheetRoomDetail({ opened, onClose }) {
 
                     <div className="row m-3 pb-2 mx-0 d-flex align-items-center border-bottom">
                         <div className="col-9 fs-15 fw-bold">
-                            Mẫu phòng hát karaoke vip phong cách Tân Cổ Điển
+                           Phòng {roomDetail && roomDetail.name}
                         </div>
                         <div className="col-3 text-end">
-                            999.000đ
+                            Khu vực {area && area.name}
                         </div>
                     </div>
                     <div className="row mt-3 pb-1 mx-0 d-flex align-items-center border-bottom">
                         <div>Giới thiệu phòng</div>
                         <ul className="fst-italic fs-13 px-5 mt-2">
-                             <li className="mt-1">
+                            <li className="mt-1">
                                 Địa chỉ: 90 – 92 Lê Thị Riêng, Quận 1, TP.HCM
                             </li>
                             <li className="mt-1">
@@ -114,7 +153,7 @@ export default function SheetRoomDetail({ opened, onClose }) {
                 </PageContent>
                 <footer className="fixed-bottom p-3 py-2">
                     <div className="grid grid-cols-2 grid-gap">
-                        <Button sheetClose className="bg-secondary bg-opacity-25 p-3 rounded-pill  fs-15">Đóng</Button>
+                        <Button sheetClose className="bg-secondary  p-3 rounded-pill  fs-15">Đóng</Button>
                         <Button className="bg-pink p-3 rounded-pill text-white fs-15" onClick={() => {
                             setSheetOpenebMenu(true), console.log(32354);
                         }}>Tiếp tục</Button>

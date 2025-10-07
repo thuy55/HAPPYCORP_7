@@ -10,7 +10,7 @@ export default function SheetEndow({ opened, onClose }) {
                 opened={opened}
                 onSheetClosed={onClose}
             >
-                <Toolbar className="">
+                <Toolbar className="border border-0">
                     <div className="left fw-bold d-flex align-items-center">
                         Ưu đãi
                     </div>
@@ -20,7 +20,7 @@ export default function SheetEndow({ opened, onClose }) {
                 </Toolbar>
                 <PageContent className="pb-5">
 
-                    <div className='bg-warning bg-opacity-10 '>
+                    <div className=' ' style={{backgroundColor:"#292579"}}>
                         <div className="row w-100">
 
                             <div className='col-7 fs-5 fw-bold'>
@@ -32,6 +32,7 @@ export default function SheetEndow({ opened, onClose }) {
                             </div>
                         </div>
                     </div>
+               
                     <List className=' mb-3 mt-0'>
                         <Card className='border border-0 my-3 shadow-none p-1 rounded-3'>
                             <div className="row ">

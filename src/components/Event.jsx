@@ -66,12 +66,12 @@ export default function SheetEvent({ opened, onClose }) {
                     {/* <div className="row w-100"> */}
 
                     <div className=' position-relative'>
-                        <img src="../image/nen-den.webp" className=' rounded-bottom-4 w-100' style={{ height: '200px', objectFit: 'cover' }}></img>
+                        <img src="https://img.pikbest.com/backgrounds/20250720/deep-blue-background-with-glowing-swirling-lines-and-filaments-of-light-purple_11798696.jpg!f305cw" className=' rounded-bottom-4 w-100' style={{ height: '200px', objectFit: 'cover' }}></img>
 
                         <div className='position-absolute top-0 end-0 m-3'>
                             <img src='../image/happy-corp-logo.png' style={{ height: "50px" }}></img>
                         </div>
-                        <div className='position-absolute bottom-0 start-0 m-3 mt-0 text-pink fs-15 fw-bold fst-italic'>
+                        <div className='position-absolute bottom-0 start-0 m-3 mt-0 fs-15 fw-bold fst-italic' style={{color:"#ff9700"}}>
                             <div className="mb-2"> Where style meets nightlife</div>
 
                             Thưởng thức từng giọt – Sống trọn từng đêm
