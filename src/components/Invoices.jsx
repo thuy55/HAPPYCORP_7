@@ -170,33 +170,41 @@ export default function SheetInvoices({ opened, onClose }) {
                         <div className=" fs-13 text-pink mb-2 fw-bold">
                             Thông tin thanh toán
                         </div>
-                        <div className='d-flex justify-content-between align-items-center text-success fw-bold  p-2'>
-                            <div>Tổng tiền :</div>
-                            <div>{pay && formatCurrency(pay.provisional_before)}</div>
+                         <div className='d-flex justify-content-between align-items-center text-success fw-bold p-2'>
+                            {/* Tổng tiền hàng ban đầu (trước giảm trừ, phí) */}
+                            <div>Tổng tiền hàng:</div>
+                            <div>{pay && formatCurrency(pay.total)}</div>
                         </div>
-                        <div className='d-flex justify-content-between align-items-center text-warning fw-bold  p-2'>
-                            <div>Đã cọc :</div>
-                            <div>{pay && formatCurrency(pay.total_payments)}</div>
+                        <div className='d-flex justify-content-between align-items-center text-danger fw-bold p-2'>
+                            <div>Giảm giá:</div>
+                            <div>{pay && formatCurrency(pay.discount_price)}</div>
                         </div>
-                        <div className='d-flex justify-content-between align-items-center text-primary fw-bold  p-2'>
-                            <div>Thuế ({pay?.tax && Object.keys(pay.tax)[0]}%):</div>
-                            <div>{pay && formatCurrency(pay.total_tax)}</div>
+                        <div className='d-flex justify-content-between align-items-center text-warning fw-bold p-2'>
+                            {/* Gán đúng giá trị tiền cọc (deposit_price) */}
+                            <div>Đã cọc:</div>
+                            <div>{pay && formatCurrency(pay.deposit_price)}</div>
                         </div>
-                        <div className='d-flex justify-content-between align-items-center text-primary fw-bold  p-2'>
+                        <div className='d-flex justify-content-between align-items-center text-xanh fw-bold p-2'>
                             <div>Phụ thu ({pay?.services_fee}%):</div>
                             <div>{pay && formatCurrency(pay.services_price)}</div>
                         </div>
-                        <div className='d-flex justify-content-between align-items-center text-danger fw-bold  p-2'>
-                            <div>Giảm giá :</div>
-                            <div>{pay && formatCurrency(pay.discount_price)}</div>
+                        <div className='d-flex justify-content-between align-items-center text-xanh fw-bold p-2'>
+                            {/* Sử dụng tax rate 10% từ dữ liệu */}
+                            <div>Thuế ({pay?.tax && Object.keys(pay.tax)[0]}%):</div>
+                            <div>{pay && formatCurrency(pay.total_tax)}</div>
                         </div>
-                        <div className='d-flex justify-content-between align-items-center fs-15 fw-bold  p-2'>
-                            <div>Tổng thanh toán :</div>
+
+                        {/* --- TỔNG KẾT --- */}
+                        <div className='d-flex justify-content-between align-items-center fs-15 fw-bold p-2'>
+                            {/* Tổng tiền phải thanh toán cuối cùng (Grand Total) */}
+                            <div>TỔNG CỘNG:</div>
                             <div>{pay && formatCurrency(pay.total_payments)}</div>
                         </div>
-                        <div className='d-flex justify-content-between align-items-center text-danger fw-bold  p-2'>
-                            <div>Nợ :</div>
-                            <div>{pay && formatCurrency(pay["into-money"]?.price ?? 0)}</div>
+
+                        <div className='d-flex justify-content-between align-items-center text-danger fw-bold p-2'>
+                            {/* Hiển thị Nợ (còn thiếu): Lấy trị tuyệt đối để bỏ dấu âm */}
+                            <div>Còn thiếu:</div>
+                            <div>{pay && formatCurrency(Math.abs(pay["into-money"]?.price ?? 0))}</div>
                         </div>
 
                     </Card>

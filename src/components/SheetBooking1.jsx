@@ -1,4 +1,4 @@
-import { Sheet, Toolbar, PageContent, Block, Link, Card, ListInput, List, Icon, Button, Segmented } from "framework7-react";
+import { Sheet, Toolbar, PageContent, Block, Link, Card, ListInput, List, Icon, Button, Segmented, Popover, ListItem } from "framework7-react";
 import { useEffect, useState } from "react";
 import moment from 'moment';
 import SheetBookingCompleted from "./BookingCompleted";
@@ -14,6 +14,21 @@ export default function SheetBooking1({ opened, onClose }) {
     const [searchMonth, setSearchMonth] = useState(moment().month()); // 0 - 11
     const [searchYear, setSearchYear] = useState(moment().year());
     const [date, setdate] = useState("");
+     const handleCloseAllModals = () => {
+            try {
+                // Đóng tất cả sheet
+                const openedSheets = document.querySelectorAll('.sheet.modal-in, .sheet-modal.modal-in');
+                openedSheets.forEach(sheet => {
+                    f7.sheet.close(sheet);
+                });
+                f7.dialog.close();
+                f7.toast.close();
+                console.log("All modals closed successfully");
+            } catch (error) {
+                console.error("Error closing modals:", error);
+            }
+        };
+    
     useEffect(() => {
         const selectedMoment = moment({
             year: searchYear,
@@ -45,10 +60,15 @@ export default function SheetBooking1({ opened, onClose }) {
     const [payment, setPayment] = useState([]);
 
     const [selectPayment, setSelectPayment] = useState(1);
+
+    const [customers, setCustomers] = useState([]);
     useEffect(() => {
         if (opened) {
             const activeRoom = localStorage.getItem("HappyCorp_active_room");
             const token = localStorage.getItem("HappyCorp-token-app");
+            const brand = localStorage.getItem("happyCorp_brand");
+            const a= localStorage.getItem("HappyCorp-id-account");
+            {a && setIdCus(a)}
             const data = {
                 "token": token,
                 "active": activeRoom
@@ -85,11 +105,35 @@ export default function SheetBooking1({ opened, onClose }) {
                     f7.dialog.alert(error, "Error");
                     console.log("k ket noi dc api");
                 });
+
+
+            const data2 = {
+                "token": token,
+                "brand": brand
+            }
+
+            api.post("/customers", data2, {
+                headers: { "Content-Type": "application/json" },
+            })
+                .then((res) => {
+                    if (res.data.status === "error") {
+                        console.log("lỗi");
+                        f7.dialog.alert(res.data.content, "Error");
+                    } else if (res.data.status === "success") {
+                        console.log(res.data.data);
+                        setCustomers(res.data.data);
+                    }
+                })
+                .catch((error) => {
+                    f7.dialog.alert(error, "Error");
+                    console.log("k ket noi dc api");
+                });
         }
     }, [opened]);
 
 
-
+    const [idCus, setIdCus] = useState();
+    const [price, setPrice] = useState(0);
     function booking() {
 
         const datePartMoment = moment(`${selectedYear}-${selectedMonth + 1}-${selectedDate}`, 'YYYY-M-D');
@@ -115,9 +159,10 @@ export default function SheetBooking1({ opened, onClose }) {
             "date": combinedDateTime,
             "amount": amount,
             "note": note,
-            "customers": localStorage.getItem("HappyCorp-id-account"),
+            "customers": idCus,
             "process": 1,
             "card": "",
+            "price": price
         }
 
         const api = axios.create({
@@ -208,6 +253,31 @@ export default function SheetBooking1({ opened, onClose }) {
 
     const [amount, setAmount] = useState(0);
     const [note, setNote] = useState("");
+
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const filteredCustomers = (customers || []).filter(customer => {
+        // 1. Chuyển giá trị tìm kiếm và các trường cần tìm kiếm về chữ thường để tìm kiếm không phân biệt hoa/thường
+        const lowerCaseSearchTerm = searchTerm.toLowerCase();
+
+        // 2. Kiểm tra xem số điện thoại hoặc tên có chứa chuỗi tìm kiếm không
+        const phoneMatches = customer.phone.toLowerCase().includes(lowerCaseSearchTerm);
+        const nameMatches = customer.name.toLowerCase().includes(lowerCaseSearchTerm);
+
+        // Trả về true nếu một trong hai điều kiện khớp
+        return phoneMatches || nameMatches;
+    });
+
+    const [customerPhone, setCustomerPhone] = useState('');
+    const [customerName, setCustomerName] = useState('');
+
+    // Hàm này sẽ được gọi khi bạn chọn một khách hàng từ danh sách
+    const handleCustomerSelect = (phone, name, id) => {
+        setCustomerPhone(phone);
+        setCustomerName(name);
+        setIdCus(id)
+
+    };
 
 
     return (
@@ -320,10 +390,11 @@ export default function SheetBooking1({ opened, onClose }) {
                             </span>
                             <input
                                 className="rounded-3  w-100 " style={{ paddingLeft: "10%", paddingRight: "10%" }}
-                                placeholder="Số điện thoại"
+                                placeholder="Số điện thoại" value={customerPhone} // Gán giá trị state
+                                onChange={(e) => setCustomerPhone(e.target.value)}
                                 type="tel"
                             />
-                            <span
+                            <Link fill popoverOpen=".popover-customer"
                                 style={{
                                     position: 'absolute',
                                     right: '10px',
@@ -340,7 +411,7 @@ export default function SheetBooking1({ opened, onClose }) {
                                     colors="primary:#1fc5f7,primary:#1fc5f7,secondary:#1fc5f7"
                                     style={{ width: '20px', height: '20px' }}
                                 ></lord-icon>
-                            </span>
+                            </Link>
                         </div>
                         <div className="position-relative rounded-3 mt-3 w-100 border border-1" style={{ padding: "12px" }}>
                             <span
@@ -362,7 +433,8 @@ export default function SheetBooking1({ opened, onClose }) {
                             </span>
                             <input
                                 className="rounded-3  w-100 " style={{ paddingLeft: "10%", paddingRight: "10%" }}
-                                placeholder="Họ và tên"
+                                placeholder="Họ và tên" value={customerName} // Gán giá trị state
+                                onChange={(e) => setCustomerName(e.target.value)}
                                 type="text"
                             />
                         </div>
@@ -445,7 +517,7 @@ export default function SheetBooking1({ opened, onClose }) {
                             </span>
                             <input
                                 className="rounded-3  w-100 " style={{ paddingLeft: "10%", paddingRight: "10%" }}
-                                placeholder="Cọc trước"
+                                placeholder="Cọc trước" value={price} onChange={(e) => { setPrice(e.target.value) }}
                                 type="number"
                             />
                         </div>
@@ -459,7 +531,7 @@ export default function SheetBooking1({ opened, onClose }) {
                                 Tiền mặt
                             </Button>
                         </Segmented> */}
-                        <select className='p-2 rounded-3 fs-14 border border-1 w-100 select-white-text' value={selectPayment}
+                        <select className='p-2 mt-2 rounded-3 fs-14 border border-1 w-100 select-white-text' value={selectPayment}
                             onChange={(e) => setSelectPayment(parseInt(e.target.value))}>
                             {payment && payment.map((payment, key) => {
                                 return (
@@ -472,7 +544,7 @@ export default function SheetBooking1({ opened, onClose }) {
                 </PageContent>
                 <footer className="fixed-bottom p-3 py-2 ">
                     <div className="grid grid-cols-2 grid-gap">
-                        <Button sheetClose className="bg-secondary bg-opacity-25 p-3 rounded-pill  fs-15">Hủy đơn</Button>
+                        <Button sheetClose className="bg-secondary bg-opacity-25 p-3 rounded-pill text-white fs-15" onClick={()=>{handleCloseAllModals()}}>Hủy đơn</Button>
                         <Button className="bg-pink p-3 rounded-pill text-white fs-15" onClick={() => { booking(); }}>Hoàn thành</Button>
                     </div>
                 </footer>
@@ -481,6 +553,38 @@ export default function SheetBooking1({ opened, onClose }) {
                 opened={sheetOpenedCompleted}
                 onClose={() => setSheetOpenedCompleted(false)}
             />
+            <Popover className="popover-customer " style={{ width: "250px", maxHeight: "400px" }}>
+                <List className='px-3 pt-2'>
+                    <div className="d-flex align-items-center bg-input  rounded-pill p-1 row " style={{ cursor: 'pointer' }}>
+                        <input className='border bg-input rounded-pill border-0 p-2 px-3 col-10 text-dark' value={searchTerm} // Gán giá trị
+                            onChange={(e) => setSearchTerm(e.target.value)} placeholder='Tìm kiếm'></input>
+                        <Button fill={false} className=" col-2 pe-0 d-flex justify-content-end">
+                            <lord-icon
+                                src="https://cdn.lordicon.com/wjyqkiew.json"
+                                trigger="loop"
+                                colors="primary:#1fc5f7,secondary:#1fc5f7"
+                                className=' me-2'
+                                style={{ width: '30px', height: '30px' }}>
+                            </lord-icon>
+                        </Button>
+                    </div>
+                    <div style={{ maxHeight: '350px', overflowY: 'auto' }}>
+                        {filteredCustomers && filteredCustomers.map((customers, key) => {
+                            return (
+                                <>
+                                    <ListItem >
+                                        <Link onClick={() => { handleCustomerSelect(customers.phone, customers.name, customers.id) }} className='d-flex align-items-center fs-14 text-dark' popoverClose >
+                                            {customers.phone}-{customers.name}
+                                        </Link>
+                                    </ListItem>
+                                </>
+                            )
+                        })}
+                    </div>
+
+                </List>
+            </Popover>
+
 
         </>
 

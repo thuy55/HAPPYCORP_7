@@ -6,7 +6,7 @@ export default function CommonNavbar() {
       <NavLeft>
         <Link panelOpen="left">
 
-          <img src='../image/menu.png' style={{ width: "30px" }}></img>
+          <img src='../image/menu-xanh.png' style={{ width: "30px" }}></img>
           {/* <img src='../image/13.gif' className='size-icon' /> */}
         </Link>
       </NavLeft>
@@ -18,7 +18,7 @@ export default function CommonNavbar() {
           <lord-icon
             src="https://cdn.lordicon.com/tjjwskjx.json"
             trigger="loop"
-            colors="primary:#f30771,secondary:#f30771"
+            colors="primary:#1fc5f7,secondary:#1fc5f7"
             className='size-icon me-2'>
           </lord-icon></Link>
       </NavRight>

@@ -223,7 +223,7 @@ const HomePage = () => {
           f7.dialog.alert(res.data.content, "Error");
         } else if (res.data.status === "success") {
           console.log(res.data.data);
-          setHistory(res.data.data);
+          setHistory(res.data.data.slice(0, 10));
         }
       })
       .catch((error) => {
@@ -248,7 +248,7 @@ const HomePage = () => {
               colors="primary:#1fc5f7,secondary:#1fc5f7"
               className='size-icon me-2'>
             </lord-icon> */}
-            <img src='../image/menu.png' style={{ width: "30px" }}></img>
+            <img src='../image/menu-xanh.png' style={{ width: "30px" }}></img>
           </Link>
         </NavLeft>
         <NavTitle className='text-dark' sliding>
@@ -668,10 +668,10 @@ const HomePage = () => {
                   <div className='col-10 fs-13 ms-2 border-bottom '>
                     <div className='fw-bold d-flex justify-content-between'>
                       Phòng: {history.room_name}
-                      {history.process == 1 || history.process == 100 &&
+                      { history.process == 100 &&
                         <span className='text-primary rounded-2'>Nhận khách</span>
                       }
-                      {history.process == 2 &&
+                      {(history.process == 1 || history.process == 2) &&
                         <span className='text-warning rounded-2'>Đợi duyệt</span>
                       }
                       {history.process == 3 || history.process == 300 &&
@@ -743,7 +743,7 @@ const HomePage = () => {
                     return (
                       <>
                         <div onClick={() => { bookingDetail(invoiceDate.active); setSheetOpenedInvoices(true) }} className='mt-1  hieuung p-2 rounded-2 d-flex align-items-center fs-13'>
-                          {invoiceDate.process == 1 || invoiceDate.process == 100 &&
+                          {(invoiceDate.process == 1 || invoiceDate.process == 100) &&
                             <div className='bg-primary rounded-2' style={{ width: "35px", height: "35px" }}></div>
                           }
                           {invoiceDate.process == 2 &&
